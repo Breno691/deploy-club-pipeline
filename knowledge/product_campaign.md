@@ -143,22 +143,110 @@ Sempre use números específicos — nunca generalizações:
 
 ---
 
-## 7. Conceitos de Campanha
+## 7. Regra de Ouro do Conteúdo
 
-### Conceito 1 — "Lean Primeiro"
-**Logline:** A sequência errada faz você gastar mais. A certa multiplica o resultado.
-**Hook:** "Automatizou sem mapear o processo? Acabou de automatizar o erro."
-**Resolução:** Lean identifica a causa raiz → padroniza → aí automação faz sentido.
+> **Não fale sobre processo. Fale sobre o sintoma que o dono já normalizou.**
+> O post funciona quando o leitor pensa: *"Achei que isso era normal."*
+> Isso gera mais curiosidade do que explicar a solução logo de cara.
 
-### Conceito 2 — "O Incêndio Todo Dia"
-**Logline:** Sua equipe não é ruim — o processo é que está quebrado.
-**Hook:** "Equipe apagando incêndio todo dia não é falta de esforço. É falta de método."
-**Resolução:** DMAIC identifica a causa raiz em semanas. Quick wins aparecem em 2–4 semanas.
+**NUNCA use:** Lean Six Sigma, DMAIC, kaizen, VSM, fishbone — o dono não sabe o que é.
+**SEMPRE use:** linguagem do dia a dia do empresário — "equipe apagando incêndio", "retrabalho", "tudo para quando fulano falta".
 
-### Conceito 3 — "3h da Manhã"
-**Logline:** O que acontece com seus clientes quando sua equipe vai embora?
-**Hook:** "Clientes mandam mensagem às 3h. Sua equipe responde quando? Às 9h do dia seguinte?"
-**Resolução:** Automação com IA responde, qualifica e agenda 24h — equipe só toca o que importa.
+---
+
+## 8. As 5 Categorias de Dor (use para escolher o ângulo do post)
+
+### Categoria 1 — Dependência do Dono
+*"Você é dono ou central de atendimento da própria empresa?"*
+- Ninguém faz nada sem perguntar
+- Tirou férias e continuou trabalhando
+- Você é a última etapa de qualquer processo
+- A empresa funciona melhor quando você está presente
+
+**Hooks:**
+- "Você tem uma empresa ou um emprego que você mesmo criou?"
+- "Você é dono ou central de atendimento da empresa?"
+
+---
+
+### Categoria 2 — Caos Operacional
+*"Todo dia aparece uma surpresa diferente."*
+- Urgências novas toda manhã
+- Sempre falta produto ou material na hora errada
+- Erros sempre nos mesmos pontos
+- Equipe vive correndo mas sempre atrasada
+
+**Hooks:**
+- "Se todo dia surge uma urgência nova, talvez nenhuma delas seja urgência."
+- "Erro repetido não é azar."
+
+---
+
+### Categoria 3 — Falhas de Comunicação
+*"Quando tudo acontece no WhatsApp, nada está realmente organizado."*
+- WhatsApp virou caos
+- Cliente precisa repetir informações
+- Equipe recebe respostas diferentes do mesmo cliente
+- Sempre aparece um "esqueci de avisar"
+
+**Hooks:**
+- "Quando tudo acontece no WhatsApp, nada está realmente organizado."
+- "Quantas empresas existem dentro da sua empresa?"
+
+---
+
+### Categoria 4 — Problemas de Equipe
+*"Quando fulano falta, ninguém sabe continuar."*
+- Funcionário faltou e tudo travou
+- Treinar alguém demora semanas
+- Melhor funcionário vive sobrecarregado
+- Funcionários perguntam as mesmas coisas todo dia
+
+**Hooks:**
+- "Se uma pessoa tira folga e a empresa para, o problema não é a pessoa."
+- "Se cada contratação recomeça do zero, você não tem treinamento."
+
+---
+
+### Categoria 5 — Perda de Clientes e Dinheiro Invisível
+*"O dinheiro some mesmo vendendo bem."*
+- Mesmo cliente reclama da mesma coisa
+- Caixa apertado mesmo com vendas altas
+- Clientes somem depois da primeira compra
+- Fechamento de mês é sofrimento
+
+**Hooks:**
+- "Você resolveu o problema ou só respondeu a reclamação?"
+- "Se descobrir o lucro parece investigação policial, algo está errado."
+
+---
+
+## 9. Banco de 50 Situações — Sintomas Reais
+
+Use esses hooks diretamente no copy. Cada um representa algo que o dono já normalizou:
+
+| # | Situação | Hook | Categoria |
+|---|---|---|---|
+| 1 | Todo dia aparece uma urgência | "Se todo dia surge uma urgência nova, talvez nenhuma delas seja urgência." | Caos |
+| 2 | Funcionário faltou e tudo travou | "Se uma pessoa tira folga e a empresa para, o problema não é a pessoa." | Equipe |
+| 3 | Mesmo cliente reclama da mesma coisa | "Você resolveu o problema ou só respondeu a reclamação?" | Dinheiro |
+| 4 | Toda semana falta algum produto | "Seu estoque te avisa antes ou depois do prejuízo?" | Caos |
+| 5 | Dono aprova tudo | "Você é dono ou central de atendimento da empresa?" | Dependência |
+| 6 | WhatsApp virou caos | "Quando tudo acontece no WhatsApp, nada está realmente organizado." | Comunicação |
+| 7 | Cliente pede atualização do pedido | "Por que o cliente precisa perguntar algo que a empresa já sabe?" | Comunicação |
+| 8 | Fechamento de mês é sofrimento | "Se descobrir o lucro parece investigação policial, algo está errado." | Dinheiro |
+| 9 | Treinar alguém demora semanas | "Se cada contratação recomeça do zero, você não tem treinamento." | Equipe |
+| 10 | Cliente recebe respostas diferentes | "Quantas empresas existem dentro da sua empresa?" | Comunicação |
+| 11 | Dono tira férias e continua trabalhando | "Você tem uma empresa ou um emprego que você mesmo criou?" | Dependência |
+| 12 | Promoções funcionam mas depois volta ao normal | "Você está construindo vendas ou fabricando picos?" | Dinheiro |
+| 13 | Ninguém sabe qual tarefa vem primeiro | "Quando tudo é prioridade, nada é prioridade." | Caos |
+| 14 | Reuniões terminam sem ação | "Sua reunião gera decisões ou apenas opiniões?" | Comunicação |
+| 15 | Cliente precisa repetir informações | "Quantas vezes seu cliente precisa contar a mesma história?" | Comunicação |
+| 16 | Caixa apertado mesmo vendendo bem | "Vender mais não deveria piorar seu caixa." | Dinheiro |
+| 17 | Melhor funcionário vive sobrecarregado | "Seu melhor funcionário está ajudando ou escondendo problemas?" | Equipe |
+| 18 | Erros sempre nos mesmos pontos | "Erro repetido não é azar." | Caos |
+| 19 | Clientes somem depois da primeira compra | "Você vende ou cria clientes?" | Dinheiro |
+| 20 | Dono descobre problemas por acaso | "O problema apareceu hoje ou você só descobriu hoje?" | Dependência |
 
 ---
 

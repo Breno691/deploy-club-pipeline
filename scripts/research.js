@@ -18,27 +18,27 @@ const tvly = tavily({ apiKey: process.env.TAVILY_API_KEY });
 const SEARCH_QUERIES = [
   {
     category: 'trends',
-    query: 'Lean Six Sigma automação IA pequenas empresas Brasil 2026 tendências crescimento',
+    query: 'problemas operacionais pequenas empresas Brasil 2026 retrabalho equipe sobrecarregada gestão',
     searchDepth: 'advanced',
   },
   {
-    category: 'competitors',
-    query: 'consultoria Lean Six Sigma automação processos pequenas empresas BH concorrentes preços',
-    searchDepth: 'basic',
-  },
-  {
-    category: 'audience',
-    query: 'problemas operacionais pequenas empresas Brasil retrabalho desperdício processo sem padrão',
+    category: 'audience_pain',
+    query: 'dono pequena empresa Brasil dificuldades operação equipe WhatsApp caos processo desorganizado',
     searchDepth: 'advanced',
   },
   {
     category: 'hooks',
-    query: 'melhores hooks marketing consultoria melhoria processos automação pequena empresa conversão',
+    query: 'posts virais Instagram empresários brasileiros problemas dia a dia operação gestão engajamento 2026',
+    searchDepth: 'basic',
+  },
+  {
+    category: 'automation',
+    query: 'automação WhatsApp pequenas empresas Brasil atendimento 24h bot IA resultado prático 2026',
     searchDepth: 'basic',
   },
   {
     category: 'viral',
-    query: 'conteúdo viral melhoria contínua automação WhatsApp IA pequenas empresas Instagram 2026',
+    query: 'conteúdo viral empreendedorismo operação empresa Instagram Threads Brasil 2026',
     searchDepth: 'basic',
   },
 ];
