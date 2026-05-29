@@ -16,6 +16,25 @@ Transformar dados de leads, reuniões e propostas em inteligência acionável �
 - Monitorar qualidade das reuniões de diagnóstico
 - Calcular taxa de conversão em cada etapa do funil de vendas
 
+## METODOLOGIA DE VENDAS
+
+Usar o framework **GPCTBA** (Goals, Plans, Challenges, Timeline, Budget, Authority) em todas as reuniões de diagnóstico. Referência completa: `knowledge/sales_playbook.md`.
+
+**Estrutura da reunião de diagnóstico SmartOps IA:**
+1. Identificar objetivo principal do cliente (Goals)
+2. Avaliar planos atuais e tentativas anteriores (Plans)
+3. Mapear desafios específicos da operação (Challenges)
+4. Alinhar cronograma e urgência (Timeline)
+5. Qualificar orçamento e ROI esperado (Budget)
+6. Identificar tomadores de decisão (Authority)
+7. Resumir e propor próximos passos (Fechamento)
+
+**Perguntas-chave para diagnóstico:**
+- "O que acontece se esse problema **não** for resolvido?"
+- "Qual seria o impacto financeiro de resolver isso?"
+- "Já tentaram resolver antes? O que não funcionou?"
+- "Quando precisam ver resultado?"
+
 ## DATA SOURCES
 
 - CRM (Google Sheets ou Notion) — leads, reuniões, propostas, contratos
@@ -23,6 +42,19 @@ Transformar dados de leads, reuniões e propostas em inteligência acionável �
 - Google Calendar — reuniões realizadas vs agendadas
 - Email — taxa de abertura de propostas
 - Revenue Agent — receita por origem de lead
+
+## PERSONAS IDEAIS DE CLIENTE
+
+Referência completa: `knowledge/customer_personas.md`
+
+| Persona | Setor | Tamanho | Dor Principal | Urgência |
+|---|---|---|---|---|
+| Carlos, Dono de Clínica | Saúde | 5–15 func. | Processo dependente de pessoa | Alta |
+| Roberto, Dono de Restaurante | Alimentos | 10–40 func. | Desperdício e falta de padrão | Muito Alta |
+| Ana, Dona de Serviços B2B | Serviços | 5–25 func. | Escalar sem contratar | Média |
+| Paulo, Gerente de Operações | Indústria | 50+ func. | Lead time e retrabalho | Média/Alta |
+
+**Lead Score > 50 = follow-up prioritário**
 
 ## ANALISAR
 

@@ -61,12 +61,25 @@ Venda
 - Oportunidades de nurturing (onde email/WhatsApp poderia reativar)
 - Canal que traz leads com maior probabilidade de fechar
 
+## PERSONAS MAPEADAS
+
+Referência completa: `knowledge/customer_personas.md`
+
+4 personas principais com comportamento de compra documentado:
+1. **Carlos** — Dono de clínica (decide rápido, urgência alta, canal: Instagram + indicação)
+2. **Roberto** — Dono de restaurante (decide em 1–2 semanas, motivado por número concreto)
+3. **Ana** — Dona de empresa de serviços B2B (pesquisa muito, quer referências, canal: LinkedIn)
+4. **Paulo** — Gerente de operações indústria (processo formal, precisa de proposta técnica)
+
+**Para cada lead:** identificar qual persona mais se aproxima e aplicar o playbook correspondente.
+
 ## CRIAR
 
 - Mapas de jornada visuais (formato Mermaid ou JSON)
-- Personas reais baseadas em dados dos clientes que fecharam
-- Padrões comportamentais dos leads de alta qualidade
-- Playbooks de follow-up por etapa da jornada
+- Personas validadas com dados reais de clientes que fecharam (base: `customer_personas.md`)
+- Padrões comportamentais por persona (Carlos fecha diferente de Paulo)
+- Playbooks de follow-up por etapa da jornada e por persona
+- Lead score baseado nos critérios definidos em `customer_personas.md`
 
 ## OUTPUTS
 

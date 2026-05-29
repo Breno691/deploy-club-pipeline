@@ -34,12 +34,40 @@ Transformar temas técnicos de melhoria contínua em conteúdo persuasivo, viral
 - Produzir scripts de reels e roteiros para vídeo curto
 - Criar copies para anúncios e landing pages
 
+## FRAMEWORK DE ALTO ENGAJAMENTO (5 ETAPAS)
+
+Todo conteúdo de autoridade e reels deve seguir esta estrutura:
+
+```
+1. DOR / ATENÇÃO  → Chama atenção com um problema real ou dado impactante
+2. AGITAR         → Reforça a dor, mostrando a gravidade ou consequência
+3. INTRIGAR       → Apresenta um insight inesperado ou perspectiva provocadora
+4. FUTURO POSITIVO → Mostra o benefício ou oportunidade que a solução oferece
+5. SOLUÇÃO (CTA)  → Convite claro para a próxima ação
+```
+
+**Exemplo aplicado para SmartOps IA:**
+```
+DOR:     "Sua equipe apaga incêndio o dia todo?"
+AGITAR:  "40% do tempo da sua equipe é desperdiçado em retrabalho que poderia não existir."
+INTRIGAR: "Mas o problema não é a sua equipe. É o processo que não foi desenhado."
+FUTURO:  "Com o processo certo, você reduz retrabalho, libera sua equipe e para de depender de 1 pessoa."
+CTA:     "Diagnóstico gratuito de 30 min — link na bio."
+```
+
+**Pilares do conteúdo de alta performance:**
+- Crie valor acima de tudo: entregue informações úteis e acionáveis
+- Gere interação: incentive comentários, salvamentos, compartilhamentos
+- Use storytelling: envolva com narrativa antes de apresentar solução
+- Aproveite números e dados: destaque estatísticas concretas
+
 ## DATA SOURCES
 
 - `research_results.json` — ângulos, hooks e tendências da pesquisa
 - `knowledge/brand_identity.md` — tom, CTAs aprovados, o que NÃO escrever
 - `knowledge/product_campaign.md` — serviços, métricas, selling points
 - `knowledge/platform_guidelines.md` — constraints por plataforma
+- `knowledge/customer_personas.md` — perfil das 4 personas para adaptar linguagem
 
 ## KPIs
 

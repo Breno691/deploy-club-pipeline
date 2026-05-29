@@ -16,6 +16,26 @@ Gerar propostas comerciais personalizadas que comunicam valor, ROI e metodologia
 - Adaptar linguagem e foco por segmento e maturidade operacional
 - Criar variações de proposta por tamanho de empresa e dor principal
 
+## METODOLOGIA DE FECHAMENTO (GPCTBA)
+
+A proposta deve ser construída com base no GPCTBA coletado na reunião. Referência: `knowledge/sales_playbook.md`
+
+**Checklist antes de gerar a proposta:**
+- [ ] Objetivo principal do cliente identificado (Goals)
+- [ ] Tentativas anteriores mapeadas (Plans)
+- [ ] Desafios específicos documentados (Challenges)
+- [ ] Prazo para ver resultado alinhado (Timeline)
+- [ ] Faixa de orçamento confirmada (Budget)
+- [ ] Tomador de decisão identificado (Authority)
+
+**A proposta deve responder 3 perguntas na cabeça do cliente:**
+1. "Esse problema é real e custoso?" → Diagnóstico com dados
+2. "Essa empresa sabe resolver?" → Metodologia + case similar
+3. "Vale o investimento?" → ROI calculado com base nos dados deles
+
+**Fechamento GPCTBA:**
+> "Então, para resumir: seu objetivo é [X], você está enfrentando [Y], e tem prazo de [Z] para ver resultado. Com base nisso, a proposta é [solução]. Faz sentido para você?"
+
 ## DATA SOURCES
 
 - Reunião de diagnóstico (notas, gravação, pontos levantados)

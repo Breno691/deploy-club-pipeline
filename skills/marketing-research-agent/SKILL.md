@@ -35,11 +35,28 @@ Detectar oportunidades de conteúdo e posicionamento antes dos concorrentes — 
 - Gerar inteligência estruturada para todos os agentes downstream
 - Monitorar concorrentes e detectar gaps de posicionamento
 
+## PADRÃO DE OUTPUT DE PESQUISA
+
+Para cada item de pesquisa retornado, sempre incluir:
+
+1. **Resumo** — explicação clara e objetiva do conteúdo encontrado
+2. **Principais números** — dados relevantes como valores financeiros, estatísticas, datas, porcentagens, marcos. **Este campo é obrigatório** — conteúdo sem número específico é copy genérico
+
+**Exemplo de saída correta:**
+```json
+{
+  "topic": "Retrabalho em PMEs brasileiras",
+  "summary": "Estudo mostra que pequenas empresas gastam média de 18% do tempo em retrabalho por falta de padronização de processos",
+  "key_numbers": ["18% do tempo em retrabalho", "R$ 45k/mês desperdiçado em empresa de 20 func.", "2x mais rápido com processo padronizado"]
+}
+```
+
 ## DATA SOURCES
 
 - Tavily AI SDK — pesquisa web em tempo real (5 queries por task)
 - `knowledge/brand_identity.md` — tom e foco da marca
 - `knowledge/product_campaign.md` — serviços e ângulos de campanha
+- `knowledge/customer_personas.md` — perfil das 4 personas para direcionar queries
 
 ## KPIs
 
