@@ -1,8 +1,6 @@
 require('dotenv').config();
-if (!globalThis.WebSocket) {
-  globalThis.WebSocket = require('ws');
-}
 const { createClient } = require('@supabase/supabase-js');
+const ws = require('ws');
 const fs = require('fs');
 const path = require('path');
 
@@ -38,7 +36,9 @@ async function uploadMedia() {
     process.exit(1);
   }
 
-  const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
+  const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY, {
+    realtime: { transport: ws },
+  });
 
   const mediaUrls = {
     task_name: taskName,
