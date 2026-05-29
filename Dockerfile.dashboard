@@ -1,0 +1,14 @@
+FROM node:20-slim
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci --omit=dev
+
+COPY . .
+
+RUN mkdir -p outputs data
+
+EXPOSE 3100
+
+CMD ["node", "pipeline/dashboard-server.js"]
