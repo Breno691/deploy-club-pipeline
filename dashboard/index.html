@@ -281,6 +281,10 @@ tr:hover td { background: rgba(124,58,237,0.03); }
   </div>
 
   <div class="nav-section">Sistema</div>
+  <div class="nav-item" onclick="show('execucoes')">
+    <span class="icon">⚡</span> Execuções
+    <span class="badge" id="badge-running" style="display:none">●</span>
+  </div>
   <div class="nav-item" onclick="show('dados')">
     <span class="icon">✏️</span> Dados
   </div>
@@ -1200,6 +1204,73 @@ tr:hover td { background: rgba(124,58,237,0.03); }
 
   </section>
 
+  <!-- ── EXECUÇÕES ── -->
+  <section class="section" id="sec-execucoes">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+      <div>
+        <div style="font-size:20px;font-weight:700">Execuções de Agentes</div>
+        <div style="color:var(--muted);font-size:13px;margin-top:4px">Histórico de todas as execuções — tempo real</div>
+      </div>
+      <button onclick="loadExecutions()" style="background:var(--lean);color:#fff;border:none;border-radius:8px;padding:8px 16px;cursor:pointer;font-size:13px;font-weight:600">↻ Atualizar</button>
+    </div>
+
+    <!-- Summary cards -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px">
+      <div class="card" style="padding:16px;text-align:center">
+        <div style="font-size:28px;font-weight:800;color:var(--lean-l)" id="exec-total">—</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px">Total hoje</div>
+      </div>
+      <div class="card" style="padding:16px;text-align:center">
+        <div style="font-size:28px;font-weight:800;color:#10B981" id="exec-ok">—</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px">Concluídos</div>
+      </div>
+      <div class="card" style="padding:16px;text-align:center">
+        <div style="font-size:28px;font-weight:800;color:#F59E0B" id="exec-running">—</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px">Rodando agora</div>
+      </div>
+      <div class="card" style="padding:16px;text-align:center">
+        <div style="font-size:28px;font-weight:800;color:#EF4444" id="exec-errors">—</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:4px">Erros</div>
+      </div>
+    </div>
+
+    <!-- Schedule -->
+    <div class="table-card" style="margin-bottom:20px">
+      <div class="table-header">
+        <h3>Agendamentos Automáticos</h3>
+        <div style="font-size:12px;color:var(--muted)">Rodam enquanto o dashboard estiver aberto</div>
+      </div>
+      <table>
+        <thead><tr><th>Agente</th><th>Horário</th><th>Dias</th></tr></thead>
+        <tbody id="schedule-tbody">
+          <tr><td colspan="3" style="text-align:center;color:var(--muted);padding:16px">Carregando...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Execution list -->
+    <div class="table-card">
+      <div class="table-header">
+        <h3>Histórico de Execuções</h3>
+        <div style="font-size:12px;color:var(--muted)" id="exec-last-updated">—</div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Agente</th>
+            <th>Resumo</th>
+            <th>Iniciou</th>
+            <th>Duração</th>
+          </tr>
+        </thead>
+        <tbody id="exec-tbody">
+          <tr><td colspan="5" style="text-align:center;color:var(--muted);padding:24px">Carregando execuções...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
 </main>
 
 <script>
@@ -1216,6 +1287,7 @@ const SECTION_TITLES = {
   clients:    'Clientes & Projetos',
   operations: 'Operações & Processos',
   dados:      'Dados — Entrada Manual',
+  execucoes:  'Execuções de Agentes',
 };
 
 function show(id) {
@@ -1721,7 +1793,90 @@ function renderAgents() {
 }
 renderAgents();
 
+// ── Execuções ────────────────────────────────────────────────────────────────
+async function loadSchedule() {
+  const tbody = document.getElementById('schedule-tbody');
+  if (!tbody) return;
+  try {
+    const r = await fetch(API + '/api/schedule', { signal: AbortSignal.timeout(2000) });
+    const list = await r.json();
+    tbody.innerHTML = list.map(s => `<tr>
+      <td style="font-weight:600;font-size:13px">⚡ ${s.name}</td>
+      <td style="font-size:13px;color:var(--lean-l);font-weight:700">${s.time}</td>
+      <td style="font-size:12px;color:var(--muted)">${s.days}</td>
+    </tr>`).join('');
+  } catch { if (tbody) tbody.innerHTML = '<tr><td colspan="3" style="color:var(--muted);padding:12px;text-align:center">Dashboard offline</td></tr>'; }
+}
+
+async function loadExecutions() {
+  const tbody = document.getElementById('exec-tbody');
+  if (!tbody) return;
+  try {
+    const r = await fetch(API + '/api/executions?limit=100', { signal: AbortSignal.timeout(3000) });
+    const list = await r.json();
+
+    const today = new Date().toISOString().split('T')[0];
+    const todayList = list.filter(e => (e.startedAt || e.finishedAt || e.timestamp || '').startsWith(today));
+    const running   = list.filter(e => e.status === 'running');
+    const errors    = list.filter(e => e.status === 'error');
+    const completed = list.filter(e => e.status === 'completed');
+
+    document.getElementById('exec-total').textContent   = todayList.length;
+    document.getElementById('exec-ok').textContent      = completed.length;
+    document.getElementById('exec-running').textContent = running.length;
+    document.getElementById('exec-errors').textContent  = errors.length;
+    document.getElementById('exec-last-updated').textContent = 'Atualizado: ' + new Date().toLocaleTimeString('pt-BR');
+
+    const badge = document.getElementById('badge-running');
+    if (badge) { badge.style.display = running.length ? '' : 'none'; }
+
+    if (!list.length) {
+      tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:24px">Nenhuma execução ainda. Rode um agente para começar.</td></tr>';
+      return;
+    }
+
+    tbody.innerHTML = list.slice(0, 100).map(e => {
+      const ts = e.startedAt || e.timestamp || '';
+      const dt = ts ? new Date(ts) : null;
+      const timeStr = dt ? dt.toLocaleString('pt-BR', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' }) : '—';
+
+      let duration = '—';
+      if (e.startedAt && e.finishedAt) {
+        const secs = Math.round((new Date(e.finishedAt) - new Date(e.startedAt)) / 1000);
+        duration = secs >= 60 ? `${Math.floor(secs/60)}m ${secs%60}s` : `${secs}s`;
+      }
+
+      const statusIcon = e.status === 'completed' ? '✅' : e.status === 'running' ? '<span style="color:#F59E0B">⏳</span>' : '❌';
+      const alertsHtml = e.alerts && e.alerts.length
+        ? `<div style="font-size:11px;color:#F59E0B;margin-top:2px">⚠️ ${e.alerts.slice(0,2).join(' | ')}</div>` : '';
+      const summaryHtml = e.summary
+        ? `<div style="font-size:12px;color:var(--muted)">${e.summary}</div>${alertsHtml}`
+        : alertsHtml || '—';
+
+      const rowBg = e.status === 'running' ? 'background:rgba(245,158,11,0.05)' : e.status === 'error' ? 'background:rgba(239,68,68,0.05)' : '';
+
+      return `<tr style="${rowBg}">
+        <td style="font-size:18px;text-align:center">${statusIcon}</td>
+        <td style="font-weight:600;font-size:13px">${e.agent || '—'}</td>
+        <td>${summaryHtml}</td>
+        <td style="font-size:12px;color:var(--muted);white-space:nowrap">${timeStr}</td>
+        <td style="font-size:12px;color:var(--muted);text-align:center">${duration}</td>
+      </tr>`;
+    }).join('');
+  } catch {
+    if (tbody) tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:24px">Dashboard offline — inicie com <code>npm run dashboard</code></td></tr>';
+  }
+}
+
+// Auto-refresh execuções a cada 10s quando a aba está ativa
+setInterval(() => {
+  const sec = document.getElementById('sec-execucoes');
+  if (sec && sec.classList.contains('active')) loadExecutions();
+}, 10000);
+
 loadData();
+loadExecutions();
+loadSchedule();
 </script>
 </body>
 </html>

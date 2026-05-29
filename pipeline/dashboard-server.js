@@ -2,9 +2,56 @@ require('dotenv').config();
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const { execFile } = require('child_process');
+const { sendTelegram } = require('../lib/agent_notify');
 
 const app = express();
 const PORT = process.env.DASHBOARD_PORT || 3100;
+
+// ── Scheduler ─────────────────────────────────────────────────────────────────
+// Roda agendamentos sem dependência de node-cron — verifica a cada minuto.
+
+const SCHEDULE = [
+  // morning: seg-sex às 7h00
+  { name: 'Morning Briefing', script: 'scripts/morning.js', hour: 7, minute: 0, days: [1,2,3,4,5] },
+  // weekly: segunda às 8h00
+  { name: 'Weekly Review',    script: 'scripts/weekly.js',  hour: 8, minute: 0, days: [1] },
+  // kpi-guardian: diário às 12h00 (meio-dia)
+  { name: 'KPI Guardian',     script: 'scripts/kpi_guardian.js',   hour: 12, minute: 0, days: [0,1,2,3,4,5,6], args: ['--task','kpi_guardian'] },
+  // risk: diário às 18h00
+  { name: 'Risk Agent',       script: 'scripts/risk_agent.js',      hour: 18, minute: 0, days: [0,1,2,3,4,5,6], args: ['--task','risk_monitor'] },
+  // revenue-intel: sexta às 17h00
+  { name: 'Revenue Intel',    script: 'scripts/digital_revenue_agent.js', hour: 17, minute: 0, days: [5], args: ['--task','revenue_intel'] },
+];
+
+const lastRan = {};
+
+function checkSchedule() {
+  const now = new Date();
+  const h = now.getHours(), m = now.getMinutes(), d = now.getDay();
+  const key = `${now.toISOString().slice(0,16)}`; // YYYY-MM-DDTHH:MM
+
+  for (const job of SCHEDULE) {
+    if (job.hour !== h || job.minute !== m) continue;
+    if (!job.days.includes(d)) continue;
+    const jobKey = `${job.name}::${key}`;
+    if (lastRan[jobKey]) continue;
+    lastRan[jobKey] = true;
+
+    console.log(`\n[Scheduler] ▶ ${job.name} — ${now.toLocaleTimeString('pt-BR')}`);
+    const scriptArgs = job.args || [];
+    execFile('node', [job.script, ...scriptArgs], { cwd: process.cwd(), env: process.env }, (err, stdout) => {
+      if (err) {
+        console.error(`[Scheduler] ❌ ${job.name}: ${err.message}`);
+        sendTelegram(`❌ *Scheduler — ${job.name}*\nErro: ${err.message}`).catch(() => {});
+      } else {
+        console.log(`[Scheduler] ✅ ${job.name} concluído`);
+      }
+    });
+  }
+}
+
+setInterval(checkSchedule, 60 * 1000);
 
 // CORS — permite o dashboard HTML acessar a API
 app.use((req, res, next) => {
@@ -242,8 +289,34 @@ app.get('/api/outputs', (req, res) => {
   res.json(result);
 });
 
+// ── API: Schedule ─────────────────────────────────────────────────────────────
+app.get('/api/schedule', (req, res) => {
+  const days = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+  res.json(SCHEDULE.map(j => ({
+    name: j.name,
+    time: `${String(j.hour).padStart(2,'0')}:${String(j.minute).padStart(2,'0')}`,
+    days: j.days.map(d => days[d]).join(', '),
+  })));
+});
+
+// ── API: Executions log ───────────────────────────────────────────────────────
+app.get('/api/executions', (req, res) => {
+  const list = readJsonSafe('data/executions.json') || [];
+  const limit = parseInt(req.query.limit) || 100;
+  res.json(list.slice(0, limit));
+});
+
 app.listen(PORT, () => {
   console.log(`\nSmartOps IA — Dashboard Server`);
   console.log(`Dashboard: http://localhost:${PORT}`);
-  console.log(`API:       http://localhost:${PORT}/api/dashboard-data\n`);
+  console.log(`API:       http://localhost:${PORT}/api/dashboard-data`);
+  console.log(`Scheduler: ${SCHEDULE.length} agendamentos ativos\n`);
+
+  // Sincroniza Supabase → data/*.json na inicialização
+  if (process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_KEY) {
+    execFile('node', ['scripts/sync_supabase.js'], { cwd: process.cwd(), env: process.env }, (err) => {
+      if (err) console.warn('[Startup] sync Supabase falhou — usando dados locais');
+      else console.log('[Startup] Supabase sincronizado ✓');
+    });
+  }
 });
