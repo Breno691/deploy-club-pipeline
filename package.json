@@ -21,7 +21,14 @@
     "dashboard": "node pipeline/dashboard-server.js",
     "ceo": "node scripts/ceo_advisor.js --task ceo_daily --mode daily",
     "proposal": "node scripts/proposal_agent.js",
-    "finance": "node scripts/financial_agent.js --task finance_semanal"
+    "finance": "node scripts/financial_agent.js --task finance_semanal",
+    "sales": "node scripts/sales_intelligence.js --task sales_intel",
+    "competitor": "node scripts/competitor_agent.js --task competitor",
+    "seo": "node scripts/seo_agent.js --task seo",
+    "lean": "node scripts/lean_agent.js --task lean",
+    "sigma": "node scripts/six_sigma_agent.js --task six_sigma",
+    "strategy": "node scripts/strategic_planning.js --task strategy --horizon 90",
+    "risk": "node scripts/risk_agent.js --task risk_monitor"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.100.0",
