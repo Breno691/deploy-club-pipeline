@@ -1,0 +1,11 @@
+[2026-05-28T21:04:55.840Z] Research Agent started
+[2026-05-28T21:04:56.418Z] Search [trends] FAILED: Unauthorized: missing or invalid API key.
+[2026-05-28T21:04:56.585Z] Search [competitors] FAILED: Unauthorized: missing or invalid API key.
+[2026-05-28T21:04:56.746Z] Search [audience] FAILED: Unauthorized: missing or invalid API key.
+[2026-05-28T21:04:56.916Z] Search [hooks] FAILED: Unauthorized: missing or invalid API key.
+[2026-05-28T21:04:57.088Z] Search [viral] FAILED: Unauthorized: missing or invalid API key.
+[2026-05-28T21:04:57.089Z] research_raw.json saved
+[2026-05-28T21:04:57.091Z] research_results.json saved
+[2026-05-28T21:04:57.092Z] research_brief.md saved
+[2026-05-28T21:04:57.094Z] interactive_report.html saved
+[2026-05-28T21:04:57.094Z] Research Agent complete ✓

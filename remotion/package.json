@@ -1,0 +1,21 @@
+{
+  "name": "deploy-club-remotion",
+  "version": "1.0.0",
+  "description": "Remotion video compositions for Deploy Club ad pipeline",
+  "scripts": {
+    "start": "npx remotion studio",
+    "render": "npx remotion render src/index.ts AdVideo"
+  },
+  "dependencies": {
+    "@remotion/google-fonts": "^4.0.237",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "^4.0.237",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@remotion/renderer": "^4.0.237",
+    "@types/react": "^18.3.3",
+    "typescript": "^5.4.5"
+  }
+}

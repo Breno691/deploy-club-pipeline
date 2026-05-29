@@ -1,0 +1,193 @@
+
+Worker started. Listening for jobs on queue: ai-content-pipeline
+Press Ctrl+C to stop.
+
+[research_agent] Starting Tavily research (5 searches)...
+
+Research Agent starting for: lean_operacoes — 2026-05-29
+
+  Searching: [trends] Lean Six Sigma automação IA pequenas empresas Brasil 2026 te...
+  Searching: [competitors] consultoria Lean Six Sigma automação processos pequenas empr...
+  Searching: [audience] problemas operacionais pequenas empresas Brasil retrabalho d...
+  Searching: [hooks] melhores hooks marketing consultoria melhoria processos auto...
+  Searching: [viral] conteúdo viral melhoria contínua automação WhatsApp IA peque...
+
+Research complete. Outputs saved to: outputs\lean_operacoes_2026-05-29
+
+[research_agent] Research complete ✓
+
+✓ research_agent — complete
+
+✗ distribution_agent failed (attempt 1/1): Dependency timeout: ad_creative_designer did not complete within 480s
+[distribution_agent] FAILED (attempt 1): Dependency timeout: ad_creative_designer did not complete within 480s
+[ad_creative_designer] Generating ad layout and HTML...
+
+Ad Creative Designer — Generating layout + HTML
+Task: lean_operacoes | Date: 2026-05-29
+
+  layout.json generated ✓
+  ad.html generated ✓
+
+Ad generation complete. Files in: outputs\lean_operacoes_2026-05-29\ads
+
+[ad_creative_designer] Rendering PNG via Playwright...
+
+Ad Creative Designer — Playwright Renderer
+Task: lean_operacoes | Date: 2026-05-29
+
+Screenshot saved: outputs\lean_operacoes_2026-05-29\ads\instagram_ad.png
+File size: 1034.9 KB
+[ad_creative_designer] Ad creative complete ✓
+[copywriter_agent] Generating platform copy via Claude API...
+
+Copywriter Agent — Generating platform copy
+Task: lean_operacoes | Date: 2026-05-29
+
+  threads_post.txt ✓
+  instagram_caption.txt ✓
+  youtube_metadata.json ✓
+
+Copy generation complete. Files in: outputs\lean_operacoes_2026-05-29\copy
+
+── Threads preview ──
+Quantas horas você perdeu essa semana montando planilha, repassando tarefa no zap ou corrigindo erro que já aconteceu an...
+
+── Instagram hook ──
+Empresas que mapearam processos antes de automatizar reduziram retrabalho em até 30% nas primeiras 4 semanas.
+
+── YouTube title ──
+Como Reduzir 30% do Custo Operacional em 4 Semanas | Deploy Club
+
+[copywriter_agent] Copy generation complete ✓
+
+[worker] Redis connection error: Missing lock for job lean_operacoes_ad_creative. moveToFinished
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: Missing lock for job lean_operacoes_copy. moveToFinished
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: Missing lock for job lean_operacoes_ad_creative. moveToFinished
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: Missing lock for job lean_operacoes_copy. moveToFinished
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: connect ETIMEDOUT
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: read ECONNRESET
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: connect ETIMEDOUT
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: connect ETIMEDOUT
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: connect ETIMEDOUT
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: connect ETIMEDOUT
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: connect ETIMEDOUT
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: read ECONNRESET
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: connect ETIMEDOUT
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: connect ETIMEDOUT
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: connect ETIMEDOUT
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: connect ETIMEDOUT
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: connect ETIMEDOUT
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.
+
+[worker] Redis connection error: getaddrinfo EAI_AGAIN welcome-wallaby-139030.upstash.io
+Check UPSTASH_REDIS_URL in your .env file.

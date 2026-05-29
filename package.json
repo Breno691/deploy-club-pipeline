@@ -1,0 +1,36 @@
+{
+  "name": "deploy-club-ai-pipeline",
+  "version": "1.0.0",
+  "description": "AI Content Marketing Pipeline for Deploy Club",
+  "type": "commonjs",
+  "scripts": {
+    "pipeline:run": "node pipeline/orchestrator.js",
+    "pipeline:run:payload": "node pipeline/orchestrator.js --payload",
+    "auto": "node pipeline/run_auto.js",
+    "auto:dry": "node pipeline/run_auto.js --skip-post",
+    "worker": "node pipeline/worker.js",
+    "research": "node scripts/research.js",
+    "render:ad": "node scripts/render_ad.js",
+    "upload:media": "node scripts/upload_media.js",
+    "install:browsers": "npx playwright install chromium",
+    "create:assets": "node scripts/create_assets.js",
+    "package:skills": "node scripts/package_skills.js",
+    "generate:ad": "node scripts/generate_ad.js",
+    "generate:copy": "node scripts/generate_copy.js",
+    "server": "node pipeline/server.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.100.0",
+    "@supabase/supabase-js": "^2.43.1",
+    "@tavily/core": "^0.3.0",
+    "bullmq": "^5.7.1",
+    "dotenv": "^16.4.5",
+    "express": "^5.2.1",
+    "googleapis": "^140.0.0",
+    "ioredis": "^5.3.2",
+    "playwright": "^1.44.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12"
+  }
+}

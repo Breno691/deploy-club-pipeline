@@ -1,0 +1,22 @@
+{
+  "video_ad_specialist": {
+    "status": "complete",
+    "completedAt": "2026-05-29T00:12:04.781Z"
+  },
+  "research_agent": {
+    "status": "complete",
+    "completedAt": "2026-05-29T00:12:06.663Z"
+  },
+  "ad_creative_designer": {
+    "status": "complete",
+    "completedAt": "2026-05-29T00:13:32.259Z"
+  },
+  "copywriter_agent": {
+    "status": "complete",
+    "completedAt": "2026-05-29T00:13:49.762Z"
+  },
+  "distribution_agent": {
+    "status": "complete",
+    "completedAt": "2026-05-29T00:13:21.341Z"
+  }
+}

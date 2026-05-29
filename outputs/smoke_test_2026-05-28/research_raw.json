@@ -1,0 +1,17 @@
+{
+  "trends": {
+    "error": "Unauthorized: missing or invalid API key."
+  },
+  "competitors": {
+    "error": "Unauthorized: missing or invalid API key."
+  },
+  "audience": {
+    "error": "Unauthorized: missing or invalid API key."
+  },
+  "hooks": {
+    "error": "Unauthorized: missing or invalid API key."
+  },
+  "viral": {
+    "error": "Unauthorized: missing or invalid API key."
+  }
+}

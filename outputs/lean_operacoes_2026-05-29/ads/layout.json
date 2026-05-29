@@ -1,0 +1,116 @@
+{
+  "format": "instagram_square",
+  "width": 1080,
+  "height": 1080,
+  "template": "lean_focus",
+  "service": "lean_six_sigma",
+  "background": "#06060e",
+  "accentColor": "#7c3aed",
+  "elements": [
+    {
+      "type": "label",
+      "text": "Lean Six Sigma",
+      "x": 80,
+      "y": 80,
+      "fontSize": 11,
+      "color": "#a78bfa",
+      "fontWeight": "600",
+      "style": "pill",
+      "paddingX": 12,
+      "paddingY": 6,
+      "borderRadius": 20,
+      "backgroundColor": "rgba(124, 58, 237, 0.1)"
+    },
+    {
+      "type": "headline",
+      "text": "Retrabalho que não sai?",
+      "x": 80,
+      "y": 160,
+      "fontSize": 56,
+      "color": "#e8e8f0",
+      "fontWeight": "800",
+      "lineHeight": 1.1,
+      "maxWidth": 480
+    },
+    {
+      "type": "subtext",
+      "text": "O processo está quebrado — não a equipe.",
+      "x": 80,
+      "y": 320,
+      "fontSize": 18,
+      "color": "#8b8baa",
+      "lineHeight": 1.4,
+      "maxWidth": 460
+    },
+    {
+      "type": "metric",
+      "label": "Resultado típico",
+      "text": "−30% custo operacional em 4 semanas",
+      "x": 80,
+      "y": 460,
+      "fontSize": 14,
+      "color": "#a78bfa",
+      "fontWeight": "600",
+      "lineHeight": 1.5
+    },
+    {
+      "type": "divider",
+      "x": 80,
+      "y": 540,
+      "width": 100,
+      "height": 2,
+      "backgroundColor": "#7c3aed"
+    },
+    {
+      "type": "benefit",
+      "text": "✓ Mapeamento da causa raiz",
+      "x": 80,
+      "y": 580,
+      "fontSize": 14,
+      "color": "#e8e8f0",
+      "fontWeight": "500"
+    },
+    {
+      "type": "benefit",
+      "text": "✓ Processo padronizado",
+      "x": 80,
+      "y": 630,
+      "fontSize": 14,
+      "color": "#e8e8f0",
+      "fontWeight": "500"
+    },
+    {
+      "type": "benefit",
+      "text": "✓ Qualidade consistente",
+      "x": 80,
+      "y": 680,
+      "fontSize": 14,
+      "color": "#e8e8f0",
+      "fontWeight": "500"
+    },
+    {
+      "type": "cta",
+      "text": "Diagnóstico Grátis (30 min)",
+      "x": 80,
+      "y": 940,
+      "fontSize": 16,
+      "fontWeight": "700",
+      "color": "#fff",
+      "backgroundColor": "#25d366",
+      "paddingX": 32,
+      "paddingY": 16,
+      "borderRadius": 10,
+      "textAlign": "center",
+      "width": 920
+    },
+    {
+      "type": "footer",
+      "text": "WhatsApp: (31) 97203-9180",
+      "x": 80,
+      "y": 1020,
+      "fontSize": 12,
+      "color": "#8b8baa",
+      "fontWeight": "400"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Dependencies
+node_modules/
+remotion/node_modules/
+
+# Pipeline outputs (large generated files)
+outputs/*/ads/instagram_ad.png
+outputs/*/video/ad.mp4
+outputs/*/interactive_report.html
+
+# Keep outputs structure and JSON/MD/log files tracked
+!outputs/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Build
+remotion/dist/
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*

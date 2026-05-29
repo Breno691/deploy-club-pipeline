@@ -1,0 +1,9 @@
+node_modules
+remotion/node_modules
+.env
+.env.local
+outputs/
+*.log
+.git
+.vscode
+remotion/dist

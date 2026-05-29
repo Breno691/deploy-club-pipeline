@@ -1,0 +1,70 @@
+{
+  "task_name": "smartops_lean_test",
+  "date": "2026-05-28",
+  "product": "SmartOps IA",
+  "services": [
+    "Lean Six Sigma",
+    "Automação com IA"
+  ],
+  "target_audience": "Donos de pequenas empresas em BH e região",
+  "data_source": "brand_defaults",
+  "content_topics": [
+    "Como eliminar retrabalho com Lean Six Sigma em pequenas empresas",
+    "DMAIC na prática: causa raiz identificada em 4 semanas",
+    "Atendimento WhatsApp com IA: quando vale e quando não vale",
+    "Os 8 desperdícios do Lean em empresas de serviço"
+  ],
+  "marketing_angles": [
+    "O processo está quebrado — não a equipe",
+    "Lean primeiro, automação depois — a sequência que multiplica resultado",
+    "Em 4 semanas o retrabalho foi eliminado. 3 meses de tentativa não resolveram.",
+    "Seu WhatsApp responde às 3h da manhã?"
+  ],
+  "keywords": [
+    "Lean Six Sigma",
+    "DMAIC",
+    "melhoria de processos",
+    "automação com IA",
+    "WhatsApp Business IA",
+    "pequenas empresas BH",
+    "redução de desperdício",
+    "processo padronizado",
+    "Black Belt",
+    "consultoria processos BH",
+    "SmartOps IA",
+    "Breno Luiz",
+    "retrabalho",
+    "gestão operacional"
+  ],
+  "ad_hooks": [
+    "Equipe apagando incêndio todo dia? Não é falta de esforço. É processo quebrado.",
+    "Automatizou sem mapear o processo? Acabou de automatizar o erro.",
+    "Em 4 semanas a clínica eliminou o retrabalho que 3 meses não resolveram.",
+    "Sem padronização, a qualidade depende de quem está de plantão.",
+    "−30% custo operacional. Não é meta — é resultado com Lean Six Sigma."
+  ],
+  "video_ideas": [
+    "DMAIC em 60 segundos — as 5 fases com exemplo real de clínica",
+    "Os 8 desperdícios do Lean em empresas de serviço — qual custa mais?",
+    "Bot WhatsApp com IA: como responder clientes às 3h da manhã automaticamente",
+    "Antes e depois: processo de atendimento com e sem padronização"
+  ],
+  "competitor_gaps": [
+    "Concorrentes focam em grandes empresas — SmartOps IA especializada em pequenas",
+    "Outros vendem curso — SmartOps IA entrega projeto com resultado fechado e proposta com custo",
+    "Poucos combinam Lean Six Sigma + Automação IA no mesmo escopo",
+    "Diagnóstico gratuito de 30 minutos com Black Belt certificado — raro no mercado"
+  ],
+  "trending_windows": {
+    "instagram": "Terça–Sexta, 11h–13h ou 19h–21h BRT",
+    "youtube": "Quinta–Sábado, 14h–17h BRT",
+    "threads": "Dias úteis, 9h–11h BRT"
+  },
+  "raw_summary": {
+    "trends": "",
+    "competitors": "",
+    "audience": "",
+    "hooks": "",
+    "viral": ""
+  }
+}

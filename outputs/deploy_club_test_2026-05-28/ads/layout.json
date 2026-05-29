@@ -1,0 +1,103 @@
+{
+  "format": "instagram_square",
+  "width": 1080,
+  "height": 1080,
+  "template": "lean_focus",
+  "service": "lean_six_sigma",
+  "background": "#06060e",
+  "accentColor": "#7c3aed",
+  "elements": [
+    {
+      "type": "label",
+      "text": "Lean Six Sigma",
+      "x": 80,
+      "y": 80,
+      "fontSize": 11,
+      "color": "#a78bfa",
+      "style": "pill",
+      "fontWeight": "600"
+    },
+    {
+      "type": "headline",
+      "text": "Retrabalho eliminado em 4 semanas",
+      "x": 80,
+      "y": 160,
+      "fontSize": 52,
+      "color": "#e8e8f0",
+      "fontWeight": "800",
+      "maxWidth": 480,
+      "lineHeight": 1.2
+    },
+    {
+      "type": "subtext",
+      "text": "3 meses de tentativa não resolveram. Mapeamento certo + causa raiz = resultado mensurável.",
+      "x": 80,
+      "y": 380,
+      "fontSize": 18,
+      "color": "#8b8baa",
+      "maxWidth": 460,
+      "lineHeight": 1.4
+    },
+    {
+      "type": "divider",
+      "x": 80,
+      "y": 520,
+      "width": 100,
+      "height": 2,
+      "color": "#7c3aed"
+    },
+    {
+      "type": "metric",
+      "label": "Redução típica",
+      "text": "−30% custo operacional",
+      "x": 80,
+      "y": 580,
+      "fontSize": 16,
+      "color": "#a78bfa",
+      "fontWeight": "700"
+    },
+    {
+      "type": "metric",
+      "label": "Timeline",
+      "text": "Quick wins em 2 semanas",
+      "x": 80,
+      "y": 660,
+      "fontSize": 16,
+      "color": "#a78bfa",
+      "fontWeight": "700"
+    },
+    {
+      "type": "metric",
+      "label": "Formato",
+      "text": "Diagnóstico gratuito: 30 minutos",
+      "x": 80,
+      "y": 740,
+      "fontSize": 16,
+      "color": "#a78bfa",
+      "fontWeight": "700"
+    },
+    {
+      "type": "cta",
+      "text": "Diagnóstico Grátis",
+      "x": 80,
+      "y": 900,
+      "fontSize": 16,
+      "color": "#fff",
+      "backgroundColor": "#25d366",
+      "paddingX": 40,
+      "paddingY": 16,
+      "borderRadius": 8,
+      "fontWeight": "700",
+      "width": 460
+    },
+    {
+      "type": "text",
+      "text": "WhatsApp: (31) 97203-9180",
+      "x": 80,
+      "y": 1010,
+      "fontSize": 12,
+      "color": "#8b8baa",
+      "fontWeight": "500"
+    }
+  ]
+}

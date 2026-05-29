@@ -1,0 +1,58 @@
+[2026-05-29T00:04:11.709Z] Generating ad layout and HTML...
+[2026-05-29T00:04:12.017Z] generate_ad started
+[2026-05-29T00:04:12.054Z] Requesting layout JSON from Claude API...
+[2026-05-29T00:04:25.714Z] FAILED: Claude returned invalid JSON for layout. Raw: ```json
+{
+  "format": "instagram_square",
+  "width": 1080,
+  "height": 1080,
+  "template": "lean_focus",
+  "service": "lean_six_sigma",
+  "background": "#06060e",
+  "accentColor": "#7c3aed",
+  "elemen
+[2026-05-29T00:04:40.436Z] FAILED (attempt 1): generate_ad error: Claude returned invalid JSON for layout. Raw: ```json
+{
+  "format": "instagram_square",
+  "width": 1080,
+  "height": 1080,
+  "template": "lean_focus",
+  "service": "lean_six_sigma",
+  "background": "#06060e",
+  "accentColor": "#7c3aed",
+  "elemen
+
+[2026-05-29T00:06:10.859Z] generate_ad started
+[2026-05-29T00:06:10.864Z] Requesting layout JSON from Claude API...
+[2026-05-29T00:06:24.266Z] FAILED: Claude returned invalid JSON for layout. Raw: ```json
+{
+  "format": "instagram_square",
+  "width": 1080,
+  "height": 1080,
+  "template": "lean_focus",
+  "service": "lean_six_sigma",
+  "background": "#06060e",
+  "accentColor": "#7c3aed",
+  "elemen
+[2026-05-29T00:06:49.592Z] generate_ad started
+[2026-05-29T00:06:49.596Z] Requesting layout JSON from Claude API...
+[2026-05-29T00:07:11.306Z] FAILED: Claude returned invalid JSON for layout. Raw: ```json
+{
+  "format": "instagram_square",
+  "width": 1080,
+  "height": 1080,
+  "template": "lean_focus",
+  "service": "lean_six_sigma",
+  "background": "#06060e",
+  "accentColor": "#7c3aed",
+  "elemen
+[2026-05-29T00:08:35.854Z] generate_ad started
+[2026-05-29T00:08:35.859Z] Requesting layout JSON from Claude API...
+[2026-05-29T00:08:40.741Z] layout.json saved
+[2026-05-29T00:08:40.742Z] Requesting ad.html from Claude API...
+[2026-05-29T00:09:26.428Z] ad.html saved
+[2026-05-29T00:09:26.429Z] generate_ad complete ✓
+[2026-05-29T00:09:33.463Z] Ad render started
+[2026-05-29T00:09:34.528Z] Loading: C:\Users\Breno Luiz\Desktop\claude  code\outputs\deploy_club_test_2026-05-28\ads\ad.html
+[2026-05-29T00:09:39.663Z] instagram_ad.png saved (5.6 KB) ✓
+[2026-05-29T00:09:39.664Z] Ad render complete ✓

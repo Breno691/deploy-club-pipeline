@@ -1,0 +1,13 @@
+[2026-05-29T00:12:04.750Z] Starting Tavily research (5 searches)...
+[2026-05-29T00:12:05.109Z] Research Agent started
+[2026-05-29T00:12:05.661Z] Search [trends] complete — 5 results
+[2026-05-29T00:12:06.151Z] Search [competitors] complete — 5 results
+[2026-05-29T00:12:06.307Z] Search [audience] complete — 5 results
+[2026-05-29T00:12:06.464Z] Search [hooks] complete — 5 results
+[2026-05-29T00:12:06.622Z] Search [viral] complete — 5 results
+[2026-05-29T00:12:06.625Z] research_raw.json saved
+[2026-05-29T00:12:06.628Z] research_results.json saved
+[2026-05-29T00:12:06.630Z] research_brief.md saved
+[2026-05-29T00:12:06.632Z] interactive_report.html saved
+[2026-05-29T00:12:06.632Z] Research Agent complete ✓
+[2026-05-29T00:12:06.661Z] Research complete ✓

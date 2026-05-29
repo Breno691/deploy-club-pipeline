@@ -1,0 +1,61 @@
+{
+  "task_name": "smoke_test",
+  "date": "2026-05-28",
+  "product": "Deploy Club",
+  "target_audience": "Freelancers e donos de agência no Brasil",
+  "content_topics": [
+    "Claude Code para automação de agências no Brasil",
+    "Templates n8n testados em produção vs construir do zero",
+    "Dominar o ecossistema Claude completo — do chat ao código",
+    "Fechar projetos de automação por R$3.000–R$7.500"
+  ],
+  "marketing_angles": [
+    "Para de construir do zero — copia o que já funciona em produção",
+    "8 minutos vs 3h30 — velocidade absurda do Claude Code",
+    "R$7.500 de um agente. Ctrl-C, Ctrl-V. Tá tudo aqui dentro.",
+    "O ecossistema Claude completo em português — do chat ao código"
+  ],
+  "keywords": [
+    "Claude Code",
+    "automação n8n",
+    "agente SDR",
+    "templates testados em produção",
+    "Kit Definitivo",
+    "Deploy Club",
+    "freelancer automação",
+    "agência digital IA",
+    "Claude API",
+    "MCP server",
+    "skills Claude",
+    "automação Brasil"
+  ],
+  "ad_hooks": [
+    "Você ainda constrói do zero?",
+    "R$7.500 de um agente SDR. Ctrl-C, Ctrl-V.",
+    "A galera ainda tá no \"faz um texto pra mim\" em 2026",
+    "3h30 montando workflow. 8 minutos com Claude Code. Faz as contas.",
+    "88 agentes por R$47. O mesmo que eu vendo por R$7.500 cada."
+  ],
+  "video_ideas": [
+    "Timer de 3h30 cortando pra 8:22 com Claude Code",
+    "Workflow n8n slide-in enquanto texto explode na tela",
+    "Antes/Depois: construir do zero vs importar template em 5 minutos"
+  ],
+  "competitor_gaps": [
+    "Concorrentes ensinam teoria; Deploy Club entrega templates testados em produção",
+    "Documentação em português é diferencial raro — galera cansou de tutorial gringo",
+    "Licença comercial sem restrição — pode vender pro cliente sem pedir permissão"
+  ],
+  "trending_windows": {
+    "instagram": "Terça–Sexta, 11h–13h ou 19h–21h BRT",
+    "youtube": "Quinta–Sábado, 14h–17h BRT",
+    "threads": "Dias úteis, 9h–11h BRT"
+  },
+  "raw_summary": {
+    "trends": "",
+    "competitors": "",
+    "audience": "",
+    "hooks": "",
+    "viral": ""
+  }
+}
