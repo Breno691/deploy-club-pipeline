@@ -1,15 +1,27 @@
 require('dotenv').config();
 const express = require('express');
-const { createClient } = require('@supabase/supabase-js');
 const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3200;
 
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_KEY
-);
+console.log('Starting SmartOps Mobile Server...');
+console.log('PORT:', PORT);
+console.log('SUPABASE_URL:', process.env.SUPABASE_URL ? 'OK' : 'MISSING');
+console.log('SUPABASE_SERVICE_KEY:', process.env.SUPABASE_SERVICE_KEY ? 'OK' : 'MISSING');
+
+let supabase = null;
+try {
+  if (process.env.SUPABASE_URL && process.env.SUPABASE_SERVICE_KEY) {
+    const { createClient } = require('@supabase/supabase-js');
+    supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
+    console.log('Supabase: connected');
+  } else {
+    console.log('Supabase: credentials missing — API will return errors');
+  }
+} catch (err) {
+  console.error('Supabase init error:', err.message);
+}
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
