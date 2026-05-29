@@ -17,7 +17,11 @@
     "package:skills": "node scripts/package_skills.js",
     "generate:ad": "node scripts/generate_ad.js",
     "generate:copy": "node scripts/generate_copy.js",
-    "server": "node pipeline/server.js"
+    "server": "node pipeline/server.js",
+    "dashboard": "node pipeline/dashboard-server.js",
+    "ceo": "node scripts/ceo_advisor.js --task ceo_daily --mode daily",
+    "proposal": "node scripts/proposal_agent.js",
+    "finance": "node scripts/financial_agent.js --task finance_semanal"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.100.0",

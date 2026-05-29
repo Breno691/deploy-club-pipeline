@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SmartOps IA — Control Center</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
+<style>
+:root {
+  --bg:      #05070B;
+  --bg2:     #0B0F17;
+  --bg3:     #111827;
+  --border:  #1F2937;
+  --text:    #F9FAFB;
+  --muted:   #6B7280;
+  --muted2:  #374151;
+  --lean:    #7C3AED;
+  --lean-l:  #A78BFA;
+  --auto:    #10B981;
+  --auto-l:  #6EE7B7;
+  --warn:    #F59E0B;
+  --danger:  #EF4444;
+  --font:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --sidebar: 240px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: var(--bg); color: var(--text); font-family: var(--font); display: flex; min-height: 100vh; font-size: 14px; }
+
+/* ── Sidebar ── */
+.sidebar {
+  width: var(--sidebar);
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+  overflow-y: auto;
+}
+.sidebar-logo {
+  padding: 24px 20px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.sidebar-logo .brand {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 15px; font-weight: 700; color: var(--text);
+}
+.brand-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--lean); box-shadow: 0 0 8px var(--lean); }
+.sidebar-logo .sub { font-size: 11px; color: var(--muted); margin-top: 3px; letter-spacing: 0.5px; }
+
+.nav-section { padding: 16px 12px 4px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted2); }
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 14px; margin: 1px 6px;
+  border-radius: 8px; cursor: pointer;
+  color: var(--muted); font-size: 13px; font-weight: 500;
+  transition: all 0.15s;
+}
+.nav-item:hover { background: var(--bg3); color: var(--text); }
+.nav-item.active { background: rgba(124,58,237,0.12); color: var(--lean-l); }
+.nav-item .icon { font-size: 15px; width: 18px; text-align: center; }
+.nav-item .badge { margin-left: auto; background: var(--lean); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 99px; }
+.nav-item .badge.warn { background: var(--warn); }
+.nav-item .badge.danger { background: var(--danger); }
+
+.sidebar-bottom {
+  margin-top: auto;
+  padding: 16px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--muted);
+}
+.status-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--auto); margin-right: 6px; box-shadow: 0 0 6px var(--auto); }
+
+/* ── Main ── */
+.main {
+  margin-left: var(--sidebar);
+  flex: 1;
+  overflow-y: auto;
+}
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(5,7,11,0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.topbar-title { font-size: 17px; font-weight: 700; }
+.topbar-meta { font-size: 12px; color: var(--muted); }
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  cursor: pointer; border: none; transition: all 0.15s;
+}
+.btn-primary { background: var(--lean); color: #fff; }
+.btn-primary:hover { background: #6d28d9; }
+.btn-ghost { background: var(--bg3); color: var(--text); border: 1px solid var(--border); }
+.btn-ghost:hover { border-color: var(--lean); }
+
+/* ── Sections ── */
+.section { display: none; padding: 28px; }
+.section.active { display: block; }
+
+/* ── Cards ── */
+.kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+.kpi-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+.kpi-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 8px; }
+.kpi-value { font-size: 28px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+.kpi-change { font-size: 12px; color: var(--muted); }
+.kpi-change.up { color: var(--auto); }
+.kpi-change.down { color: var(--danger); }
+.kpi-card.lean .kpi-value { color: var(--lean-l); }
+.kpi-card.green .kpi-value { color: var(--auto-l); }
+.kpi-card.warn .kpi-value { color: var(--warn); }
+.kpi-card.danger .kpi-value { color: var(--danger); }
+
+/* ── Charts ── */
+.chart-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 24px; }
+.chart-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+.chart-title { font-size: 13px; font-weight: 700; margin-bottom: 16px; }
+.chart-sub { font-size: 11px; color: var(--muted); margin-top: -12px; margin-bottom: 16px; }
+
+/* ── Table ── */
+.table-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+.table-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.table-header h3 { font-size: 14px; font-weight: 700; }
+table { width: 100%; border-collapse: collapse; }
+th { padding: 10px 20px; text-align: left; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--muted); border-bottom: 1px solid var(--border); background: var(--bg3); }
+td { padding: 12px 20px; border-bottom: 1px solid rgba(31,41,55,0.5); font-size: 13px; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(124,58,237,0.03); }
+
+/* ── Pills ── */
+.pill {
+  display: inline-flex; align-items: center;
+  padding: 3px 10px; border-radius: 99px; font-size: 11px; font-weight: 600;
+}
+.pill-lean    { background: rgba(124,58,237,0.15); color: var(--lean-l); border: 1px solid rgba(124,58,237,0.2); }
+.pill-green   { background: rgba(16,185,129,0.12); color: var(--auto-l); border: 1px solid rgba(16,185,129,0.2); }
+.pill-warn    { background: rgba(245,158,11,0.12); color: var(--warn); border: 1px solid rgba(245,158,11,0.2); }
+.pill-danger  { background: rgba(239,68,68,0.12); color: var(--danger); border: 1px solid rgba(239,68,68,0.2); }
+.pill-muted   { background: var(--bg3); color: var(--muted); border: 1px solid var(--border); }
+
+/* ── Agents Grid ── */
+.agents-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+.agent-card {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 16px;
+}
+.agent-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.agent-name { font-size: 13px; font-weight: 700; }
+.agent-squad { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+.agent-last { font-size: 11px; color: var(--muted); }
+.agent-status { display: flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 600; }
+.dot-green { width: 6px; height: 6px; border-radius: 50%; background: var(--auto); }
+.dot-lean  { width: 6px; height: 6px; border-radius: 50%; background: var(--lean); }
+.dot-warn  { width: 6px; height: 6px; border-radius: 50%; background: var(--warn); }
+.dot-gray  { width: 6px; height: 6px; border-radius: 50%; background: var(--muted2); }
+
+/* ── Content Calendar ── */
+.calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-bottom: 24px; }
+.cal-day { background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 10px; min-height: 80px; }
+.cal-day.today { border-color: var(--lean); }
+.cal-day.has-post { border-color: rgba(16,185,129,0.3); }
+.cal-date { font-size: 11px; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
+.cal-post { background: rgba(124,58,237,0.15); border-radius: 4px; padding: 4px 6px; font-size: 10px; color: var(--lean-l); margin-bottom: 3px; line-height: 1.3; }
+.cal-post.auto { background: rgba(16,185,129,0.1); color: var(--auto-l); }
+
+/* ── Alert cards ── */
+.alert-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px; }
+.alert-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px;
+}
+.alert-item.high  { border-left: 3px solid var(--danger); }
+.alert-item.med   { border-left: 3px solid var(--warn); }
+.alert-item.low   { border-left: 3px solid var(--lean); }
+.alert-icon { font-size: 18px; margin-top: 1px; }
+.alert-title { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+.alert-desc { font-size: 12px; color: var(--muted); }
+
+/* ── Section header ── */
+.section-header { margin-bottom: 20px; }
+.section-header h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+.section-header p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+/* ── Progress bars ── */
+.prog-item { margin-bottom: 12px; }
+.prog-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 5px; }
+.prog-bar { height: 6px; background: var(--border); border-radius: 99px; overflow: hidden; }
+.prog-fill { height: 100%; border-radius: 99px; background: var(--lean); }
+.prog-fill.green { background: var(--auto); }
+
+/* ── Funnel ── */
+.funnel { display: flex; flex-direction: column; gap: 4px; margin-bottom: 20px; }
+.funnel-step {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--bg3); border-radius: 6px; padding: 10px 14px;
+  position: relative;
+}
+.funnel-bar { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 6px; z-index: 0; }
+.funnel-content { position: relative; z-index: 1; display: flex; align-items: center; gap: 12px; width: 100%; }
+.funnel-name { font-size: 12px; font-weight: 600; flex: 1; }
+.funnel-count { font-size: 20px; font-weight: 800; color: var(--lean-l); min-width: 40px; }
+.funnel-rate { font-size: 11px; color: var(--muted); min-width: 60px; text-align: right; }
+
+/* ── Responsive ── */
+@media (max-width: 1200px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .agents-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- ── SIDEBAR ── -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <div class="brand"><div class="brand-dot"></div> SmartOps IA</div>
+    <div class="sub">Control Center v1.0</div>
+  </div>
+
+  <div class="nav-section">Principal</div>
+  <div class="nav-item active" onclick="show('executive')">
+    <span class="icon">⚡</span> Executive
+  </div>
+  <div class="nav-item" onclick="show('agents')">
+    <span class="icon">🤖</span> Agentes <span class="badge">35</span>
+  </div>
+
+  <div class="nav-section">Aquisição</div>
+  <div class="nav-item" onclick="show('leads')">
+    <span class="icon">🎯</span> Leads & Pipeline
+  </div>
+  <div class="nav-item" onclick="show('site')">
+    <span class="icon">🌐</span> Site & Analytics
+  </div>
+  <div class="nav-item" onclick="show('ads')">
+    <span class="icon">📢</span> Campanhas & Ads
+  </div>
+
+  <div class="nav-section">Conteúdo</div>
+  <div class="nav-item" onclick="show('marketing')">
+    <span class="icon">📣</span> Marketing
+  </div>
+  <div class="nav-item" onclick="show('content')">
+    <span class="icon">📅</span> Calendário
+  </div>
+
+  <div class="nav-section">Negócio</div>
+  <div class="nav-item" onclick="show('finance')">
+    <span class="icon">💰</span> Financeiro
+  </div>
+  <div class="nav-item" onclick="show('clients')">
+    <span class="icon">👥</span> Clientes
+  </div>
+  <div class="nav-item" onclick="show('operations')">
+    <span class="icon">⚙️</span> Operações
+  </div>
+
+  <div class="sidebar-bottom">
+    <div><span class="status-dot"></span>Pipeline ativo — EasyPanel</div>
+    <div style="margin-top:6px;color:#374151">Breno Luiz · Black Belt LSS</div>
+  </div>
+</aside>
+
+<!-- ── MAIN CONTENT ── -->
+<main class="main">
+
+  <!-- ── TOP BAR ── -->
+  <div class="topbar">
+    <div>
+      <div class="topbar-title" id="pageTitle">Executive Overview</div>
+      <div class="topbar-meta" id="pageDate">Carregando...</div>
+    </div>
+    <div class="topbar-right">
+      <button class="btn btn-ghost" onclick="runAgent('ceo_advisor')">🧠 Briefing do Dia</button>
+      <button class="btn btn-primary" onclick="runPipeline()">▶ Rodar Pipeline</button>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════
+       SECTION 1 — EXECUTIVE
+  ════════════════════════════════════════ -->
+  <section class="section active" id="sec-executive">
+    <div class="section-header">
+      <h2>Executive Overview</h2>
+      <p>Visão consolidada de todos os squads — atualizado automaticamente</p>
+    </div>
+
+    <!-- KPIs executivos -->
+    <div class="kpi-grid">
+      <div class="kpi-card green">
+        <div class="kpi-label">Receita Mensal</div>
+        <div class="kpi-value" id="kpi-receita">R$ 0</div>
+        <div class="kpi-change" id="kpi-receita-change">Meta: R$ 15.000</div>
+      </div>
+      <div class="kpi-card lean">
+        <div class="kpi-label">Clientes Ativos</div>
+        <div class="kpi-value" id="kpi-clientes">0</div>
+        <div class="kpi-change">Meta: 5 clientes</div>
+      </div>
+      <div class="kpi-card warn">
+        <div class="kpi-label">Leads no Pipeline</div>
+        <div class="kpi-value" id="kpi-leads">0</div>
+        <div class="kpi-change">Reuniões agendadas: 0</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">Posts Publicados (mês)</div>
+        <div class="kpi-value" id="kpi-posts">0</div>
+        <div class="kpi-change up">Próximo: hoje às 11h</div>
+      </div>
+    </div>
+
+    <!-- Alertas e Prioridades -->
+    <div class="table-header" style="padding:0 0 12px 0; border:none;">
+      <h3>🔴 Prioridades de Hoje (CEO Advisor)</h3>
+    </div>
+    <div class="alert-list">
+      <div class="alert-item high">
+        <div class="alert-icon">🚀</div>
+        <div>
+          <div class="alert-title">FAZER HOJE — Abordar 5 donos de PME via WhatsApp</div>
+          <div class="alert-desc">Pipeline zerado. Oferecer diagnóstico gratuito de 30 min. WhatsApp é o canal com menor atrito para fechamento rápido.</div>
+        </div>
+        <span class="pill pill-danger">Alta</span>
+      </div>
+      <div class="alert-item med">
+        <div class="alert-icon">📝</div>
+        <div>
+          <div class="alert-title">PLANEJAR — Criar script de abordagem fria replicável</div>
+          <div class="alert-desc">Sem script padronizado, cada abordagem é um experimento. Padronizar aumenta conversão e escala.</div>
+        </div>
+        <span class="pill pill-warn">Média</span>
+      </div>
+      <div class="alert-item low">
+        <div class="alert-icon">📸</div>
+        <div>
+          <div class="alert-title">AUTOMATIZAR — Pipeline de conteúdo Instagram (3x/semana)</div>
+          <div class="alert-desc">Pipeline roda Ter/Qui/Sáb. Verificar se aprovação Telegram está configurada e publicação ativa.</div>
+        </div>
+        <span class="pill pill-lean">Baixa</span>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="chart-grid">
+      <div class="chart-card">
+        <div class="chart-title">Receita Projetada — Próximos 90 dias</div>
+        <div class="chart-sub">Com base no pipeline atual e probabilidade de fechamento</div>
+        <canvas id="chart-revenue" height="200"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Pipeline por Estágio</div>
+        <div class="chart-sub">Leads distribuídos no funil de vendas</div>
+        <canvas id="chart-pipeline" height="200"></canvas>
+      </div>
+    </div>
+
+    <!-- Metas vs Realizado -->
+    <div class="chart-card" style="margin-bottom:24px">
+      <div class="chart-title">Metas vs Realizado (Maio 2026)</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:4px">
+        <div>
+          <div class="prog-item">
+            <div class="prog-label"><span>Receita Mensal</span><span>R$ 0 / R$ 15k</span></div>
+            <div class="prog-bar"><div class="prog-fill" style="width:0%"></div></div>
+          </div>
+          <div class="prog-item">
+            <div class="prog-label"><span>Clientes Ativos</span><span>0 / 5</span></div>
+            <div class="prog-bar"><div class="prog-fill" style="width:0%"></div></div>
+          </div>
+          <div class="prog-item">
+            <div class="prog-label"><span>Leads Qualificados</span><span>0 / 20</span></div>
+            <div class="prog-bar"><div class="prog-fill" style="width:0%"></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="prog-item">
+            <div class="prog-label"><span>Posts Publicados</span><span>0 / 12</span></div>
+            <div class="prog-bar"><div class="prog-fill green" style="width:0%"></div></div>
+          </div>
+          <div class="prog-item">
+            <div class="prog-label"><span>Propostas Enviadas</span><span>0 / 4</span></div>
+            <div class="prog-bar"><div class="prog-fill" style="width:0%"></div></div>
+          </div>
+          <div class="prog-item">
+            <div class="prog-label"><span>Diagnósticos Realizados</span><span>0 / 8</span></div>
+            <div class="prog-bar"><div class="prog-fill green" style="width:0%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SECTION 2 — AGENTES
+  ════════════════════════════════════════ -->
+  <section class="section" id="sec-agents">
+    <div class="section-header">
+      <h2>35 Agentes — 10 Squads</h2>
+      <p>Status e último output de cada agente do sistema</p>
+    </div>
+
+    <div class="kpi-grid" style="grid-template-columns:repeat(5,1fr)">
+      <div class="kpi-card green"><div class="kpi-label">Implementados</div><div class="kpi-value">9</div></div>
+      <div class="kpi-card lean"><div class="kpi-label">Documentados</div><div class="kpi-value">35</div></div>
+      <div class="kpi-card warn"><div class="kpi-label">Pendentes (script)</div><div class="kpi-value">26</div></div>
+      <div class="kpi-card"><div class="kpi-label">Squads Ativos</div><div class="kpi-value">4</div></div>
+      <div class="kpi-card"><div class="kpi-label">Execuções Hoje</div><div class="kpi-value" id="kpi-runs">0</div></div>
+    </div>
+
+    <div style="margin-bottom:12px;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px">SQUAD 1 — Marketing</div>
+    <div class="agents-grid">
+      <div class="agent-card" style="border-top:2px solid var(--lean)">
+        <div class="agent-header"><div class="agent-name">Marketing Research</div><div class="agent-status"><div class="dot-green"></div> Ativo</div></div>
+        <div class="agent-squad">research.js</div>
+        <div class="agent-last">Pesquisa tendências com Tavily AI · Gera research_brief.md</div>
+        <div style="margin-top:8px"><span class="pill pill-green">✅ Implementado</span></div>
+      </div>
+      <div class="agent-card" style="border-top:2px solid var(--lean)">
+        <div class="agent-header"><div class="agent-name">Copywriter</div><div class="agent-status"><div class="dot-green"></div> Ativo</div></div>
+        <div class="agent-squad">generate_copy.js</div>
+        <div class="agent-last">Instagram + Threads + YouTube · Framework Dor→CTA</div>
+        <div style="margin-top:8px"><span class="pill pill-green">✅ Implementado</span></div>
+      </div>
+      <div class="agent-card" style="border-top:2px solid var(--lean)">
+        <div class="agent-header"><div class="agent-name">Design Agent</div><div class="agent-status"><div class="dot-green"></div> Ativo</div></div>
+        <div class="agent-squad">generate_ad.js + build_ad_html.js</div>
+        <div class="agent-last">PNG 1080x1080 · Bebas Neue · Dark theme #0A0A0F</div>
+        <div style="margin-top:8px"><span class="pill pill-green">✅ Implementado</span></div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-header"><div class="agent-name">Distribution</div><div class="agent-status"><div class="dot-gray"></div> Pendente</div></div>
+        <div class="agent-squad">distribution_agent.js (a criar)</div>
+        <div class="agent-last">Publica no Instagram, Threads, YouTube via API</div>
+        <div style="margin-top:8px"><span class="pill pill-warn">🚧 Pendente</span></div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-header"><div class="agent-name">SEO Agent</div><div class="agent-status"><div class="dot-gray"></div> Pendente</div></div>
+        <div class="agent-squad">seo_agent.js (a criar)</div>
+        <div class="agent-last">Keywords, clusters, posicionamento Google</div>
+        <div style="margin-top:8px"><span class="pill pill-warn">🚧 Pendente</span></div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-header"><div class="agent-name">Remotion Video</div><div class="agent-status"><div class="dot-warn"></div> Parcial</div></div>
+        <div class="agent-squad">remotion/src/AdVideo.tsx</div>
+        <div class="agent-last">Vídeos animados React · Falta integração pipeline</div>
+        <div style="margin-top:8px"><span class="pill pill-warn">⚡ Parcial</span></div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:12px;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px">SQUAD 4 — Sales</div>
+    <div class="agents-grid">
+      <div class="agent-card" style="border-top:2px solid var(--lean)">
+        <div class="agent-header"><div class="agent-name">Proposal Agent</div><div class="agent-status"><div class="dot-green"></div> Ativo</div></div>
+        <div class="agent-squad">proposal_agent.js</div>
+        <div class="agent-last">GPCTBA → Proposta + ROI + Resumo Executivo</div>
+        <div style="margin-top:8px"><span class="pill pill-green">✅ Implementado</span></div>
+      </div>
+      <div class="agent-card">
+        <div class="agent-header"><div class="agent-name">Sales Intelligence</div><div class="agent-status"><div class="dot-gray"></div> Pendente</div></div>
+        <div class="agent-squad">sales_intelligence.js (a criar)</div>
+        <div class="agent-last">Lead scoring automático, objeções por segmento</div>
+        <div style="margin-top:8px"><span class="pill pill-warn">🚧 Pendente</span></div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:12px;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px">SQUAD 5 — Executive</div>
+    <div class="agents-grid">
+      <div class="agent-card" style="border-top:2px solid var(--lean)">
+        <div class="agent-header"><div class="agent-name">CEO Advisor</div><div class="agent-status"><div class="dot-green"></div> Ativo</div></div>
+        <div class="agent-squad">ceo_advisor.js</div>
+        <div class="agent-last">Briefing diário · FAZER HOJE / PLANEJAR / DELEGAR</div>
+        <div style="margin-top:8px"><span class="pill pill-green">✅ Implementado</span></div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:12px;font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px">SQUAD 8 — Finance</div>
+    <div class="agents-grid">
+      <div class="agent-card" style="border-top:2px solid var(--auto)">
+        <div class="agent-header"><div class="agent-name">Financial Intelligence</div><div class="agent-status"><div class="dot-green"></div> Ativo</div></div>
+        <div class="agent-squad">financial_agent.js</div>
+        <div class="agent-last">CAC · LTV · Margem · Forecast 30/60/90 dias</div>
+        <div style="margin-top:8px"><span class="pill pill-green">✅ Implementado</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SECTION 3 — LEADS
+  ════════════════════════════════════════ -->
+  <section class="section" id="sec-leads">
+    <div class="section-header">
+      <h2>Leads & Pipeline de Vendas</h2>
+      <p>Todos os leads, origem, score e andamento no funil</p>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card lean"><div class="kpi-label">Leads Ativos</div><div class="kpi-value">0</div><div class="kpi-change">Esta semana: +0</div></div>
+      <div class="kpi-card warn"><div class="kpi-label">Reuniões Agendadas</div><div class="kpi-value">0</div><div class="kpi-change">Próximas 7 dias</div></div>
+      <div class="kpi-card green"><div class="kpi-label">Propostas Abertas</div><div class="kpi-value">0</div><div class="kpi-change">Valor: R$ 0</div></div>
+      <div class="kpi-card"><div class="kpi-label">Taxa de Fechamento</div><div class="kpi-value">—%</div><div class="kpi-change">Meta: 40%</div></div>
+    </div>
+
+    <!-- Funil de Vendas -->
+    <div class="chart-card" style="margin-bottom:24px">
+      <div class="chart-title">Funil de Vendas — Etapas e Conversão</div>
+      <div class="funnel">
+        <div class="funnel-step">
+          <div class="funnel-bar" style="width:100%;background:rgba(124,58,237,0.08);"></div>
+          <div class="funnel-content"><div class="funnel-name">👁 Consciência (alcance Instagram)</div><div class="funnel-count">—</div><div class="funnel-rate">100%</div></div>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-bar" style="width:30%;background:rgba(124,58,237,0.1);"></div>
+          <div class="funnel-content"><div class="funnel-name">💬 Mensagem recebida (DM/WhatsApp)</div><div class="funnel-count">0</div><div class="funnel-rate">—%</div></div>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-bar" style="width:20%;background:rgba(124,58,237,0.12);"></div>
+          <div class="funnel-content"><div class="funnel-name">✅ Lead Qualificado (score > 50)</div><div class="funnel-count">0</div><div class="funnel-rate">—%</div></div>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-bar" style="width:12%;background:rgba(124,58,237,0.15);"></div>
+          <div class="funnel-content"><div class="funnel-name">📅 Diagnóstico Agendado</div><div class="funnel-count">0</div><div class="funnel-rate">—%</div></div>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-bar" style="width:8%;background:rgba(124,58,237,0.18);"></div>
+          <div class="funnel-content"><div class="funnel-name">📄 Proposta Enviada</div><div class="funnel-count">0</div><div class="funnel-rate">—%</div></div>
+        </div>
+        <div class="funnel-step">
+          <div class="funnel-bar" style="width:5%;background:rgba(16,185,129,0.15);"></div>
+          <div class="funnel-content"><div class="funnel-name">🤝 Cliente Fechado</div><div class="funnel-count">0</div><div class="funnel-rate">—%</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabela de Leads -->
+    <div class="table-card">
+      <div class="table-header">
+        <h3>Leads Ativos</h3>
+        <button class="btn btn-ghost" onclick="addLead()">+ Adicionar Lead</button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Segmento</th>
+            <th>Origem</th>
+            <th>Score</th>
+            <th>Etapa</th>
+            <th>Próxima Ação</th>
+            <th>Urgência</th>
+          </tr>
+        </thead>
+        <tbody id="leads-table">
+          <tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px">Nenhum lead cadastrado — adicione via WhatsApp ou Instagram</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Scoring Guide -->
+    <div class="chart-card">
+      <div class="chart-title">🎯 Guia de Lead Scoring (0–100 pontos)</div>
+      <table style="margin-top:8px">
+        <thead><tr><th>Critério</th><th>Pontos</th></tr></thead>
+        <tbody>
+          <tr><td>Dono/CEO (decide sozinho)</td><td><span class="pill pill-lean">+15 pts</span></td></tr>
+          <tr><td>10–50 funcionários</td><td><span class="pill pill-lean">+10 pts</span></td></tr>
+          <tr><td>Urgência clara (perda de dinheiro visível)</td><td><span class="pill pill-lean">+12 pts</span></td></tr>
+          <tr><td>Veio por indicação</td><td><span class="pill pill-lean">+15 pts</span></td></tr>
+          <tr><td>Já tentou resolver e falhou</td><td><span class="pill pill-lean">+8 pts</span></td></tr>
+          <tr><td>Setor prioritário (saúde, serviços, indústria)</td><td><span class="pill pill-lean">+8 pts</span></td></tr>
+          <tr><td>Respondeu perguntas com detalhes</td><td><span class="pill pill-lean">+10 pts</span></td></tr>
+          <tr><td><strong>Score > 50 = PRIORIDADE MÁXIMA</strong></td><td><span class="pill pill-danger">🔴 Follow-up imediato</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SECTION 4 — SITE
+  ════════════════════════════════════════ -->
+  <section class="section" id="sec-site">
+    <div class="section-header">
+      <h2>Site & Analytics</h2>
+      <p>Visitantes, conversões e comportamento no site — via GA4</p>
+    </div>
+
+    <div class="alert-item med" style="margin-bottom:20px">
+      <div class="alert-icon">⚠️</div>
+      <div>
+        <div class="alert-title">GA4 ainda não configurado</div>
+        <div class="alert-desc">Para ver dados reais do site, conecte o Google Analytics 4. Adicione a tag GA4 ao site e configure a Google Analytics Data API. Os dados abaixo são projeções para uma consultoria iniciante.</div>
+      </div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card lean"><div class="kpi-label">Visitantes/mês</div><div class="kpi-value">—</div><div class="kpi-change">Conectar GA4</div></div>
+      <div class="kpi-card"><div class="kpi-label">Taxa de Conversão</div><div class="kpi-value">—%</div><div class="kpi-change">Meta: 3-5%</div></div>
+      <div class="kpi-card green"><div class="kpi-label">Cliques WhatsApp</div><div class="kpi-value">—</div><div class="kpi-change">Principal CTA do site</div></div>
+      <div class="kpi-card warn"><div class="kpi-label">Bounce Rate</div><div class="kpi-value">—%</div><div class="kpi-change">Meta: < 60%</div></div>
+    </div>
+
+    <div class="chart-grid">
+      <div class="chart-card">
+        <div class="chart-title">Tráfego por Canal (projeção)</div>
+        <canvas id="chart-traffic" height="200"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Jornada do Visitante</div>
+        <div class="funnel" style="margin-top:8px">
+          <div class="funnel-step"><div class="funnel-content"><div class="funnel-name">Visitam o site</div><div class="funnel-count">—</div><div class="funnel-rate">100%</div></div></div>
+          <div class="funnel-step"><div class="funnel-content"><div class="funnel-name">Leem a proposta</div><div class="funnel-count">—</div><div class="funnel-rate">~40%</div></div></div>
+          <div class="funnel-step"><div class="funnel-content"><div class="funnel-name">Clicam no WhatsApp</div><div class="funnel-count">—</div><div class="funnel-rate">~8%</div></div></div>
+          <div class="funnel-step"><div class="funnel-content"><div class="funnel-name">Agendam diagnóstico</div><div class="funnel-count">—</div><div class="funnel-rate">~3%</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Páginas Mais Visitadas</div>
+      <table style="margin-top:8px">
+        <thead><tr><th>Página</th><th>Visitas</th><th>Tempo médio</th><th>Conversão</th></tr></thead>
+        <tbody>
+          <tr><td>/</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td>/servicos</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td>/diagnostico-gratuito</td><td>—</td><td>—</td><td>—</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:16px;padding:12px;background:var(--bg3);border-radius:8px;font-size:12px;color:var(--muted)">
+        💡 <strong>Para ativar:</strong> Adicione o script do GA4 ao site → conecte Google Analytics Data API → crie <code>scripts/website_analytics.js</code>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SECTION 5 — ADS
+  ════════════════════════════════════════ -->
+  <section class="section" id="sec-ads">
+    <div class="section-header">
+      <h2>Campanhas & Ads</h2>
+      <p>Google Ads + Meta Ads — desempenho, gastos e ROAS</p>
+    </div>
+
+    <div class="alert-item med" style="margin-bottom:20px">
+      <div class="alert-icon">⚠️</div>
+      <div>
+        <div class="alert-title">Ads ainda não ativos</div>
+        <div class="alert-desc">Nenhuma campanha paga rodando. Quando ativar Google Ads ou Meta Ads, os dados aparecerão aqui. Para integrar: configure Google Ads API e Meta Marketing API.</div>
+      </div>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card"><div class="kpi-label">Gasto Total (mês)</div><div class="kpi-value">R$ 0</div><div class="kpi-change">Orçamento planejado: R$ 500</div></div>
+      <div class="kpi-card lean"><div class="kpi-label">ROAS</div><div class="kpi-value">—x</div><div class="kpi-change">Meta: > 4x</div></div>
+      <div class="kpi-card green"><div class="kpi-label">CPA (custo/lead)</div><div class="kpi-value">—</div><div class="kpi-change">Meta: < R$ 50</div></div>
+      <div class="kpi-card warn"><div class="kpi-label">CTR médio</div><div class="kpi-value">—%</div><div class="kpi-change">Meta: > 2%</div></div>
+    </div>
+
+    <div class="chart-card" style="margin-bottom:24px">
+      <div class="chart-title">Estratégia de Anúncios — SmartOps IA</div>
+      <table style="margin-top:8px">
+        <thead><tr><th>Canal</th><th>Formato</th><th>Objetivo</th><th>Público</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Instagram / Meta</td>
+            <td>Carrossel + Imagem estática</td>
+            <td>Diagnóstico gratuito</td>
+            <td>Donos de PME em BH, 30-55 anos</td>
+            <td><span class="pill pill-warn">🔴 Não ativo</span></td>
+          </tr>
+          <tr>
+            <td>Google Search</td>
+            <td>Texto (Search Ads)</td>
+            <td>Consulta Lean BH</td>
+            <td>Buscas: "consultoria lean belo horizonte"</td>
+            <td><span class="pill pill-warn">🔴 Não ativo</span></td>
+          </tr>
+          <tr>
+            <td>YouTube</td>
+            <td>Skippable In-Stream</td>
+            <td>Autoridade / Branding</td>
+            <td>Empresários BH que assistem gestão</td>
+            <td><span class="pill pill-muted">📋 Planejado</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Ad Preview — Último Criativo Gerado</div>
+      <div style="display:flex;gap:20px;margin-top:12px;align-items:flex-start">
+        <div style="width:200px;height:200px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+          <div style="text-align:center;color:var(--muted)">
+            <div style="font-size:28px;margin-bottom:8px">🖼</div>
+            <div style="font-size:11px">instagram_ad.png<br>1080×1080px</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:700;margin-bottom:6px">Último ad gerado pelo pipeline</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:12px">Headline: "SEU PROCESSO ESTÁ TE CUSTANDO DINHEIRO."</div>
+          <div style="font-size:12px;margin-bottom:4px"><strong>Legenda Instagram:</strong></div>
+          <div style="font-size:12px;color:var(--muted);background:var(--bg3);padding:10px;border-radius:6px;line-height:1.6">
+            Gerada pelo Copywriter Agent via pipeline automático.<br>
+            Rode o pipeline para ver a legenda atual.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SECTION 6 — MARKETING
+  ════════════════════════════════════════ -->
+  <section class="section" id="sec-marketing">
+    <div class="section-header">
+      <h2>Marketing & Conteúdo</h2>
+      <p>Posts, engajamento, alcance e performance de conteúdo orgânico</p>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card lean"><div class="kpi-label">Seguidores Instagram</div><div class="kpi-value">—</div><div class="kpi-change">Conectar Graph API</div></div>
+      <div class="kpi-card green"><div class="kpi-label">Engajamento Médio</div><div class="kpi-value">—%</div><div class="kpi-change">Meta: > 3%</div></div>
+      <div class="kpi-card"><div class="kpi-label">Alcance/Post</div><div class="kpi-value">—</div><div class="kpi-change">Meta: > 500</div></div>
+      <div class="kpi-card warn"><div class="kpi-label">Posts Aprovados (mês)</div><div class="kpi-value">0</div><div class="kpi-change">Pipeline: 3x/semana</div></div>
+    </div>
+
+    <div class="chart-card" style="margin-bottom:24px">
+      <div class="chart-title">Pipeline de Conteúdo — Status</div>
+      <table style="margin-top:8px">
+        <thead><tr><th>Etapa</th><th>Script</th><th>Status</th><th>Output</th></tr></thead>
+        <tbody>
+          <tr><td>1. Pesquisa de Mercado</td><td>research.js</td><td><span class="pill pill-green">✅ Ativo</span></td><td>research_brief.md</td></tr>
+          <tr><td>2. Geração de Copy</td><td>generate_copy.js</td><td><span class="pill pill-green">✅ Ativo</span></td><td>instagram_caption.txt</td></tr>
+          <tr><td>3. Layout do Ad</td><td>generate_ad.js</td><td><span class="pill pill-green">✅ Ativo</span></td><td>layout.json</td></tr>
+          <tr><td>4. HTML do Ad</td><td>build_ad_html.js</td><td><span class="pill pill-green">✅ Ativo</span></td><td>ad.html</td></tr>
+          <tr><td>5. Render PNG</td><td>render_ad.js</td><td><span class="pill pill-green">✅ Ativo</span></td><td>instagram_ad.png</td></tr>
+          <tr><td>6. Upload Supabase</td><td>upload_media.js</td><td><span class="pill pill-green">✅ Ativo</span></td><td>media_urls.json</td></tr>
+          <tr><td>7. Aprovação Telegram</td><td>n8n workflow</td><td><span class="pill pill-green">✅ Ativo</span></td><td>✅ / ❌ via bot</td></tr>
+          <tr><td>8. Publicação Instagram</td><td>distribution_agent.js</td><td><span class="pill pill-warn">🚧 Pendente</span></td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="chart-grid">
+      <div class="chart-card">
+        <div class="chart-title">5 Pilares de Conteúdo SmartOps IA</div>
+        <canvas id="chart-content" height="200"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Melhor Horário de Publicação</div>
+        <table style="margin-top:8px">
+          <thead><tr><th>Plataforma</th><th>Dias</th><th>Horário</th></tr></thead>
+          <tbody>
+            <tr><td>Instagram</td><td>Ter / Qui / Sáb</td><td>11h–13h BRT</td></tr>
+            <tr><td>Threads</td><td>Dias úteis</td><td>9h–11h BRT</td></tr>
+            <tr><td>YouTube</td><td>Qui / Sáb</td><td>14h–17h BRT</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SECTION 7 — CONTENT CALENDAR
+  ════════════════════════════════════════ -->
+  <section class="section" id="sec-content">
+    <div class="section-header">
+      <h2>Calendário de Conteúdo</h2>
+      <p>Publicações programadas e realizadas — Maio 2026</p>
+    </div>
+
+    <div class="kpi-grid" style="grid-template-columns:repeat(4,1fr)">
+      <div class="kpi-card green"><div class="kpi-label">Programados (mês)</div><div class="kpi-value">12</div></div>
+      <div class="kpi-card lean"><div class="kpi-label">Publicados</div><div class="kpi-value">0</div></div>
+      <div class="kpi-card warn"><div class="kpi-label">Aprovação pendente</div><div class="kpi-value">0</div></div>
+      <div class="kpi-card"><div class="kpi-label">Taxa de aprovação</div><div class="kpi-value">—%</div></div>
+    </div>
+
+    <div class="chart-card" style="margin-bottom:24px">
+      <div class="chart-title">Semana Atual — Maio 2026</div>
+      <div class="calendar-grid" style="grid-template-columns:repeat(7,1fr);margin-top:12px">
+        <div class="cal-day"><div class="cal-date">SEG 26</div></div>
+        <div class="cal-day has-post"><div class="cal-date">TER 27</div><div class="cal-post">📸 Instagram<br>8 desperdícios Lean</div></div>
+        <div class="cal-day"><div class="cal-date">QUA 28</div></div>
+        <div class="cal-day has-post today"><div class="cal-date">QUI 29 ●</div><div class="cal-post auto">🤖 Auto Pipeline<br>11h00</div></div>
+        <div class="cal-day"><div class="cal-date">SEX 30</div></div>
+        <div class="cal-day has-post"><div class="cal-date">SÁB 31</div><div class="cal-post">📸 Instagram<br>Programado</div></div>
+        <div class="cal-day"><div class="cal-date">DOM 1</div></div>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Próximas Publicações</div>
+      <table style="margin-top:8px">
+        <thead><tr><th>Data</th><th>Plataforma</th><th>Tema</th><th>Status</th><th>Ação</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>29/05 11h</td>
+            <td>Instagram</td>
+            <td>Pesquisa automática + copy gerada</td>
+            <td><span class="pill pill-warn">⏳ Aguardando pipeline</span></td>
+            <td><button class="btn btn-ghost" style="padding:4px 10px;font-size:11px" onclick="runPipeline()">▶ Rodar</button></td>
+          </tr>
+          <tr>
+            <td>31/05 11h</td>
+            <td>Instagram + Threads</td>
+            <td>A definir via research.js</td>
+            <td><span class="pill pill-muted">📋 Programado</span></td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>02/06 11h</td>
+            <td>Instagram + Threads</td>
+            <td>A definir via research.js</td>
+            <td><span class="pill pill-muted">📋 Programado</span></td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SECTION 8 — FINANCE
+  ════════════════════════════════════════ -->
+  <section class="section" id="sec-finance">
+    <div class="section-header">
+      <h2>Inteligência Financeira</h2>
+      <p>Receita, margem, CAC, LTV e forecast — atualizado pelo Financial Agent</p>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card green"><div class="kpi-label">Receita Mensal</div><div class="kpi-value" id="fin-receita">R$ 0</div><div class="kpi-change">Meta: R$ 15.000</div></div>
+      <div class="kpi-card lean"><div class="kpi-label">Margem Bruta</div><div class="kpi-value" id="fin-margem">0%</div><div class="kpi-change">Meta: > 60%</div></div>
+      <div class="kpi-card warn"><div class="kpi-label">CAC</div><div class="kpi-value" id="fin-cac">—</div><div class="kpi-change">LTV deve ser > 3× CAC</div></div>
+      <div class="kpi-card"><div class="kpi-label">LTV Médio</div><div class="kpi-value" id="fin-ltv">R$ 36k</div><div class="kpi-change">Ticket R$12k × 3 meses</div></div>
+    </div>
+
+    <div class="chart-grid">
+      <div class="chart-card">
+        <div class="chart-title">Margem por Tipo de Serviço</div>
+        <canvas id="chart-margin" height="200"></canvas>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Previsão de Caixa — 90 dias</div>
+        <canvas id="chart-forecast" height="200"></canvas>
+      </div>
+    </div>
+
+    <div class="chart-card" style="margin-bottom:24px">
+      <div class="chart-title">Serviços e Margem Estimada</div>
+      <table style="margin-top:8px">
+        <thead><tr><th>Serviço</th><th>Ticket Médio</th><th>Custo Estimado</th><th>Margem</th><th>Prazo</th></tr></thead>
+        <tbody>
+          <tr><td>Quick Win</td><td>R$ 5.500</td><td>R$ 1.200</td><td><span class="pill pill-green">78%</span></td><td>2–4 semanas</td></tr>
+          <tr><td>Diagnóstico + Plano</td><td>R$ 11.500</td><td>R$ 2.800</td><td><span class="pill pill-green">76%</span></td><td>4–6 semanas</td></tr>
+          <tr><td>Projeto Completo</td><td>R$ 32.000</td><td>R$ 9.000</td><td><span class="pill pill-green">72%</span></td><td>2–4 meses</td></tr>
+          <tr><td>Parceria Contínua</td><td>R$ 5.500/mês</td><td>R$ 1.100</td><td><span class="pill pill-green">80%</span></td><td>Mensal</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">⚙️ Atualizar Dados Financeiros</div>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:12px">Crie ou edite <code>data/financial_data.json</code> e rode o agente:</div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px;font-family:monospace;font-size:12px;color:var(--auto-l)">
+        node scripts/financial_agent.js --task finance_semanal --data data/financial_data.json
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SECTION 9 — CLIENTS
+  ════════════════════════════════════════ -->
+  <section class="section" id="sec-clients">
+    <div class="section-header">
+      <h2>Clientes & Projetos</h2>
+      <p>Clientes ativos, entregas, riscos e oportunidades de expansão</p>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card lean"><div class="kpi-label">Clientes Ativos</div><div class="kpi-value">0</div><div class="kpi-change">Meta: 5 clientes</div></div>
+      <div class="kpi-card green"><div class="kpi-label">NPS Médio</div><div class="kpi-value">—</div><div class="kpi-change">Meta: > 8.0</div></div>
+      <div class="kpi-card warn"><div class="kpi-label">Em Risco</div><div class="kpi-value">0</div><div class="kpi-change">Prazo ou satisfação</div></div>
+      <div class="kpi-card"><div class="kpi-label">Receita Recorrente</div><div class="kpi-value">R$ 0</div><div class="kpi-change">Parcerias mensais</div></div>
+    </div>
+
+    <div class="table-card">
+      <div class="table-header">
+        <h3>Projetos em Andamento</h3>
+        <button class="btn btn-ghost">+ Novo Cliente</button>
+      </div>
+      <table>
+        <thead><tr><th>Cliente</th><th>Segmento</th><th>Tipo</th><th>Valor</th><th>Progresso</th><th>Prazo</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td colspan="7" style="text-align:center;color:var(--muted);padding:32px">Nenhum cliente ativo — feche o primeiro contrato e registre aqui</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════
+       SECTION 10 — OPERATIONS
+  ════════════════════════════════════════ -->
+  <section class="section" id="sec-operations">
+    <div class="section-header">
+      <h2>Operações & Processos</h2>
+      <p>Lean Six Sigma, automações e processos internos da consultoria</p>
+    </div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card lean"><div class="kpi-label">Automações Ativas</div><div class="kpi-value">3</div><div class="kpi-change">Pipeline + Telegram + n8n</div></div>
+      <div class="kpi-card green"><div class="kpi-label">Workflows n8n</div><div class="kpi-value">1</div><div class="kpi-change">Pipeline de conteúdo</div></div>
+      <div class="kpi-card"><div class="kpi-label">Execuções/semana</div><div class="kpi-value">3</div><div class="kpi-change">Ter / Qui / Sáb</div></div>
+      <div class="kpi-card warn"><div class="kpi-label">Próxima execução</div><div class="kpi-value">Qui 11h</div><div class="kpi-change">Aguardando trigger n8n</div></div>
+    </div>
+
+    <div class="chart-card" style="margin-bottom:24px">
+      <div class="chart-title">Stack de Automação</div>
+      <table style="margin-top:8px">
+        <thead><tr><th>Ferramenta</th><th>Função</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>n8n</td><td>Trigger agendado (Ter/Qui/Sáb 8h) → aciona pipeline</td><td><span class="pill pill-green">✅ Ativo</span></td></tr>
+          <tr><td>EasyPanel</td><td>Hospeda pipeline server (Express 3099)</td><td><span class="pill pill-green">✅ Ativo</span></td></tr>
+          <tr><td>Telegram Bot</td><td>Aprovação de posts com botões ✅/❌</td><td><span class="pill pill-green">✅ Ativo</span></td></tr>
+          <tr><td>Upstash Redis</td><td>Fila de jobs BullMQ</td><td><span class="pill pill-green">✅ Ativo</span></td></tr>
+          <tr><td>Supabase</td><td>Storage de imagens do pipeline</td><td><span class="pill pill-green">✅ Ativo</span></td></tr>
+          <tr><td>Instagram Graph API</td><td>Publicação automática de posts</td><td><span class="pill pill-warn">🚧 Pendente</span></td></tr>
+          <tr><td>GA4</td><td>Analytics do site</td><td><span class="pill pill-warn">🚧 Pendente</span></td></tr>
+          <tr><td>Remotion</td><td>Renderização de vídeos animados</td><td><span class="pill pill-warn">⚡ Parcial</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title">Comandos Rápidos</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px">
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:6px">Pipeline completo</div>
+          <div style="font-family:monospace;font-size:12px;color:var(--auto-l)">npm run pipeline:run</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:6px">CEO Briefing do dia</div>
+          <div style="font-family:monospace;font-size:12px;color:var(--auto-l)">node scripts/ceo_advisor.js --mode daily</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:6px">Gerar proposta</div>
+          <div style="font-family:monospace;font-size:12px;color:var(--lean-l)">node scripts/proposal_agent.js --client "Nome"</div>
+        </div>
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:6px">Relatório financeiro</div>
+          <div style="font-family:monospace;font-size:12px;color:var(--lean-l)">node scripts/financial_agent.js --data data/financial_data.json</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+// ── Navigation ─────────────────────────────────────────────────────────────
+const SECTION_TITLES = {
+  executive:  'Executive Overview',
+  agents:     '35 Agentes — 10 Squads',
+  leads:      'Leads & Pipeline',
+  site:       'Site & Analytics',
+  ads:        'Campanhas & Ads',
+  marketing:  'Marketing & Conteúdo',
+  content:    'Calendário de Conteúdo',
+  finance:    'Inteligência Financeira',
+  clients:    'Clientes & Projetos',
+  operations: 'Operações & Processos',
+};
+
+function show(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('sec-' + id).classList.add('active');
+  document.querySelector(`[onclick="show('${id}')"]`).classList.add('active');
+  document.getElementById('pageTitle').textContent = SECTION_TITLES[id] || id;
+}
+
+// ── Date ────────────────────────────────────────────────────────────────────
+const now = new Date();
+document.getElementById('pageDate').textContent =
+  now.toLocaleDateString('pt-BR', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+
+// ── Actions ─────────────────────────────────────────────────────────────────
+function runPipeline() {
+  alert('Para rodar o pipeline:\n\n$ npm run pipeline:run\n\nou acesse:\nhttps://n8n-pipeline-server.sumjyb.easypanel.host/run-pipeline');
+}
+function runAgent(name) {
+  const cmds = {
+    ceo_advisor: 'node scripts/ceo_advisor.js --task ceo_daily --mode daily',
+    financial: 'node scripts/financial_agent.js --task finance --data data/financial_data.json',
+  };
+  alert('Para rodar o agente:\n\n$ ' + (cmds[name] || 'node scripts/' + name + '.js'));
+}
+function addLead() {
+  alert('Para adicionar um lead, edite data/leads.json ou integre com um CRM.\nEm breve: formulário integrado neste dashboard.');
+}
+
+// ── Charts ──────────────────────────────────────────────────────────────────
+const CHART_DEFAULTS = {
+  plugins: { legend: { labels: { color: '#9CA3AF', font: { size: 11 } } } },
+  scales: {
+    x: { ticks: { color: '#6B7280', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+    y: { ticks: { color: '#6B7280', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.04)' } }
+  }
+};
+
+// Revenue forecast
+new Chart(document.getElementById('chart-revenue'), {
+  type: 'bar',
+  data: {
+    labels: ['Hoje', '30 dias', '60 dias', '90 dias'],
+    datasets: [{
+      label: 'Receita Projetada (R$)',
+      data: [0, 5000, 15000, 30000],
+      backgroundColor: ['rgba(124,58,237,0.3)', 'rgba(124,58,237,0.5)', 'rgba(124,58,237,0.7)', 'rgba(124,58,237,0.9)'],
+      borderRadius: 6,
+    }]
+  },
+  options: { ...CHART_DEFAULTS, plugins: { ...CHART_DEFAULTS.plugins, tooltip: { callbacks: { label: ctx => 'R$ ' + ctx.raw.toLocaleString('pt-BR') } } } }
+});
+
+// Pipeline donut
+new Chart(document.getElementById('chart-pipeline'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Novos Leads', 'Qualificados', 'Reunião', 'Proposta', 'Fechados'],
+    datasets: [{ data: [0, 0, 0, 0, 0], backgroundColor: ['#374151','#4B5563','#7C3AED','#A78BFA','#10B981'], borderWidth: 0 }]
+  },
+  options: { plugins: { legend: { position: 'bottom', labels: { color: '#9CA3AF', font: { size: 11 } } } }, cutout: '65%' }
+});
+
+// Traffic chart
+new Chart(document.getElementById('chart-traffic'), {
+  type: 'pie',
+  data: {
+    labels: ['Orgânico (Google)', 'Instagram', 'Direto', 'Indicação', 'WhatsApp'],
+    datasets: [{ data: [35, 30, 15, 15, 5], backgroundColor: ['#7C3AED','#10B981','#F59E0B','#3B82F6','#EC4899'], borderWidth: 0 }]
+  },
+  options: { plugins: { legend: { position: 'bottom', labels: { color: '#9CA3AF', font: { size: 11 } } } } }
+});
+
+// Content pillars
+new Chart(document.getElementById('chart-content'), {
+  type: 'radar',
+  data: {
+    labels: ['Educação (Lean/IA)', 'Dor/Problema', 'Prova Social', 'Autoridade', 'CTA Direto'],
+    datasets: [{
+      label: 'Distribuição Ideal',
+      data: [30, 25, 20, 15, 10],
+      backgroundColor: 'rgba(124,58,237,0.15)',
+      borderColor: '#7C3AED',
+      pointBackgroundColor: '#A78BFA',
+    }]
+  },
+  options: { plugins: { legend: { display: false } }, scales: { r: { ticks: { display: false }, grid: { color: 'rgba(255,255,255,0.06)' }, pointLabels: { color: '#9CA3AF', font: { size: 10 } } } } }
+});
+
+// Margin by service
+new Chart(document.getElementById('chart-margin'), {
+  type: 'bar',
+  data: {
+    labels: ['Quick Win', 'Diagnóstico+Plano', 'Projeto Completo', 'Parceria Mensal'],
+    datasets: [{
+      label: 'Margem Bruta (%)',
+      data: [78, 76, 72, 80],
+      backgroundColor: '#10B981',
+      borderRadius: 6,
+    }]
+  },
+  options: { indexAxis: 'y', ...CHART_DEFAULTS, plugins: { ...CHART_DEFAULTS.plugins, tooltip: { callbacks: { label: ctx => ctx.raw + '%' } } } }
+});
+
+// Cash flow forecast
+new Chart(document.getElementById('chart-forecast'), {
+  type: 'line',
+  data: {
+    labels: ['Hoje', '30d', '60d', '90d'],
+    datasets: [
+      {
+        label: 'Receita Projetada',
+        data: [0, 5000, 15000, 30000],
+        borderColor: '#10B981', backgroundColor: 'rgba(16,185,129,0.1)', fill: true, tension: 0.3,
+      },
+      {
+        label: 'Custos Projetados',
+        data: [800, 800, 1600, 2400],
+        borderColor: '#EF4444', backgroundColor: 'rgba(239,68,68,0.05)', fill: true, tension: 0.3,
+      }
+    ]
+  },
+  options: CHART_DEFAULTS
+});
+
+// ── Load real data from API (if dashboard-server.js is running) ─────────────
+async function loadData() {
+  try {
+    const r = await fetch('http://localhost:3100/api/dashboard-data', { signal: AbortSignal.timeout(2000) });
+    if (!r.ok) return;
+    const data = await r.json();
+    if (data.finance) {
+      document.getElementById('fin-receita').textContent = 'R$ ' + (data.finance.receita_total || 0).toLocaleString('pt-BR');
+      document.getElementById('fin-margem').textContent = (data.finance.margem_bruta || 0) + '%';
+      document.getElementById('fin-cac').textContent = data.finance.cac > 0 ? 'R$ ' + data.finance.cac.toLocaleString('pt-BR') : '—';
+      document.getElementById('kpi-receita').textContent = 'R$ ' + (data.finance.receita_total || 0).toLocaleString('pt-BR');
+    }
+    if (data.leads) {
+      document.getElementById('kpi-leads').textContent = data.leads.total || 0;
+    }
+    if (data.runs !== undefined) {
+      document.getElementById('kpi-runs').textContent = data.runs;
+    }
+  } catch {
+    // Server not running — using static demo data, that's fine
+  }
+}
+loadData();
+</script>
+</body>
+</html>
