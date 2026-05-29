@@ -34,9 +34,10 @@ async function generateAd() {
   if (!fs.existsSync(adsDir)) fs.mkdirSync(adsDir, { recursive: true });
 
   // Load context
-  const brandIdentity   = readFileSafe('knowledge/brand_identity.md');
-  const productCampaign = readFileSafe('knowledge/product_campaign.md');
-  const researchResults = readFileSafe(path.join(outputDir, 'research_results.json'));
+  const brandIdentity    = readFileSafe('knowledge/brand_identity.md');
+  const productCampaign  = readFileSafe('knowledge/product_campaign.md');
+  const visualReferences = readFileSafe('knowledge/visual_references.md');
+  const researchResults  = readFileSafe(path.join(outputDir, 'research_results.json'));
 
   const client = new Anthropic();
 
@@ -50,8 +51,11 @@ Consultant: Breno Luiz, Black Belt Lean Six Sigma
 Website: smartops-ia.com.br
 Offer: Free 30-minute diagnostic
 
+VISUAL DESIGN SYSTEM (follow strictly):
+${visualReferences.slice(0, 2500)}
+
 BRAND IDENTITY:
-${brandIdentity.slice(0, 2000)}
+${brandIdentity.slice(0, 1000)}
 
 SERVICES & CAMPAIGN:
 ${productCampaign.slice(0, 1500)}
