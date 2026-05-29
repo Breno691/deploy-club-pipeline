@@ -1,0 +1,54 @@
+{
+  "ultima_atualizacao": "2026-05-29",
+  "moeda": "BRL",
+
+  "receita": {
+    "projetos_ativos": 0,
+    "novos_fechamentos_mes": 0,
+    "parceria_mensal_retainer": 0,
+    "outros": 0,
+    "total_mensal": 0
+  },
+
+  "custos": {
+    "anthropic_api": 150,
+    "n8n_easypanel": 80,
+    "supabase": 50,
+    "tavily_ai": 50,
+    "dominio_hosting": 80,
+    "outros_ferramentas": 190,
+    "total_mensal": 600
+  },
+
+  "pipeline_vendas": {
+    "leads_ativos": 0,
+    "valor_total_pipeline": 0,
+    "probabilidade_media_fechamento": 0.25,
+    "reunioes_agendadas": 0,
+    "propostas_abertas": 0
+  },
+
+  "clientes": {
+    "total_ativos": 0,
+    "novos_no_mes": 0,
+    "ticket_medio_projeto": 15000,
+    "duracao_media_meses": 2.5,
+    "taxa_retainer_pos_projeto": 0.3
+  },
+
+  "metricas_calculadas": {
+    "margem_bruta_pct": 0,
+    "receita_recorrente": 0,
+    "cac_estimado": 500,
+    "ltv_estimado": 25000,
+    "meses_runway": 0,
+    "saude_financeira": "pre-receita"
+  },
+
+  "metas": {
+    "receita_mensal_meta": 15000,
+    "clientes_simultaneos_meta": 3,
+    "margem_bruta_minima": 60,
+    "ltv_cac_ratio_minimo": 3
+  }
+}

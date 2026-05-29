@@ -280,6 +280,11 @@ tr:hover td { background: rgba(124,58,237,0.03); }
     <span class="icon">⚙️</span> Operações
   </div>
 
+  <div class="nav-section">Sistema</div>
+  <div class="nav-item" onclick="show('dados')">
+    <span class="icon">✏️</span> Dados
+  </div>
+
   <div class="sidebar-bottom">
     <div><span class="status-dot"></span>Pipeline ativo — EasyPanel</div>
     <div style="margin-top:6px;color:#374151">Breno Luiz · Black Belt LSS</div>
@@ -904,13 +909,304 @@ tr:hover td { background: rgba(124,58,237,0.03); }
     </div>
   </section>
 
+  <!-- ════════════════════════════════════════
+       SECTION — DADOS (formulários de entrada)
+  ════════════════════════════════════════ -->
+  <section class="section" id="sec-dados">
+    <div class="section-header">
+      <h2>✏️ Dados — Entrada Manual</h2>
+      <p>Adicione leads, clientes e atualize números financeiros diretamente aqui</p>
+    </div>
+
+    <!-- Tabs -->
+    <div style="display:flex;gap:8px;margin-bottom:24px;border-bottom:1px solid var(--border);padding-bottom:0">
+      <button class="dados-tab active" onclick="dadosTab('leads')" id="tab-leads"
+        style="padding:10px 20px;background:none;border:none;border-bottom:2px solid var(--lean);color:var(--lean-l);font-weight:700;cursor:pointer;font-size:13px">
+        👤 Leads
+      </button>
+      <button class="dados-tab" onclick="dadosTab('clientes')" id="tab-clientes"
+        style="padding:10px 20px;background:none;border:none;border-bottom:2px solid transparent;color:var(--muted);font-weight:600;cursor:pointer;font-size:13px">
+        🏢 Clientes
+      </button>
+      <button class="dados-tab" onclick="dadosTab('financeiro')" id="tab-financeiro"
+        style="padding:10px 20px;background:none;border:none;border-bottom:2px solid transparent;color:var(--muted);font-weight:600;cursor:pointer;font-size:13px">
+        💰 Financeiro
+      </button>
+    </div>
+
+    <!-- ── TAB LEADS ── -->
+    <div id="dados-leads">
+      <div style="display:grid;grid-template-columns:380px 1fr;gap:20px;align-items:start">
+
+        <!-- Form -->
+        <div class="chart-card">
+          <div class="chart-title">➕ Novo Lead</div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div>
+              <label style="font-size:11px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px">NOME *</label>
+              <input id="l-nome" type="text" placeholder="João Silva"
+                style="width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px">
+            </div>
+            <div>
+              <label style="font-size:11px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px">EMPRESA *</label>
+              <input id="l-empresa" type="text" placeholder="Metalúrgica Silva"
+                style="width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px">
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <div>
+                <label style="font-size:11px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px">SETOR</label>
+                <select id="l-setor" style="width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px">
+                  <option value="manufatura">Manufatura</option>
+                  <option value="saude">Saúde/Clínica</option>
+                  <option value="restaurante">Restaurante</option>
+                  <option value="servicos">Serviços</option>
+                  <option value="distribuicao">Distribuição</option>
+                  <option value="tecnologia">Tecnologia</option>
+                  <option value="outro">Outro</option>
+                </select>
+              </div>
+              <div>
+                <label style="font-size:11px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px">ORIGEM</label>
+                <select id="l-origem" style="width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px">
+                  <option value="indicacao">Indicação</option>
+                  <option value="instagram">Instagram</option>
+                  <option value="linkedin">LinkedIn</option>
+                  <option value="google">Google</option>
+                  <option value="whatsapp">WhatsApp direto</option>
+                  <option value="evento">Evento</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label style="font-size:11px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px">WHATSAPP</label>
+              <input id="l-whatsapp" type="text" placeholder="(31) 9xxxx-xxxx"
+                style="width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px">
+            </div>
+            <div>
+              <label style="font-size:11px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px">PROBLEMA PRINCIPAL *</label>
+              <input id="l-problema" type="text" placeholder="Ex: muito retrabalho na linha de produção"
+                style="width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px">
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <div>
+                <label style="font-size:11px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px">SCORE (0-100)</label>
+                <input id="l-score" type="number" min="0" max="100" placeholder="0"
+                  style="width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px">
+              </div>
+              <div>
+                <label style="font-size:11px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px">URGÊNCIA</label>
+                <select id="l-urgencia" style="width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px">
+                  <option value="alta">Alta</option>
+                  <option value="media">Média</option>
+                  <option value="baixa">Baixa</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label style="font-size:11px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px">OBSERVAÇÕES</label>
+              <textarea id="l-notas" rows="2" placeholder="Objeções, contexto, próximo passo..."
+                style="width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;resize:vertical"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="saveLead()" style="width:100%;justify-content:center;padding:12px">
+              ➕ Adicionar Lead
+            </button>
+            <div id="lead-msg" style="font-size:12px;text-align:center;color:var(--auto);display:none">✅ Lead salvo!</div>
+          </div>
+        </div>
+
+        <!-- Lista de leads -->
+        <div>
+          <div class="table-card">
+            <div class="table-header">
+              <h3>Leads no Pipeline</h3>
+              <button class="btn btn-ghost" style="font-size:12px" onclick="loadLeadsList()">↻ Atualizar</button>
+            </div>
+            <table>
+              <thead><tr><th>Nome</th><th>Empresa</th><th>Setor</th><th>Score</th><th>Status</th><th>Ação</th></tr></thead>
+              <tbody id="dados-leads-table">
+                <tr><td colspan="6" style="text-align:center;color:var(--muted);padding:24px">Carregando...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TAB CLIENTES ── -->
+    <div id="dados-clientes" style="display:none">
+      <div style="display:grid;grid-template-columns:380px 1fr;gap:20px;align-items:start">
+
+        <!-- Form -->
+        <div class="chart-card">
+          <div class="chart-title">➕ Novo Cliente</div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div>
+              <label style="font-size:11px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px">NOME DA EMPRESA *</label>
+              <input id="c-nome" type="text" placeholder="Clínica Saúde BH"
+                style="width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px">
+            </div>
+            <div>
+              <label style="font-size:11px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px">CONTATO</label>
+              <input id="c-contato" type="text" placeholder="Maria Santos"
+                style="width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px">
+            </div>
+            <div>
+              <label style="font-size:11px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px">TIPO DE PROJETO *</label>
+              <select id="c-projeto" style="width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px">
+                <option value="Lean VSM + Quick Wins">Lean VSM + Quick Wins</option>
+                <option value="Six Sigma DMAIC">Six Sigma DMAIC</option>
+                <option value="Automação n8n">Automação n8n</option>
+                <option value="Diagnóstico + Plano">Diagnóstico + Plano</option>
+                <option value="Kaizen Event">Kaizen Event</option>
+                <option value="Retainer Mensal">Retainer Mensal</option>
+              </select>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+              <div>
+                <label style="font-size:11px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px">SEMANA ATUAL</label>
+                <input id="c-semana" type="number" min="1" max="20" placeholder="1"
+                  style="width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px">
+              </div>
+              <div>
+                <label style="font-size:11px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px">TICKET (R$)</label>
+                <input id="c-ticket" type="number" placeholder="15000"
+                  style="width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px">
+              </div>
+            </div>
+            <div>
+              <label style="font-size:11px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px">DATA DE INÍCIO</label>
+              <input id="c-inicio" type="date"
+                style="width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px">
+            </div>
+            <div>
+              <label style="font-size:11px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px">WHATSAPP DO CLIENTE</label>
+              <input id="c-whatsapp" type="text" placeholder="(31) 9xxxx-xxxx"
+                style="width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px">
+            </div>
+            <div>
+              <label style="font-size:11px;color:var(--muted);font-weight:600;display:block;margin-bottom:4px">NOTAS</label>
+              <textarea id="c-notas" rows="2" placeholder="Observações, riscos, última entrega..."
+                style="width:100%;padding:9px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;resize:vertical"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="saveClient()" style="width:100%;justify-content:center;padding:12px">
+              ➕ Adicionar Cliente
+            </button>
+            <div id="client-msg" style="font-size:12px;text-align:center;color:var(--auto);display:none">✅ Cliente salvo!</div>
+          </div>
+        </div>
+
+        <!-- Lista de clientes -->
+        <div>
+          <div class="table-card">
+            <div class="table-header">
+              <h3>Clientes Ativos</h3>
+              <button class="btn btn-ghost" style="font-size:12px" onclick="loadClientsList()">↻ Atualizar</button>
+            </div>
+            <table>
+              <thead><tr><th>Empresa</th><th>Projeto</th><th>Semana</th><th>Ticket</th><th>Status</th><th>Ação</th></tr></thead>
+              <tbody id="dados-clients-table">
+                <tr><td colspan="6" style="text-align:center;color:var(--muted);padding:24px">Carregando...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TAB FINANCEIRO ── -->
+    <div id="dados-financeiro" style="display:none">
+      <div style="display:grid;grid-template-columns:420px 1fr;gap:20px;align-items:start">
+
+        <!-- Form -->
+        <div class="chart-card">
+          <div class="chart-title">💰 Atualizar Números Financeiros</div>
+          <div style="display:flex;flex-direction:column;gap:16px">
+
+            <div>
+              <div style="font-size:12px;font-weight:700;color:var(--lean-l);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.5px">Receita Mensal</div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <label style="font-size:12px;color:var(--muted);min-width:180px">Projetos ativos (R$)</label>
+                  <input id="f-projetos" type="number" placeholder="0"
+                    style="flex:1;padding:8px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px">
+                </div>
+                <div style="display:flex;align-items:center;gap:10px">
+                  <label style="font-size:12px;color:var(--muted);min-width:180px">Novos fechamentos (R$)</label>
+                  <input id="f-fechamentos" type="number" placeholder="0"
+                    style="flex:1;padding:8px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px">
+                </div>
+                <div style="display:flex;align-items:center;gap:10px">
+                  <label style="font-size:12px;color:var(--muted);min-width:180px">Retainers mensais (R$)</label>
+                  <input id="f-retainers" type="number" placeholder="0"
+                    style="flex:1;padding:8px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px">
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div style="font-size:12px;font-weight:700;color:var(--auto-l);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.5px">Custos Mensais</div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <label style="font-size:12px;color:var(--muted);min-width:180px">Total de custos (R$)</label>
+                  <input id="f-custos" type="number" placeholder="600"
+                    style="flex:1;padding:8px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px">
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div style="font-size:12px;font-weight:700;color:var(--warn);margin-bottom:10px;text-transform:uppercase;letter-spacing:0.5px">Pipeline de Vendas</div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <label style="font-size:12px;color:var(--muted);min-width:180px">Leads ativos</label>
+                  <input id="f-leads" type="number" placeholder="0"
+                    style="flex:1;padding:8px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px">
+                </div>
+                <div style="display:flex;align-items:center;gap:10px">
+                  <label style="font-size:12px;color:var(--muted);min-width:180px">Valor total pipeline (R$)</label>
+                  <input id="f-pipeline" type="number" placeholder="0"
+                    style="flex:1;padding:8px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px">
+                </div>
+                <div style="display:flex;align-items:center;gap:10px">
+                  <label style="font-size:12px;color:var(--muted);min-width:180px">Reuniões agendadas</label>
+                  <input id="f-reunioes" type="number" placeholder="0"
+                    style="flex:1;padding:8px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:13px">
+                </div>
+              </div>
+            </div>
+
+            <button class="btn btn-primary" onclick="saveFinancial()" style="width:100%;justify-content:center;padding:12px">
+              💾 Salvar Números
+            </button>
+            <div id="fin-msg" style="font-size:12px;text-align:center;color:var(--auto);display:none">✅ Financeiro atualizado!</div>
+          </div>
+        </div>
+
+        <!-- Resumo financeiro atual -->
+        <div>
+          <div class="kpi-grid" style="grid-template-columns:repeat(2,1fr)">
+            <div class="kpi-card green"><div class="kpi-label">Receita Mensal</div><div class="kpi-value" id="d-receita">R$ 0</div><div class="kpi-change">Meta: R$ 15.000</div></div>
+            <div class="kpi-card danger"><div class="kpi-label">Custos Mensais</div><div class="kpi-value" id="d-custos">R$ 600</div><div class="kpi-change">Ferramentas + infra</div></div>
+            <div class="kpi-card lean"><div class="kpi-label">Margem Bruta</div><div class="kpi-value" id="d-margem">0%</div><div class="kpi-change">Meta: > 60%</div></div>
+            <div class="kpi-card warn"><div class="kpi-label">Saúde</div><div class="kpi-value" id="d-saude" style="font-size:18px">Pré-receita</div><div class="kpi-change">Foco: fechar 1º cliente</div></div>
+          </div>
+          <div class="chart-card" style="margin-top:4px">
+            <div class="chart-title" style="margin-bottom:12px">📋 Dados atuais no sistema</div>
+            <pre id="fin-json-preview" style="font-size:11px;color:var(--muted);overflow:auto;max-height:300px;line-height:1.5">Carregando...</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
 </main>
 
 <script>
 // ── Navigation ─────────────────────────────────────────────────────────────
 const SECTION_TITLES = {
   executive:  'Executive Overview',
-  agents:     '35 Agentes — 10 Squads',
+  agents:     '49 Agentes — 11 Níveis',
   leads:      'Leads & Pipeline',
   site:       'Site & Analytics',
   ads:        'Campanhas & Ads',
@@ -919,6 +1215,7 @@ const SECTION_TITLES = {
   finance:    'Inteligência Financeira',
   clients:    'Clientes & Projetos',
   operations: 'Operações & Processos',
+  dados:      'Dados — Entrada Manual',
 };
 
 function show(id) {
@@ -945,8 +1242,227 @@ function runAgent(name) {
   };
   alert('Para rodar o agente:\n\n$ ' + (cmds[name] || 'node scripts/' + name + '.js'));
 }
-function addLead() {
-  alert('Para adicionar um lead, edite data/leads.json ou integre com um CRM.\nEm breve: formulário integrado neste dashboard.');
+function addLead() { show('dados'); dadosTab('leads'); }
+
+// ── Dados section tabs ───────────────────────────────────────────────────────
+function dadosTab(tab) {
+  ['leads','clientes','financeiro'].forEach(t => {
+    document.getElementById('dados-' + t).style.display = t === tab ? '' : 'none';
+    const btn = document.getElementById('tab-' + t);
+    if (btn) {
+      btn.style.borderBottomColor = t === tab ? 'var(--lean)' : 'transparent';
+      btn.style.color = t === tab ? 'var(--lean-l)' : 'var(--muted)';
+    }
+  });
+  if (tab === 'leads')      loadLeadsList();
+  if (tab === 'clientes')   loadClientsList();
+  if (tab === 'financeiro') loadFinancial();
+}
+
+const API = 'http://localhost:3100';
+
+// ── Leads ────────────────────────────────────────────────────────────────────
+async function saveLead() {
+  const nome = document.getElementById('l-nome').value.trim();
+  const empresa = document.getElementById('l-empresa').value.trim();
+  const problema = document.getElementById('l-problema').value.trim();
+  if (!nome || !empresa || !problema) return alert('Preencha Nome, Empresa e Problema');
+
+  const payload = {
+    nome, empresa,
+    setor:     document.getElementById('l-setor').value,
+    origem:    document.getElementById('l-origem').value,
+    whatsapp:  document.getElementById('l-whatsapp').value.trim(),
+    problema_principal: problema,
+    score:     parseInt(document.getElementById('l-score').value) || 0,
+    urgencia:  document.getElementById('l-urgencia').value,
+    notas:     document.getElementById('l-notas').value.trim(),
+    ultimo_contato: new Date().toISOString().split('T')[0],
+    status: 'novo',
+  };
+
+  try {
+    const r = await fetch(API + '/api/leads', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+    if (!r.ok) throw new Error(await r.text());
+    ['l-nome','l-empresa','l-whatsapp','l-problema','l-score','l-notas'].forEach(id => document.getElementById(id).value = '');
+    const msg = document.getElementById('lead-msg');
+    msg.style.display = 'block';
+    setTimeout(() => msg.style.display = 'none', 3000);
+    loadLeadsList();
+    loadData();
+  } catch(e) { alert('Erro: ' + e.message); }
+}
+
+async function loadLeadsList() {
+  const tbody = document.getElementById('dados-leads-table');
+  if (!tbody) return;
+  try {
+    const r = await fetch(API + '/api/leads', { signal: AbortSignal.timeout(2000) });
+    const leads = await r.json();
+    const real = leads.filter(l => !l._exemplo);
+    if (!real.length) {
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:24px">Nenhum lead ainda — adicione o primeiro!</td></tr>';
+      return;
+    }
+    const scoreColor = s => s >= 70 ? 'var(--auto)' : s >= 50 ? 'var(--warn)' : 'var(--danger)';
+    tbody.innerHTML = real.map(l => `
+      <tr>
+        <td><strong>${l.nome || '—'}</strong></td>
+        <td>${l.empresa || '—'}</td>
+        <td><span class="pill pill-muted">${l.setor || '—'}</span></td>
+        <td><strong style="color:${scoreColor(l.score || 0)}">${l.score || 0}</strong></td>
+        <td><span class="pill ${l.urgencia === 'alta' ? 'pill-danger' : l.urgencia === 'media' ? 'pill-warn' : 'pill-muted'}">${l.status || 'novo'}</span></td>
+        <td>
+          <button onclick="updateLeadStatus(${l.id},'reuniao')" style="background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.3);color:var(--auto);padding:4px 8px;border-radius:6px;font-size:11px;cursor:pointer;margin-right:4px">📅 Reunião</button>
+          <button onclick="deleteLead(${l.id})" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);color:var(--danger);padding:4px 8px;border-radius:6px;font-size:11px;cursor:pointer">✕</button>
+        </td>
+      </tr>
+    `).join('');
+  } catch {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:24px">Servidor não está rodando — inicie com: npm run dashboard</td></tr>';
+  }
+}
+
+async function updateLeadStatus(id, status) {
+  await fetch(API + '/api/leads/' + id, { method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ status, etapa: status }) });
+  loadLeadsList();
+}
+
+async function deleteLead(id) {
+  if (!confirm('Remover este lead?')) return;
+  await fetch(API + '/api/leads/' + id, { method:'DELETE' });
+  loadLeadsList();
+}
+
+// ── Clients ──────────────────────────────────────────────────────────────────
+async function saveClient() {
+  const nome = document.getElementById('c-nome').value.trim();
+  const projeto = document.getElementById('c-projeto').value;
+  if (!nome) return alert('Preencha o nome da empresa');
+
+  const payload = {
+    nome, projeto,
+    contato:    document.getElementById('c-contato').value.trim(),
+    semana:     parseInt(document.getElementById('c-semana').value) || 1,
+    ticket:     parseInt(document.getElementById('c-ticket').value) || 0,
+    data_inicio: document.getElementById('c-inicio').value || new Date().toISOString().split('T')[0],
+    whatsapp:   document.getElementById('c-whatsapp').value.trim(),
+    notas:      document.getElementById('c-notas').value.trim(),
+    status:     'ativo',
+    ultimo_contato: new Date().toISOString().split('T')[0],
+  };
+
+  try {
+    const r = await fetch(API + '/api/clients', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+    if (!r.ok) throw new Error(await r.text());
+    ['c-nome','c-contato','c-whatsapp','c-notas'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('c-semana').value = '';
+    document.getElementById('c-ticket').value = '';
+    const msg = document.getElementById('client-msg');
+    msg.style.display = 'block';
+    setTimeout(() => msg.style.display = 'none', 3000);
+    loadClientsList();
+    loadData();
+  } catch(e) { alert('Erro: ' + e.message); }
+}
+
+async function loadClientsList() {
+  const tbody = document.getElementById('dados-clients-table');
+  if (!tbody) return;
+  try {
+    const r = await fetch(API + '/api/clients', { signal: AbortSignal.timeout(2000) });
+    const clients = await r.json();
+    const real = clients.filter(c => !c._exemplo);
+    if (!real.length) {
+      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:24px">Nenhum cliente ainda — adicione quando fechar o primeiro!</td></tr>';
+      return;
+    }
+    tbody.innerHTML = real.map(c => `
+      <tr>
+        <td><strong>${c.nome || '—'}</strong></td>
+        <td>${c.projeto || '—'}</td>
+        <td><span class="pill pill-lean">Sem ${c.semana || 1}</span></td>
+        <td>R$ ${(c.ticket || 0).toLocaleString('pt-BR')}</td>
+        <td><span class="pill ${c.status === 'ativo' ? 'pill-green' : 'pill-muted'}">${c.status || 'ativo'}</span></td>
+        <td>
+          <button onclick="advanceWeek(${c.id}, ${c.semana || 1})" style="background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.3);color:var(--lean-l);padding:4px 8px;border-radius:6px;font-size:11px;cursor:pointer;margin-right:4px">+1 sem</button>
+          <button onclick="deleteClient(${c.id})" style="background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.2);color:var(--danger);padding:4px 8px;border-radius:6px;font-size:11px;cursor:pointer">✕</button>
+        </td>
+      </tr>
+    `).join('');
+  } catch {
+    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:24px">Servidor não rodando — npm run dashboard</td></tr>';
+  }
+}
+
+async function advanceWeek(id, semana) {
+  await fetch(API + '/api/clients/' + id, { method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ semana: semana + 1, ultimo_contato: new Date().toISOString().split('T')[0] }) });
+  loadClientsList();
+}
+
+async function deleteClient(id) {
+  if (!confirm('Remover este cliente?')) return;
+  await fetch(API + '/api/clients/' + id, { method:'DELETE' });
+  loadClientsList();
+}
+
+// ── Financial ────────────────────────────────────────────────────────────────
+async function loadFinancial() {
+  try {
+    const r = await fetch(API + '/api/financial', { signal: AbortSignal.timeout(2000) });
+    const d = await r.json();
+    if (d.receita) {
+      document.getElementById('f-projetos').value    = d.receita.projetos_ativos || 0;
+      document.getElementById('f-fechamentos').value = d.receita.novos_fechamentos_mes || 0;
+      document.getElementById('f-retainers').value   = d.receita.parceria_mensal_retainer || 0;
+    }
+    if (d.custos) document.getElementById('f-custos').value = d.custos.total_mensal || 600;
+    if (d.pipeline_vendas) {
+      document.getElementById('f-leads').value    = d.pipeline_vendas.leads_ativos || 0;
+      document.getElementById('f-pipeline').value  = d.pipeline_vendas.valor_total_pipeline || 0;
+      document.getElementById('f-reunioes').value  = d.pipeline_vendas.reunioes_agendadas || 0;
+    }
+    // Update summary cards
+    const receita = d.receita?.total_mensal || 0;
+    const custos  = d.custos?.total_mensal || 600;
+    const margem  = receita > 0 ? Math.round((receita - custos) / receita * 100) : 0;
+    document.getElementById('d-receita').textContent = 'R$ ' + receita.toLocaleString('pt-BR');
+    document.getElementById('d-custos').textContent  = 'R$ ' + custos.toLocaleString('pt-BR');
+    document.getElementById('d-margem').textContent  = margem + '%';
+    document.getElementById('d-saude').textContent   = d.metricas_calculadas?.saude_financeira || 'Pré-receita';
+    document.getElementById('fin-json-preview').textContent = JSON.stringify(d, null, 2);
+  } catch {
+    document.getElementById('fin-json-preview').textContent = 'Servidor não rodando — npm run dashboard';
+  }
+}
+
+async function saveFinancial() {
+  const payload = {
+    receita: {
+      projetos_ativos:           parseInt(document.getElementById('f-projetos').value)    || 0,
+      novos_fechamentos_mes:     parseInt(document.getElementById('f-fechamentos').value)  || 0,
+      parceria_mensal_retainer:  parseInt(document.getElementById('f-retainers').value)    || 0,
+      outros: 0,
+    },
+    custos: {
+      total_mensal: parseInt(document.getElementById('f-custos').value) || 600,
+    },
+    pipeline_vendas: {
+      leads_ativos:           parseInt(document.getElementById('f-leads').value)    || 0,
+      valor_total_pipeline:   parseInt(document.getElementById('f-pipeline').value)  || 0,
+      reunioes_agendadas:     parseInt(document.getElementById('f-reunioes').value)  || 0,
+    },
+  };
+
+  try {
+    const r = await fetch(API + '/api/financial', { method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+    if (!r.ok) throw new Error(await r.text());
+    const msg = document.getElementById('fin-msg');
+    msg.style.display = 'block';
+    setTimeout(() => msg.style.display = 'none', 3000);
+    loadFinancial();
+    loadData();
+  } catch(e) { alert('Erro: ' + e.message); }
 }
 
 // ── Charts ──────────────────────────────────────────────────────────────────

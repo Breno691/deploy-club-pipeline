@@ -1,0 +1,26 @@
+[
+  {
+    "_exemplo": "REMOVA ESTE OBJETO ao adicionar clientes reais. Copie a estrutura abaixo.",
+    "id": 1,
+    "nome": "Empresa Exemplo Ltda",
+    "contato": "Maria Santos",
+    "whatsapp": "(31) 9xxxx-xxxx",
+    "projeto": "Lean VSM + Quick Wins",
+    "tipo_projeto": "lean",
+    "status": "ativo",
+    "semana": 3,
+    "total_semanas": 10,
+    "data_inicio": "2026-05-01",
+    "data_prevista_fim": "2026-07-10",
+    "ultimo_contato": "2026-05-28",
+    "proxima_entrega": "VSM completo",
+    "data_proxima_entrega": "2026-06-05",
+    "ticket": 15000,
+    "ticket_pago": 7500,
+    "ticket_a_pagar": 7500,
+    "nps_parcial": 9,
+    "resultado_parcial": "Mapeados 3 desperdícios críticos",
+    "risco": "baixo",
+    "notas": "Cliente muito engajado. Equipe participativa."
+  }
+]

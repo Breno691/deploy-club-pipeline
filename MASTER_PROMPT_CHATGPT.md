@@ -930,6 +930,136 @@ node scripts/financial_agent.js --task finance_semanal --data data/financial_dat
 
 ---
 
+---
+
+## MASTER SPEC — ORGANIZAÇÃO HIERÁRQUICA MULTIAGENTE (11 NÍVEIS)
+
+**Princípio fundamental:** Nenhum agente trabalha sozinho. Todos compartilham contexto, memória, métricas e aprendizados. CEO Advisor é o cérebro. Chief of Staff é o coordenador. Automation Layer executa. Todos os outros produzem inteligência especializada.
+
+```
+NÍVEL 1 — EXECUTIVE LAYER (tomar decisões)
+  → CEO Advisor Agent         — priorização, estratégia, ROI (nunca executa)
+  → Chief of Staff Agent      — transforma decisões em execução
+  → Executive Dashboard Agent — consolida tudo em um painel
+
+NÍVEL 2 — BUSINESS INTELLIGENCE LAYER (entender o negócio)
+  → Revenue Agent             — onde vem o dinheiro?
+  → Financial Intelligence    — como aumentar lucro?
+  → Competitor Intelligence   — o que os concorrentes fazem?
+  → Market Research Agent     — o que o mercado quer?
+  → KPI Guardian Agent *      — o que piorou?
+
+NÍVEL 3 — MARKETING LAYER (gerar autoridade, audiência, demanda)
+  → Copywriter Agent
+  → Design Agent
+  → Distribution Agent
+  → SEO Agent
+  → Video Ad Agent
+  → Remotion Agent
+  → Content Performance Agent *  — descobre conteúdo vencedor
+  → Thought Leadership Agent *   — constrói autoridade pública
+
+NÍVEL 4 — GROWTH LAYER (transformar audiência em clientes)
+  → CRO Agent
+  → Customer Journey Agent
+  → Ads Agent
+  → Website Analytics Agent
+  → Experimentation Agent *   — executa testes A/B
+  → Lead Scoring Agent *      — prioriza melhores leads
+
+NÍVEL 5 — SALES LAYER (transformar leads em clientes)
+  → Sales Intelligence Agent
+  → Proposal Agent
+  → Offer Optimization Agent
+  → Pricing Agent
+  → Meeting Intelligence Agent *  — analisa reuniões e objeções
+
+NÍVEL 6 — CLIENT SUCCESS LAYER (reter e expandir clientes)
+  → Client Success Agent
+  → Client Expansion Agent *  — upsell em clientes ativos
+  → Risk Agent
+
+NÍVEL 7 — OPERATIONS LAYER (melhoria contínua)
+  → Lean Agent
+  → Six Sigma Agent
+  → Kaizen Agent
+  → Process Mining Agent
+  → Change Management Agent * — gerencia mudança organizacional
+  → Project Delivery Agent *  — controla execução dos projetos
+
+NÍVEL 8 — AUTOMATION LAYER (executar)
+  → Automation Agent
+  → AI Automation Discovery * — descobre novas automações com IA
+
+NÍVEL 9 — KNOWLEDGE LAYER (transformar tudo em conhecimento)
+  → Knowledge Management Agent
+  → Organizational Learning Agent * — aprende com tudo que acontece
+  → Case Study Agent
+  → Framework Creation Agent *      — cria metodologias proprietárias
+  → Productization Agent
+
+NÍVEL 10 — PERSONAL BRAND LAYER (transformar Breno em autoridade)
+  → Personal Brand Agent
+  → Authority Building Agent
+  → Partnership Agent
+  → Community Agent *         — constrói comunidade de seguidores
+
+NÍVEL 11 — INNOVATION LAYER (manter a empresa à frente)
+  → AI Lab Agent
+  → Market Opportunity Agent * — encontra novos mercados e nichos
+```
+
+*Agentes marcados com * são novos. Total planejado: 49 agentes (35 já implementados + 14 novos).
+
+### Fluxo Principal do Sistema
+
+```
+Dados → Business Intelligence → Marketing → Growth → Sales
+  → Client Success → Operations → Executive Layer
+  → Plano de ação → Automation Layer → Execução
+```
+
+### Novos 14 Agentes (scripts a criar)
+
+| Script | Nível | Pergunta Principal | Comando |
+|---|---|---|---|
+| kpi_guardian.js | BI | O que piorou? | `npm run kpi-guardian` |
+| content_performance.js | Marketing | Qual conteúdo vence? | `npm run content-perf` |
+| thought_leadership.js | Marketing | Como construir autoridade? | `npm run thought` |
+| experimentation_agent.js | Growth | O que testar? | `npm run experiment` |
+| lead_scoring.js | Growth | Quais leads priorizar? | `npm run lead-score` |
+| meeting_intelligence.js | Sales | O que a reunião revelou? | `npm run meeting` |
+| client_expansion.js | Client Success | Quem pode comprar mais? | `npm run expand` |
+| change_management.js | Operations | Como implementar a mudança? | `npm run change` |
+| project_delivery.js | Operations | O projeto está no prazo? | `npm run delivery` |
+| ai_automation_discovery.js | Automation | O que automatizar com IA? | `npm run ai-auto` |
+| organizational_learning.js | Knowledge | O que aprendemos? | `npm run org-learn` |
+| framework_creation.js | Knowledge | Qual metodologia criar? | `npm run framework` |
+| community_agent.js | Personal Brand | Como engajar a comunidade? | `npm run community` |
+| market_opportunity.js | Innovation | Quais mercados explorar? | `npm run market-opp` |
+
+### Formato de Saída Obrigatório (todos os 49 agentes)
+
+```
+TÍTULO:
+CONTEXTO:
+DADOS ANALISADOS:
+PROBLEMA IDENTIFICADO:
+EVIDÊNCIA:
+IMPACTO:
+RECOMENDAÇÃO:
+AÇÃO SUGERIDA:
+PRIORIDADE: [Alta / Média / Baixa]
+ESFORÇO: [Baixo / Médio / Alto]
+ROI ESPERADO:
+RISCO DE NÃO AGIR:
+PRAZO:
+MÉTRICA DE SUCESSO:
+PRÓXIMO PASSO:
+```
+
+---
+
 ## INSTRUÇÃO PARA O CHATGPT
 
 Agora que você tem o contexto completo do Sistema Operacional SmartOps IA, você pode me ajudar com qualquer uma destas tarefas:

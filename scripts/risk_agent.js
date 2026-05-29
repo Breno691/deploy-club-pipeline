@@ -16,6 +16,7 @@ function appendLog(msg) {
     `[${new Date().toISOString()}] ${msg}\n`);
 }
 function readJsonSafe(p) { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch { return null; } }
+const getData = require('../lib/data');
 function readFileSafe(p) { try { return fs.readFileSync(p, 'utf8'); } catch { return ''; } }
 
 async function runRiskAgent() {
@@ -30,8 +31,10 @@ async function runRiskAgent() {
   appendLog('risk_agent started');
 
   // Collect all available data
-  const leads     = readJsonSafe('data/leads.json') || [];
-  const clients   = readJsonSafe('data/clients.json') || [];
+  const [leads, clients] = await Promise.all([
+    getData.getLeads(),
+    getData.getClients(),
+  ]);
   const finances  = (() => {
     const base = 'outputs';
     if (!fs.existsSync(base)) return null;

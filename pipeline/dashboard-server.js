@@ -152,6 +152,74 @@ app.post('/api/leads', express.json(), (req, res) => {
   res.json({ status: 'ok', lead: newLead });
 });
 
+app.put('/api/leads/:id', express.json(), (req, res) => {
+  const leads = readJsonSafe('data/leads.json') || [];
+  const idx = leads.findIndex(l => String(l.id) === req.params.id);
+  if (idx === -1) return res.status(404).json({ error: 'not found' });
+  leads[idx] = { ...leads[idx], ...req.body, id: leads[idx].id };
+  fs.writeFileSync('data/leads.json', JSON.stringify(leads, null, 2));
+  res.json({ status: 'ok', lead: leads[idx] });
+});
+
+app.delete('/api/leads/:id', (req, res) => {
+  const leads = (readJsonSafe('data/leads.json') || []).filter(l => String(l.id) !== req.params.id);
+  fs.writeFileSync('data/leads.json', JSON.stringify(leads, null, 2));
+  res.json({ status: 'ok' });
+});
+
+// ── API: Clients CRUD ─────────────────────────────────────────────────────────
+app.get('/api/clients', (req, res) => {
+  res.json(readJsonSafe('data/clients.json') || []);
+});
+
+app.post('/api/clients', express.json(), (req, res) => {
+  const clients = readJsonSafe('data/clients.json') || [];
+  const c = { id: Date.now(), created_at: new Date().toISOString(), status: 'ativo', semana: 1, ...req.body };
+  clients.push(c);
+  fs.writeFileSync('data/clients.json', JSON.stringify(clients, null, 2));
+  res.json({ status: 'ok', client: c });
+});
+
+app.put('/api/clients/:id', express.json(), (req, res) => {
+  const clients = readJsonSafe('data/clients.json') || [];
+  const idx = clients.findIndex(c => String(c.id) === req.params.id);
+  if (idx === -1) return res.status(404).json({ error: 'not found' });
+  clients[idx] = { ...clients[idx], ...req.body, id: clients[idx].id };
+  fs.writeFileSync('data/clients.json', JSON.stringify(clients, null, 2));
+  res.json({ status: 'ok', client: clients[idx] });
+});
+
+app.delete('/api/clients/:id', (req, res) => {
+  const clients = (readJsonSafe('data/clients.json') || []).filter(c => String(c.id) !== req.params.id);
+  fs.writeFileSync('data/clients.json', JSON.stringify(clients, null, 2));
+  res.json({ status: 'ok' });
+});
+
+// ── API: Financial CRUD ───────────────────────────────────────────────────────
+app.get('/api/financial', (req, res) => {
+  res.json(readJsonSafe('data/financial_data.json') || {});
+});
+
+app.put('/api/financial', express.json(), (req, res) => {
+  const current = readJsonSafe('data/financial_data.json') || {};
+  const updated = { ...current, ...req.body, ultima_atualizacao: new Date().toISOString().split('T')[0] };
+  // recalc total receita
+  if (updated.receita) {
+    updated.receita.total_mensal = Object.values(updated.receita).reduce((s, v) => typeof v === 'number' ? s + v : s, 0) - (updated.receita.total_mensal || 0);
+    const r = updated.receita;
+    updated.receita.total_mensal = (r.projetos_ativos||0) + (r.novos_fechamentos_mes||0) + (r.parceria_mensal_retainer||0) + (r.outros||0);
+  }
+  if (updated.receita && updated.custos) {
+    const receita = updated.receita.total_mensal || 0;
+    const custo   = updated.custos.total_mensal || 0;
+    updated.metricas_calculadas = updated.metricas_calculadas || {};
+    updated.metricas_calculadas.margem_bruta_pct = receita > 0 ? Math.round((receita - custo) / receita * 100) : 0;
+    updated.metricas_calculadas.saude_financeira  = receita === 0 ? 'pre-receita' : receita < custo ? 'critico' : receita < custo * 2 ? 'alerta' : 'saudavel';
+  }
+  fs.writeFileSync('data/financial_data.json', JSON.stringify(updated, null, 2));
+  res.json({ status: 'ok', data: updated });
+});
+
 // ── API: Latest outputs listing ────────────────────────────────────────────────
 app.get('/api/outputs', (req, res) => {
   const base = 'outputs';
