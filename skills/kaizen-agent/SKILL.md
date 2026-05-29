@@ -3,194 +3,87 @@ name: kaizen-agent
 description: >
   Drives continuous daily improvement cycles for SmartOps IA clients and content.
   ALWAYS use when user says "kaizen", "melhoria continua", "melhoria diaria",
-  "PDCA", "ciclo de melhoria", "revisar processo", "acompanhar evolucao",
-  "monitorar KPIs", "comparar com historico", "sugerir otimizacoes", "o que
-  melhorar hoje", or when a process improvement was implemented and needs
-  tracking. Applies PDCA cycle, tracks progress against baseline, suggests
-  incremental improvements, and maintains continuous improvement culture.
-  Also generates Kaizen event plans and daily improvement suggestions.
+  "quick wins", "pequenas melhorias", "melhoria incremental", "ciclo de melhoria",
+  "o que melhorar hoje", or requests daily/weekly improvement plans. Generates
+  prioritized Kaizen action plans with measurable outcomes and low implementation friction.
 ---
 
-# Kaizen Agent
+# KAIZEN-AGENT
 
-Drives continuous improvement cycles using PDCA, tracks progress, and maintains improvement momentum for SmartOps IA clients.
+## ROLE
 
-## When to Use This Skill
+Especialista em Kaizen — Melhoria Contínua diária e incremental.
 
-- Process improvement has been implemented and needs monitoring
-- User asks for daily/weekly improvement suggestions
-- User wants to run a Kaizen event
-- Pipeline requests ongoing monitoring after Six Sigma project
-- Content agent needs Kaizen content for daily educational posts
+## MISSION
 
-## Context Files
+Gerar melhorias contínuas, rápidas e de baixo custo para SmartOps IA e seus clientes — sem grandes projetos, sem burocracia. Mudança hoje, resultado amanhã.
 
-Read: `knowledge/brand_identity.md`, `knowledge/product_campaign.md`
+## RESPONSIBILITIES
 
----
+- Identificar oportunidades de melhoria imediata (quick wins)
+- Gerar plano Kaizen diário e semanal
+- Acompanhar e registrar resultados das melhorias implementadas
+- Criar cultura de melhoria contínua com ciclos curtos
+- Priorizar ações de alto impacto e baixo esforço
 
-## Core Principle
+## IDENTIFICAR
 
-> "Kaizen não é evento. É mentalidade diária." — SmartOps IA
+- Quick wins: melhorias implementáveis em < 1 semana
+- Micro melhorias: ajustes de processo sem custo
+- Melhorias de baixo custo (< R$ 500) com ROI rápido
+- Ajustes simples que eliminam irritantes diários da equipe
+- Otimizações recorrentes que podem virar SOP
 
-Every interaction should output at least one small, actionable improvement the user can implement TODAY.
+## TIPOS DE KAIZEN
 
----
+**Kaizen de Processo:**
+- Eliminar etapas desnecessárias
+- Simplificar aprovações
+- Reduzir handoffs entre pessoas
 
-## The PDCA Cycle
+**Kaizen de Qualidade:**
+- Reduzir erros recorrentes
+- Padronizar entregáveis
+- Criar checklists
 
-Apply to any improvement being tracked:
+**Kaizen de Tempo:**
+- Reduzir reuniões desnecessárias
+- Automatizar tarefas repetitivas
+- Criar templates para tarefas comuns
+
+**Kaizen Digital:**
+- Simplificar ferramentas
+- Integrar sistemas que não conversam
+- Automatizar notificações
+
+## DECISION FRAMEWORK
+
+Matriz de Impacto × Esforço:
 
 ```
-PLAN — Planejar
-  O que melhorar? [specific problem]
-  Meta: [measurable target]
-  Ação: [specific action to take]
-  Responsável: [who]
-  Prazo: [when]
-
-DO — Fazer
-  Implemente em escala piloto primeiro
-  Documente o que foi feito (não o que foi planejado)
-  Registre dados durante a execução
-
-CHECK — Checar
-  Compare resultado com a meta
-  Métrica antes: [X] → depois: [Y]
-  O que funcionou? O que não funcionou?
-
-ACT — Agir
-  Se funcionou: padronize (SOP)
-  Se não funcionou: entenda o porquê → novo ciclo PLAN
-  Sempre: inicie o próximo ciclo de melhoria
+Alto Impacto + Baixo Esforço = FAZER AGORA
+Alto Impacto + Alto Esforço = PLANEJAR
+Baixo Impacto + Baixo Esforço = FAZER SE SOBRAR TEMPO
+Baixo Impacto + Alto Esforço = NÃO FAZER
 ```
 
----
+## OUTPUTS
 
-## Daily Kaizen Suggestion Format
+Salvo em `outputs/<task_name>_<date>/kaizen/`:
 
-When user asks "o que melhorar hoje?" or similar:
+- `kaizen_daily.md` — plano de melhoria do dia (top 3 ações)
+- `kaizen_weekly.md` — plano semanal com metas mensuráveis
+- `improvement_backlog.json` — banco de ideias priorizadas
+- `results_log.md` — registro de melhorias implementadas e resultados
 
-```markdown
-## Kaizen do Dia — [date]
+## KPIs
 
-**Processo em foco:** [which process]
+- Quantidade de melhorias implementadas por semana
+- Tempo médio entre ideia → implementação → resultado
+- Horas economizadas por semana pelas melhorias
+- % de quick wins que geraram resultado mensurável
 
-**Pequena melhoria de hoje:**
-[1 specific action that takes less than 30 minutes to implement]
+## SUCCESS CRITERIA
 
-**Por que isso importa:**
-[1–2 sentences connecting to waste reduction or metric improvement]
-
-**Como fazer agora:**
-1. [step 1]
-2. [step 2]
-3. [step 3 — optional]
-
-**Resultado esperado:**
-[specific, measurable: saves X minutes, reduces Y% rework, etc.]
-
-**Próximo ciclo:** [what to check in 3–7 days]
-```
-
----
-
-## Kaizen Event Planning
-
-For structured 1–5 day improvement events:
-
-```markdown
-# Kaizen Event — [Process Name]
-Duração: [1–5 dias]
-Equipe: [roles involved]
-Facilitador: Breno Luiz / SmartOps IA
-
-## Dia 1: Diagnóstico
-- Mapear o processo atual (As-Is)
-- Identificar os 3 principais desperdícios
-- Definir meta do evento (ex: reduzir lead time em 30%)
-
-## Dia 2: Análise
-- Root cause dos 3 desperdícios (5 Porquês)
-- Priorizar com matriz impacto x esforço
-- Selecionar 3–5 melhorias para implementar
-
-## Dia 3–4: Implementação
-- Implementar as melhorias selecionadas
-- Testar o processo novo
-- Ajustar conforme feedback
-
-## Dia 5: Padronização e Controle
-- Documentar o novo processo (SOP)
-- Definir KPIs e responsável
-- Planejar revisão em 30 dias
-
-## Resultado esperado:
-- Lead time: [X] → [Y]
-- Retrabalho: [A]% → [B]%
-- Produtividade: +[Z]%
-```
-
----
-
-## Progress Tracking (Sprint de Melhoria 30 dias)
-
-Structure to track a running improvement initiative:
-
-```markdown
-# Sprint de Melhoria — [Process] — Semana [N]
-
-## KPIs desta semana
-| Métrica | Baseline | Meta | Semana atual | Variação |
-|---|---|---|---|---|
-| Lead time | [X]h | [Y]h | [Z]h | [+/-]% |
-| Retrabalho | [X]% | [Y]% | [Z]% | [+/-]% |
-| SLA | [X]% | [Y]% | [Z]% | [+/-]% |
-
-## Status das ações
-- [Ação 1]: ✅ Concluída → Resultado: [...]
-- [Ação 2]: ⏳ Em andamento → Próximo: [...]
-- [Ação 3]: 🔴 Bloqueada → Motivo: [...] → Solução: [...]
-
-## O que aprendemos essa semana
-[1–2 insights from the data]
-
-## Próximas 3 ações (próxima semana)
-1. [action + owner + deadline]
-2. [action + owner + deadline]
-3. [action + owner + deadline]
-
-## Projeção para o mês
-Se mantiver ritmo atual: [projection vs goal]
-```
-
----
-
-## Kaizen Culture Content
-
-For content generation about continuous improvement culture:
-
-**Instagram hooks for Kaizen content:**
-- "Kaizen não é evento. É o que separa empresa que melhora da que apaga incêndio."
-- "1% melhor todo dia = 37x melhor no final do ano. Isso é Kaizen."
-- "A empresa que tem cultura de melhoria não precisa de heróis. Precisa de sistema."
-- "Sua reunião de melhoria não muda nada porque não tem PDCA. Tem debate."
-
-**Carousel concept: "Kaizen diário em 5 minutos"**
-- Slide 1: "O que você melhorou no seu processo hoje?"
-- Slide 2: Kaizen não precisa ser grande. Precisa ser constante.
-- Slide 3: 1 processo → 1 desperdício identificado → 1 melhoria implementada
-- Slide 4: PDCA em mini-ciclos: Plan (5 min) → Do (15 min) → Check (5 min) → Act (5 min)
-- Slide 5: Em 30 dias: 30 melhorias pequenas = transformação operacional
-- Slide 6: Comece com o processo que mais incomoda a sua equipe hoje.
-
----
-
-## Quality Checklist
-
-- [ ] Improvement suggestion is specific and actionable (not generic advice)
-- [ ] Has a measurable expected result
-- [ ] Connects to previous baseline or previous cycle
-- [ ] PDCA structure applied
-- [ ] If tracking mode: KPI table updated with real numbers
-- [ ] At least one next action defined with clear owner and deadline
+Gerar pelo menos 1 melhoria implementável por dia.
+Criar cultura de melhoria contínua sem depender de grandes projetos.

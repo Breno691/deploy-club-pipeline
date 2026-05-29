@@ -1,22 +1,87 @@
-## Visão Geral do Projeto
+# SmartOps IA — Multi-Agent Consulting Operating System
 
-Este projeto implementa um **Sistema Completo de Inteligência de Marketing e Crescimento com IA** para a **SmartOps IA** — consultoria de Lean Six Sigma e Automação com IA para pequenas e médias empresas em BH, MG.
+**SmartOps IA** é uma consultoria de Melhoria Contínua, Lean, Six Sigma e Automação com IA para pequenas e médias empresas em BH, MG.
 
-O sistema usa **onze agentes de IA especializados** organizados em dois grupos:
-
-**Grupo 1 — Content Pipeline (automação de conteúdo diário)**
-Cinco agentes coordenados por um Orchestrator para pesquisar, gerar, renderizar e distribuir conteúdo de marketing 3x por semana automaticamente.
-
-**Grupo 2 — Growth Intelligence (inteligência de crescimento e receita)**
-Seis agentes que analisam dados de tráfego, conversão, campanhas pagas e pipeline de receita para transformar dados em ações concretas de crescimento.
+Este repositório implementa o **sistema operacional da consultoria** — uma plataforma multiagente que integra marketing, vendas, operações, automação e estratégia.
 
 ---
 
-# Arquitetura do Sistema
+## Princípio de Especificação de Agentes
 
-## Grupo 1 — Content Pipeline
+Todo agente usa esta estrutura operacional completa:
 
-Cinco agentes gerenciados por um Orchestrator central:
+```
+ROLE · MISSION · RESPONSIBILITIES · INPUTS · DATA SOURCES · TOOLS
+WORKFLOWS · DECISION FRAMEWORK · OUTPUTS · KPIs · AUTOMATIONS
+REPORTS · ALERTS · ACTIONS · RESTRICTIONS · SUCCESS CRITERIA
+```
+
+---
+
+## Arquitetura — 7 Camadas
+
+```
+1. Data Collection Layer    — coleta de todas as fontes (GA4, Ads, CRM, site, n8n)
+2. Memory & Knowledge Layer — base de conhecimento, histórico, vetores
+3. Agent Orchestration Layer — BullMQ + n8n coordenando todos os agentes
+4. Specialist Agents Layer  — 21 agentes em 4 squads
+5. Automation Layer         — n8n executa workflows aprovados
+6. Analytics & Dashboard Layer — métricas consolidadas por squad
+7. Executive Decision Layer — plano de ação executivo diário
+```
+
+---
+
+## Os 4 Squads — 21 Agentes
+
+### SQUAD 1 — MARKETING (7 agentes)
+
+| Agente | Skill File | Foco |
+|---|---|---|
+| Copywriter Agent | `skills/copywriter-agent/` | copy, hooks, storytelling, CTAs |
+| Distribution Agent | `skills/distribution-agent/` | publicação multicanal, calendário |
+| Marketing Research Agent | `skills/marketing-research-agent/` | pesquisa, tendências, concorrentes |
+| SEO Agent | `skills/seo-agent/` | orgânico, keywords, clusters |
+| Video Ad Specialist | `skills/video-ad-specialist/` | criativos de vídeo, VSL, reels |
+| Design Agent | `skills/design-agent/` | layouts, carrosséis, identidade visual |
+| Remotion Video Agent | `skills/remotion-best-practices/` | animações React, motion design |
+
+### SQUAD 2 — GROWTH (5 agentes)
+
+| Agente | Skill File | Foco |
+|---|---|---|
+| CRO Agent | `skills/cro-agent/` | conversão de site, funis, formulários |
+| Customer Journey Agent | `skills/customer-journey-agent/` | jornada completa do visitante |
+| Revenue Agent | `skills/revenue-agent/` | receita, ROI, CAC, LTV, atribuição |
+| Ads Agent | `skills/ads-agent/` | Google Ads + Meta Ads |
+| Website Analytics Agent | `skills/website-analytics-agent/` | eventos, sessões, páginas, conversões |
+
+### SQUAD 3 — OPERATIONS (5 agentes)
+
+| Agente | Skill File | Foco |
+|---|---|---|
+| Lean Agent | `skills/lean-agent/` | 8 desperdícios, VSM, eliminação de waste |
+| Six Sigma Agent | `skills/six-sigma-agent/` | DMAIC, defeitos, variabilidade |
+| Kaizen Agent | `skills/kaizen-agent/` | melhoria contínua diária, quick wins |
+| Process Mining Agent | `skills/process-mining-agent/` | descoberta de processos por dados |
+| Automation Agent | `skills/automation-agent/` | n8n, APIs, webhooks, RPA |
+
+### SQUAD 4 — EXECUTIVE (4 agentes)
+
+| Agente | Skill File | Foco |
+|---|---|---|
+| Executive Dashboard Agent | `skills/executive-dashboard-agent/` | dashboards diário/semanal/mensal |
+| Competitor Intelligence Agent | `skills/competitor-intelligence-agent/` | monitoramento de concorrentes |
+| Strategic Planning Agent | `skills/strategic-planning-agent/` | planos 30/90/180 dias, OKRs |
+| CEO Advisor Agent | `skills/ceo-advisor-agent/` | decisão central, priorização executiva |
+
+---
+
+## Orchestrator (Content Pipeline)
+
+O Orchestrator coordena o pipeline de conteúdo diário (3x por semana: Ter/Qui/Sáb).
+
+Skill File: `skills/orchestrator/SKILL.md`
 
 ```
 Marketing Research Agent
@@ -26,267 +91,162 @@ Marketing Research Agent
         └──► Copywriter Agent      ─┘
 ```
 
-O **Orchestrator** skill coordena todos os agentes via filas de job **BullMQ** backed por **Upstash Redis**. Agentes rodam em ordem de dependência — research primeiro, depois os três agentes criativos em paralelo, depois distribution por último.
-
-Cada agente usa uma combinação de **custom skills, knowledge files e APIs** para executar suas tarefas.
-
----
-
-## Grupo 2 — Growth Intelligence
-
-Seis agentes de inteligência analítica coordenados pelo **Growth Intelligence Agent**:
-
-```
-Growth Intelligence Agent (cérebro analítico)
-        │
-        ├──► CRO Agent            (conversão do site)
-        ├──► SEO Agent            (crescimento orgânico)
-        ├──► Ads Agent            (Google Ads + Meta Ads)
-        ├──► Customer Journey Agent (jornada do visitante)
-        └──► Revenue Agent        (receita e ROI)
-```
-
-O **Growth Intelligence Agent** analisa tráfego, funil, campanhas e tendências — e gera um plano de ação semanal priorizado. Os outros 5 agentes executam as recomendações em suas áreas específicas.
-
-**Integrações necessárias:**
-- Google Analytics 4 + Search Console
-- Microsoft Clarity (heatmaps)
-- Google Ads API
-- Meta Ads API
-- CRM (Google Sheets ou Notion)
-
----
-
-# Orchestrator
-
-O Orchestrator não é um agente — é uma skill de coordenação que gerencia o pipeline completo.
-
-Skill File: `skills/orchestrator/SKILL.md`
-
-Responsabilidades:
-- Aceitar um Job Payload (JSON) com `task_name`, `task_date`, `platform_targets` e skip flags opcionais
-- Validar o payload e enforçar a ordering de dependências
-- Enqueue todos os agent jobs na fila BullMQ `ai-content-pipeline` via `pipeline/orchestrator.js`
-- Iniciar o BullMQ worker (`pipeline/worker.js`) para processar jobs enfileirados
-- Rastrear status dos jobs via log files em `outputs/<task_name>_<date>/logs/`
-- Reportar conclusão do pipeline e surfacear o Publish MD file gerado
-
 ### Comandos do Pipeline
 
 ```bash
 npm run pipeline:run                     # rodar com demo payload padrão
 npm run pipeline:run:payload '<json>'    # rodar com JSON payload inline
-node pipeline/worker.js                  # iniciar o BullMQ worker (terminal separado)
+node pipeline/worker.js                  # iniciar o BullMQ worker
 ```
+
+### Infraestrutura
+
+- **Pipeline server:** `pipeline/server.js` — Express porta 3099
+- **URL pública:** `https://n8n-pipeline-server.sumjyb.easypanel.host`
+- **n8n trigger:** POST `/run-pipeline` com `{ taskName, taskDate, skipPost }`
+- **GitHub:** `https://github.com/Breno691/deploy-club-pipeline`
 
 ### Skip Flags
 
 | Flag | Efeito |
 |---|---|
-| `skip_research: true` | Pula o Research Agent; requer que `assets/<task_name>/` exista |
-| `skip_image: true` | Pula o Ad Creative Designer |
-| `skip_video: true` | Pula o Video Ad Specialist |
+| `skip_research: true` | Pula Research Agent |
+| `skip_image: true` | Pula Ad Creative Designer |
+| `skip_video: true` | Pula Video Ad Specialist |
 
 ---
 
-# Agentes e Responsabilidades
+## Pipeline de Automação (`pipeline/run_auto.js`)
 
-## 1. Marketing Research Agent
+```
+1. research.js       → research_results.json (Tavily AI)
+2. generate_copy.js  → copy/ (Threads, Instagram, YouTube)
+3. generate_ad.js    → layout.json + ad.html (Claude API)
+4. build_ad_html.js  → ad.html (dark theme SmartOps IA, Bebas Neue)
+5. render_ad.js      → instagram_ad.png (Playwright 1080×1080)
+6. upload_media.js   → media_urls.json (Supabase)
+→ auto_result.json retornado para n8n
+```
 
-Propósito:
-Conduzir pesquisa estruturada de inteligência de mercado usando o **Tavily AI SDK** via um script local Node.js.
-
-Skill File: `skills/marketing-research-agent/SKILL.md`
-
-Responsabilidades:
-- Rodar 5 buscas Tavily direcionadas (tendências, concorrentes, audiência, hooks, tópicos virais)
-- Sintetizar achados em categorias de inteligência de marketing
-- Gerar três deliverables: JSON estruturado, brief em Markdown com diagramas Mermaid, e um report HTML interativo com Chart.js
-
-Output Típico (salvo em `outputs/<task_name>_<date>/`):
-- `research_results.json` — dados estruturados machine-readable consumidos por agentes downstream
-- `research_brief.md` — report Markdown human-readable com gráficos Mermaid
-- `interactive_report.html` — dashboard interativo estilizado com a marca usando Chart.js
+Validação entre etapas via `assertFile()` e `assertJSON()` em cada step.
 
 ---
 
-## 2. Ad Creative Designer
+## Aprovação Telegram (n8n)
 
-Propósito:
-Gerar **criativos de anúncio estáticos** como design JSON estruturado, depois renderizar para PNG via **Playwright**.
+Após o HTTP Request, o n8n envia preview para Telegram com botões ✅ Aprovar / ❌ Rejeitar via `$execution.resumeUrl`. Aprovado → publica no Instagram.
 
-Skill File: `skills/ad-creative-designer/SKILL.md`
-
-Responsabilidades:
-- Selecionar tipo de layout do ad (Product Focus, Split ou Lifestyle) baseado na plataforma e objetivo da campanha
-- Gerar copy de marketing (headline ≤4 palavras, subtext, CTA)
-- Gerar um design JSON spec
-- Gerar `ad.html` + `styles.css` a partir do layout spec
-- Renderizar o HTML para PNG screenshot 1080×1080 usando Playwright (`chromium.launch()`)
-
-Output Típico (salvo em `outputs/<task_name>_<date>/ads/`):
-- `layout.json` — especificação de design
-- `ad.html` + `styles.css` — HTML ad gerado
-- `instagram_ad.png` — screenshot renderizado via Playwright a 1080×1080
+- **Chat ID:** 1349738505
+- **Bot Token:** configurado no n8n
 
 ---
 
-## 3. Video Ad Specialist
+## Design do Ad (SmartOps IA)
 
-Propósito:
-Gerar conceitos de video ad short-form e **estruturas de scene Remotion-ready**.
+| Token | Valor |
+|---|---|
+| Background | `#0A0A0F` |
+| Card | `#0B0F17` |
+| Border | `#1F2937` |
+| Accent Lean | `#7C3AED` (roxo) |
+| Accent Automação | `#10B981` (verde) |
+| Fonte headline | Bebas Neue |
+| Fonte corpo | Inter |
 
-Skill File: `skills/video-ad-specialist/SKILL.md`
-
-Responsabilidades:
-- Gerar um conceito de vídeo (hook, arco emocional, estilo visual, intenção de CTA)
-- Construir um breakdown scene-by-scene (Hook → Product Showcase → Benefit → CTA)
-- Gerar scene JSON para renderização Remotion
-- Referenciar a skill oficial `remotion-best-practices` para guidance técnico
-
-Output Típico (salvo em `outputs/<task_name>_<date>/video/`):
-- Scene JSON com `video_length`, `platform`, e por scene `visual` + `text_overlay`
-- Configuração de rendering para Remotion
+Headline padrão: **"SEU PROCESSO QUEBRADO CUSTA CARO."**
+Pilares: Diagnóstico → Mapeamento → Solução
 
 ---
 
-## 4. Copywriter Agent
+## Knowledge Files
 
-Propósito:
-Transformar output de pesquisa em **copy de marketing platform-native** para Threads, Instagram e YouTube.
+Todos os agentes referenciam arquivos em `knowledge/`:
 
-Skill File: `skills/copywriter-agent/SKILL.md`
-
-Responsabilidades:
-- Selecionar um ângulo de campanha consistente a partir do output de pesquisa
-- Escrever copy platform-specific adaptado em tom, tamanho, CTA e formato de hashtag
-- Gerar JSON estruturado e arquivos de texto individuais por plataforma
-
-Output Típico (salvo em `outputs/<task_name>_<date>/copy/`):
-- `threads_post.txt` — provocativo, casual, ≤500 characters
-- `instagram_caption.txt` — hook + benefício + CTA + 3–5 hashtags
-- `youtube_metadata.json` — title (60–70 chars), description e keyword tags
+| Arquivo | Conteúdo | Usado por |
+|---|---|---|
+| `brand_identity.md` | tom, voz, emojis, CTAs aprovados | todos |
+| `product_campaign.md` | serviços, selling points, ângulos | Marketing Squad |
+| `platform_guidelines.md` | regras Instagram, Threads, YouTube | Marketing Squad |
+| `visual_references.md` | tokens de design, paleta, tipografia | Design, Ad Creative |
+| `content_strategy.md` | estratégia de conteúdo, formatos | Copywriter, Distribution |
 
 ---
 
-## 5. Distribution Agent
-
-Propósito:
-Hospedar mídia no **Supabase**, montar metadata publish-ready, gerar recomendações de agendamento e gate-protect a publicação real.
-
-Skill File: `skills/distribution-agent/SKILL.md`
-
-Responsabilidades:
-- Fazer upload de todos os media files da campanha para o bucket de storage `campaign-uploads` do Supabase
-- Gerar public URLs e salvar em `media_urls.json`
-- Montar metadata final por plataforma a partir dos outputs do Copywriter Agent
-- Gerar recomendações de agendamento baseadas nas tendências da pesquisa
-- Escrever um arquivo advisory `Publish <task_name> <date>.md`
-- Executar posting real via API **somente** quando o usuário referenciar explicitamente o Publish MD file pelo nome
-
-Plataformas:
-- **Instagram** — Graph API (`/media` + `/media_publish`)
-- **YouTube** — YouTube Data API (requer OAuth `YOUTUBE_REFRESH_TOKEN`)
-- **Threads** — Sem API pública; texto do post é incluído no Publish MD para posting manual
-
-Output Típico (salvo em `outputs/<task_name>_<date>/`):
-- `media_urls.json` — URLs públicas do Supabase para toda mídia uploaded
-- `Publish <task_name> <date>.md` — advisory completo com captions, metadata, agendamento e instruções de publicação
-
----
-
-# Knowledge Files
-
-Todos os agentes devem referenciar os seguintes knowledge files localizados no diretório **knowledge/**.
-
-### brand_identity.md
-Define:
-- tom e voz da marca
-- emojis aprovados e o que evitar
-- estilo de CTA e linguagem de CTA aprovada
-- estratégia de hashtags
-
-Usado por:
-- Todos os cinco agentes
-
----
-
-### product_campaign.md
-Define:
-- features e selling points dos produtos
-- referências de visual assets (filenames em `assets/`)
-- ideias e ângulos de campanha
-
-Usado por:
-- Marketing Research Agent
-- Ad Creative Designer
-- Video Ad Specialist
-- Copywriter Agent
-
----
-
-### platform_guidelines.md
-Define best practices e formatting constraints por plataforma para:
-
-- Instagram (feed, Stories, Reels)
-- Threads
-- YouTube (Shorts, vídeo padrão)
-
-Usado por:
-- Ad Creative Designer
-- Copywriter Agent
-- Distribution Agent
-
----
-
-# Assets
-
-`assets/` contém media assets demo usados para testing e rendering:
-- `claude_interface.png`
-- `claude_code_terminal.png`
-- `n8n_workflow.png`
-- `deploy_club_logo.png`
-
----
-
-# Estrutura da Pasta de Output do Pipeline
+## Estrutura de Output do Pipeline
 
 ```
 outputs/<task_name>_<date>/
-├── research_results.json         ← Research Agent
-├── research_brief.md             ← Research Agent
-├── interactive_report.html       ← Research Agent
-├── media_urls.json               ← Distribution Agent
+├── research_results.json
+├── research_brief.md
+├── interactive_report.html
+├── media_urls.json
+├── auto_result.json
 ├── ads/
-│   ├── layout.json               ← Ad Creative Designer
-│   ├── ad.html                   ← Ad Creative Designer
-│   ├── styles.css                ← Ad Creative Designer
-│   └── instagram_ad.png          ← Ad Creative Designer (Playwright render)
-├── video/
-│   └── ad.mp4                    ← Video Ad Specialist (Remotion render)
+│   ├── layout.json
+│   ├── ad.html
+│   ├── styles.css
+│   └── instagram_ad.png
 ├── copy/
-│   ├── instagram_caption.txt     ← Copywriter Agent
-│   ├── threads_post.txt          ← Copywriter Agent
-│   └── youtube_metadata.json     ← Copywriter Agent
+│   ├── instagram_caption.txt
+│   ├── threads_post.txt
+│   └── youtube_metadata.json
+├── video/
+│   └── ad.mp4
 ├── logs/
 │   ├── research_agent.log
 │   ├── ad_creative_designer.log
-│   ├── video_ad_specialist.log
 │   ├── copywriter_agent.log
-│   └── distribution_agent.log
-└── Publish <task_name> <date>.md ← Distribution Agent
+│   ├── distribution_agent.log
+│   └── auto_pipeline.log
+└── Publish <task_name> <date>.md
 ```
 
 ---
 
-# Tech Stack
+## Tech Stack
 
 | Ferramenta | Propósito |
 |---|---|
-| BullMQ + Upstash Redis | Job queuing e worker orchestration |
-| Tavily AI SDK (`@tavily/core`) | Pesquisa de mercado via scripts Node.js |
-| Playwright (`chromium`) | Rendering HTML-to-PNG de ads |
+| BullMQ + Upstash Redis | Job queuing e orchestration |
+| Tavily AI SDK | Pesquisa de mercado |
+| Playwright (chromium) | Rendering HTML→PNG |
 | Remotion | Rendering de video ads |
-| Supabase (`@supabase/supabase-js`) | Hosting de mídia e geração de public URLs |
-| Instagram Graph API | Publicação no Instagram |
-| YouTube Data API | Publicação no YouTube (requer OAuth) |
+| Supabase | Hosting de mídia |
+| Instagram Graph API | Publicação Instagram |
+| YouTube Data API | Publicação YouTube |
+| n8n | Automação e triggers |
+| EasyPanel | Deploy do pipeline server |
+
+---
+
+## Fluxo Executivo Diário
+
+```
+1. Coletar dados (GA4, Ads, CRM, site)
+2. Agentes analisam seus domínios
+3. Cada agente gera insights e recomendações
+4. CEO Advisor consolida e prioriza
+5. Dashboard atualiza
+6. Plano de ação executivo é gerado
+7. n8n executa automações aprovadas
+```
+
+---
+
+## Formato Padrão de Plano de Ação
+
+Todo relatório executivo deve incluir:
+
+```
+TÍTULO:
+PROBLEMA:
+EVIDÊNCIA:
+IMPACTO:
+AÇÃO RECOMENDADA:
+PRIORIDADE: [Alta / Média / Baixa]
+ESFORÇO: [Baixo / Médio / Alto]
+ROI ESPERADO:
+PRAZO:
+RESPONSÁVEL:
+MÉTRICA DE SUCESSO:
+```
