@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0A0A0F">
+<title>SmartOps — Rotina de Conteúdo</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  :root {
+    --bg: #0A0A0F;
+    --card: #0F1318;
+    --border: #1F2937;
+    --lean: #7C3AED;
+    --lean-l: #A78BFA;
+    --green: #10B981;
+    --yellow: #F59E0B;
+    --red: #EF4444;
+    --text: #F9FAFB;
+    --muted: #6B7280;
+    --muted2: #374151;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    padding-bottom: 80px;
+  }
+
+  /* Header */
+  .header {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header h1 { font-size: 17px; font-weight: 700; }
+  .header .date { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .logo { width: 32px; height: 32px; background: var(--lean); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    padding: 12px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    white-space: nowrap;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .tab.active { color: var(--lean-l); border-bottom-color: var(--lean); }
+
+  /* Sections */
+  .section { display: none; padding: 16px; }
+  .section.active { display: block; }
+
+  /* Card */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Checklist */
+  .checklist { list-style: none; }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-box {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+  .checklist li.done .check-box {
+    background: var(--green);
+    border-color: var(--green);
+  }
+  .checklist li.done .check-box::after { content: '✓'; color: #fff; font-size: 13px; font-weight: 700; }
+  .checklist li.done .item-text { text-decoration: line-through; color: var(--muted); }
+  .item-text { font-size: 14px; line-height: 1.4; flex: 1; }
+  .item-time { font-size: 11px; color: var(--lean-l); font-weight: 600; white-space: nowrap; }
+  .item-auto { font-size: 10px; background: rgba(16,185,129,0.15); color: var(--green); padding: 2px 6px; border-radius: 99px; white-space: nowrap; }
+  .item-you  { font-size: 10px; background: rgba(245,158,11,0.15); color: var(--yellow); padding: 2px 6px; border-radius: 99px; white-space: nowrap; }
+
+  /* Day selector */
+  .day-pills {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+    margin-bottom: 16px;
+  }
+  .day-pills::-webkit-scrollbar { display: none; }
+  .day-pill {
+    padding: 6px 14px;
+    border-radius: 99px;
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+    cursor: pointer;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    transition: all 0.2s;
+  }
+  .day-pill.active { background: var(--lean); border-color: var(--lean); color: #fff; }
+  .day-pill.today { border-color: var(--lean-l); color: var(--lean-l); }
+
+  /* Action button */
+  .action-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-decoration: none;
+    color: var(--text);
+  }
+  .action-btn:active { transform: scale(0.98); background: var(--muted2); }
+  .action-btn .icon { font-size: 20px; width: 36px; height: 36px; background: rgba(124,58,237,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .action-btn .label { font-size: 14px; font-weight: 600; }
+  .action-btn .sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .action-btn .arrow { margin-left: auto; color: var(--muted); }
+
+  /* Banner */
+  .banner {
+    background: rgba(124,58,237,0.1);
+    border: 1px solid rgba(124,58,237,0.3);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .banner strong { color: var(--lean-l); }
+
+  /* Time table */
+  .time-row {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    gap: 12px;
+  }
+  .time-row:last-child { border-bottom: none; }
+  .time-badge { font-size: 12px; font-weight: 700; color: var(--lean-l); min-width: 48px; }
+  .time-desc { font-size: 13px; flex: 1; }
+
+  /* Summary cards */
+  .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .summary-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px; text-align: center; }
+  .summary-card .num { font-size: 24px; font-weight: 800; color: var(--lean-l); }
+  .summary-card .lbl { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  /* Progress bar */
+  .progress-bar { background: var(--border); border-radius: 99px; height: 6px; margin-top: 8px; }
+  .progress-fill { background: var(--green); border-radius: 99px; height: 6px; transition: width 0.3s; }
+
+  /* Telegram command */
+  .cmd-box {
+    background: #0D1117;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    font-family: monospace;
+    font-size: 13px;
+    color: #58A6FF;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .copy-btn { background: var(--border); border: none; color: var(--text); padding: 4px 10px; border-radius: 6px; font-size: 11px; cursor: pointer; }
+
+  /* Bottom nav */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    display: flex;
+    z-index: 100;
+  }
+  .nav-btn {
+    flex: 1;
+    padding: 12px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  .nav-btn.active { color: var(--lean-l); }
+  .nav-btn .nav-icon { font-size: 20px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="header h1" style="font-size:17px;font-weight:700">📱 Rotina SmartOps</div>
+    <div class="date" id="header-date"></div>
+  </div>
+  <div class="logo">⚡</div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" onclick="switchTab('hoje')">Hoje</div>
+  <div class="tab" onclick="switchTab('semana')">Semana</div>
+  <div class="tab" onclick="switchTab('acoes')">Ações Rápidas</div>
+  <div class="tab" onclick="switchTab('resumo')">Resumo</div>
+</div>
+
+<!-- ── HOJE ── -->
+<div class="section active" id="tab-hoje">
+
+  <div class="banner">
+    ⚡ <strong>Automático às 07:00</strong> — post gerado e enviado no Telegram.<br>
+    Sua missão: aprovar em 2 minutos pela manhã.
+  </div>
+
+  <!-- Dia da semana dinâmico -->
+  <div class="day-pills" id="day-pills"></div>
+
+  <!-- Checklist do dia -->
+  <div class="card">
+    <div class="card-title" id="day-title">☀️ Checklist do Dia</div>
+    <ul class="checklist" id="daily-checklist"></ul>
+  </div>
+
+  <!-- Progress -->
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+      <span style="font-size:13px;font-weight:600">Progresso do dia</span>
+      <span style="font-size:13px;color:var(--lean-l)" id="progress-text">0/0</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+
+</div>
+
+<!-- ── SEMANA ── -->
+<div class="section" id="tab-semana">
+
+  <div class="summary-grid">
+    <div class="summary-card"><div class="num">~70</div><div class="lbl">min/semana</div></div>
+    <div class="summary-card"><div class="num">7</div><div class="lbl">posts/semana</div></div>
+    <div class="summary-card"><div class="num">1</div><div class="lbl">artigo/semana</div></div>
+    <div class="summary-card"><div class="num">1</div><div class="lbl">carrossel/semana</div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📅 Segunda — 20 min</div>
+    <div class="time-row"><span class="time-badge">07:00</span><span class="time-desc">Post gerado automaticamente</span><span class="item-auto">Auto</span></div>
+    <div class="time-row"><span class="time-badge">08:00</span><span class="time-desc">Aprovar post na planilha</span><span class="item-you">Você</span></div>
+    <div class="time-row"><span class="time-badge">08:30</span><span class="time-desc">Publicar artigo novo no blog</span><span class="item-you">Você</span></div>
+    <div class="time-row"><span class="time-badge">08:31</span><span class="time-desc">Mandar <code>blog: URL</code> no Telegram</span><span class="item-you">Você</span></div>
+    <div class="time-row"><span class="time-badge">09:30</span><span class="time-desc">Aprovar post do blog</span><span class="item-you">Você</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📅 Terça — 3 min</div>
+    <div class="time-row"><span class="time-badge">07:00</span><span class="time-desc">Post gerado automaticamente</span><span class="item-auto">Auto</span></div>
+    <div class="time-row"><span class="time-badge">08:00</span><span class="time-desc">Aprovar post na planilha</span><span class="item-you">Você</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📅 Quarta — 10 min 🎠 Carrossel</div>
+    <div class="time-row"><span class="time-badge">07:00</span><span class="time-desc">Post gerado automaticamente</span><span class="item-auto">Auto</span></div>
+    <div class="time-row"><span class="time-badge">08:00</span><span class="time-desc">Aprovar post na planilha</span><span class="item-you">Você</span></div>
+    <div class="time-row"><span class="time-badge">08:30</span><span class="time-desc">Criar carrossel via Telegram</span><span class="item-you">Você</span></div>
+    <div class="time-row"><span class="time-badge">09:30</span><span class="time-desc">Aprovar carrossel na planilha</span><span class="item-you">Você</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📅 Quinta — 3 min</div>
+    <div class="time-row"><span class="time-badge">07:00</span><span class="time-desc">Post gerado automaticamente</span><span class="item-auto">Auto</span></div>
+    <div class="time-row"><span class="time-badge">08:00</span><span class="time-desc">Aprovar post na planilha</span><span class="item-you">Você</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📅 Sexta — 15 min</div>
+    <div class="time-row"><span class="time-badge">07:00</span><span class="time-desc">Post gerado automaticamente</span><span class="item-auto">Auto</span></div>
+    <div class="time-row"><span class="time-badge">08:00</span><span class="time-desc">Aprovar post na planilha</span><span class="item-you">Você</span></div>
+    <div class="time-row"><span class="time-badge">18:00</span><span class="time-desc">Responder comentários da semana</span><span class="item-you">Você</span></div>
+    <div class="time-row"><span class="time-badge">18:30</span><span class="time-desc">Revisar resultado da semana</span><span class="item-you">Você</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📅 Sábado — 3 min</div>
+    <div class="time-row"><span class="time-badge">07:00</span><span class="time-desc">Post gerado automaticamente</span><span class="item-auto">Auto</span></div>
+    <div class="time-row"><span class="time-badge">09:00</span><span class="time-desc">Aprovar post (bastidores)</span><span class="item-you">Você</span></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📅 Domingo — 15 min</div>
+    <div class="time-row"><span class="time-badge">07:00</span><span class="time-desc">Post gerado automaticamente</span><span class="item-auto">Auto</span></div>
+    <div class="time-row"><span class="time-badge">09:00</span><span class="time-desc">Aprovar post</span><span class="item-you">Você</span></div>
+    <div class="time-row"><span class="time-badge">18:00</span><span class="time-desc">Aprovar posts da semana toda de uma vez</span><span class="item-you">Você</span></div>
+  </div>
+
+</div>
+
+<!-- ── AÇÕES RÁPIDAS ── -->
+<div class="section" id="tab-acoes">
+
+  <div class="card">
+    <div class="card-title">📋 Planilha de controle</div>
+    <a class="action-btn" href="https://docs.google.com/spreadsheets" target="_blank">
+      <div class="icon">📊</div>
+      <div><div class="label">CENTRAL_MARKETING_IA</div><div class="sub">Aba: post → mudar status</div></div>
+      <div class="arrow">›</div>
+    </a>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:4px">
+      <div style="background:rgba(107,114,128,0.15);border-radius:8px;padding:8px;text-align:center;font-size:12px"><span style="color:var(--muted)">rascunho</span><br><span style="font-size:10px;color:var(--muted)">aguardando</span></div>
+      <div style="background:rgba(16,185,129,0.15);border-radius:8px;padding:8px;text-align:center;font-size:12px"><span style="color:var(--green)">aprovado</span><br><span style="font-size:10px;color:var(--muted)">vai publicar</span></div>
+      <div style="background:rgba(124,58,237,0.15);border-radius:8px;padding:8px;text-align:center;font-size:12px"><span style="color:var(--lean-l)">publicado</span><br><span style="font-size:10px;color:var(--muted)">no ar</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">✉️ Comandos Telegram</div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Envie no canal do bot para criar conteúdo:</p>
+
+    <p style="font-size:12px;font-weight:600;margin-bottom:4px">Artigo do blog → post Instagram:</p>
+    <div class="cmd-box">
+      blog: https://seusite.com/artigo
+      <button class="copy-btn" onclick="copyCmd(this, 'blog: ')">Copiar</button>
+    </div>
+
+    <p style="font-size:12px;font-weight:600;margin:12px 0 4px">Criar carrossel:</p>
+    <div class="cmd-box">
+      tema: Lean Six Sigma categoria: Lean
+      <button class="copy-btn" onclick="copyCmd(this, 'tema: SEU TEMA categoria: Lean')">Copiar</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📅 Mensal — 1 clique</div>
+    <div class="action-btn" style="cursor:pointer" onclick="alert('Acesse o n8n e rode o workflow: Calendário 30 Dias')">
+      <div class="icon">🗓️</div>
+      <div><div class="label">Calendário 30 Dias</div><div class="sub">Gera 30 posts automaticamente</div></div>
+      <div class="arrow">›</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">🔗 Links úteis</div>
+    <a class="action-btn" href="https://dados.sumjyb.easypanel.host" target="_blank">
+      <div class="icon">📝</div>
+      <div><div class="label">Adicionar Lead / Cliente</div><div class="sub">dados.sumjyb.easypanel.host</div></div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="action-btn" href="https://n8n-smartops-dashboard.sumjyb.easypanel.host" target="_blank">
+      <div class="icon">📊</div>
+      <div><div class="label">Dashboard SmartOps</div><div class="sub">KPIs, agentes, execuções</div></div>
+      <div class="arrow">›</div>
+    </a>
+    <a class="action-btn" href="https://n8n-n8nn.sumjyb.easypanel.host" target="_blank">
+      <div class="icon">⚙️</div>
+      <div><div class="label">n8n — Automações</div><div class="sub">Workflows e triggers</div></div>
+      <div class="arrow">›</div>
+    </a>
+  </div>
+
+</div>
+
+<!-- ── RESUMO ── -->
+<div class="section" id="tab-resumo">
+
+  <div class="banner">
+    🤖 <strong>O sistema faz 90% do trabalho.</strong><br>
+    Você só aprova e escreve 1 artigo por semana.
+  </div>
+
+  <div class="card">
+    <div class="card-title">⏱️ Tempo por dia</div>
+    <div class="time-row"><span class="time-badge">Seg</span><span class="time-desc">Artigo + 2 aprovações</span><span style="font-size:12px;font-weight:700;color:var(--yellow)">~20 min</span></div>
+    <div class="time-row"><span class="time-badge">Ter</span><span class="time-desc">Só aprovar post</span><span style="font-size:12px;font-weight:700;color:var(--green)">~3 min</span></div>
+    <div class="time-row"><span class="time-badge">Qua</span><span class="time-desc">Post + carrossel</span><span style="font-size:12px;font-weight:700;color:var(--yellow)">~10 min</span></div>
+    <div class="time-row"><span class="time-badge">Qui</span><span class="time-desc">Só aprovar post</span><span style="font-size:12px;font-weight:700;color:var(--green)">~3 min</span></div>
+    <div class="time-row"><span class="time-badge">Sex</span><span class="time-desc">Post + comentários + revisão</span><span style="font-size:12px;font-weight:700;color:var(--yellow)">~15 min</span></div>
+    <div class="time-row"><span class="time-badge">Sáb</span><span class="time-desc">Só aprovar post</span><span style="font-size:12px;font-weight:700;color:var(--green)">~3 min</span></div>
+    <div class="time-row"><span class="time-badge">Dom</span><span class="time-desc">Aprovar semana toda</span><span style="font-size:12px;font-weight:700;color:var(--yellow)">~15 min</span></div>
+    <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-weight:700">
+      <span>Total semanal</span>
+      <span style="color:var(--lean-l)">~70 min</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">📆 Tarefas mensais</div>
+    <div class="time-row"><span class="time-badge">Dia 1</span><span class="time-desc">Último dia → rodar Calendário 30 Dias</span></div>
+    <div class="time-row"><span class="time-badge"></span><span class="time-desc">Revisar métricas do mês na planilha</span></div>
+    <div class="time-row"><span class="time-badge"></span><span class="time-desc">Atualizar temas na aba config se necessário</span></div>
+  </div>
+
+</div>
+
+<!-- Bottom nav -->
+<div class="bottom-nav">
+  <div class="nav-btn active" id="nav-hoje" onclick="switchTab('hoje')"><div class="nav-icon">☀️</div>Hoje</div>
+  <div class="nav-btn" id="nav-semana" onclick="switchTab('semana')"><div class="nav-icon">📅</div>Semana</div>
+  <div class="nav-btn" id="nav-acoes" onclick="switchTab('acoes')"><div class="nav-icon">⚡</div>Ações</div>
+  <div class="nav-btn" id="nav-resumo" onclick="switchTab('resumo')"><div class="nav-icon">📊</div>Resumo</div>
+</div>
+
+<script>
+const DAYS = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
+const DAYS_SHORT = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+
+const DAILY_TASKS = {
+  0: [ // Domingo
+    { time:'07:00', text:'Post gerado automaticamente', auto:true },
+    { time:'09:00', text:'Aprovar post na planilha', auto:false },
+    { time:'18:00', text:'Aprovar posts da semana toda de uma vez', auto:false },
+  ],
+  1: [ // Segunda
+    { time:'07:00', text:'Post gerado automaticamente', auto:true },
+    { time:'08:00', text:'Aprovar post na planilha', auto:false },
+    { time:'08:30', text:'Publicar artigo novo no blog', auto:false },
+    { time:'08:31', text:'Mandar blog: URL no Telegram', auto:false },
+    { time:'09:30', text:'Aprovar post do blog na planilha', auto:false },
+  ],
+  2: [ // Terça
+    { time:'07:00', text:'Post gerado automaticamente', auto:true },
+    { time:'08:00', text:'Aprovar post na planilha', auto:false },
+  ],
+  3: [ // Quarta
+    { time:'07:00', text:'Post gerado automaticamente', auto:true },
+    { time:'08:00', text:'Aprovar post na planilha', auto:false },
+    { time:'08:30', text:'Criar carrossel — mandar no Telegram: tema: X categoria: Y', auto:false },
+    { time:'09:30', text:'Aprovar carrossel na planilha', auto:false },
+  ],
+  4: [ // Quinta
+    { time:'07:00', text:'Post gerado automaticamente', auto:true },
+    { time:'08:00', text:'Aprovar post na planilha', auto:false },
+  ],
+  5: [ // Sexta
+    { time:'07:00', text:'Post gerado automaticamente', auto:true },
+    { time:'08:00', text:'Aprovar post na planilha', auto:false },
+    { time:'18:00', text:'Responder comentários da semana', auto:false },
+    { time:'18:30', text:'Revisar resultado da semana na planilha', auto:false },
+  ],
+  6: [ // Sábado
+    { time:'07:00', text:'Post gerado automaticamente', auto:true },
+    { time:'09:00', text:'Aprovar post (bastidores)', auto:false },
+  ],
+};
+
+const THEMES = ['domingo — Reflexão','segunda — Organização','terça — Kaizen','quarta — Automação & IA','quinta — Lean Six Sigma','sexta — Vendas','sábado — Bastidores'];
+
+let currentDay = new Date().getDay();
+let checked = JSON.parse(localStorage.getItem('smartops_checks_' + todayKey()) || '{}');
+
+function todayKey() {
+  return new Date().toISOString().split('T')[0];
+}
+
+function saveChecks() {
+  localStorage.setItem('smartops_checks_' + todayKey(), JSON.stringify(checked));
+}
+
+function renderDayPills() {
+  const today = new Date().getDay();
+  const pills = document.getElementById('day-pills');
+  pills.innerHTML = DAYS_SHORT.map((d, i) => {
+    const cls = i === currentDay ? 'day-pill active' : i === today ? 'day-pill today' : 'day-pill';
+    return `<div class="${cls}" onclick="selectDay(${i})">${d}${i === today ? ' ●' : ''}</div>`;
+  }).join('');
+}
+
+function selectDay(d) {
+  currentDay = d;
+  renderDayPills();
+  renderChecklist();
+}
+
+function renderChecklist() {
+  const tasks = DAILY_TASKS[currentDay] || [];
+  const title = document.getElementById('day-title');
+  const list = document.getElementById('daily-checklist');
+  title.textContent = `${DAYS[currentDay]} — ${THEMES[currentDay].split('—')[1]?.trim() || ''}`;
+  list.innerHTML = tasks.map((t, i) => {
+    const id = `${currentDay}_${i}`;
+    const done = checked[id] ? 'done' : '';
+    const badge = t.auto
+      ? '<span class="item-auto">Auto</span>'
+      : '<span class="item-you">Você</span>';
+    return `<li class="${done}" onclick="toggleCheck('${id}', this)">
+      <div class="check-box"></div>
+      <div class="item-text">${t.text}</div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">
+        <span class="item-time">${t.time}</span>
+        ${badge}
+      </div>
+    </li>`;
+  }).join('');
+  updateProgress();
+}
+
+function toggleCheck(id, el) {
+  if (checked[id]) {
+    delete checked[id];
+    el.classList.remove('done');
+  } else {
+    checked[id] = true;
+    el.classList.add('done');
+  }
+  saveChecks();
+  updateProgress();
+}
+
+function updateProgress() {
+  const tasks = DAILY_TASKS[currentDay] || [];
+  const total = tasks.length;
+  const done = tasks.filter((_, i) => checked[`${currentDay}_${i}`]).length;
+  document.getElementById('progress-text').textContent = `${done}/${total}`;
+  document.getElementById('progress-fill').style.width = total ? `${(done/total)*100}%` : '0%';
+}
+
+function switchTab(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(n => n.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  document.querySelector(`[onclick="switchTab('${id}')"]`).classList.add('active');
+  document.getElementById('nav-' + id)?.classList.add('active');
+}
+
+function copyCmd(btn, text) {
+  navigator.clipboard.writeText(text).catch(() => {});
+  btn.textContent = 'Copiado!';
+  setTimeout(() => btn.textContent = 'Copiar', 2000);
+}
+
+// Header date
+const now = new Date();
+document.getElementById('header-date').textContent =
+  now.toLocaleDateString('pt-BR', { weekday:'long', day:'numeric', month:'long' });
+
+renderDayPills();
+renderChecklist();
+</script>
+</body>
+</html>
