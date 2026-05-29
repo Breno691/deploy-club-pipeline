@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; height: 1080px; overflow: hidden; background: #05070B; }
+
+.ad {
+  width: 1080px; height: 1080px;
+  background: #05070B;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+
+.grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(31,41,55,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31,41,55,0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Top bar */
+.topbar {
+  flex-shrink: 0;
+  height: 48px;
+  background: #0B0F17;
+  border-bottom: 1px solid #1F2937;
+  display: flex; align-items: center;
+  padding: 0 24px; gap: 8px;
+}
+.tb-dot { width: 11px; height: 11px; border-radius: 50%; }
+.dot-r { background: #FF5F57; }
+.dot-y { background: #FFBD2E; }
+.dot-g { background: #28CA41; }
+.tb-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: #374151; margin-left: 6px;
+}
+.tb-spacer { flex: 1; }
+.tb-badge {
+  background: rgba(0,255,136,0.07);
+  border: 1px solid rgba(0,255,136,0.18);
+  border-radius: 20px; padding: 3px 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px; color: #00FF88; font-weight: 600;
+}
+
+/* Content flex container */
+.content {
+  flex: 1; display: flex; flex-direction: column;
+  padding: 20px 24px 20px; gap: 14px;
+  min-height: 0;
+}
+
+/* Headline */
+.headline {
+  font-size: 40px; font-weight: 800;
+  color: #FFFFFF; line-height: 1.12; letter-spacing: -0.5px;
+  flex-shrink: 0;
+}
+.headline span { color: #00FF88; }
+.sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: #374151; margin-top: 4px;
+}
+
+/* Metrics row */
+.metrics { display: flex; gap: 12px; flex-shrink: 0; }
+.mc {
+  flex: 1; background: #0B0F17;
+  border: 1px solid #1F2937; border-top: 2px solid #1F2937;
+  border-radius: 10px; padding: 16px 18px;
+}
+.mc.hi { border-top-color: #00FF88; background: rgba(0,255,136,0.025); }
+.mc-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: #374151;
+  text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 6px;
+}
+.mc-val {
+  font-size: 44px; font-weight: 800;
+  color: #FFFFFF; line-height: 1; letter-spacing: -1px;
+}
+.mc.hi .mc-val { color: #00FF88; }
+.mc-tag {
+  font-size: 11px; font-weight: 600; margin-top: 4px;
+  display: flex; align-items: center; gap: 4px;
+}
+.mc-tag.red { color: #FF3B3B; }
+.mc-tag.green { color: #00FF88; }
+.mc-note { font-size: 11px; color: #374151; margin-top: 2px; }
+
+/* Main dashboard 2-col */
+.dash { display: flex; gap: 12px; flex: 1; min-height: 0; }
+
+.panel {
+  flex: 1; background: #0B0F17;
+  border: 1px solid #1F2937; border-radius: 10px;
+  padding: 16px 18px; display: flex; flex-direction: column;
+  min-height: 0;
+}
+.panel-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: #374151;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  margin-bottom: 14px; flex-shrink: 0;
+}
+
+/* Symptom list */
+.symp-list { display: flex; flex-direction: column; gap: 10px; flex: 1; justify-content: space-between; }
+.symp-item { display: flex; align-items: center; gap: 10px; }
+.symp-icon {
+  width: 22px; height: 22px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; flex-shrink: 0;
+}
+.si-r { background: rgba(255,59,59,0.1); color: #FF3B3B; border: 1px solid rgba(255,59,59,0.2); }
+.si-y { background: rgba(250,204,21,0.08); color: #FACC15; border: 1px solid rgba(250,204,21,0.2); }
+.si-g { background: rgba(0,255,136,0.08); color: #00FF88; border: 1px solid rgba(0,255,136,0.2); }
+.symp-text { font-size: 13px; font-weight: 500; color: #9CA3AF; flex: 1; }
+.symp-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; padding: 2px 8px; border-radius: 4px; font-weight: 600;
+}
+.sb-r { background: rgba(255,59,59,0.1); color: #FF3B3B; }
+.sb-y { background: rgba(250,204,21,0.08); color: #FACC15; }
+.sb-g { background: rgba(0,255,136,0.08); color: #00FF88; }
+
+/* Timeline */
+.tl { display: flex; flex-direction: column; gap: 0; flex: 1; justify-content: space-between; }
+.tl-item {
+  display: flex; gap: 12px;
+  padding-bottom: 12px; position: relative;
+}
+.tl-item:last-child { padding-bottom: 0; }
+.tl-item:not(:last-child)::after {
+  content: ''; position: absolute;
+  left: 9px; top: 22px; bottom: 0;
+  width: 1px; background: #1F2937;
+}
+.tl-dot {
+  width: 18px; height: 18px; border-radius: 50%;
+  flex-shrink: 0; margin-top: 3px;
+  display: flex; align-items: center; justify-content: center; font-size: 8px;
+}
+.tl-done { background: #00FF88; color: #05070B; }
+.tl-now { background: rgba(0,255,136,0.12); border: 2px solid #00FF88; }
+.tl-pend { background: #111827; border: 1px solid #1F2937; }
+.tl-info strong { font-size: 13px; font-weight: 600; color: #E5E7EB; display: block; margin-bottom: 2px; }
+.tl-info p { font-size: 12px; color: #4B5563; }
+.tl-time { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #1F2937; margin-top: 2px; }
+
+/* Footer */
+.footer { display: flex; gap: 12px; align-items: stretch; flex-shrink: 0; }
+.brand-row {
+  flex: 1; background: #0B0F17; border: 1px solid #1F2937;
+  border-radius: 10px; padding: 14px 18px;
+  display: flex; align-items: center; gap: 10px;
+}
+.br-dot { width: 9px; height: 9px; border-radius: 50%; background: #00FF88; box-shadow: 0 0 10px #00FF88; }
+.br-name { font-size: 14px; font-weight: 700; color: #FFFFFF; }
+.br-sub { font-size: 11px; color: #374151; margin-top: 1px; }
+.cta-btn {
+  background: #00FF88; border-radius: 10px;
+  padding: 14px 32px; display: flex; align-items: center;
+  font-size: 15px; font-weight: 700; color: #05070B;
+  box-shadow: 0 0 36px rgba(0,255,136,0.28);
+  white-space: nowrap; gap: 6px;
+}
+</style>
+</head>
+<body>
+<div class="ad">
+  <div class="grid"></div>
+
+  <div class="topbar">
+    <div class="tb-dot dot-r"></div>
+    <div class="tb-dot dot-y"></div>
+    <div class="tb-dot dot-g"></div>
+    <span class="tb-title">smartops — diagnóstico operacional</span>
+    <div class="tb-spacer"></div>
+    <div class="tb-badge">● LIVE</div>
+  </div>
+
+  <div class="content">
+    <div>
+      <div class="headline">Seu processo está te custando<br><span>dinheiro que você não vê.</span></div>
+      <div class="sub">// diagnóstico gratuito · 30 minutos · smartops-ia.com.br</div>
+    </div>
+
+    <div class="metrics">
+      <div class="mc">
+        <div class="mc-lbl">Retrabalho</div>
+        <div class="mc-val">340h</div>
+        <div class="mc-tag red">↑ por mês</div>
+        <div class="mc-note">desperdiçadas pela operação</div>
+      </div>
+      <div class="mc">
+        <div class="mc-lbl">Após mapeamento</div>
+        <div class="mc-val">4 sem</div>
+        <div class="mc-tag green">✓ resultado visível</div>
+        <div class="mc-note">quick wins implementados</div>
+      </div>
+      <div class="mc hi">
+        <div class="mc-lbl">Redução de custo</div>
+        <div class="mc-val">−30%</div>
+        <div class="mc-tag green">↓ custo operacional</div>
+        <div class="mc-note">média dos projetos</div>
+      </div>
+    </div>
+
+    <div class="dash">
+      <div class="panel">
+        <div class="panel-title">Sintomas identificados</div>
+        <div class="symp-list">
+          <div class="symp-item">
+            <div class="symp-icon si-r">✗</div>
+            <div class="symp-text">Equipe apagando incêndio todo dia</div>
+            <div class="symp-badge sb-r">crítico</div>
+          </div>
+          <div class="symp-item">
+            <div class="symp-icon si-r">✗</div>
+            <div class="symp-text">Retrabalho nos mesmos pontos</div>
+            <div class="symp-badge sb-r">crítico</div>
+          </div>
+          <div class="symp-item">
+            <div class="symp-icon si-y">⚠</div>
+            <div class="symp-text">Tudo precisa passar pelo dono</div>
+            <div class="symp-badge sb-y">atenção</div>
+          </div>
+          <div class="symp-item">
+            <div class="symp-icon si-y">⚠</div>
+            <div class="symp-text">WhatsApp virou caos total</div>
+            <div class="symp-badge sb-y">atenção</div>
+          </div>
+          <div class="symp-item">
+            <div class="symp-icon si-y">⚠</div>
+            <div class="symp-text">Funcionário falta e tudo para</div>
+            <div class="symp-badge sb-y">atenção</div>
+          </div>
+          <div class="symp-item">
+            <div class="symp-icon si-g">✓</div>
+            <div class="symp-text">Diagnóstico agendado</div>
+            <div class="symp-badge sb-g">ok</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">Método aplicado</div>
+        <div class="tl">
+          <div class="tl-item">
+            <div class="tl-dot tl-done">✓</div>
+            <div class="tl-info">
+              <strong>Diagnóstico gratuito</strong>
+              <p>Mapeamos o problema real da operação</p>
+              <div class="tl-time">30 min · sem compromisso</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot tl-done">✓</div>
+            <div class="tl-info">
+              <strong>Mapeamento de processo</strong>
+              <p>Causa raiz identificada com dados reais</p>
+              <div class="tl-time">semana 1–2</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot tl-now"></div>
+            <div class="tl-info">
+              <strong>Quick wins</strong>
+              <p>Primeiros resultados visíveis</p>
+              <div class="tl-time">semana 2–4</div>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot tl-pend"></div>
+            <div class="tl-info">
+              <strong>Automação com IA</strong>
+              <p>Elimina tarefas repetitivas definitivamente</p>
+              <div class="tl-time">semana 4–8</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="brand-row">
+        <div class="br-dot"></div>
+        <div>
+          <div class="br-name">SmartOps IA</div>
+          <div class="br-sub">Consultoria · Lean + Automação com IA · smartops-ia.com.br</div>
+        </div>
+      </div>
+      <div class="cta-btn">Diagnóstico gratuito →</div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

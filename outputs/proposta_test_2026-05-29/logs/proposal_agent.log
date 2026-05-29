@@ -1,0 +1,9 @@
+[2026-05-29T13:34:38.831Z] proposal_agent started
+[2026-05-29T13:34:38.839Z] Step 1: Analyzing meeting notes...
+[2026-05-29T13:34:59.311Z] Analysis complete. Tier: diagnostico | Score: 50
+[2026-05-29T13:34:59.312Z] Step 2: Generating proposal...
+[2026-05-29T13:35:56.777Z] Proposal markdown generated
+[2026-05-29T13:35:56.778Z] Step 3: Generating executive summary...
+[2026-05-29T13:36:10.846Z] Executive summary generated
+[2026-05-29T13:36:10.853Z] All outputs saved ✓
+[2026-05-29T13:36:10.855Z] proposal_agent complete ✓

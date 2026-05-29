@@ -1,0 +1,18 @@
+{
+  "date": "2026-05-29",
+  "mode": "daily",
+  "sources": [
+    "smoke_test_2026-05-28/research_brief"
+  ],
+  "decisions": [
+    {
+      "id": 1,
+      "titulo": "Revisar briefing manualmente",
+      "prioridade": "alta",
+      "esforco": "baixo",
+      "acao": "Ler o executive_action_plan.md",
+      "prazo": "hoje",
+      "score": 90
+    }
+  ]
+}

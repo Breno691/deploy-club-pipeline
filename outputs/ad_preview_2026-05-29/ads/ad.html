@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; height: 1080px; overflow: hidden; background: #05070B; }
+
+.ad-container {
+  position: relative;
+  width: 1080px;
+  height: 1080px;
+  background: #05070B;
+  overflow: hidden;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Grid background */
+.grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(31,41,55,0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31,41,55,0.12) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Radial glow */
+.glow-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 500px;
+  background: radial-gradient(ellipse, rgba(0,255,136,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* TOP SEAL */
+.seal {
+  position: absolute;
+  left: 64px;
+  top: 52px;
+  border: 1px solid #1F2937;
+  border-radius: 100px;
+  padding: 6px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #71717A;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* LOGO */
+.logo {
+  position: absolute;
+  left: 64px;
+  top: 98px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #00FF88;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.logo-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00FF88;
+  box-shadow: 0 0 8px #00FF88;
+}
+
+/* HEADLINE */
+.headline {
+  position: absolute;
+  left: 64px;
+  top: 148px;
+  font-size: 82px;
+  font-weight: 900;
+  color: #FFFFFF;
+  line-height: 1.0;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  max-width: 900px;
+}
+.headline span {
+  color: #00FF88;
+}
+
+/* SUBTEXT */
+.subtext {
+  position: absolute;
+  left: 64px;
+  top: 408px;
+  font-size: 19px;
+  font-weight: 400;
+  color: #A1A1AA;
+  line-height: 1.5;
+  max-width: 620px;
+}
+
+/* TERMINAL CARD */
+.terminal-card {
+  position: absolute;
+  left: 100px;
+  top: 490px;
+  width: 880px;
+  height: 268px;
+  background: #0B0F17;
+  border: 1px solid #1F2937;
+  border-radius: 16px;
+  box-shadow: 0 0 60px rgba(0,255,136,0.07), 0 0 0 1px rgba(0,255,136,0.04);
+  overflow: hidden;
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 20px;
+  border-bottom: 1px solid #1F2937;
+  background: #111827;
+}
+.dot-r { width: 12px; height: 12px; border-radius: 50%; background: #FF5F57; }
+.dot-y { width: 12px; height: 12px; border-radius: 50%; background: #FFBD2E; }
+.dot-g { width: 12px; height: 12px; border-radius: 50%; background: #28CA41; }
+.terminal-title {
+  margin-left: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: #4B5563;
+  letter-spacing: 0.5px;
+}
+
+.terminal-body {
+  display: flex;
+  padding: 20px 24px;
+  gap: 0;
+  height: calc(100% - 45px);
+}
+
+.terminal-lines {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.t-line {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 1.9;
+  color: #71717A;
+}
+.t-line.prompt { color: #4B5563; }
+.t-line.success { color: #00FF88; }
+.t-line.money { color: #FACC15; font-weight: 700; font-size: 14px; }
+
+.terminal-sidebar {
+  width: 180px;
+  border-left: 1px solid #1F2937;
+  padding: 0 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+}
+.sidebar-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+.pill {
+  display: inline-block;
+  background: rgba(0,255,136,0.06);
+  border: 1px solid rgba(0,255,136,0.15);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #00FF88;
+}
+
+/* PRICE BLOCK */
+.price-block {
+  position: absolute;
+  left: 64px;
+  top: 816px;
+}
+.price-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #71717A;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+}
+.price-value {
+  font-size: 56px;
+  font-weight: 900;
+  color: #FACC15;
+  line-height: 1;
+  letter-spacing: -2px;
+}
+.price-detail {
+  font-size: 14px;
+  color: #A1A1AA;
+  line-height: 1.4;
+}
+
+/* CTA */
+.cta-btn {
+  position: absolute;
+  right: 64px;
+  top: 816px;
+  background: #00FF88;
+  color: #05070B;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 18px 36px;
+  border-radius: 12px;
+  box-shadow: 0 0 32px rgba(0,255,136,0.28);
+  letter-spacing: 0.3px;
+}
+
+/* DIVIDER */
+.divider {
+  position: absolute;
+  left: 64px;
+  right: 64px;
+  top: 796px;
+  height: 1px;
+  background: #1F2937;
+}
+
+/* DOMAIN */
+.domain {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #2D3748;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+<div class="ad-container">
+  <div class="grid-bg"></div>
+  <div class="glow-center"></div>
+
+  <div class="seal">Para Builders de IA</div>
+
+  <div class="logo">
+    <div class="logo-dot"></div>
+    Deploy Club
+  </div>
+
+  <div class="headline">Pare de criar<br>agentes de IA<br><span>do zero.</span></div>
+
+  <div class="subtext">88 templates prontos para freelancers e agências<br>entregarem automações reais com Claude Code e n8n.</div>
+
+  <div class="terminal-card">
+    <div class="terminal-header">
+      <div class="dot-r"></div>
+      <div class="dot-y"></div>
+      <div class="dot-g"></div>
+      <span class="terminal-title">deploy-agent — terminal</span>
+    </div>
+    <div class="terminal-body">
+      <div class="terminal-lines">
+        <div class="t-line prompt">$ deploy-agent --template sdr-qualificador</div>
+        <div class="t-line success">✓ Agente carregado em 3.2s</div>
+        <div class="t-line success">✓ Lead qualifier: ATIVO</div>
+        <div class="t-line success">✓ Proposta gerada em 42s</div>
+        <div class="t-line success">✓ Workflow n8n: CONECTADO</div>
+        <div class="t-line money">→ Contrato: R$ 4.800 registrado_</div>
+      </div>
+      <div class="terminal-sidebar">
+        <div class="sidebar-label">Incluído</div>
+        <div class="pill">88 templates</div>
+        <div class="pill">Claude Code</div>
+        <div class="pill">n8n</div>
+        <div class="pill">Agentes prontos</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="price-block">
+    <div class="price-label">Kit completo</div>
+    <div class="price-row">
+      <div class="price-value">R$47</div>
+      <div class="price-detail">88 templates<br>prontos para uso</div>
+    </div>
+  </div>
+
+  <div class="cta-btn">Acessar por R$47 →</div>
+
+  <div class="domain">deployclub.com.br</div>
+</div>
+</body>
+</html>

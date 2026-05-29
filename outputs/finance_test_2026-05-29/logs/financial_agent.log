@@ -1,0 +1,7 @@
+[2026-05-29T13:33:37.962Z] financial_agent started
+[2026-05-29T13:33:37.965Z] Data loaded: defaults (zero)
+[2026-05-29T13:33:37.996Z] Metrics: receita=0, margem_bruta=0%, saude=critico
+[2026-05-29T13:33:37.999Z] Generating AI analysis...
+[2026-05-29T13:34:03.743Z] AI analysis complete
+[2026-05-29T13:34:03.751Z] All outputs saved ✓
+[2026-05-29T13:34:03.753Z] financial_agent complete ✓

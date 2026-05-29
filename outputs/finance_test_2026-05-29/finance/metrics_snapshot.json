@@ -1,0 +1,54 @@
+{
+  "date": "2026-05-29",
+  "receita_total": 0,
+  "custo_total": 0,
+  "custo_entrega": 0,
+  "lucro_bruto": 0,
+  "lucro_liquido": 0,
+  "margem_bruta": 0,
+  "margem_liquida": 0,
+  "cac": 0,
+  "ltv": 36000,
+  "ltv_cac_ratio": 0,
+  "pipeline_esperado": 0,
+  "forecast": {
+    "d30": 0,
+    "d60": 0,
+    "d90": 0
+  },
+  "meses_cobertura": 0,
+  "saude": "critico",
+  "data": {
+    "receita": {
+      "projetos_ativos": 0,
+      "novos_fechamentos": 0,
+      "parceria_mensal": 0,
+      "outros": 0
+    },
+    "custos": {
+      "ferramentas_ia": 0,
+      "plataformas": 0,
+      "marketing_ads": 0,
+      "outros_fixos": 0
+    },
+    "pipeline": {
+      "leads_ativos": 0,
+      "valor_total_pipeline": 0,
+      "probabilidade_media": 0.3,
+      "reunioes_agendadas": 0
+    },
+    "clientes": {
+      "total_ativos": 0,
+      "novos_mes": 0,
+      "perdidos_mes": 0,
+      "ticket_medio": 12000,
+      "duracao_media_meses": 3
+    },
+    "historico": {
+      "receita_mes_anterior": 0,
+      "receita_ha_3_meses": 0,
+      "melhor_mes": 0
+    },
+    "_date": "2026-05-29"
+  }
+}

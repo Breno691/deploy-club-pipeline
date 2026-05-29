@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; height: 1080px; overflow: hidden; background: #05070B; }
+
+.ad {
+  position: relative;
+  width: 1080px; height: 1080px;
+  background: #05070B;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+}
+
+/* Subtle grid */
+.grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(31,41,55,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(31,41,55,0.08) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Top bar — like a real app */
+.topbar {
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 52px;
+  background: #0B0F17;
+  border-bottom: 1px solid #1F2937;
+  display: flex; align-items: center;
+  padding: 0 28px; gap: 16px;
+}
+.topbar-dot { width: 8px; height: 8px; border-radius: 50%; }
+.dot-red { background: #FF5F57; }
+.dot-yellow { background: #FFBD2E; }
+.dot-green { background: #28CA41; }
+.topbar-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px; color: #4B5563;
+  margin-left: 8px; letter-spacing: 0.5px;
+}
+.topbar-badge {
+  margin-left: auto;
+  background: rgba(0,255,136,0.08);
+  border: 1px solid rgba(0,255,136,0.2);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 11px; font-weight: 600;
+  color: #00FF88; letter-spacing: 0.5px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Main content */
+.content {
+  position: absolute;
+  top: 68px; left: 28px; right: 28px; bottom: 28px;
+}
+
+/* Headline area */
+.headline-area {
+  margin-bottom: 20px;
+}
+.headline {
+  font-size: 38px; font-weight: 800;
+  color: #FFFFFF; line-height: 1.15;
+  letter-spacing: -0.5px;
+  max-width: 700px;
+}
+.headline span { color: #00FF88; }
+.sub {
+  font-size: 15px; font-weight: 400;
+  color: #6B7280; margin-top: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.3px;
+}
+
+/* Big metrics row */
+.metrics-row {
+  display: flex; gap: 14px; margin-bottom: 16px;
+}
+.metric-card {
+  flex: 1; background: #0B0F17;
+  border: 1px solid #1F2937;
+  border-radius: 12px; padding: 18px 20px;
+  position: relative; overflow: hidden;
+}
+.metric-card.highlight {
+  border-color: rgba(0,255,136,0.25);
+  background: rgba(0,255,136,0.03);
+}
+.metric-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: #1F2937;
+}
+.metric-card.highlight::before { background: #00FF88; }
+.metric-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: #4B5563;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  margin-bottom: 8px;
+}
+.metric-value {
+  font-size: 40px; font-weight: 800;
+  color: #FFFFFF; line-height: 1;
+  letter-spacing: -1px;
+}
+.metric-card.highlight .metric-value { color: #00FF88; }
+.metric-change {
+  font-size: 12px; font-weight: 600;
+  color: #00FF88; margin-top: 4px;
+  display: flex; align-items: center; gap: 4px;
+}
+.metric-change.bad { color: #FF3B3B; }
+.metric-sub {
+  font-size: 11px; color: #4B5563; margin-top: 3px;
+}
+
+/* Main dashboard area — 2 col */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+/* Process status card */
+.process-card {
+  background: #0B0F17;
+  border: 1px solid #1F2937;
+  border-radius: 12px; padding: 18px 20px;
+}
+.card-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: #4B5563;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  margin-bottom: 14px;
+}
+.process-list { display: flex; flex-direction: column; gap: 10px; }
+.process-item {
+  display: flex; align-items: center; gap: 10px;
+}
+.process-icon {
+  width: 20px; height: 20px; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; flex-shrink: 0;
+}
+.pi-red { background: rgba(255,59,59,0.1); color: #FF3B3B; border: 1px solid rgba(255,59,59,0.2); }
+.pi-green { background: rgba(0,255,136,0.08); color: #00FF88; border: 1px solid rgba(0,255,136,0.2); }
+.pi-yellow { background: rgba(250,204,21,0.08); color: #FACC15; border: 1px solid rgba(250,204,21,0.2); }
+.process-text { font-size: 13px; font-weight: 500; color: #A1A1AA; flex: 1; }
+.process-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; padding: 2px 8px;
+  border-radius: 4px; font-weight: 600;
+}
+.pb-red { background: rgba(255,59,59,0.1); color: #FF3B3B; }
+.pb-green { background: rgba(0,255,136,0.08); color: #00FF88; }
+.pb-yellow { background: rgba(250,204,21,0.08); color: #FACC15; }
+
+/* Timeline card */
+.timeline-card {
+  background: #0B0F17;
+  border: 1px solid #1F2937;
+  border-radius: 12px; padding: 18px 20px;
+}
+.timeline { display: flex; flex-direction: column; gap: 0; }
+.timeline-item {
+  display: flex; gap: 12px; padding-bottom: 14px;
+  position: relative;
+}
+.timeline-item:last-child { padding-bottom: 0; }
+.timeline-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 9px; top: 22px; bottom: 0;
+  width: 1px; background: #1F2937;
+}
+.tl-dot {
+  width: 18px; height: 18px; border-radius: 50%;
+  flex-shrink: 0; margin-top: 2px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 8px;
+}
+.tl-done { background: #00FF88; color: #05070B; }
+.tl-active { background: rgba(0,255,136,0.15); border: 2px solid #00FF88; }
+.tl-pending { background: #111827; border: 1px solid #1F2937; }
+.tl-text { font-size: 12px; color: #6B7280; }
+.tl-text strong { color: #E5E7EB; font-weight: 600; font-size: 13px; display: block; }
+.tl-time { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #374151; }
+
+/* Bottom row */
+.bottom-row {
+  display: flex; gap: 14px; align-items: stretch;
+}
+.brand-tag {
+  background: #0B0F17; border: 1px solid #1F2937;
+  border-radius: 12px; padding: 14px 20px;
+  display: flex; align-items: center; gap: 10px;
+  flex: 1;
+}
+.brand-dot { width: 8px; height: 8px; border-radius: 50%; background: #00FF88; box-shadow: 0 0 8px #00FF88; }
+.brand-name { font-size: 13px; font-weight: 700; color: #FFFFFF; }
+.brand-sub { font-size: 11px; color: #4B5563; margin-top: 1px; }
+
+.cta-card {
+  background: #00FF88;
+  border-radius: 12px; padding: 14px 28px;
+  display: flex; align-items: center;
+  font-size: 15px; font-weight: 700;
+  color: #05070B; white-space: nowrap;
+  box-shadow: 0 0 32px rgba(0,255,136,0.3);
+  gap: 8px;
+}
+</style>
+</head>
+<body>
+<div class="ad">
+  <div class="grid"></div>
+
+  <div class="topbar">
+    <div class="topbar-dot dot-red"></div>
+    <div class="topbar-dot dot-yellow"></div>
+    <div class="topbar-dot dot-green"></div>
+    <div class="topbar-title">smartops — diagnóstico operacional</div>
+    <div class="topbar-badge">● LIVE</div>
+  </div>
+
+  <div class="content">
+    <div class="headline-area">
+      <div class="headline">Seu processo está te custando<br><span>dinheiro que você não vê.</span></div>
+      <div class="sub">// diagnóstico gratuito · 30 minutos · smartops-ia.com.br</div>
+    </div>
+
+    <div class="metrics-row">
+      <div class="metric-card">
+        <div class="metric-label">Retrabalho</div>
+        <div class="metric-value">340h</div>
+        <div class="metric-change bad">↑ por mês</div>
+        <div class="metric-sub">desperdiçadas pela operação</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Após mapeamento</div>
+        <div class="metric-value">4 sem</div>
+        <div class="metric-change">✓ resultado visível</div>
+        <div class="metric-sub">quick wins implementados</div>
+      </div>
+      <div class="metric-card highlight">
+        <div class="metric-label">Redução de custo</div>
+        <div class="metric-value">−30%</div>
+        <div class="metric-change">↓ custo operacional</div>
+        <div class="metric-sub">média dos projetos</div>
+      </div>
+    </div>
+
+    <div class="dashboard-grid">
+      <div class="process-card">
+        <div class="card-title">Sintomas identificados</div>
+        <div class="process-list">
+          <div class="process-item">
+            <div class="process-icon pi-red">✗</div>
+            <div class="process-text">Equipe apagando incêndio</div>
+            <div class="process-badge pb-red">crítico</div>
+          </div>
+          <div class="process-item">
+            <div class="process-icon pi-red">✗</div>
+            <div class="process-text">Retrabalho recorrente</div>
+            <div class="process-badge pb-red">crítico</div>
+          </div>
+          <div class="process-item">
+            <div class="process-icon pi-yellow">⚠</div>
+            <div class="process-text">Tudo depende do dono</div>
+            <div class="process-badge pb-yellow">atenção</div>
+          </div>
+          <div class="process-item">
+            <div class="process-icon pi-yellow">⚠</div>
+            <div class="process-text">WhatsApp sem controle</div>
+            <div class="process-badge pb-yellow">atenção</div>
+          </div>
+          <div class="process-item">
+            <div class="process-icon pi-green">✓</div>
+            <div class="process-text">Diagnóstico agendado</div>
+            <div class="process-badge pb-green">ok</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-card">
+        <div class="card-title">Método aplicado</div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="tl-dot tl-done">✓</div>
+            <div class="tl-text">
+              <strong>Diagnóstico</strong>
+              Mapeamos o problema real
+              <div class="tl-time">30 min · gratuito</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot tl-done">✓</div>
+            <div class="tl-text">
+              <strong>Mapeamento</strong>
+              Causa raiz identificada
+              <div class="tl-time">semana 1–2</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot tl-active"></div>
+            <div class="tl-text">
+              <strong>Quick wins</strong>
+              Primeiros resultados
+              <div class="tl-time">semana 2–4</div>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="tl-dot tl-pending"></div>
+            <div class="tl-text">
+              <strong>Automação</strong>
+              IA elimina o repetitivo
+              <div class="tl-time">semana 4–8</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-row">
+      <div class="brand-tag">
+        <div class="brand-dot"></div>
+        <div>
+          <div class="brand-name">SmartOps IA</div>
+          <div class="brand-sub">Consultoria · Lean + Automação com IA</div>
+        </div>
+      </div>
+      <div class="cta-card">
+        Diagnóstico gratuito →
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

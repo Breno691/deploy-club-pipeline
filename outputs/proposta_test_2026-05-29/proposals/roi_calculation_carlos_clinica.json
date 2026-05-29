@@ -1,0 +1,15 @@
+{
+  "client": "Carlos_Clinica",
+  "date": "2026-05-29",
+  "tier": "diagnostico",
+  "tierInfo": {
+    "label": "Diagnóstico + Plano",
+    "range": "R$ 8.000–15.000",
+    "duration": "4–6 semanas"
+  },
+  "analysis": {
+    "tier_recomendado": "diagnostico",
+    "dor_principal": "processo operacional com desperdício identificado",
+    "lead_score": 50
+  }
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "servico": "Quick Win (2–4 semanas)",
+    "valor_medio": 5500,
+    "custo_estimado": 1200,
+    "margem_bruta_pct": 78
+  },
+  {
+    "servico": "Diagnóstico + Plano",
+    "valor_medio": 11500,
+    "custo_estimado": 2800,
+    "margem_bruta_pct": 76
+  },
+  {
+    "servico": "Projeto Completo",
+    "valor_medio": 32000,
+    "custo_estimado": 9000,
+    "margem_bruta_pct": 72
+  },
+  {
+    "servico": "Parceria Contínua (mensal)",
+    "valor_medio": 5500,
+    "custo_estimado": 1100,
+    "margem_bruta_pct": 80
+  }
+]

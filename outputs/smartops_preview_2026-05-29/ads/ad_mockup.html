@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 1080px; height: 1080px; overflow: hidden; }
+
+.ad {
+  width: 1080px; height: 1080px;
+  background: #0A0A0F; font-family: 'Inter', sans-serif;
+  overflow: hidden; display: flex; flex-direction: column;
+}
+
+.grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+.bg-glow {
+  position: absolute; top: -80px; left: -60px;
+  width: 500px; height: 700px;
+  background: radial-gradient(ellipse, rgba(124,58,237,0.07) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* Top bar */
+.topbar {
+  flex-shrink: 0; height: 50px;
+  background: #0B0F17; border-bottom: 1px solid #1F2937;
+  display: flex; align-items: center; padding: 0 32px; gap: 10px;
+}
+.tb-dot { width: 8px; height: 8px; border-radius: 50%; background: #7C3AED; box-shadow: 0 0 8px rgba(124,58,237,0.8); }
+.tb-name { font-size: 13px; font-weight: 700; color: #FFFFFF; }
+.tb-sep { color: #374151; }
+.tb-tag { font-size: 12px; color: #6B7280; }
+.tb-spacer { flex: 1; }
+.tb-badge { background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.25); border-radius: 20px; padding: 4px 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #A78BFA; }
+
+/* Main 2-col — fills remaining height */
+.main { flex: 1; display: flex; min-height: 0; }
+
+/* LEFT phone — fills full height */
+.left {
+  width: 400px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 28px 16px; position: relative;
+}
+.phone-glow {
+  position: absolute; width: 300px; height: 600px;
+  background: radial-gradient(ellipse, rgba(124,58,237,0.13) 0%, transparent 70%);
+}
+.phone {
+  width: 230px; height: 620px;
+  background: #0B0F17; border: 2px solid #1F2937;
+  border-radius: 34px; overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(124,58,237,0.12);
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column;
+}
+.phone-notch {
+  width: 72px; height: 18px; background: #05070B;
+  border-radius: 0 0 12px 12px; margin: 0 auto; flex-shrink: 0;
+}
+.phone-screen {
+  flex: 1; padding: 10px 12px 14px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.ph-head {
+  background: #111827; border-radius: 8px; padding: 10px 11px;
+  display: flex; align-items: center; gap: 8px;
+}
+.ph-icon { width: 28px; height: 28px; border-radius: 7px; background: rgba(124,58,237,0.2); border: 1px solid rgba(124,58,237,0.3); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+.ph-t { font-size: 10px; font-weight: 700; color: #FFFFFF; display: block; }
+.ph-s { font-size: 8px; color: #6B7280; margin-top: 1px; }
+
+.ph-metric {
+  background: rgba(124,58,237,0.06); border: 1px solid rgba(124,58,237,0.18);
+  border-radius: 8px; padding: 12px;
+}
+.phm-lbl { font-family: 'JetBrains Mono', monospace; font-size: 8px; color: #4B5563; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.phm-val { font-size: 36px; font-weight: 800; color: #A78BFA; line-height: 1; letter-spacing: -1px; }
+.phm-sub { font-size: 9px; color: #7C3AED; font-weight: 600; margin-top: 3px; }
+
+.ph-list { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.pli {
+  background: #111827; border-radius: 7px; padding: 8px 10px;
+  display: flex; align-items: center; gap: 7px;
+}
+.pli-ico { font-size: 10px; flex-shrink: 0; width: 14px; text-align: center; }
+.pli-txt { font-size: 11px; font-weight: 500; color: #9CA3AF; flex: 1; }
+.pli-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; padding: 2px 7px; border-radius: 4px; font-weight: 600; }
+.t-r { background: rgba(255,59,59,0.1); color: #FF3B3B; }
+.t-y { background: rgba(250,204,21,0.08); color: #FACC15; }
+.t-g { background: rgba(0,255,136,0.08); color: #00FF88; }
+
+.ph-cta {
+  background: #7C3AED; border-radius: 8px; padding: 12px;
+  text-align: center; font-size: 11px; font-weight: 700; color: #FFFFFF;
+  box-shadow: 0 4px 18px rgba(124,58,237,0.45);
+}
+
+/* RIGHT copy — space-between fills full height */
+.right {
+  flex: 1; display: flex; flex-direction: column;
+  justify-content: space-between;
+  padding: 40px 44px 40px 24px;
+}
+.right-top { display: flex; flex-direction: column; gap: 16px; }
+.right-bottom { display: flex; flex-direction: column; gap: 16px; }
+
+.tag {
+  display: inline-flex; align-items: center;
+  border: 1px solid #1F2937; border-radius: 20px; padding: 5px 14px;
+  width: fit-content; font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; color: #6B7280; letter-spacing: 1px; text-transform: uppercase;
+}
+.headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 114px; color: #FFFFFF; line-height: 0.88; letter-spacing: 2px;
+}
+.headline span { color: #A78BFA; }
+.subtext { font-size: 19px; font-weight: 400; color: #9CA3AF; line-height: 1.6; }
+.subtext strong { color: #E5E7EB; font-weight: 600; }
+
+.divider { height: 1px; background: #1F2937; }
+
+.benefits { display: flex; flex-direction: column; gap: 14px; }
+.bi { display: flex; align-items: flex-start; gap: 12px; }
+.bi-dot {
+  width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0; margin-top: 2px;
+  background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; color: #A78BFA;
+}
+.bi-t { font-size: 16px; color: #9CA3AF; line-height: 1.5; }
+.bi-t strong { color: #E5E7EB; font-weight: 700; }
+
+/* Footer */
+.footer {
+  flex-shrink: 0; height: 80px;
+  background: #0F1319; border-top: 1px solid #1F2937;
+  display: flex; align-items: center; padding: 0 32px; gap: 20px;
+}
+.wa { width: 46px; height: 46px; border-radius: 12px; background: #25D366; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 22px rgba(37,211,102,0.4); flex-shrink: 0; }
+.wa-info { flex: 1; }
+.wa-lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #4B5563; text-transform: uppercase; letter-spacing: 1px; }
+.wa-num { font-size: 24px; font-weight: 700; color: #FFFFFF; letter-spacing: 0.5px; margin-top: 1px; }
+.footer-cta { background: #7C3AED; border-radius: 10px; padding: 16px 34px; font-size: 15px; font-weight: 700; color: #FFFFFF; box-shadow: 0 0 28px rgba(124,58,237,0.4); white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="ad">
+  <div class="grid"></div>
+  <div class="bg-glow"></div>
+
+  <div class="topbar">
+    <div class="tb-dot"></div>
+    <span class="tb-name">SmartOps IA</span>
+    <span class="tb-sep">/</span>
+    <span class="tb-tag">Consultoria · Lean + Automação com IA</span>
+    <div class="tb-spacer"></div>
+    <div class="tb-badge">smartops-ia.com.br</div>
+  </div>
+
+  <div class="main">
+    <div class="left">
+      <div class="phone-glow"></div>
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="ph-head">
+            <div class="ph-icon">⚙</div>
+            <div>
+              <span class="ph-t">Diagnóstico Operacional</span>
+              <span class="ph-s">SmartOps IA · Resultado</span>
+            </div>
+          </div>
+          <div class="ph-metric">
+            <div class="phm-lbl">Retrabalho identificado</div>
+            <div class="phm-val">340h</div>
+            <div class="phm-sub">↑ perdidas por mês</div>
+          </div>
+          <div class="ph-list">
+            <div class="pli"><span class="pli-ico">✗</span><span class="pli-txt">Equipe apagando incêndio</span><span class="pli-tag t-r">crítico</span></div>
+            <div class="pli"><span class="pli-ico">✗</span><span class="pli-txt">Retrabalho recorrente</span><span class="pli-tag t-r">crítico</span></div>
+            <div class="pli"><span class="pli-ico">⚠</span><span class="pli-txt">Tudo depende do dono</span><span class="pli-tag t-y">atenção</span></div>
+            <div class="pli"><span class="pli-ico">⚠</span><span class="pli-txt">WhatsApp sem controle</span><span class="pli-tag t-y">atenção</span></div>
+            <div class="pli"><span class="pli-ico">✓</span><span class="pli-txt">Diagnóstico: agendado</span><span class="pli-tag t-g">ok</span></div>
+          </div>
+          <div class="ph-cta">Diagnóstico gratuito — 30 min →</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="right-top">
+        <div class="tag">Consultoria de Processos</div>
+        <div class="headline">VOCÊ JÁ<br>NORMALIZOU<br><span>O CAOS?</span></div>
+        <div class="subtext">Toda empresa tem um processo quebrado.<br>A maioria acha que é <strong>falta de esforço</strong>. Não é.</div>
+      </div>
+      <div class="right-bottom">
+        <div class="divider"></div>
+        <div class="benefits">
+          <div class="bi"><div class="bi-dot">✓</div><div class="bi-t">Identificamos o problema real em <strong>30 minutos</strong></div></div>
+          <div class="bi"><div class="bi-dot">✓</div><div class="bi-t">Primeiros resultados em <strong>2–4 semanas</strong></div></div>
+          <div class="bi"><div class="bi-dot">✓</div><div class="bi-t"><strong>−30% custo operacional</strong> em média</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="wa">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.7c-.2-.1-1.4-.7-1.6-.77-.2-.08-.34-.1-.49.1-.14.2-.57.7-.7.85-.12.14-.24.16-.45.05-.22-.1-.91-.34-1.73-1.07-.64-.57-1.07-1.27-1.2-1.49-.12-.21-.01-.33.1-.43.09-.09.2-.24.3-.36.1-.13.14-.21.2-.36.07-.14.04-.27-.01-.38-.06-.1-.49-1.2-.67-1.64-.18-.43-.37-.37-.5-.38h-.43c-.14 0-.37.05-.56.27-.19.21-.74.73-.74 1.78 0 1.04.76 2.05.86 2.19.1.14 1.48 2.27 3.6 3.18.5.21.9.34 1.2.44.5.16.96.14 1.32.09.4-.06 1.24-.51 1.41-1 .17-.49.17-.9.12-1c-.05-.09-.2-.14-.42-.25z"/><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.37 5.07L2 22l5.09-1.34A9.93 9.93 0 0012 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.72 0-3.32-.48-4.68-1.31l-.34-.2-3.02.8.81-2.96-.22-.35A8 8 0 014 12c0-4.42 3.58-8 8-8s8 3.58 8 8-3.58 8-8 8z"/></svg>
+    </div>
+    <div class="wa-info">
+      <div class="wa-lbl">Fale no WhatsApp</div>
+      <div class="wa-num">(31) 97203-9180</div>
+    </div>
+    <div class="footer-cta">Diagnóstico gratuito →</div>
+  </div>
+</div>
+</body>
+</html>

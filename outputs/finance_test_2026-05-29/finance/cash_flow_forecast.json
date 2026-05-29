@@ -1,0 +1,24 @@
+{
+  "date": "2026-05-29",
+  "saldo_atual": 0,
+  "periodos": [
+    {
+      "periodo": "30 dias",
+      "receita_projetada": 0,
+      "custo_projetado": 0,
+      "saldo_projetado": 0
+    },
+    {
+      "periodo": "60 dias",
+      "receita_projetada": 0,
+      "custo_projetado": 0,
+      "saldo_projetado": 0
+    },
+    {
+      "periodo": "90 dias",
+      "receita_projetada": 0,
+      "custo_projetado": 0,
+      "saldo_projetado": 0
+    }
+  ]
+}
