@@ -8,8 +8,10 @@ const path = require('path');
 const args     = process.argv.slice(2);
 const skipPost = args.includes('--skip-post');
 
-// Task name automático: data de hoje
-const taskDate = new Date().toISOString().split('T')[0];
+const taskDate = (() => {
+  const idx = args.indexOf('--date');
+  return idx !== -1 ? args[idx + 1] : new Date().toISOString().split('T')[0];
+})();
 const taskIdx  = args.indexOf('--task');
 const taskName = taskIdx !== -1 ? args[taskIdx + 1] : `campanha_${taskDate.replace(/-/g, '')}`;
 const taskDir  = path.join('outputs', `${taskName}_${taskDate}`);
@@ -33,6 +35,37 @@ function run(script, extraArgs = []) {
   log(`✓ ${script}`);
 }
 
+// ─── Output validation helpers ───────────────────────────────────────────────
+function assertFile(filePath, label, minSizeKB = 0) {
+  const abs = path.resolve(filePath);
+  if (!fs.existsSync(abs)) {
+    throw new Error(`${label} not found: ${abs}`);
+  }
+  if (minSizeKB > 0) {
+    const sizeKB = fs.statSync(abs).size / 1024;
+    if (sizeKB < minSizeKB) {
+      throw new Error(`${label} too small (${sizeKB.toFixed(1)} KB < ${minSizeKB} KB expected): ${abs}`);
+    }
+  }
+  return true;
+}
+
+function assertJSON(filePath, label, requiredKeys = []) {
+  assertFile(filePath, label);
+  let data;
+  try {
+    data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  } catch {
+    throw new Error(`${label} is not valid JSON: ${filePath}`);
+  }
+  for (const key of requiredKeys) {
+    if (data[key] === undefined || data[key] === null || data[key] === '') {
+      throw new Error(`${label} missing required field "${key}"`);
+    }
+  }
+  return data;
+}
+
 // ─── Pipeline ────────────────────────────────────────────────────────────────
 async function main() {
   log(`════════════════════════════════════`);
@@ -45,51 +78,75 @@ async function main() {
     if (!fs.existsSync(d)) fs.mkdirSync(d, { recursive: true });
   });
 
-  // 1. Research
+  // ── STEP 1: Research ──────────────────────────────────────────────────────
   log('── STEP 1: Research ──');
   run('scripts/research.js');
+  assertJSON(
+    path.join(taskDir, 'research_results.json'),
+    'research_results.json',
+    ['marketing_angles', 'ad_hooks']
+  );
+  log('✓ Research validated');
 
-  // 2. Copy
+  // ── STEP 2: Copy ──────────────────────────────────────────────────────────
   log('── STEP 2: Copywriter ──');
   run('scripts/generate_copy.js');
+  assertFile(path.join(taskDir, 'copy', 'instagram_caption.txt'), 'instagram_caption.txt', 0.05);
+  assertFile(path.join(taskDir, 'copy', 'threads_post.txt'), 'threads_post.txt', 0.01);
+  assertJSON(path.join(taskDir, 'copy', 'youtube_metadata.json'), 'youtube_metadata.json', ['title']);
+  log('✓ Copy validated');
 
-  // 3. Ad Creative
+  // ── STEP 3: Ad Creative ───────────────────────────────────────────────────
   log('── STEP 3: Ad Creative ──');
   run('scripts/generate_ad.js');
-  run('scripts/build_ad_html.js');
-  run('scripts/render_ad.js');
+  assertJSON(path.join(taskDir, 'ads', 'layout.json'), 'layout.json', ['background']);
 
-  // 4. Upload Supabase
+  run('scripts/build_ad_html.js');
+  assertFile(path.join(taskDir, 'ads', 'ad.html'), 'ad.html', 2);
+
+  run('scripts/render_ad.js');
+  assertFile(path.join(taskDir, 'ads', 'instagram_ad.png'), 'instagram_ad.png', 50);
+  log('✓ Ad Creative validated');
+
+  // ── STEP 4: Upload ────────────────────────────────────────────────────────
   log('── STEP 4: Upload Mídia ──');
   run('scripts/upload_media.js');
 
-  // 5. Ler outputs gerados
-  const mediaUrls = JSON.parse(
-    fs.readFileSync(path.join(taskDir, 'media_urls.json'), 'utf8')
+  const mediaUrls = assertJSON(
+    path.join(taskDir, 'media_urls.json'),
+    'media_urls.json'
   );
+
+  if (!mediaUrls.instagram_ad) {
+    log('⚠ instagram_ad URL missing from media_urls.json — upload may have failed');
+  }
+
+  // ── STEP 5: Read outputs ──────────────────────────────────────────────────
   const caption = fs.readFileSync(
     path.join(taskDir, 'copy', 'instagram_caption.txt'), 'utf8'
   ).trim();
 
-  log(`Image URL: ${mediaUrls.instagram_ad}`);
+  const imageUrl = mediaUrls.instagram_ad || '';
+  log(`Image URL: ${imageUrl || '(not uploaded)'}`);
   log(`Caption: ${caption.slice(0, 80)}...`);
 
-  // 6. Postar no Instagram (se não tiver --skip-post)
+  // ── STEP 6: Post to Instagram ─────────────────────────────────────────────
   if (skipPost) {
     log('⏭ Skip post ativo — pulando publicação');
   } else if (!process.env.INSTAGRAM_ACCESS_TOKEN || process.env.INSTAGRAM_ACCESS_TOKEN.includes('xxx')) {
     log('⚠ INSTAGRAM_ACCESS_TOKEN não configurado — pulando publicação');
-    log('  Configure no .env para publicação automática');
+  } else if (!imageUrl) {
+    log('⚠ Sem URL de imagem — pulando publicação');
   } else {
     log('── STEP 5: Publicando no Instagram ──');
-    await postToInstagram(mediaUrls.instagram_ad, caption);
+    await postToInstagram(imageUrl, caption);
   }
 
-  // 7. Resultado final
+  // ── Result JSON ───────────────────────────────────────────────────────────
   const result = {
     task: taskName,
     date: taskDate,
-    image_url: mediaUrls.instagram_ad,
+    image_url: imageUrl,
     caption_preview: caption.slice(0, 120),
     status: 'complete',
     timestamp: new Date().toISOString(),
@@ -103,7 +160,6 @@ async function main() {
   log(`Resultado: ${resultPath}`);
   log(`════════════════════════════════════`);
 
-  // Imprime JSON para o n8n capturar
   console.log('\n__RESULT__');
   console.log(JSON.stringify(result));
 
@@ -120,7 +176,6 @@ async function postToInstagram(imageUrl, caption) {
     return;
   }
 
-  // Step 1: Criar container de mídia
   log('  Criando container de mídia...');
   const containerRes = await fetch(
     `https://graph.facebook.com/v21.0/${accountId}/media`,
@@ -133,10 +188,8 @@ async function postToInstagram(imageUrl, caption) {
   if (err1) { log(`✗ Erro container: ${err1.message}`); return; }
   log(`  Container criado: ${containerId}`);
 
-  // Aguarda processamento
   await new Promise(r => setTimeout(r, 3000));
 
-  // Step 2: Publicar
   log('  Publicando...');
   const publishRes = await fetch(
     `https://graph.facebook.com/v21.0/${accountId}/media_publish`,

@@ -82,15 +82,15 @@ ${platformGuidelines.slice(0, 1500)}`;
     system: systemPrompt,
     messages: [{
       role: 'user',
-      content: `Write a Threads post for Deploy Club.
+      content: `Write a Threads post for SmartOps IA.
 
 Rules:
 - Max 500 characters total
 - 1-3 short sentences
 - Provocative, raw, conversational — most casual of all platforms
 - 0-1 hashtags (never lead with hashtag)
+- Speak directly to business owners with broken processes
 - Can end with dry observation, rhetorical question, or challenge
-- Self-deprecation welcome ("o idiota aqui, ó")
 
 Return ONLY the post text, nothing else.`
     }],
@@ -109,14 +109,14 @@ Return ONLY the post text, nothing else.`
     system: systemPrompt,
     messages: [{
       role: 'user',
-      content: `Write an Instagram caption for Deploy Club.
+      content: `Write an Instagram caption for SmartOps IA.
 
 Structure (follow exactly):
-1. Hook line: proof with number OR pain point (1 sentence)
-2. Benefit: concrete result in specific terms (1-2 sentences)
-3. CTA: challenging tone, never pleading (1 sentence)
+1. Hook line: specific number OR business pain point (1 sentence)
+2. Benefit: concrete result with number (1-2 sentences)
+3. CTA: direct, challenging — references free diagnostic (1 sentence)
 4. Blank line
-5. Hashtags: exactly 3-5, mix of #DeployClub + product + niche
+5. Hashtags: exactly 3-5, mix of #SmartOpsIA + #LeanSixSigma + niche
 
 Rules:
 - Max 1-2 emojis total
@@ -140,16 +140,16 @@ Return ONLY the caption text, nothing else.`
     system: systemPrompt,
     messages: [{
       role: 'user',
-      content: `Generate YouTube metadata for a Deploy Club video.
+      content: `Generate YouTube metadata for a SmartOps IA video.
 
 Return ONLY valid JSON, no markdown:
 {
-  "title": "60-70 char SEO title with specific number | Deploy Club",
-  "description": "2-3 sentences: what it shows + concrete result with number + CTA with [link]",
-  "tags": ["10-12 relevant tags", "mix of brand, product, niche keywords"]
+  "title": "60-70 char SEO title with specific number | SmartOps IA",
+  "description": "2-3 sentences: what it shows + concrete result with number + CTA referencing smartops-ia.com.br",
+  "tags": ["10-12 relevant tags", "mix of SmartOpsIA, LeanSixSigma, automacao, and niche keywords"]
 }
 
-Title rules: clear + specific number + no clickbait + ends with "| Deploy Club"
+Title rules: clear + specific number + no clickbait + ends with "| SmartOps IA"
 Use these keywords in tags: ${keywords}`
     }],
   });
