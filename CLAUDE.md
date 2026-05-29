@@ -1,18 +1,22 @@
 ## Visão Geral do Projeto
 
-Este projeto implementa um **Sistema de Automação de Conteúdo para Redes Sociais com IA** construído com Claude Code dentro da Antigravity IDE.
+Este projeto implementa um **Sistema Completo de Inteligência de Marketing e Crescimento com IA** para a **SmartOps IA** — consultoria de Lean Six Sigma e Automação com IA para pequenas e médias empresas em BH, MG.
 
-O sistema usa **cinco agentes de IA especializados** coordenados por um **Orchestrator** para pesquisar, gerar, renderizar e distribuir conteúdo de marketing para uma marca demo.
+O sistema usa **onze agentes de IA especializados** organizados em dois grupos:
 
-O objetivo é demonstrar como agentes Claude Code podem coordenar **workflows de pesquisa, geração criativa, produção de mídia e distribuição social** usando skills modulares, knowledge files e APIs.
+**Grupo 1 — Content Pipeline (automação de conteúdo diário)**
+Cinco agentes coordenados por um Orchestrator para pesquisar, gerar, renderizar e distribuir conteúdo de marketing 3x por semana automaticamente.
 
-A marca demo usada neste projeto é **Deploy Club.**
+**Grupo 2 — Growth Intelligence (inteligência de crescimento e receita)**
+Seis agentes que analisam dados de tráfego, conversão, campanhas pagas e pipeline de receita para transformar dados em ações concretas de crescimento.
 
 ---
 
 # Arquitetura do Sistema
 
-O sistema consiste em cinco agentes gerenciados por um orchestrator central:
+## Grupo 1 — Content Pipeline
+
+Cinco agentes gerenciados por um Orchestrator central:
 
 ```
 Marketing Research Agent
@@ -25,6 +29,31 @@ Marketing Research Agent
 O **Orchestrator** skill coordena todos os agentes via filas de job **BullMQ** backed por **Upstash Redis**. Agentes rodam em ordem de dependência — research primeiro, depois os três agentes criativos em paralelo, depois distribution por último.
 
 Cada agente usa uma combinação de **custom skills, knowledge files e APIs** para executar suas tarefas.
+
+---
+
+## Grupo 2 — Growth Intelligence
+
+Seis agentes de inteligência analítica coordenados pelo **Growth Intelligence Agent**:
+
+```
+Growth Intelligence Agent (cérebro analítico)
+        │
+        ├──► CRO Agent            (conversão do site)
+        ├──► SEO Agent            (crescimento orgânico)
+        ├──► Ads Agent            (Google Ads + Meta Ads)
+        ├──► Customer Journey Agent (jornada do visitante)
+        └──► Revenue Agent        (receita e ROI)
+```
+
+O **Growth Intelligence Agent** analisa tráfego, funil, campanhas e tendências — e gera um plano de ação semanal priorizado. Os outros 5 agentes executam as recomendações em suas áreas específicas.
+
+**Integrações necessárias:**
+- Google Analytics 4 + Search Console
+- Microsoft Clarity (heatmaps)
+- Google Ads API
+- Meta Ads API
+- CRM (Google Sheets ou Notion)
 
 ---
 
