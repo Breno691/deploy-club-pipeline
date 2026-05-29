@@ -251,10 +251,10 @@ function extractCompetitorGaps(raw) {
   const gaps = [...BRAND_DEFAULTS.competitor_gaps];
 
   if (competitorText.toLowerCase().includes('inglês') || competitorText.toLowerCase().includes('english')) {
-    gaps.unshift('Mercado de automação IA no Brasil carece de documentação em português — Deploy Club preenche esse gap');
+    gaps.unshift('Mercado de automação IA no Brasil carece de conteúdo prático em português — SmartOps IA preenche esse gap');
   }
   if (competitorText.toLowerCase().includes('caro') || competitorText.toLowerCase().includes('preço')) {
-    gaps.push('Concorrentes cobram R$197–R$997 por cursos teóricos; Deploy Club entrega templates prontos por R$47');
+    gaps.push('Concorrentes oferecem teoria; SmartOps IA entrega diagnóstico e implementação com resultado mensurável');
   }
 
   return [...new Set(gaps)].slice(0, 5);

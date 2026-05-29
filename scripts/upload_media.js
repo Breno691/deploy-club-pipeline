@@ -8,7 +8,7 @@ const args = process.argv.slice(2);
 const taskArg = args.indexOf('--task');
 const dateArg = args.indexOf('--date');
 
-const taskName = taskArg !== -1 ? args[taskArg + 1] : process.env.TASK_NAME || 'deploy_club_demo';
+const taskName = taskArg !== -1 ? args[taskArg + 1] : process.env.TASK_NAME || 'smartops_demo';
 const taskDate = dateArg !== -1 ? args[dateArg + 1] : new Date().toISOString().split('T')[0];
 const outputDir = path.join('outputs', `${taskName}_${taskDate}`);
 
