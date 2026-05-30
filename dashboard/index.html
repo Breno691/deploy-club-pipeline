@@ -247,7 +247,7 @@ tr:hover td { background: rgba(124,58,237,0.03); }
     <span class="icon">⚡</span> Executive
   </div>
   <div class="nav-item" onclick="show('agents')">
-    <span class="icon">🤖</span> Agentes <span class="badge">35</span>
+    <span class="icon">🤖</span> Agentes <span class="badge">50</span>
   </div>
 
   <div class="nav-section">Aquisição</div>
@@ -434,9 +434,9 @@ tr:hover td { background: rgba(124,58,237,0.03); }
     </div>
 
     <div class="kpi-grid" style="grid-template-columns:repeat(5,1fr)">
-      <div class="kpi-card green"><div class="kpi-label">Implementados</div><div class="kpi-value">9</div></div>
-      <div class="kpi-card lean"><div class="kpi-label">Documentados</div><div class="kpi-value">35</div></div>
-      <div class="kpi-card warn"><div class="kpi-label">Pendentes (script)</div><div class="kpi-value">26</div></div>
+      <div class="kpi-card green"><div class="kpi-label">Implementados</div><div class="kpi-value" id="agents-ok-count">47</div></div>
+      <div class="kpi-card lean"><div class="kpi-label">Total de Agentes</div><div class="kpi-value">50</div></div>
+      <div class="kpi-card warn"><div class="kpi-label">Aguardando API</div><div class="kpi-value">3</div></div>
       <div class="kpi-card"><div class="kpi-label">Squads Completos</div><div class="kpi-value">10</div></div>
       <div class="kpi-card"><div class="kpi-label">Execuções Hoje</div><div class="kpi-value" id="kpi-runs">0</div></div>
     </div>
@@ -1657,92 +1657,106 @@ async function loadData() {
 }
 loadData();
 
-// ── All 35 Agents Data ───────────────────────────────────────────────────────
+// ── All 50 Agents Data ───────────────────────────────────────────────────────
 const ALL_SQUADS = [
   {
     id: 1, name: 'Marketing', color: 'var(--lean)',
     agents: [
-      { n: 'Marketing Research', file: 'research.js',                  status: 'ok',      desc: 'Pesquisa tendências em tempo real com Tavily AI · research_brief.md' },
-      { n: 'Copywriter',         file: 'generate_copy.js',             status: 'ok',      desc: 'Instagram + Threads + YouTube · Framework Dor→Agitar→Intrigar→CTA' },
-      { n: 'Design Agent',       file: 'generate_ad.js',               status: 'ok',      desc: 'PNG 1080×1080 · Bebas Neue · Dark theme #0A0A0F · Faixa roxa' },
-      { n: 'Distribution',       file: 'distribution_agent.js',        status: 'pending', desc: 'Publica no Instagram, Threads e YouTube via Graph API / Data API' },
-      { n: 'SEO Agent',          file: 'seo_agent.js',                  status: 'pending', desc: 'Keywords, clusters semânticos, posicionamento Google · Search Console' },
-      { n: 'Video Ad Agent',     file: 'video_ad_agent.js',            status: 'pending', desc: 'Roteiros VSL, scripts para Reels 60-90s, hooks visuais primeiros 3s' },
-      { n: 'Remotion Video',     file: 'remotion/src/AdVideo.tsx',     status: 'partial', desc: 'Vídeos animados React · Componente criado · Falta integração pipeline' },
+      { n: 'Marketing Research',  file: 'research.js',              status: 'ok',      desc: 'Pesquisa tendências em tempo real com Tavily AI · research_brief.md' },
+      { n: 'Copywriter',          file: 'generate_copy.js',         status: 'ok',      desc: 'Instagram + Threads + YouTube · Framework Dor→Agitar→Intrigar→CTA' },
+      { n: 'Design Agent',        file: 'generate_ad.js',           status: 'ok',      desc: 'PNG 1080×1080 · Bebas Neue · Dark theme #0A0A0F · Faixa roxa' },
+      { n: 'Distribution',        file: 'distribution_agent.js',    status: 'pending', desc: 'Publica no Instagram, Threads e YouTube via Graph API / Data API' },
+      { n: 'SEO Agent',           file: 'seo_agent.js',             status: 'ok',      desc: 'Keywords, clusters semânticos, posicionamento Google · Search Console' },
+      { n: 'Video Ad Agent',      file: 'video_ad_agent.js',        status: 'pending', desc: 'Roteiros VSL, scripts para Reels 60-90s, hooks visuais primeiros 3s' },
+      { n: 'Remotion Video',      file: 'remotion/src/AdVideo.tsx', status: 'partial', desc: 'Vídeos animados React · Componente criado · Falta integração pipeline' },
+      { n: 'Content Performance', file: 'content_performance.js',   status: 'ok',      desc: 'CTR, engajamento e conversão por post · Identifica formatos campeões' },
+      { n: 'Thought Leadership',  file: 'thought_leadership.js',    status: 'ok',      desc: 'LinkedIn Articles, newsletter, podcasts · Construção de autoridade' },
     ]
   },
   {
     id: 2, name: 'Growth', color: '#3B82F6',
     agents: [
-      { n: 'CRO Agent',              file: 'cro_agent.js',              status: 'pending', desc: 'Taxa de conversão por página · Testes A/B · CTR de CTAs' },
-      { n: 'Customer Journey',       file: 'journey_agent.js',          status: 'pending', desc: 'Mapeamento completo visitante→cliente · Pontos de atrito no funil' },
-      { n: 'Revenue Agent',          file: 'revenue_agent.js',          status: 'pending', desc: 'Receita por canal · CAC por canal · LTV · Atribuição de receita' },
-      { n: 'Ads Agent',              file: 'ads_agent.js',              status: 'pending', desc: 'Google Ads (CPC/CTR/CPA) + Meta Ads (CPM/ROAS/frequência) · Relatório semanal' },
-      { n: 'Website Analytics',      file: 'website_analytics.js',     status: 'pending', desc: 'GA4 · Visitantes, sessões, bounce rate · Origem de tráfego · Eventos' },
+      { n: 'CRO Agent',           file: 'cro_agent.js',                  status: 'ok', desc: 'Taxa de conversão por página · Testes A/B · CTR de CTAs' },
+      { n: 'Customer Journey',    file: 'journey_agent.js',               status: 'ok', desc: 'Mapeamento completo visitante→cliente · Pontos de atrito no funil' },
+      { n: 'Revenue Agent',       file: 'revenue_agent.js',               status: 'ok', desc: 'Receita por canal · CAC por canal · LTV · Atribuição de receita' },
+      { n: 'Ads Agent',           file: 'ads_agent.js',                   status: 'ok', desc: 'Google Ads (CPC/CTR/CPA) + Meta Ads (CPM/ROAS/frequência) · Relatório semanal' },
+      { n: 'Website Analytics',   file: 'website_analytics_agent.js',     status: 'ok', desc: 'GA4 · Visitantes, sessões, bounce rate · Origem de tráfego · Eventos' },
+      { n: 'Lead Scoring',        file: 'lead_scoring.js',                status: 'ok', desc: 'Pontua leads 0-100 por ICP · Aciona Telegram quando score > 70' },
+      { n: 'Experimentation',     file: 'experimentation_agent.js',       status: 'ok', desc: 'A/B tests com significância estatística · Testa copy, criativos e landing pages' },
     ]
   },
   {
     id: 3, name: 'Operations', color: '#F59E0B',
     agents: [
-      { n: 'Lean Agent',             file: 'lean_agent.js',             status: 'pending', desc: '8 desperdícios · Value Stream Map (VSM) · Gargalos · Lead time vs cycle time' },
-      { n: 'Six Sigma Agent',        file: 'six_sigma_agent.js',        status: 'pending', desc: 'DMAIC · Cpk · DPMO · Ishikawa · Pareto · Plano de controle' },
-      { n: 'Kaizen Agent',           file: 'kaizen_agent.js',           status: 'pending', desc: 'Eventos Kaizen 3-5 dias · Kanban de melhorias · Impacto acumulado' },
-      { n: 'Process Mining',         file: 'process_mining_agent.js',  status: 'pending', desc: 'Analisa logs e dados reais para descobrir processos · Desvios vs ideal' },
-      { n: 'Automation Agent',       file: 'automation_agent.js',      status: 'pending', desc: 'Identifica candidatos à automação · Cria workflows n8n · Bots WhatsApp IA' },
+      { n: 'Lean Agent',          file: 'lean_agent.js',             status: 'ok', desc: '8 desperdícios · Value Stream Map (VSM) · Gargalos · Lead time vs cycle time' },
+      { n: 'Six Sigma Agent',     file: 'six_sigma_agent.js',        status: 'ok', desc: 'DMAIC · Cpk · DPMO · Ishikawa · Pareto · Plano de controle' },
+      { n: 'Kaizen Agent',        file: 'kaizen_agent.js',           status: 'ok', desc: 'Eventos Kaizen 3-5 dias · Kanban de melhorias · Impacto acumulado' },
+      { n: 'Process Mining',      file: 'process_mining_agent.js',   status: 'ok', desc: 'Analisa logs e dados reais para descobrir processos · Desvios vs ideal' },
+      { n: 'AI Automation',       file: 'ai_automation_discovery.js',status: 'ok', desc: 'Identifica candidatos à automação IA · Cria workflows n8n · Bots WhatsApp IA' },
+      { n: 'Change Management',   file: 'change_management.js',      status: 'ok', desc: 'Resistências, plano de comunicação, adoção e sustentação de melhorias' },
+      { n: 'Project Delivery',    file: 'project_delivery.js',       status: 'ok', desc: 'Cronograma de projeto · Marcos · Status ao cliente · Entrega no prazo' },
     ]
   },
   {
     id: 4, name: 'Sales', color: '#10B981',
     agents: [
-      { n: 'Sales Intelligence',     file: 'sales_intelligence.js',    status: 'pending', desc: 'Lead scoring 0-100 · Objeções por segmento · Follow-up automático' },
-      { n: 'Proposal Agent',         file: 'proposal_agent.js',        status: 'ok',      desc: 'GPCTBA → Proposta personalizada + ROI calculado + Resumo executivo 1 página' },
-      { n: 'Offer Optimization',     file: 'offer_optimization.js',    status: 'pending', desc: 'Analisa aprovação de ofertas · Testa variações · Identifica LTV máximo' },
-      { n: 'Pricing Agent',          file: 'pricing_agent.js',         status: 'pending', desc: 'Precifica projetos com margem > 60% · Sensibilidade por segmento · Tabela' },
+      { n: 'Sales Intelligence',  file: 'sales_intelligence.js',   status: 'ok', desc: 'Briefing pré-reunião · Objeções por segmento · Probabilidade de fechamento' },
+      { n: 'Proposal Agent',      file: 'proposal_agent.js',        status: 'ok', desc: 'GPCTBA → Proposta personalizada + ROI calculado + Resumo executivo 1 página' },
+      { n: 'Offer Optimization',  file: 'offer_optimization.js',    status: 'ok', desc: 'Analisa aprovação de ofertas · Testa variações · Identifica LTV máximo' },
+      { n: 'Pricing Agent',       file: 'pricing_agent.js',         status: 'ok', desc: 'Precifica projetos com margem > 60% · Sensibilidade por segmento · Tabela' },
+      { n: 'Meeting Intelligence',file: 'meeting_intelligence.js',  status: 'ok', desc: 'Sumário pós-reunião · Objeções registradas · Probabilidade de fechamento' },
     ]
   },
   {
     id: 5, name: 'Executive', color: '#A78BFA',
     agents: [
-      { n: 'Executive Dashboard',    file: 'exec_dashboard.js',        status: 'pending', desc: 'Consolida KPIs de todos os squads · Relatório diário/semanal/mensal' },
-      { n: 'Competitor Intelligence',file: 'competitor_agent.js',      status: 'pending', desc: 'Monitora concorrentes no Instagram e Google · Gaps e oportunidades' },
-      { n: 'Strategic Planning',     file: 'strategic_planning.js',   status: 'pending', desc: 'Planos 30/90/180 dias · OKRs · Progresso semanal vs metas' },
-      { n: 'CEO Advisor',            file: 'ceo_advisor.js',           status: 'ok',      desc: 'Briefing diário · FAZER HOJE / PLANEJAR / DELEGAR · Decisões priorizadas' },
-      { n: 'Chief of Staff',         file: 'chief_of_staff.js',        status: 'pending', desc: 'Decisões → tarefas concretas · Agenda do dia · Resumo Telegram/WhatsApp' },
+      { n: 'Executive Dashboard',     file: 'exec_dashboard.js',      status: 'ok', desc: 'Consolida KPIs de todos os squads · Relatório diário/semanal/mensal' },
+      { n: 'Competitor Intelligence', file: 'competitor_agent.js',     status: 'ok', desc: 'Monitora concorrentes no Instagram e Google · Gaps e oportunidades' },
+      { n: 'Strategic Planning',      file: 'strategic_planning.js',   status: 'ok', desc: 'Planos 30/90/180 dias · OKRs · Progresso semanal vs metas' },
+      { n: 'CEO Advisor',             file: 'ceo_advisor.js',          status: 'ok', desc: 'Briefing diário · FAZER HOJE / PLANEJAR / DELEGAR · Decisões priorizadas' },
+      { n: 'Chief of Staff',          file: 'chief_of_staff.js',       status: 'ok', desc: 'Decisões → tarefas concretas · Agenda do dia · Resumo Telegram/WhatsApp' },
+      { n: 'KPI Guardian',            file: 'kpi_guardian.js',         status: 'ok', desc: 'Monitora KPIs às 12h · Alerta quando métrica sai da faixa · Verde/Amarelo/Vermelho' },
     ]
   },
   {
     id: 6, name: 'Knowledge', color: '#6EE7B7',
     agents: [
-      { n: 'Knowledge Management',   file: 'knowledge_agent.js',       status: 'pending', desc: 'SOPs · Playbooks · Aprendizados de projetos · pgvector busca semântica' },
-      { n: 'Case Study Agent',       file: 'case_study_agent.js',      status: 'pending', desc: 'Documenta casos antes/depois · ROI real de cada projeto · Prova social' },
-      { n: 'Productization Agent',   file: 'productization_agent.js', status: 'pending', desc: 'Transforma serviços em produtos digitais escaláveis e replicáveis' },
+      { n: 'Knowledge Management',  file: 'knowledge_agent.js',         status: 'ok', desc: 'SOPs · Playbooks · Aprendizados de projetos · pgvector busca semântica' },
+      { n: 'Case Study Agent',       file: 'case_study_agent.js',       status: 'ok', desc: 'Documenta casos antes/depois · ROI real de cada projeto · Prova social' },
+      { n: 'Productization Agent',   file: 'productization_agent.js',   status: 'ok', desc: 'Transforma serviços em produtos digitais escaláveis e replicáveis' },
+      { n: 'Org Learning',           file: 'organizational_learning.js',status: 'ok', desc: 'Retrospectiva mensal · 3 wins, 3 aprendizados, 3 mudanças · Atualiza playbooks' },
+      { n: 'Framework Creation',     file: 'framework_creation.js',     status: 'ok', desc: 'Cria frameworks proprietários SmartOps · IP vendável · Diferencial competitivo' },
     ]
   },
   {
     id: 7, name: 'Client Success', color: '#F87171',
     agents: [
-      { n: 'Client Success',         file: 'client_success_agent.js', status: 'pending', desc: 'Satisfação de clientes · Entregas e prazos · Upsell em ativos · Churn risk' },
-      { n: 'Risk Agent',             file: 'risk_agent.js',            status: 'pending', desc: 'Alertas: pagamento atrasado, prazo estourado, cliente insatisfeito' },
+      { n: 'Client Success',   file: 'client_success_agent.js', status: 'ok', desc: 'Satisfação de clientes · Entregas e prazos · Upsell em ativos · Churn risk' },
+      { n: 'Risk Agent',       file: 'risk_agent.js',            status: 'ok', desc: 'Alertas: pagamento atrasado, prazo estourado, cliente insatisfeito' },
+      { n: 'Client Expansion', file: 'client_expansion.js',      status: 'ok', desc: 'Upsell e cross-sell em clientes ativos · Aumenta LTV sem custo de aquisição' },
     ]
   },
   {
     id: 8, name: 'Finance', color: 'var(--auto)',
     agents: [
-      { n: 'Financial Intelligence', file: 'financial_agent.js',       status: 'ok',      desc: 'CAC · LTV · Margem bruta/líquida · Forecast 30/60/90 dias · ROI por canal' },
+      { n: 'Financial Intelligence', file: 'financial_agent.js',         status: 'ok', desc: 'CAC · LTV · Margem bruta/líquida · Forecast 30/60/90 dias · ROI por canal' },
+      { n: 'Revenue Intelligence',   file: 'digital_revenue_agent.js',   status: 'ok', desc: 'Receita digital por canal · Performance de ads · Attribution semanal' },
     ]
   },
   {
     id: 9, name: 'Personal Brand', color: '#FBBF24',
     agents: [
-      { n: 'Personal Brand',         file: 'personal_brand_agent.js', status: 'pending', desc: 'Narrativa de autoridade Breno Luiz · Posicionamento Black Belt referência BH' },
-      { n: 'Authority Building',     file: 'authority_agent.js',       status: 'pending', desc: 'Palestras e eventos BH · Artigos LinkedIn · Lives · Podcasts · Menções' },
-      { n: 'Partnership Agent',      file: 'partnership_agent.js',    status: 'pending', desc: 'Parcerias B2B estratégicas · Comissionamento · Pipeline de parceiros' },
+      { n: 'Personal Brand',    file: 'personal_brand_agent.js', status: 'ok', desc: 'Narrativa de autoridade Breno Luiz · Posicionamento Black Belt referência BH' },
+      { n: 'Authority Building',file: 'authority_agent.js',      status: 'ok', desc: 'Palestras e eventos BH · Artigos LinkedIn · Lives · Podcasts · Menções' },
+      { n: 'Partnership Agent', file: 'partnership_agent.js',    status: 'ok', desc: 'Parcerias B2B estratégicas · Comissionamento · Pipeline de parceiros' },
+      { n: 'Community Agent',   file: 'community_agent.js',      status: 'ok', desc: 'Grupo WhatsApp/Telegram · Nutrição de leads · Conversão de membros' },
     ]
   },
   {
     id: 10, name: 'AI Lab', color: '#C084FC',
     agents: [
-      { n: 'AI Lab Agent',           file: 'ai_lab_agent.js',          status: 'pending', desc: 'Monitora novos LLMs e ferramentas · Testa e avalia aplicações para consultoria' },
+      { n: 'AI Lab Agent',        file: 'ai_lab_agent.js',      status: 'ok', desc: 'Monitora novos LLMs e ferramentas · Testa e avalia aplicações para consultoria' },
+      { n: 'Market Opportunity',  file: 'market_opportunity.js',status: 'ok', desc: 'Identifica setores com maior dor + crescimento · Oportunidades de expansão' },
     ]
   },
 ];
@@ -1790,6 +1804,10 @@ function renderAgents() {
     html += `</div>`;
   }
   container.innerHTML = html;
+  // Atualiza counter de implementados dinamicamente
+  const totalOk = ALL_SQUADS.reduce((s, sq) => s + sq.agents.filter(a => a.status === 'ok').length, 0);
+  const el = document.getElementById('agents-ok-count');
+  if (el) el.textContent = totalOk;
 }
 renderAgents();
 
