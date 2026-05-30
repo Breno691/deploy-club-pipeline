@@ -1,204 +1,188 @@
 # CONTINUAR AQUI — SmartOps IA
-# Cole este documento no início da próxima conversa com Claude Code
+# Última atualização: 2026-05-29 (Sessão 3)
 
 ---
 
-## CONTEXTO DO PROJETO
+## INFRAESTRUTURA ATUAL — TUDO RODANDO
 
-**Empresa:** SmartOps IA — consultoria Lean Six Sigma + Automação com IA para PMEs em BH
-**Dono:** Breno Luiz — Black Belt Lean Six Sigma
-**Contato:** (31) 97203-9180 | brenoluiz691@gmail.com
-**GitHub:** https://github.com/Breno691/deploy-club-pipeline
-**Pipeline Server:** https://n8n-pipeline-server.sumjyb.easypanel.host
-**Dashboard:** http://localhost:3100 (rodar: `npm run dashboard`)
+| Serviço | URL | Status |
+|---|---|---|
+| Dashboard 24/7 | https://n8n-smartops-dashboard.sumjyb.easypanel.host | ✅ EasyPanel |
+| Mobile / Dados | https://dados.sumjyb.easypanel.host | ✅ EasyPanel |
+| Rotina Conteúdo | https://dados.sumjyb.easypanel.host/rotina.html | ✅ EasyPanel |
+| Pipeline conteúdo | https://n8n-pipeline-server.sumjyb.easypanel.host | ✅ EasyPanel |
+| n8n | https://n8n-n8nn.sumjyb.easypanel.host | ✅ EasyPanel |
+| Site SmartOps | https://smartops-ia.com.br | ✅ Netlify |
+| Dashboard local | http://localhost:3100 | `npm run dashboard` |
 
 ---
 
-## O QUE JÁ ESTÁ FUNCIONANDO
+## O QUE FOI FEITO NESTA SESSÃO (2026-05-29)
 
-### Pipeline de Conteúdo Automático (3x/semana via n8n + EasyPanel)
-```
-research.js → generate_copy.js → generate_ad.js → build_ad_html.js
-→ render_ad.js → upload_media.js → Telegram (aprovação) → [Instagram pendente]
-```
+### 1. AUTONOMOUS OPERATIONS FRAMEWORK
+- `knowledge/autonomous_governance.md` — modelo de governança com 3 níveis de autonomia
+- Cada agente tem: autoridade definida, formato de reporte padronizado, regra de quando agir sem pedir aprovação
 
-### 16 Scripts de Agentes em scripts/
+### 2. DIGITAL REVENUE INTELLIGENCE AGENT (50º agente)
+- `scripts/digital_revenue_agent.js` (`npm run revenue-intel`)
+- CMO + CRO + Analytics Director consolidado
+- Analisa funil completo, gera calendário de conteúdo, keywords de ads, 10 decisões do dia
+
+### 3. MONITORING — TELEGRAM + DASHBOARD
+- `lib/agent_notify.js` — notificação Telegram + log em `data/executions.json` + Supabase
+- `lib/run.js` — wrapper universal para todos os agentes
+- **41 scripts** atualizados para usar o wrapper automaticamente
+- Aba **⚡ Execuções** no dashboard com histórico + auto-refresh
+- **TELEGRAM_BOT_TOKEN configurado:** `8768619004:AAE7orIiwvi2CD4wF5okhSx2ClkUaHLVaXY`
+- **Chat ID:** `1349738505`
+
+### 4. SCHEDULER AUTOMÁTICO
+Agentes rodam automaticamente enquanto o dashboard estiver online (EasyPanel = 24/7):
+
+| Agente | Horário | Dias |
+|---|---|---|
+| Morning Briefing | 07:00 | Seg–Sex |
+| Weekly Review | 08:00 | Segunda |
+| KPI Guardian | 12:00 | Todo dia |
+| Risk Agent | 18:00 | Todo dia |
+| Revenue Intel | 17:00 | Sexta |
+
+### 5. NOVOS AGENTES CRIADOS
+| Agente | Comando | Funciona sem API? |
+|---|---|---|
+| Website Analytics | `npm run website-analytics` | ✅ |
+| Ads Agent | `npm run ads` | ✅ |
+| Process Mining | `npm run process-mining` | ✅ (com dados: `--process arquivo.csv`) |
+| Digital Revenue Intel | `npm run revenue-intel` | ✅ |
+
+### 6. ORQUESTRADORES
+| Comando | Agentes | Duração estimada |
+|---|---|---|
+| `npm run morning` | KPI Guardian → Risk → Lead Score → CoS → CEO | ~10 min |
+| `npm run weekly` | Finance → Revenue → Sales → Risk → KPI → Exec Dash → Competitor → Strategy → CEO → CoS | ~25 min |
+| `npm run agent-roadmap` | Gera framework + roadmap 12 meses de todos os agentes | ~5 min |
+
+### 7. EASYPANEL — DASHBOARD DEPLOYADO
+- `Dockerfile.dashboard` — imagem Node.js leve, porta 3100
+- URL: `https://n8n-smartops-dashboard.sumjyb.easypanel.host`
+- Volumes: `smartops-data:/app/data`, `smartops-outputs:/app/outputs`
+
+### 8. PÁGINA MOBILE — ROTINA DE CONTEÚDO
+- `mobile-server/public/rotina.html`
+- URL: `https://dados.sumjyb.easypanel.host/rotina.html`
+- 4 abas: Hoje (checklist com progresso) / Semana / Ações Rápidas / Resumo
+
+### 9. AGENT ROADMAP + CLASSIFICAÇÃO
+- `scripts/agent_roadmap.js` (`npm run agent-roadmap`)
+- Gera análise completa de 44 agentes + roadmap 12 meses + classificação por fase
+- Output: `outputs/agent_roadmap_YYYY-MM-DD/FULL_AGENT_GUIDE.md`
+
+---
+
+## TOTAL DE AGENTES: 50
+
+| Status | Quantidade |
+|---|---|
+| ✅ Funcionam agora (só ANTHROPIC_API_KEY) | 44 |
+| 📊 Leem Supabase em tempo real | 5 |
+| 🔴 Precisam API externa (Instagram, GA4, Ads) | 3 |
+
+---
+
+## COMANDOS DO DIA A DIA
+
 ```bash
-npm run pipeline:run   # pipeline completo de conteúdo
-npm run ceo            # briefing executivo do dia
-npm run proposal       # gerar proposta comercial (+ --client "Nome" --notes arquivo.txt)
-npm run finance        # relatório financeiro (+ --data data/financial_data.json)
-npm run sales          # scoring de leads e scripts de abordagem WhatsApp
-npm run competitor     # inteligência competitiva via Tavily
-npm run lean           # análise VSM + 8 desperdícios (+ --client "X" --sector saude)
-npm run sigma          # DMAIC completo (+ --client "X")
-npm run strategy       # plano estratégico 90 dias com OKRs
-npm run seo            # keywords, clusters, artigos prioritários
-npm run risk           # alertas de risco do negócio
-npm run dashboard      # painel de controle em http://localhost:3100
+# Rotina diária (automática via scheduler 24/7)
+# Ou manual:
+npm run morning        # 5 agentes em sequência
+npm run weekly         # 10 agentes — toda segunda
+
+# Agentes individuais mais usados
+npm run cos            # Plano do dia
+npm run kpi-guardian   # O que piorou
+npm run lead-score     # Priorizar leads
+npm run risk           # Alertas
+npm run revenue-intel  # Visão do funil completo
+npm run ceo            # Decisões estratégicas
+
+# Análise completa
+npm run agent-roadmap  # Framework + roadmap 12 meses
+
+# Infraestrutura
+npm run dashboard      # Dashboard local http://localhost:3100
+npm run sync           # Sincronizar Supabase → JSON local
 ```
-
-### Knowledge Files em knowledge/
-- brand_identity.md, product_campaign.md, platform_guidelines.md
-- visual_references.md, content_strategy.md, sales_playbook.md, customer_personas.md
-
-### Data Files em data/
-- data/leads.json — leads do pipeline (vazio, populate manualmente ou via API)
-- data/financial_data.json — criar com dados reais de receita/custos
 
 ---
 
-## O QUE FALTA IMPLEMENTAR
+## O QUE AINDA FALTA
 
-### GRUPO A — Só precisam de script (pode criar agora, sem novas APIs)
-Esses 16 agentes têm SKILL.md documentado em skills/ e só precisam de um script .js seguindo o mesmo padrão dos scripts existentes (Claude API + knowledge files):
-
-| Agente | Arquivo | O que faz |
-|---|---|---|
-| Chief of Staff | `chief_of_staff.js` | Decisões do CEO → tarefas concretas + envia resumo no Telegram |
-| Knowledge Management | `knowledge_agent.js` | Cria SOPs e playbooks de processos recorrentes |
-| Case Study | `case_study_agent.js` | Documenta casos antes/depois com ROI real |
-| Productization | `productization_agent.js` | Transforma serviços em produtos escaláveis |
-| Personal Brand | `personal_brand_agent.js` | Narrativa de autoridade + posicionamento Breno Luiz |
-| Authority Building | `authority_agent.js` | Palestras, artigos LinkedIn, lives, podcasts |
-| Partnership | `partnership_agent.js` | Parcerias B2B + pipeline de parceiros |
-| AI Lab | `ai_lab_agent.js` | Monitora novidades em LLMs e ferramentas IA |
-| Offer Optimization | `offer_optimization.js` | Analisa aprovação de ofertas + testa variações |
-| Pricing | `pricing_agent.js` | Precifica projetos com margem > 60% |
-| Client Success | `client_success_agent.js` | Satisfação, entregas, upsell, churn risk |
-| Executive Dashboard | `exec_dashboard.js` | Consolida KPIs de todos os squads |
-| Kaizen | `kaizen_agent.js` | Melhorias Kaizen, Kanban, impacto acumulado |
-| CRO | `cro_agent.js` | Taxa de conversão por página, testes A/B |
-| Customer Journey | `journey_agent.js` | Mapeia jornada visitante→cliente, pontos de atrito |
-| Revenue | `revenue_agent.js` | Receita por canal, atribuição, LTV por projeto |
-
-### GRUPO B — Precisam de API externa primeiro
-| Agente | API Necessária | Como obter |
-|---|---|---|
-| Distribution (publicar Instagram) | Instagram Graph API — token longa duração + Page ID | Meta for Developers → Graph API Explorer |
-| Website Analytics | GA4 — Google Analytics Data API | Google Cloud Console → habilitar API → service account |
-| Ads Agent | Google Ads API (Developer Token) + Meta Marketing API | Google Ads Manager + Meta Business Manager |
-
-### GRUPO C — Infraestrutura
+### 🔴 Requer dados do Breno
 | Item | O que falta |
 |---|---|
-| `render_video.js` | Integrar Remotion ao pipeline (remotion/src/AdVideo.tsx já existe) |
-| Process Mining | Logs/dados de sistemas de clientes para analisar |
+| Meta Pixel | `PUBLIC_META_PIXEL_ID` no .env do site + Netlify |
+| Meta CAPI | Token no Events Manager → configurar no n8n |
+| Instagram Graph API | Token para publicação automática |
+| GA4 Data API | Service account JSON para Website Analytics Agent |
+
+### 🟡 Próximas sessões sugeridas
+1. **Ativar Meta Pixel** — 10 min, impacto alto em ads
+2. **Adicionar leads reais** via https://dados.sumjyb.easypanel.host
+3. **Formulário na /diagnostico-gratuito** do site
+4. **Reimplantar smartops-dados** no EasyPanel (pega a página /rotina.html)
+5. **Reimplantar smartops-dashboard** no EasyPanel (pega novos scripts e scheduler)
+
+### 🟢 Quando tiver primeiro cliente
+- Case Study Agent (`npm run case-study`)
+- Process Mining com dados reais (`npm run process-mining --process dados.csv`)
+- Client Success (`npm run cs`)
 
 ---
 
-## ARQUITETURA DOS SCRIPTS (PADRÃO)
+## SUPABASE
 
-Todos os scripts seguem este padrão — use como referência para criar novos:
+**URL:** https://fehnahtgmcppatcwgpiz.supabase.co
+**Tabelas:** `leads`, `clients`, `financial`, `agent_executions` (nova)
+**Service Key:** no `.env` local como `SUPABASE_SERVICE_KEY`
 
-```javascript
-require('dotenv').config();
-const Anthropic = require('@anthropic-ai/sdk');
-const fs = require('fs');
-const path = require('path');
-
-// Args
-const args = process.argv.slice(2);
-const get = (flag) => { const i = args.indexOf(flag); return i !== -1 ? args[i + 1] : null; };
-const taskName = get('--task') || 'nome_padrao';
-const taskDate = get('--date') || new Date().toISOString().split('T')[0];
-
-// Output dirs
-const outputDir = path.join('outputs', `${taskName}_${taskDate}`);
-const agentDir  = path.join(outputDir, 'nome_do_agente');
-
-// Log helper
-function appendLog(msg) {
-  fs.appendFileSync(path.join(outputDir, 'logs', 'nome_agente.log'),
-    `[${new Date().toISOString()}] ${msg}\n`);
-}
-
-// Helpers
-function readFileSafe(p) { try { return fs.readFileSync(p, 'utf8'); } catch { return ''; } }
-function readJsonSafe(p) { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch { return null; } }
-
-async function runAgent() {
-  // Create dirs
-  [agentDir, path.join(outputDir, 'logs')].forEach(d => {
-    if (!fs.existsSync(d)) fs.mkdirSync(d, { recursive: true });
-  });
-  appendLog('agent started');
-
-  // Load knowledge
-  const brandIdentity = readFileSafe('knowledge/brand_identity.md');
-  const playbook      = readFileSafe('knowledge/sales_playbook.md');
-
-  // Claude call
-  const client = new Anthropic();
-  const resp = await client.messages.create({
-    model: 'claude-sonnet-4-6',
-    max_tokens: 2000,
-    messages: [{ role: 'user', content: `SEU PROMPT AQUI` }],
-  });
-
-  // Parse JSON (sempre fazer assim para evitar markdown wrapping)
-  let result = {};
-  try {
-    const raw = resp.content[0].text.trim().replace(/```json\n?/g,'').replace(/```\n?/g,'').trim();
-    result = JSON.parse(raw);
-  } catch { result = {}; }
-
-  // Save
-  fs.writeFileSync(path.join(agentDir, 'report.md'), resp.content[0].text.trim());
-  fs.writeFileSync(path.join(agentDir, 'data.json'), JSON.stringify(result, null, 2));
-
-  appendLog('agent complete ✓');
-}
-
-runAgent().catch(err => { console.error(err.message); process.exit(1); });
-```
+Agentes que leem Supabase em tempo real:
+`kpi_guardian`, `lead_scoring`, `revenue_agent`, `risk_agent`, `chief_of_staff`
 
 ---
 
-## TECH STACK
-
-| Ferramenta | Status | Uso |
-|---|---|---|
-| Node.js 22 | ✅ Ativo | Runtime de todos os scripts |
-| Anthropic API (Claude Sonnet 4.6) | ✅ Ativo | Todos os agentes de geração |
-| Tavily AI | ✅ Ativo | research.js, competitor_agent.js, seo_agent.js |
-| Playwright | ✅ Ativo | render_ad.js → PNG 1080x1080 |
-| Supabase | ✅ Ativo | upload_media.js → storage |
-| BullMQ + Upstash Redis | ✅ Ativo | fila de jobs |
-| n8n | ✅ Ativo | trigger Ter/Qui/Sáb + Telegram |
-| EasyPanel | ✅ Ativo | hospeda pipeline server |
-| Express (dashboard-server.js) | ✅ Ativo | API local porta 3100 |
-| Instagram Graph API | 🔴 Pendente | publicar posts |
-| GA4 Data API | 🔴 Pendente | analytics do site |
-| Google Ads API | 🔴 Pendente | dados de campanhas |
-| Remotion | ⚡ Parcial | AdVideo.tsx existe, falta render_video.js |
+## GITHUB
+**Repo:** https://github.com/Breno691/deploy-club-pipeline
+**Branch:** main
+**Último commit:** feat: add agent roadmap generator + classification framework
 
 ---
 
-## DESIGN DO AD (SmartOps IA)
+## CLASSIFICAÇÃO DOS AGENTES POR PRIORIDADE (resultado do agent-roadmap)
 
-- Fundo: #0A0A0F | Card: #0B0F17 | Border: #1F2937
-- Accent Lean: #7C3AED (roxo) | Accent Automação: #10B981 (verde)
-- Headline: Bebas Neue | Corpo: Inter
-- Layout: faixa roxa vertical esquerda, grid sutil, 3 pilares numerados
+### 🔴 CRÍTICOS AGORA (fechar primeiros clientes)
+Offer Optimization, Personal Brand, Sales Intelligence, Copywriter, Ads Agent,
+Proposal, Lead Scoring, Pricing, Customer Journey
+
+### 🟡 IMPORTANTES EM 90 DIAS
+SEO, Content Performance, CRO, Website Analytics, Meeting Intelligence,
+Revenue, Client Success, Authority Building, AI Automation Discovery,
+Strategic Planning, Chief of Staff, Marketing Research
+
+### 🟢 ÚTEIS NO MÊS 4-8
+Lean, Six Sigma, Kaizen, Process Mining, Case Study, Framework Creation,
+Productization, Client Expansion, Automation, Project Delivery,
+Change Management, Risk, Experimentation, Thought Leadership
+
+### ⚪ MÊS 9+ (quando escalar)
+CEO Advisor, Executive Dashboard, KPI Guardian, Design avançado,
+Distribution (Instagram API), Video Ad, Community, Partnership,
+AI Lab, Market Opportunity, Org Learning, Knowledge Management
 
 ---
 
-## INSTRUÇÃO PARA CLAUDE CODE
-
-Continue de onde paramos. Próximas opções:
-
-**Opção 1 — Criar os 16 scripts do Grupo A** (sem APIs externas, pode fazer agora)
-> "Implemente os agentes do Grupo A — Chief of Staff, Knowledge Management, Case Study..."
-
-**Opção 2 — Conectar Instagram Graph API** (publicação automática de posts)
-> "Implemente o distribution_agent.js para publicar no Instagram. Tenho o token X e Page ID Y"
-
-**Opção 3 — Integrar Remotion** (gerar vídeos animados no pipeline)
-> "Implemente render_video.js para integrar o AdVideo.tsx do Remotion ao pipeline"
-
-**Opção 4 — Conectar GA4** (analytics real do site)
-> "Implemente website_analytics.js para ler dados do GA4. Meu Property ID é: XXXXXXXX"
-
-**Opção 5 — Adicionar leads e testar proposta real**
-> "Adiciona um lead em data/leads.json e gera uma proposta real para ele"
+## TOP 5 PARA FOCAR AGORA
+1. **Offer Optimization** — definir a oferta antes de tudo
+2. **Personal Brand** — Breno é o produto
+3. **Sales Intelligence** — lista de 50 alvos em BH
+4. **Copywriter** — copy que converte em cada canal
+5. **Ads (Google Ads)** — único canal que gera leads ativos agora
