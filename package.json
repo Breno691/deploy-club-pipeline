@@ -63,6 +63,7 @@
     "ads": "node lib/run.js \"Ads Agent\" scripts/ads_agent.js --task ads",
     "process-mining": "node lib/run.js \"Process Mining\" scripts/process_mining_agent.js --task process_mining",
     "revenue-intel": "node lib/run.js \"Digital Revenue Intelligence\" scripts/digital_revenue_agent.js --task revenue_intel",
+    "agent-roadmap": "node scripts/agent_roadmap.js",
     "morning": "node scripts/morning.js",
     "weekly": "node scripts/weekly.js",
     "sync": "node scripts/sync_supabase.js"

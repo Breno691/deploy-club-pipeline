@@ -1,1 +1,27 @@
-[]
+[
+  {
+    "_exemplo": "REMOVA ESTE OBJETO ao adicionar leads reais. Copie a estrutura abaixo.",
+    "id": 1,
+    "nome": "João Silva",
+    "empresa": "Metalúrgica Silva Ltda",
+    "setor": "manufatura",
+    "cargo": "Dono",
+    "funcionarios": 20,
+    "faturamento_estimado": "200k/mes",
+    "whatsapp": "(31) 9xxxx-xxxx",
+    "email": "",
+    "cidade": "BH",
+    "problema_principal": "retrabalho alto na linha de montagem",
+    "ja_tentou_resolver": true,
+    "urgencia": "alta",
+    "score": 78,
+    "status": "lead_quente",
+    "origem": "indicacao",
+    "indicado_por": "Carlos Pereira",
+    "data_primeiro_contato": "2026-05-29",
+    "ultimo_contato": "2026-05-29",
+    "proximo_passo": "ligar para agendar diagnostico",
+    "objection": "acha que vai ser caro",
+    "notas": "Dono decide sozinho. Retrabalho estima em 15% da producao."
+  }
+]
