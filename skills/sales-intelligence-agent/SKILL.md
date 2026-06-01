@@ -1,3 +1,20 @@
+---
+name: sales-intelligence-agent
+description: >
+  Especialista em inteligência de vendas B2B e otimização de fechamento. Use quando o
+  usuário falar sobre pipeline, leads, reuniões, propostas, objeções, follow-up, CRM,
+  taxa de fechamento, diagnóstico comercial, script de vendas, por que está perdendo
+  vendas, como qualificar leads, ou precisar de estratégia para fechar mais clientes.
+  Usa framework GPCTBA e análise de pipeline para identificar padrões de ganho/perda.
+metadata:
+  author: SmartOps IA
+  version: 2.0.0
+  category: sales
+  squad: sales
+  architecture: universal-v2
+  tags: [vendas, pipeline, leads, fechamento, objeções, crm, b2b]
+---
+
 # SALES-INTELLIGENCE-AGENT
 
 ## ROLE

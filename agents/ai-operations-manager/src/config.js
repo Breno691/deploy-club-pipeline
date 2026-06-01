@@ -1,0 +1,450 @@
+// AI Operations Manager — config
+const CONFIG = {
+  agent: {
+    name:    'AI Operations Manager',
+    version: '2.0.0',
+    role:    'Maestro Central — Orquestrador de todos os agentes SmartOps IA',
+    mission: 'Receber qualquer pedido do usuário, identificar o(s) agente(s) correto(s), distribuir tarefas, consolidar respostas e entregar plano de ação integrado.',
+    mantra:  'O maestro não toca todos os instrumentos. Ele garante que cada um toque na hora certa.',
+  },
+
+  company: {
+    name:     'SmartOps IA',
+    owner:    'Breno Luiz',
+    role:     'Black Belt Lean Six Sigma + Fundador',
+    location: 'Belo Horizonte, MG',
+  },
+
+  claude: {
+    model:     'claude-sonnet-4-6',
+    maxTokens: 8192,
+  },
+
+  // Todos os agentes registrados no sistema
+  agents: {
+    // ── ORQUESTRAÇÃO ──────────────────────────────────────────────
+    orchestrator: {
+      name:     'Orchestrator Agent',
+      path:     '../orchestrator-agent',
+      squad:    'orchestration',
+      category: 'coordination',
+      triggers: ['pipeline', 'campanha', 'conteúdo completo', 'publicar', 'gerar campanha'],
+      description: 'Coordena o pipeline completo de conteúdo: research → copy + design + video → distribuição',
+    },
+    ceo_advisor: {
+      name:     'CEO Advisor Agent',
+      path:     '../ceo-advisor-agent',
+      squad:    'executive',
+      category: 'decision',
+      triggers: ['decisão', 'priorizar', 'o que fazer', 'plano do dia', 'resumo executivo', 'brief', 'revisão semanal'],
+      description: 'Consolida insights de todos os agentes e gera decisões executivas priorizadas por ROI',
+    },
+    chief_of_staff: {
+      name:     'Chief of Staff Agent',
+      path:     '../chief-of-staff-agent',
+      squad:    'executive',
+      category: 'execution',
+      triggers: ['plano de execução', 'tarefas da semana', 'organizar', 'delegar'],
+      description: 'Transforma estratégia em execução, cria planos táticos e acompanha entregas',
+    },
+
+    // ── SQUAD MARKETING ───────────────────────────────────────────
+    marketing_research: {
+      name:     'Marketing Research Agent',
+      path:     '../marketing-research-agent',
+      squad:    'marketing',
+      category: 'research',
+      triggers: ['pesquisa de mercado', 'concorrentes', 'tendências', 'público-alvo', 'benchmark'],
+      description: 'Pesquisa mercado, tendências, concorrentes e oportunidades de crescimento',
+    },
+    copywriter: {
+      name:     'Copywriter Agent',
+      path:     '../copywriter-agent',
+      squad:    'marketing',
+      category: 'content',
+      triggers: ['copy', 'texto', 'legenda', 'caption', 'instagram', 'threads', 'youtube', 'script'],
+      description: 'Cria copy persuasivo para todos os canais: Instagram, Threads, YouTube, e-mail, anúncios',
+    },
+    design: {
+      name:     'Design Agent',
+      path:     '../design-agent',
+      squad:    'marketing',
+      category: 'creative',
+      triggers: ['design', 'visual', 'carrossel', 'layout', 'banner', 'ad criativo'],
+      description: 'Cria visuais premium: posts, carrosséis, anúncios, layouts com HTML/CSS + Playwright',
+    },
+    distribution: {
+      name:     'Distribution Agent',
+      path:     '../distribution-agent',
+      squad:    'marketing',
+      category: 'distribution',
+      triggers: ['publicar', 'postar', 'distribuir', 'calendário de conteúdo', 'schedule'],
+      description: 'Gerencia publicação multicanal e calendário de conteúdo',
+    },
+    seo: {
+      name:     'SEO Agent',
+      path:     '../seo-agent',
+      squad:    'marketing',
+      category: 'organic',
+      triggers: ['seo', 'tráfego orgânico', 'palavra-chave', 'cluster', 'autoridade'],
+      description: 'Estratégia de SEO, pesquisa de palavras-chave, clusters de conteúdo',
+    },
+    video_ad: {
+      name:     'Video Ad Specialist Agent',
+      path:     '../video-ad-specialist-agent',
+      squad:    'marketing',
+      category: 'video',
+      triggers: ['vídeo', 'video ad', 'VSL', 'reels', 'roteiro de vídeo'],
+      description: 'Cria criativos de vídeo, VSL, UGC e roteiros para reels',
+    },
+    personal_brand: {
+      name:     'Personal Brand Agent',
+      path:     '../personal-brand-agent',
+      squad:    'brand',
+      category: 'brand',
+      triggers: ['marca pessoal', 'posicionamento', 'narrativa', 'autoridade pessoal'],
+      description: 'Desenvolve narrativa, posicionamento e autoridade da marca pessoal',
+    },
+
+    // ── SQUAD GROWTH ──────────────────────────────────────────────
+    cro: {
+      name:     'CRO Agent',
+      path:     '../cro-agent',
+      squad:    'growth',
+      category: 'conversion',
+      triggers: ['conversão', 'cro', 'landing page', 'funil', 'taxa de conversão'],
+      description: 'Otimiza conversão em landing pages, funis e jornada do cliente',
+    },
+    revenue: {
+      name:     'Revenue Agent',
+      path:     '../revenue-agent',
+      squad:    'growth',
+      category: 'revenue',
+      triggers: ['receita', 'revenue', 'cac', 'ltv', 'atribuição', 'roi'],
+      description: 'Análise de receita, ROI, CAC, LTV e atribuição de canais',
+    },
+    ads: {
+      name:     'Ads Agent',
+      path:     '../ads-agent',
+      squad:    'growth',
+      category: 'paid',
+      triggers: ['google ads', 'meta ads', 'anúncios', 'ads', 'campanhas pagas', 'roas', 'cpa'],
+      description: 'Gestão e otimização de Google Ads e Meta Ads',
+    },
+    customer_journey: {
+      name:     'Customer Journey Agent',
+      path:     '../customer-journey-agent',
+      squad:    'growth',
+      category: 'ux',
+      triggers: ['jornada do cliente', 'customer journey', 'experiência do cliente'],
+      description: 'Mapeia e otimiza a jornada completa do cliente',
+    },
+    lead_scoring: {
+      name:     'Lead Scoring Agent',
+      path:     '../lead-scoring-agent',
+      squad:    'growth',
+      category: 'leads',
+      triggers: ['qualificação de leads', 'lead scoring', 'leads quentes', 'prioridade de leads'],
+      description: 'Qualifica e prioriza leads por probabilidade de fechamento e valor',
+    },
+    website_analytics: {
+      name:     'Website Analytics Agent',
+      path:     '../website-analytics-agent',
+      squad:    'growth',
+      category: 'analytics',
+      triggers: ['analytics', 'site', 'sessões', 'eventos', 'ga4', 'tráfego'],
+      description: 'Analisa comportamento no site via GA4: eventos, sessões, páginas, conversões',
+    },
+
+    // ── SQUAD OPERATIONS ──────────────────────────────────────────
+    lean: {
+      name:     'Lean Agent',
+      path:     '../lean-agent',
+      squad:    'operations',
+      category: 'lean',
+      triggers: ['lean', '8 desperdícios', 'vsm', 'mapeamento de fluxo', 'fluxo de valor'],
+      description: 'Identifica desperdícios e mapeia fluxo de valor com metodologia Lean',
+    },
+    six_sigma: {
+      name:     'Six Sigma Agent',
+      path:     '../six-sigma-agent',
+      squad:    'operations',
+      category: 'quality',
+      triggers: ['six sigma', 'dmaic', 'defeitos', 'variabilidade', 'processo sigma'],
+      description: 'Reduz defeitos e variabilidade com DMAIC e ferramentas Six Sigma',
+    },
+    kaizen: {
+      name:     'Kaizen Agent',
+      path:     '../kaizen-agent',
+      squad:    'operations',
+      category: 'improvement',
+      triggers: ['kaizen', 'melhoria contínua', 'melhoria diária', 'ciclo pdca'],
+      description: 'Implementa melhoria contínua diária com ciclos Kaizen e PDCA',
+    },
+    process_mining: {
+      name:     'Process Mining Agent',
+      path:     '../process-mining-agent',
+      squad:    'operations',
+      category: 'process',
+      triggers: ['process mining', 'processos descobertos por dados', 'análise de processo'],
+      description: 'Descobre processos reais a partir de dados de sistemas e logs',
+    },
+    automation: {
+      name:     'Automation Agent',
+      path:     '../automation-agent',
+      squad:    'operations',
+      category: 'automation',
+      triggers: ['automação', 'n8n', 'webhook', 'zapier', 'make', 'workflow', 'automatizar'],
+      description: 'Desenha e implementa automações com n8n, APIs e RPA',
+    },
+    lean_consulting: {
+      name:     'Lean Consulting Agent',
+      path:     '../lean-consulting-agent',
+      squad:    'operations',
+      category: 'consulting',
+      triggers: ['consultoria lean', 'projeto lean', 'implementar lean', 'lean em cliente'],
+      description: 'Estrutura e executa projetos de consultoria Lean para clientes',
+    },
+    knowledge_management: {
+      name:     'Knowledge Management Agent',
+      path:     '../knowledge-management-agent',
+      squad:    'knowledge',
+      category: 'knowledge',
+      triggers: ['sop', 'playbook', 'documentação', 'procedimento', 'aprendizados', 'base de conhecimento'],
+      description: 'Cria e mantém SOPs, playbooks e base de conhecimento da empresa',
+    },
+
+    // ── SQUAD SALES ───────────────────────────────────────────────
+    sales_intelligence: {
+      name:     'Sales Intelligence Agent',
+      path:     '../sales-intelligence-agent',
+      squad:    'sales',
+      category: 'sales',
+      triggers: ['vendas', 'prospecção', 'script de vendas', 'objeções', 'crm', 'fechamento'],
+      description: 'Qualifica leads, supera objeções e cria estratégia comercial',
+    },
+    proposal: {
+      name:     'Proposal Agent',
+      path:     '../proposal-agent',
+      squad:    'sales',
+      category: 'proposal',
+      triggers: ['proposta', 'proposta comercial', 'orçamento', 'escopo'],
+      description: 'Cria propostas comerciais personalizadas e de alto valor percebido',
+    },
+    offer_optimization: {
+      name:     'Offer Optimization Agent',
+      path:     '../offer-optimization-agent',
+      squad:    'sales',
+      category: 'offer',
+      triggers: ['oferta', 'pacote', 'serviço', 'proposta de valor', 'posicionamento de oferta'],
+      description: 'Otimiza ofertas, pacotes e proposta de valor para maximizar conversão',
+    },
+    pricing: {
+      name:     'Pricing Agent',
+      path:     '../pricing-agent',
+      squad:    'sales',
+      category: 'pricing',
+      triggers: ['precificação', 'preço', 'margem', 'valor percebido', 'pricing'],
+      description: 'Define precificação estratégica com base em margem e valor percebido',
+    },
+
+    // ── SQUAD EXECUTIVE ───────────────────────────────────────────
+    executive_dashboard: {
+      name:     'Executive Dashboard Agent',
+      path:     '../executive-dashboard-agent',
+      squad:    'executive',
+      category: 'dashboard',
+      triggers: ['dashboard', 'kpis', 'relatório executivo', 'painel'],
+      description: 'Consolida KPIs de todos os squads em dashboards executivos',
+    },
+    competitor_intelligence: {
+      name:     'Competitor Intelligence Agent',
+      path:     '../competitor-intelligence-agent',
+      squad:    'executive',
+      category: 'intelligence',
+      triggers: ['concorrentes', 'benchmarking', 'análise competitiva', 'inteligência competitiva'],
+      description: 'Monitora concorrentes e identifica oportunidades de diferenciação',
+    },
+    strategic_planning: {
+      name:     'Strategic Planning Agent',
+      path:     '../strategic-planning-agent',
+      squad:    'executive',
+      category: 'strategy',
+      triggers: ['planejamento estratégico', 'okr', 'plano 90 dias', 'plano 180 dias', 'estratégia'],
+      description: 'Cria planos estratégicos 30/90/180 dias e define OKRs',
+    },
+    market_opportunity: {
+      name:     'Market Opportunity Agent',
+      path:     '../market-opportunity-agent',
+      squad:    'executive',
+      category: 'opportunity',
+      triggers: ['oportunidade de mercado', 'novo mercado', 'expansão', 'nicho'],
+      description: 'Identifica e prioriza oportunidades de mercado e novos nichos',
+    },
+
+    // ── SQUAD FINANCE ─────────────────────────────────────────────
+    financial_intelligence: {
+      name:     'Financial Intelligence Agent',
+      path:     '../financial-intelligence-agent',
+      squad:    'finance',
+      category: 'finance',
+      triggers: ['financeiro', 'fluxo de caixa', 'margem', 'receita', 'lucro', 'custos', 'relatório financeiro'],
+      description: 'Analisa saúde financeira: receita, margem, ROI, fluxo de caixa e custos',
+    },
+
+    // ── SQUAD CLIENT SUCCESS ──────────────────────────────────────
+    client_success: {
+      name:     'Client Success Agent',
+      path:     '../client-success-agent',
+      squad:    'client',
+      category: 'retention',
+      triggers: ['clientes', 'retenção', 'satisfação', 'onboarding', 'churn', 'expansão'],
+      description: 'Monitora saúde dos clientes, reduz churn e aumenta expansão',
+    },
+    risk: {
+      name:     'Risk Agent',
+      path:     '../risk-agent',
+      squad:    'client',
+      category: 'risk',
+      triggers: ['risco', 'alerta', 'ameaça', 'prevenção', 'mitigação'],
+      description: 'Identifica riscos operacionais, financeiros e de clientes com ações preventivas',
+    },
+
+    // ── SQUAD KNOWLEDGE ───────────────────────────────────────────
+    case_study: {
+      name:     'Case Study Agent',
+      path:     '../case-study-agent',
+      squad:    'knowledge',
+      category: 'proof',
+      triggers: ['case study', 'estudo de caso', 'antes e depois', 'resultado de cliente'],
+      description: 'Cria estudos de caso com resultados mensuráveis e ROI documentado',
+    },
+    productization: {
+      name:     'Productization Agent',
+      path:     '../productization-agent',
+      squad:    'knowledge',
+      category: 'product',
+      triggers: ['produtizar', 'produto', 'serviço recorrente', 'escalar consultoria'],
+      description: 'Transforma consultoria em produtos escaláveis e serviços recorrentes',
+    },
+
+    // ── SQUAD PERSONAL BRAND ──────────────────────────────────────
+    authority_building: {
+      name:     'Authority Building Agent',
+      path:     '../authority-building-agent',
+      squad:    'brand',
+      category: 'authority',
+      triggers: ['autoridade', 'palestra', 'artigo', 'podcast', 'live', 'especialista'],
+      description: 'Constrói autoridade via palestras, artigos, lives e podcasts',
+    },
+    partnership: {
+      name:     'Partnership Agent',
+      path:     '../partner-ship-agent',
+      squad:    'brand',
+      category: 'partnerships',
+      triggers: ['parceria', 'b2b', 'aliança estratégica', 'co-marketing'],
+      description: 'Identifica e estrutura parcerias estratégicas B2B',
+    },
+
+    // ── SQUAD AI LAB ──────────────────────────────────────────────
+    ai_lab: {
+      name:     'AI Lab Agent',
+      path:     '../ai-lab-agent',
+      squad:    'ai-lab',
+      category: 'innovation',
+      triggers: ['novas tecnologias', 'llm', 'ia', 'ferramentas ia', 'inovação', 'experimento'],
+      description: 'Avalia e experimenta novas tecnologias de IA para o negócio',
+    },
+
+    // ── OUTROS ────────────────────────────────────────────────────
+    consulting_company_builder: {
+      name:     'Consulting Company Builder Agent',
+      path:     '../consulting-company-builder-agent',
+      squad:    'operations',
+      category: 'consulting',
+      triggers: ['estruturar consultoria', 'empresa de consultoria', 'escalar consultoria', 'metodologia'],
+      description: 'Estrutura e escala empresa de consultoria com metodologia, serviços e operação',
+    },
+    relationship_coach: {
+      name:     'Relationship Coach Agent',
+      path:     '../relationship-coach-agent',
+      squad:    'brand',
+      category: 'relationship',
+      triggers: ['relacionamento', 'networking', 'abordagem', 'follow-up', 'mensagem de prospecção'],
+      description: 'Orienta estratégia de relacionamento, networking e abordagem de prospects',
+    },
+    growth_intelligence: {
+      name:     'Growth Intelligence Agent',
+      path:     '../growth-intelligence-agent',
+      squad:    'growth',
+      category: 'intelligence',
+      triggers: ['crescimento', 'growth hacking', 'alavancas de crescimento', 'escala'],
+      description: 'Identifica alavancas de crescimento e oportunidades de escala',
+    },
+    revenue_intelligence: {
+      name:     'Revenue Intelligence Agent',
+      path:     '../revenue-intelligence-agent',
+      squad:    'growth',
+      category: 'revenue',
+      triggers: ['inteligência de receita', 'análise de receita', 'forecasting', 'previsão de receita'],
+      description: 'Análise preditiva de receita, forecasting e identificação de padrões',
+    },
+    content_performance: {
+      name:     'Content Performance Agent',
+      path:     '../content-performance-agent',
+      squad:    'marketing',
+      category: 'analytics',
+      triggers: ['performance de conteúdo', 'engajamento', 'alcance', 'métricas de conteúdo'],
+      description: 'Analisa performance de conteúdo: alcance, engajamento, conversão e ROI',
+    },
+    experimentation: {
+      name:     'Experimentation Agent',
+      path:     '../experimentation-agent',
+      squad:    'operations',
+      category: 'testing',
+      triggers: ['teste a/b', 'experimento', 'hipótese', 'validação', 'mvp'],
+      description: 'Estrutura experimentos, testes A/B e validação de hipóteses',
+    },
+    organizational_learning: {
+      name:     'Organizational Learning Agent',
+      path:     '../organizational-learning-agent',
+      squad:    'knowledge',
+      category: 'learning',
+      triggers: ['aprendizado organizacional', 'retrospectiva', 'lições aprendidas', 'cultura'],
+      description: 'Captura aprendizados, melhora processos e fortalece cultura de aprendizado',
+    },
+    ai_automation: {
+      name:     'AI Automation Agent',
+      path:     '../ai-automation-agent',
+      squad:    'operations',
+      category: 'automation',
+      triggers: ['automação com ia', 'agentes ia', 'llm automação', 'crewai', 'langgraph'],
+      description: 'Automatiza processos usando IA: LangGraph, CrewAI, Claude API, n8n + IA',
+    },
+  },
+
+  // Mapeamento de squads
+  squads: {
+    marketing:    ['marketing_research', 'copywriter', 'design', 'distribution', 'seo', 'video_ad', 'personal_brand', 'content_performance'],
+    growth:       ['cro', 'revenue', 'ads', 'customer_journey', 'lead_scoring', 'website_analytics', 'growth_intelligence', 'revenue_intelligence'],
+    operations:   ['lean', 'six_sigma', 'kaizen', 'process_mining', 'automation', 'lean_consulting', 'consulting_company_builder', 'experimentation', 'organizational_learning', 'ai_automation', 'knowledge_management'],
+    sales:        ['sales_intelligence', 'proposal', 'offer_optimization', 'pricing'],
+    executive:    ['ceo_advisor', 'chief_of_staff', 'executive_dashboard', 'competitor_intelligence', 'strategic_planning', 'market_opportunity'],
+    knowledge:    ['case_study', 'productization', 'organizational_learning'],
+    client:       ['client_success', 'risk'],
+    finance:      ['financial_intelligence'],
+    brand:        ['personal_brand', 'authority_building', 'partnership', 'relationship_coach'],
+    ai_lab:       ['ai_lab'],
+    orchestration: ['orchestrator'],
+  },
+
+  // Quadrante de priorização
+  priority_matrix: {
+    Q1: { urgent: true,  impact: true,  label: 'FAZER AGORA',   action: 'Executar imediatamente' },
+    Q2: { urgent: false, impact: true,  label: 'PLANEJAR',      action: 'Agendar esta semana' },
+    Q3: { urgent: true,  impact: false, label: 'DELEGAR',       action: 'Passar para equipe' },
+    Q4: { urgent: false, impact: false, label: 'ELIMINAR',      action: 'Remover do backlog' },
+  },
+};
+
+module.exports = { CONFIG };

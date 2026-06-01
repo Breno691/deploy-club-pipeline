@@ -90,8 +90,66 @@ app.post('/run-pipeline', async (req, res) => {
   }
 });
 
+// ── Agent Report → @IAAgentesmartopsbot ──────────────────────────────────────
+// Recebe relatório de qualquer agente e envia via bot dedicado
+// Body: { agent, message, date? }
+app.post('/send-agent-report', async (req, res) => {
+  const { agent, message, date } = req.body;
+  if (!agent || !message) {
+    return res.status(400).json({ error: 'agent e message são obrigatórios' });
+  }
+
+  const AGENT_BOT_TOKEN = process.env.TELEGRAM_AGENT_BOT_TOKEN;
+  const AGENT_CHAT_ID   = process.env.TELEGRAM_AGENT_CHAT_ID || '1349738505';
+
+  if (!AGENT_BOT_TOKEN) {
+    return res.status(500).json({ error: 'TELEGRAM_AGENT_BOT_TOKEN não configurado' });
+  }
+
+  const today = date || new Date().toISOString().split('T')[0];
+  const text  = `${message}`;
+
+  try {
+    const params = new URLSearchParams({ chat_id: AGENT_CHAT_ID, text, parse_mode: 'Markdown' });
+    const response = await fetch(
+      `https://api.telegram.org/bot${AGENT_BOT_TOKEN}/sendMessage`,
+      { method: 'POST', body: params }
+    );
+    const data = await response.json();
+    if (!data.ok) throw new Error(data.description);
+    console.log(`[${new Date().toISOString()}] Agente ${agent} (${today}): mensagem enviada`);
+    res.json({ ok: true, agent, date: today, message_id: data.result.message_id });
+  } catch (e) {
+    console.error(`[${new Date().toISOString()}] Erro send-agent-report: ${e.message}`);
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// ── Run Daily — dispara o daily_master_runner.js ─────────────────────────────
+// Body: { level?: 'daily'|'weekly'|'full' }
+app.post('/run-daily', (req, res) => {
+  const level = req.body?.level || 'daily';
+  const date  = new Date().toISOString().split('T')[0];
+
+  res.json({ ok: true, level, date, message: `Rotina ${level} iniciada em background` });
+
+  // Executa em background — não bloqueia a resposta
+  const { spawn } = require('child_process');
+  const proc = spawn('node', ['scripts/daily_master_runner.js', '--level', level], {
+    cwd:      ROOT,
+    detached: true,
+    stdio:    'ignore',
+    env:      process.env,
+  });
+  proc.unref();
+
+  console.log(`[${new Date().toISOString()}] Rotina ${level} iniciada (PID ${proc.pid})`);
+});
+
 app.listen(PORT, () => {
   console.log(`Pipeline server rodando em http://localhost:${PORT}`);
-  console.log(`  POST /run-pipeline  { taskName, taskDate, skipPost? }`);
+  console.log(`  POST /run-pipeline        { taskName, taskDate, skipPost? }`);
+  console.log(`  POST /send-agent-report   { agent, message, date? }`);
+  console.log(`  POST /run-daily           { level? }  → dispara daily_master_runner`);
   console.log(`  GET  /health`);
 });

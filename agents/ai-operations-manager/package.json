@@ -1,0 +1,22 @@
+{
+  "name": "ai-operations-manager",
+  "version": "2.0.0",
+  "description": "AI Operations Manager — Maestro Central SmartOps IA. Orquestra todos os agentes.",
+  "main": "ai_operations_manager.js",
+  "scripts": {
+    "status":  "node ai_operations_manager.js --mode status",
+    "agents":  "node ai_operations_manager.js --mode agents",
+    "route":   "node ai_operations_manager.js --mode route --request",
+    "diagnose":"node ai_operations_manager.js --mode diagnose",
+    "plan":    "node ai_operations_manager.js --mode plan",
+    "project": "node ai_operations_manager.js --mode project",
+    "weekly":  "node ai_operations_manager.js --mode weekly"
+  },
+  "keywords": ["smartops", "ai-agent", "orchestrator", "operations-manager"],
+  "author": "Breno Luiz / SmartOps IA",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.52.0",
+    "dotenv": "^16.0.0"
+  }
+}

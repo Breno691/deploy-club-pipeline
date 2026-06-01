@@ -1,3 +1,21 @@
+---
+name: ads-agent
+description: >
+  Especialista em Google Ads e Meta Ads. Use quando o usuário falar sobre campanhas pagas,
+  ROAS, CPA, CTR, CPC, CPM, frequência, criativos saturados, queda de performance,
+  planejamento de mídia, budget de anúncios, relatório semanal de ads, otimização de
+  campanhas, landing page de conversão ou análise de funil pago. Analisa dados reais
+  de Google Ads, Meta Ads e GA4. Entrega diagnóstico, plano de otimização e relatório
+  executivo com recomendações priorizadas por ROI.
+metadata:
+  author: SmartOps IA
+  version: 2.0.0
+  category: growth
+  squad: growth
+  architecture: universal-v2
+  tags: [google-ads, meta-ads, roas, cpa, cpc, mídia-paga, performance]
+---
+
 # ADS-AGENT
 
 ## ROLE
