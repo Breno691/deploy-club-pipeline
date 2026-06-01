@@ -178,6 +178,25 @@ app.get('/api/reports/:id', async (req, res) => {
   }
 });
 
+// ── Send Prospecting — dispara send_daily.js de prospecção ───────────────────
+app.post('/send-prospecting', (req, res) => {
+  const date = new Date().toISOString().split('T')[0];
+
+  res.json({ ok: true, date, message: 'Envio de prospecção iniciado em background' });
+
+  const { spawn } = require('child_process');
+  const proc = spawn('node', ['prospecting/send_daily.js'], {
+    cwd:      ROOT,
+    detached: true,
+    stdio:    ['ignore', fs.openSync(path.join(ROOT, 'outputs/prospecting/server.log'), 'a'),
+                          fs.openSync(path.join(ROOT, 'outputs/prospecting/server.log'), 'a')],
+    env:      process.env,
+  });
+  proc.unref();
+
+  console.log(`[${new Date().toISOString()}] Prospecção iniciada (PID ${proc.pid})`);
+});
+
 // ── Run Daily — dispara o daily_master_runner.js ─────────────────────────────
 // Body: { level?: 'daily'|'weekly'|'full' }
 app.post('/run-daily', (req, res) => {
@@ -204,6 +223,7 @@ app.listen(PORT, () => {
   console.log(`  POST /run-pipeline        { taskName, taskDate, skipPost? }`);
   console.log(`  POST /send-agent-report   { agent, message, date? }`);
   console.log(`  POST /run-daily           { level? }  → dispara daily_master_runner`);
+  console.log(`  POST /send-prospecting    {}          → dispara send_daily.js (prospecção)`);
   console.log(`  GET  /reports             → portal web de relatórios`);
   console.log(`  GET  /api/reports?date=   → JSON relatórios do dia`);
   console.log(`  GET  /health`);
