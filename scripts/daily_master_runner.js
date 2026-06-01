@@ -111,39 +111,55 @@ function runAgent(agent) {
   }
 }
 
-// ─── Formata relatório para Telegram ─────────────────────────────────────────
+// ─── Limpa output bruto do agente para leitura no Telegram ──────────────────
 
-function formatTelegramReport(agent, result, tasks) {
-  const statusEmoji = result.status === 'ok' ? '✅' : result.status === 'partial' ? '⚠️' : '❌';
-
-  const tasksText = tasks && tasks.length > 0
-    ? '\n*Tarefas do dia:*\n' + tasks.map(t => `• ${t}`).join('\n')
-    : '';
-
-  if (result.status === 'error') {
-    return `${statusEmoji} *${agent.telegram_title}*\n\n❌ Erro: ${result.error || 'Falha na execução'}${tasksText}`;
-  }
-
-  // Limita output a 1500 chars para não lotara Telegram
-  const outputPreview = result.output
-    ? result.output.replace(/\x1B\[[0-9;]*m/g, '') // remove ANSI colors
-        .replace(/[╔╗╚╝║═]/g, '') // remove box chars
-        .trim()
-        .slice(0, 1500)
-    : '(sem output)';
-
-  return `${statusEmoji} ${agent.telegram_title}\n\n${outputPreview}`;
+function cleanOutput(raw) {
+  if (!raw) return '';
+  return raw
+    .replace(/\x1B\[[0-9;]*[mGKHF]/g, '')              // ANSI escape codes
+    .replace(/[╔╗╚╝║╠╣╦╩╬═╪╫]/g, '')                   // box drawing duplo
+    .replace(/[┌┐└┘├┤┬┴┼─│]/g, '')                      // box drawing simples
+    .replace(/^.*─{5,}.*$/gm, '---')                    // separadores longos
+    .replace(/^\s*[✓✗]\s+Salvo:.*$/gm, '')              // linhas "Salvo:"
+    .replace(/^\s*[✓✗]\s+Saved:.*$/gm, '')              // linhas "Saved:"
+    .replace(/^\s*[✓✗]\s+.*\.(json|md|txt).*$/gm, '')   // linhas de arquivo
+    .replace(/^(Modo:|Hora:|Agente:|Squad:|CFO Virtual).*$/gm, '')
+    .replace(/^=== .* ===$\n?/gm, '')                   // cabeçalhos === ===
+    .replace(/^\s*→.*$/gm, '')                          // linhas de progresso "→ ..."
+    .replace(/^\s*\.\.\./gm, '')                        // linhas "..."
+    .replace(/\n{3,}/g, '\n\n')                          // linhas em branco extras
+    .trim();
 }
 
-// ─── Formata resumo do squad ─────────────────────────────────────────────────
+// ─── Formata relatório completo para Telegram ────────────────────────────────
 
-function buildSquadSummary(squadName, agentResults) {
-  const lines = [`📦 *SQUAD ${squadName.toUpperCase()}*\n`];
-  for (const r of agentResults) {
-    const icon = r.status === 'ok' ? '✅' : r.status === 'partial' ? '⚠️' : '❌';
-    lines.push(`${icon} ${r.agent.telegram_title.replace(/^[^\w\s]*\s/, '')}`);
+function formatTelegramReport(agent, result, reportFilePath) {
+  const statusEmoji = result.status === 'ok' ? '✅' : result.status === 'partial' ? '⚠️' : '❌';
+  const header = `${statusEmoji} *${agent.telegram_title}*`;
+
+  if (result.status === 'error') {
+    const tasksList = agent.daily_tasks.map(t => `• ${t}`).join('\n');
+    return `${header}\n\n❌ Erro na execução\n\n*Tarefas configuradas:*\n${tasksList}`;
   }
-  return lines.join('\n');
+
+  // Tenta ler o arquivo salvo (mais completo que stdout)
+  let content = '';
+  if (reportFilePath && fs.existsSync(reportFilePath)) {
+    content = cleanOutput(fs.readFileSync(reportFilePath, 'utf-8'));
+  }
+
+  // Fallback para stdout se arquivo estiver vazio
+  if (!content || content.length < 50) {
+    content = cleanOutput(result.output || '');
+  }
+
+  // Se ainda assim vazio, lista as tarefas do dia
+  if (!content || content.length < 20) {
+    const tasksList = agent.daily_tasks.map((t, i) => `${i + 1}. ${t}`).join('\n');
+    content = `*Tarefas executadas:*\n${tasksList}`;
+  }
+
+  return `${header}\n\n${content}`;
 }
 
 // ─── MAIN ─────────────────────────────────────────────────────────────────────
@@ -233,35 +249,21 @@ async function main() {
       squadResults[squad].push(resultForReport);
     }
 
-    // ── Envia relatório do squad no Telegram ──────────────────────────────
+    // ── Envia 1 mensagem detalhada por agente no Telegram ────────────────
     if (!NO_TELEGRAM && !DRY_RUN && squadResults[squad].length > 0) {
-      const squadEmojis = {
-        marketing: '📢', growth: '📈', operations: '⚙️',
-        sales: '💼', executive: '🎯', finance: '💰',
-        client: '🤝', knowledge: '📚', brand: '👤',
-        'ai-lab': '🔬', orchestration: '🎛️',
-      };
-      const emoji = squadEmojis[squad] || '📦';
-
-      // Para squads com muitos agentes, envia 1 msg por agente (detalhado)
-      // Para squads menores, envia resumo
-      if (squadAgents.length > 4) {
-        // Resumo compacto do squad
-        const summaryText = buildSquadSummary(squad, squadResults[squad]);
+      for (const r of squadResults[squad]) {
+        const reportFilePath = path.join(agentOutputDir(dailyDir, r.agent), r.agent.output_file || 'report.md');
+        const msg = formatTelegramReport(r.agent, r, reportFilePath);
         try {
-          await telegramPost(`${emoji} *SQUAD ${squad.toUpperCase()}*\n\n${summaryText}`);
-        } catch (e) { console.log(`  ⚠️  Telegram squad ${squad}: ${e.message}`); }
-      } else {
-        // Relatório detalhado por agente
-        for (const r of squadResults[squad]) {
-          const msg = formatTelegramReport(r.agent, r, r.agent.daily_tasks);
-          try {
-            await sendTelegram({ agent: r.agent.folder, message: msg, emoji });
-          } catch (e) { console.log(`  ⚠️  Telegram ${r.agent.key}: ${e.message}`); }
-          await new Promise(res => setTimeout(res, 600));
-        }
+          // sendTelegram já divide automaticamente se > 3800 chars
+          const chunks = msg.match(/[\s\S]{1,3800}/g) || [msg];
+          for (const chunk of chunks) {
+            await telegramPost(chunk);
+            if (chunks.length > 1) await new Promise(res => setTimeout(res, 400));
+          }
+        } catch (e) { console.log(`  ⚠️  Telegram ${r.agent.key}: ${e.message}`); }
+        await new Promise(res => setTimeout(res, 700));
       }
-      await new Promise(res => setTimeout(res, 800));
     }
   }
 
