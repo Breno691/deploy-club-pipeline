@@ -6,6 +6,7 @@ const express = require('express');
 const { execSync } = require('child_process');
 const fs   = require('fs');
 const path = require('path');
+const { getReportsByDate, getAvailableDates, getDailySummary, getReportById, getAgentHistory } = require('../scripts/reports_db');
 
 const app  = express();
 const PORT = process.env.PIPELINE_PORT || 3099;
@@ -125,6 +126,58 @@ app.post('/send-agent-report', async (req, res) => {
   }
 });
 
+// ── Reports Dashboard ─────────────────────────────────────────────────────────
+
+// GET /reports — serve o portal HTML
+app.get('/reports', (_, res) => {
+  const html = path.join(ROOT, 'pipeline', 'reports-dashboard.html');
+  if (fs.existsSync(html)) res.sendFile(html);
+  else res.status(404).send('Dashboard não encontrado');
+});
+
+// GET /api/reports?date=YYYY-MM-DD — relatórios do dia
+app.get('/api/reports', async (req, res) => {
+  try {
+    const date    = req.query.date || new Date().toISOString().split('T')[0];
+    const reports = await getReportsByDate(date);
+    const summary = await getDailySummary(date);
+    res.json({ date, reports, summary });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// GET /api/reports/dates — datas disponíveis
+app.get('/api/reports/dates', async (_, res) => {
+  try {
+    const dates = await getAvailableDates();
+    res.json({ dates });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// GET /api/reports/history/:agentKey — histórico de um agente
+app.get('/api/reports/history/:agentKey', async (req, res) => {
+  try {
+    const history = await getAgentHistory(req.params.agentKey);
+    res.json({ history });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+// GET /api/reports/:id — 1 relatório completo
+app.get('/api/reports/:id', async (req, res) => {
+  try {
+    const report = await getReportById(req.params.id);
+    if (!report) return res.status(404).json({ error: 'Não encontrado' });
+    res.json({ report });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
 // ── Run Daily — dispara o daily_master_runner.js ─────────────────────────────
 // Body: { level?: 'daily'|'weekly'|'full' }
 app.post('/run-daily', (req, res) => {
@@ -151,5 +204,7 @@ app.listen(PORT, () => {
   console.log(`  POST /run-pipeline        { taskName, taskDate, skipPost? }`);
   console.log(`  POST /send-agent-report   { agent, message, date? }`);
   console.log(`  POST /run-daily           { level? }  → dispara daily_master_runner`);
+  console.log(`  GET  /reports             → portal web de relatórios`);
+  console.log(`  GET  /api/reports?date=   → JSON relatórios do dia`);
   console.log(`  GET  /health`);
 });

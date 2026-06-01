@@ -35,6 +35,7 @@ const { execSync } = require('child_process');
 
 const { DAILY_AGENTS, WEEKLY_AGENTS, ALL_AGENTS, AGENTS, getBySquad } = require('./daily_tasks_config');
 const { sendTelegram, sendDailySummary, telegramPost } = require('./send_telegram_direct');
+const { saveReport } = require('./reports_db');
 
 const ROOT       = path.resolve(__dirname, '..');
 const AGENTS_DIR = path.join(ROOT, 'agents');
@@ -222,14 +223,29 @@ async function main() {
       console.log(`${icon} ${elapsed}s`);
 
       // Salva output na pasta dedicada do agente
-      const reportPath  = path.join(outDir, agent.output_file || 'report.md');
+      const reportPath    = path.join(outDir, agent.output_file || 'report.md');
       const reportContent = result.output || result.error || '(sem output)';
+      const reportClean   = cleanOutput(reportContent);
       fs.writeFileSync(reportPath, reportContent, 'utf-8');
 
       // Salva tasks do dia
       const tasksPath = path.join(outDir, 'daily_tasks.md');
       const tasksContent = `# Tarefas Diárias — ${agent.folder}\nData: ${date}\n\n${agent.daily_tasks.map((t, i) => `${i+1}. ${t}`).join('\n')}`;
       fs.writeFileSync(tasksPath, tasksContent, 'utf-8');
+
+      // Salva no Supabase (em background — não bloqueia o runner)
+      saveReport({
+        date,
+        agentKey:       agent.key,
+        agentName:      agent.folder,
+        squad:          agent.squad,
+        mode:           agent.daily_mode,
+        status:         result.status,
+        content:        reportContent,
+        contentClean:   reportClean,
+        elapsedSeconds: parseFloat(elapsed),
+        dailyTasks:     agent.daily_tasks,
+      }).catch(() => {}); // silencia erros de DB para não travar o runner
 
       // Log
       const entry = {
@@ -244,7 +260,7 @@ async function main() {
       };
       log.agents.push(entry);
 
-      const resultForReport = { ...result, agent, title: agent.telegram_title };
+      const resultForReport = { ...result, agent, title: agent.telegram_title, reportPath, reportClean };
       allResults.push(resultForReport);
       squadResults[squad].push(resultForReport);
     }
@@ -252,16 +268,23 @@ async function main() {
     // ── Envia 1 mensagem detalhada por agente no Telegram ────────────────
     if (!NO_TELEGRAM && !DRY_RUN && squadResults[squad].length > 0) {
       for (const r of squadResults[squad]) {
-        const reportFilePath = path.join(agentOutputDir(dailyDir, r.agent), r.agent.output_file || 'report.md');
-        const msg = formatTelegramReport(r.agent, r, reportFilePath);
+        const reportFilePath = r.reportPath || path.join(agentOutputDir(dailyDir, r.agent), r.agent.output_file || 'report.md');
+        const msg    = formatTelegramReport(r.agent, r, reportFilePath);
+        let chunks   = 0;
+        let tgSent   = false;
         try {
-          // sendTelegram já divide automaticamente se > 3800 chars
-          const chunks = msg.match(/[\s\S]{1,3800}/g) || [msg];
-          for (const chunk of chunks) {
+          const parts = msg.match(/[\s\S]{1,3800}/g) || [msg];
+          chunks = parts.length;
+          for (const chunk of parts) {
             await telegramPost(chunk);
-            if (chunks.length > 1) await new Promise(res => setTimeout(res, 400));
+            if (parts.length > 1) await new Promise(res => setTimeout(res, 400));
           }
+          tgSent = true;
         } catch (e) { console.log(`  ⚠️  Telegram ${r.agent.key}: ${e.message}`); }
+
+        // Log telegram
+        if (tgSent) console.log(`    📱 Telegram: ${chunks} msg(s) → ${r.agent.key}`);
+
         await new Promise(res => setTimeout(res, 700));
       }
     }
