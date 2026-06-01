@@ -13,7 +13,10 @@ function getClient() {
   const url = process.env.SUPABASE_URL;
   const key = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_KEY;
   if (!url || !key) { console.warn('⚠️  Supabase não configurado — relatórios não serão salvos online'); return null; }
-  supabase = createClient(url, key);
+  supabase = createClient(url, key, {
+    realtime: { enabled: false },
+    auth: { persistSession: false, autoRefreshToken: false },
+  });
   return supabase;
 }
 
