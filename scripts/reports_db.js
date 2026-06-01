@@ -1,34 +1,70 @@
 /**
  * reports_db.js — SmartOps IA
- * Módulo para salvar e ler relatórios de agentes no Supabase.
+ * Salva e lê relatórios de agentes no Supabase via REST puro (sem WebSocket/realtime).
+ * Compatível com Node.js 18, 20 e 22.
  */
 
 require('dotenv').config({ path: require('path').resolve(__dirname, '../.env') });
-const { createClient } = require('@supabase/supabase-js');
+const https = require('https');
+const http  = require('http');
 
-let supabase = null;
+const SUPABASE_URL = process.env.SUPABASE_URL;
+const SUPABASE_KEY = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_KEY;
+const TABLE        = 'agent_daily_reports';
 
-function getClient() {
-  if (supabase) return supabase;
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_KEY || process.env.SUPABASE_KEY;
-  if (!url || !key) { console.warn('⚠️  Supabase não configurado — relatórios não serão salvos online'); return null; }
-  supabase = createClient(url, key, {
-    realtime: { enabled: false },
-    auth: { persistSession: false, autoRefreshToken: false },
-  });
-  return supabase;
+function isConfigured() {
+  return !!(SUPABASE_URL && SUPABASE_KEY);
 }
 
-/**
- * Salva relatório de um agente no Supabase.
- */
-async function saveReport({ date, agentKey, agentName, squad, mode, status, content, contentClean, elapsedSeconds, telegramSent, telegramChunks, dailyTasks }) {
-  const db = getClient();
-  if (!db) return null;
+// ─── REST helper ─────────────────────────────────────────────────────────────
 
+function restRequest(method, path, body) {
+  return new Promise((resolve, reject) => {
+    if (!isConfigured()) return resolve({ data: null, error: { message: 'Supabase não configurado' } });
+
+    const url     = new URL(`/rest/v1/${path}`, SUPABASE_URL);
+    const bodyStr = body ? JSON.stringify(body) : null;
+    const lib     = url.protocol === 'https:' ? https : http;
+
+    const opts = {
+      hostname: url.hostname,
+      port:     url.port || (url.protocol === 'https:' ? 443 : 80),
+      path:     url.pathname + url.search,
+      method,
+      headers: {
+        'Content-Type':  'application/json',
+        'Accept':        'application/json',
+        'apikey':        SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Prefer':        method === 'POST' ? 'return=representation' : '',
+      },
+    };
+    if (bodyStr) opts.headers['Content-Length'] = Buffer.byteLength(bodyStr);
+
+    const req = lib.request(opts, res => {
+      let raw = '';
+      res.on('data', c => raw += c);
+      res.on('end', () => {
+        try {
+          const data = JSON.parse(raw);
+          if (res.statusCode >= 400) resolve({ data: null, error: data });
+          else resolve({ data, error: null });
+        } catch { resolve({ data: raw, error: null }); }
+      });
+    });
+    req.on('error', e => resolve({ data: null, error: { message: e.message } }));
+    req.setTimeout(10000, () => { req.destroy(); resolve({ data: null, error: { message: 'Timeout' } }); });
+    if (bodyStr) req.write(bodyStr);
+    req.end();
+  });
+}
+
+// ─── Operações ────────────────────────────────────────────────────────────────
+
+async function saveReport({ date, agentKey, agentName, squad, mode, status, content, contentClean, elapsedSeconds, telegramSent, telegramChunks, dailyTasks }) {
+  if (!isConfigured()) return null;
   try {
-    const { data, error } = await db.from('agent_daily_reports').insert({
+    const { data, error } = await restRequest('POST', TABLE, {
       date,
       agent_key:       agentKey,
       agent_name:      agentName,
@@ -41,52 +77,32 @@ async function saveReport({ date, agentKey, agentName, squad, mode, status, cont
       telegram_sent:   telegramSent || false,
       telegram_chunks: telegramChunks || 0,
       daily_tasks:     dailyTasks || [],
-    }).select('id').single();
-
-    if (error) { console.warn(`  ⚠️  Supabase save error (${agentKey}): ${error.message}`); return null; }
-    return data?.id;
-  } catch (e) {
-    console.warn(`  ⚠️  Supabase error: ${e.message}`);
-    return null;
-  }
+    });
+    if (error) { console.warn(`  ⚠️  DB save (${agentKey}): ${error.message || JSON.stringify(error)}`); return null; }
+    return Array.isArray(data) ? data[0]?.id : data?.id;
+  } catch (e) { console.warn(`  ⚠️  DB error: ${e.message}`); return null; }
 }
 
-/**
- * Busca relatórios por data.
- */
 async function getReportsByDate(date) {
-  const db = getClient();
-  if (!db) return [];
-  const { data, error } = await db.from('agent_daily_reports')
-    .select('*').eq('date', date).order('squad').order('agent_name');
-  if (error) return [];
-  return data || [];
+  if (!isConfigured()) return [];
+  const { data, error } = await restRequest('GET', `${TABLE}?date=eq.${date}&order=squad.asc,agent_name.asc&select=*`);
+  if (error || !data) return [];
+  return Array.isArray(data) ? data : [];
 }
 
-/**
- * Busca datas disponíveis (últimos 30 dias).
- */
 async function getAvailableDates() {
-  const db = getClient();
-  if (!db) return [];
-  const { data, error } = await db.from('agent_daily_reports')
-    .select('date').order('date', { ascending: false })
-    .limit(200);
-  if (error) return [];
-  const dates = [...new Set((data || []).map(r => r.date))];
+  if (!isConfigured()) return [];
+  const { data, error } = await restRequest('GET', `${TABLE}?select=date&order=date.desc&limit=200`);
+  if (error || !data) return [];
+  const all   = Array.isArray(data) ? data : [];
+  const dates = [...new Set(all.map(r => r.date))];
   return dates.slice(0, 30);
 }
 
-/**
- * Busca resumo diário (contagens por status).
- */
 async function getDailySummary(date) {
-  const db = getClient();
-  if (!db) return null;
-  const { data, error } = await db.from('agent_daily_reports')
-    .select('status, squad, elapsed_seconds').eq('date', date);
-  if (error || !data) return null;
-
+  if (!isConfigured()) return null;
+  const { data, error } = await restRequest('GET', `${TABLE}?date=eq.${date}&select=status,squad,elapsed_seconds`);
+  if (error || !data || !Array.isArray(data)) return null;
   return {
     date,
     total:   data.length,
@@ -100,31 +116,18 @@ async function getDailySummary(date) {
   };
 }
 
-/**
- * Busca 1 relatório por ID.
- */
 async function getReportById(id) {
-  const db = getClient();
-  if (!db) return null;
-  const { data, error } = await db.from('agent_daily_reports')
-    .select('*').eq('id', id).single();
-  if (error) return null;
-  return data;
+  if (!isConfigured()) return null;
+  const { data, error } = await restRequest('GET', `${TABLE}?id=eq.${id}&select=*&limit=1`);
+  if (error || !data) return null;
+  return Array.isArray(data) ? data[0] : data;
 }
 
-/**
- * Busca relatórios por agente (histórico).
- */
 async function getAgentHistory(agentKey, limit = 30) {
-  const db = getClient();
-  if (!db) return [];
-  const { data, error } = await db.from('agent_daily_reports')
-    .select('id, date, status, elapsed_seconds, telegram_sent')
-    .eq('agent_key', agentKey)
-    .order('date', { ascending: false })
-    .limit(limit);
-  if (error) return [];
-  return data || [];
+  if (!isConfigured()) return [];
+  const { data, error } = await restRequest('GET', `${TABLE}?agent_key=eq.${agentKey}&select=id,date,status,elapsed_seconds,telegram_sent&order=date.desc&limit=${limit}`);
+  if (error || !data) return [];
+  return Array.isArray(data) ? data : [];
 }
 
-module.exports = { saveReport, getReportsByDate, getAvailableDates, getDailySummary, getReportById, getAgentHistory };
+module.exports = { saveReport, getReportsByDate, getAvailableDates, getDailySummary, getReportById, getAgentHistory, isConfigured };
