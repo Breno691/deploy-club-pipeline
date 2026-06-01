@@ -23,3 +23,11 @@ jobs:
             -u "${{ secrets.EASYPANEL_EMAIL }}:${{ secrets.EASYPANEL_PASSWORD }}" \
             -H "Content-Type: application/json" \
             -d '{"json":{"projectName":"n8n","serviceName":"smartops-dados"}}'
+
+      - name: Deploy pipeline-server
+        run: |
+          curl -s -X POST \
+            "http://${{ secrets.EASYPANEL_HOST }}/api/trpc/services.redeploy" \
+            -u "${{ secrets.EASYPANEL_EMAIL }}:${{ secrets.EASYPANEL_PASSWORD }}" \
+            -H "Content-Type: application/json" \
+            -d '{"json":{"projectName":"n8n","serviceName":"pipeline-server"}}'
