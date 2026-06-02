@@ -136,19 +136,20 @@
     "setor": "Saúde / Odontologia",
     "cidade": "Vespasiano",
     "bairro": "Centro",
-    "telefone": "",
+    "telefone": "(31) 3622-4899",
     "whatsapp": "",
-    "email": "",
-    "email_confirmado": false,
+    "email": "inoveodonto.vesp@gmail.com",
+    "email_confirmado": true,
     "contato_responsavel": "Administrador / Dentista-Sócio",
     "dor_principal": "Agendamentos, confirmações, falta de pacientes",
     "servico_sugerido": "automacao",
     "canal_abordagem": "email",
     "prioridade": "A",
-    "status": "pending",
-    "data_contato": null,
+    "status": "enviado",
+    "data_contato": "2026-06-02T10:51:57.360Z",
     "observacoes": "Muitas clínicas em Vespasiano sem automação",
-    "site": "https://www.dentistas.net.br/sobre/centro-medico-odontologico-vespasiano"
+    "site": "https://www.dentistas.net.br/sobre/centro-medico-odontologico-vespasiano",
+    "email_enviado_tipo": "automacao"
   },
   {
     "id": 8,
@@ -295,11 +296,12 @@
     "servico_sugerido": "automacao",
     "canal_abordagem": "email",
     "prioridade": "A",
-    "status": "pending",
-    "data_contato": null,
+    "status": "enviado",
+    "data_contato": "2026-06-02T10:52:07.035Z",
     "observacoes": "Imobiliárias têm muito follow-up manual — alto ROI de automação",
     "email_fonte": "tavily_search",
-    "site": "http://imobiliariavistaverde.com.br/contato"
+    "site": "http://imobiliariavistaverde.com.br/contato",
+    "email_enviado_tipo": "automacao"
   },
   {
     "id": 15,
@@ -316,11 +318,12 @@
     "servico_sugerido": "automacao",
     "canal_abordagem": "email",
     "prioridade": "A",
-    "status": "pending",
-    "data_contato": null,
+    "status": "enviado",
+    "data_contato": "2026-06-02T10:52:18.677Z",
     "observacoes": "Automação de agendamento + confirmação via WhatsApp",
     "email_fonte": "tavily_search",
-    "site": "https://www.econodata.com.br/consulta-empresa/27615508000150-clinica-plena-ltda"
+    "site": "https://www.econodata.com.br/consulta-empresa/27615508000150-clinica-plena-ltda",
+    "email_enviado_tipo": "automacao"
   },
   {
     "id": 16,
@@ -337,11 +340,12 @@
     "servico_sugerido": "automacao",
     "canal_abordagem": "email",
     "prioridade": "A",
-    "status": "pending",
-    "data_contato": null,
+    "status": "enviado",
+    "data_contato": "2026-06-02T10:52:25.446Z",
     "observacoes": "Escolas técnicas e cursos livres em BH",
     "email_fonte": "tavily_search",
-    "site": "https://prefeitura.pbh.gov.br/assistencia-social/programa-municipal-de-qualificacao-profissional"
+    "site": "https://prefeitura.pbh.gov.br/assistencia-social/programa-municipal-de-qualificacao-profissional",
+    "email_enviado_tipo": "automacao"
   },
   {
     "id": 17,
@@ -358,11 +362,12 @@
     "servico_sugerido": "lean",
     "canal_abordagem": "email",
     "prioridade": "A",
-    "status": "pending",
-    "data_contato": null,
+    "status": "enviado",
+    "data_contato": "2026-06-02T10:52:32.461Z",
     "observacoes": "Gráficas têm muito desperdício de papel e tempo de setup",
     "email_fonte": "tavily_search",
-    "site": "https://www.graficabh.com"
+    "site": "https://www.graficabh.com",
+    "email_enviado_tipo": "lean"
   },
   {
     "id": 18,
@@ -379,11 +384,12 @@
     "servico_sugerido": "automacao",
     "canal_abordagem": "email",
     "prioridade": "A",
-    "status": "pending",
-    "data_contato": null,
+    "status": "enviado",
+    "data_contato": "2026-06-02T10:52:41.285Z",
     "observacoes": "Facilities tem muita operação manual — automação de escala é muito vendável",
     "email_fonte": "tavily_search",
-    "site": "https://www.grupoperfect.com.br"
+    "site": "https://www.grupoperfect.com.br",
+    "email_enviado_tipo": "automacao"
   },
   {
     "id": 19,
@@ -422,11 +428,12 @@
     "servico_sugerido": "automacao",
     "canal_abordagem": "email",
     "prioridade": "A",
-    "status": "pending",
-    "data_contato": null,
+    "status": "enviado",
+    "data_contato": "2026-06-02T10:52:51.868Z",
     "observacoes": "Terceirizadoras têm volume alto de processos manuais",
     "email_fonte": "tavily_search",
-    "site": "https://www.primeterceirizacao.com.br"
+    "site": "https://www.primeterceirizacao.com.br",
+    "email_enviado_tipo": "automacao"
   },
   {
     "id": 21,
@@ -477,8 +484,8 @@
     "setor": "Varejo / Supermercado",
     "cidade": "Belo Horizonte",
     "bairro": "Nordeste",
-    "telefone": "",
-    "whatsapp": "",
+    "telefone": "(31) 3491-5110",
+    "whatsapp": "(31) 99820-1279",
     "email": "",
     "email_confirmado": false,
     "contato_responsavel": "Gerente / Sócio",
@@ -497,19 +504,20 @@
     "setor": "Saúde / Fisioterapia",
     "cidade": "Belo Horizonte",
     "bairro": "Colégio Batista",
-    "telefone": "",
+    "telefone": "(31) 8795-2542",
     "whatsapp": "",
-    "email": "",
-    "email_confirmado": false,
+    "email": "tiagopetronio@gmail.com",
+    "email_confirmado": true,
     "contato_responsavel": "Administrador / Fisioterapeuta-Sócio",
     "dor_principal": "Cancelamentos, ociosidade de salas, prontuário no papel",
     "servico_sugerido": "automacao",
     "canal_abordagem": "email",
     "prioridade": "A",
-    "status": "pending",
-    "data_contato": null,
+    "status": "enviado",
+    "data_contato": "2026-06-02T10:53:00.522Z",
     "observacoes": "Clínicas de fisio têm muito cancelamento — automação de confirmação resolve",
-    "site": "https://www.movimentereabilitacao.com.br"
+    "site": "https://www.movimentereabilitacao.com.br",
+    "email_enviado_tipo": "automacao"
   },
   {
     "id": 25,
@@ -526,31 +534,33 @@
     "servico_sugerido": "lean",
     "canal_abordagem": "email",
     "prioridade": "A",
-    "status": "pending",
-    "data_contato": null,
+    "status": "enviado",
+    "data_contato": "2026-06-02T10:53:11.383Z",
     "observacoes": "Vidraçarias têm muito desperdício de material e retrabalho",
     "email_fonte": "tavily_search",
-    "site": "https://www.vidroseg.com.br"
+    "site": "https://www.vidroseg.com.br",
+    "email_enviado_tipo": "lean"
   },
   {
     "id": 26,
-    "empresa": "Agência de Marketing Digital BH",
+    "empresa": "Ints.Digital — Agência de Marketing Digital",
     "setor": "Marketing Digital / Agência",
     "cidade": "Belo Horizonte",
-    "bairro": "Serra",
-    "telefone": "",
-    "whatsapp": "",
-    "email": "",
-    "email_confirmado": false,
+    "bairro": "Savassi",
+    "telefone": "(31) 99574-1196",
+    "whatsapp": "(31) 99574-1196",
+    "email": "contato@ints.digital",
+    "email_confirmado": true,
     "contato_responsavel": "Sócio / CEO",
     "dor_principal": "Onboarding de clientes manual, relatórios demorados, gestão de tarefas",
     "servico_sugerido": "automacao",
     "canal_abordagem": "email",
     "prioridade": "A",
-    "status": "pending",
-    "data_contato": null,
+    "status": "enviado",
+    "data_contato": "2026-06-02T10:53:18.127Z",
     "observacoes": "Agências se identificam com automação — boa abertura",
-    "site": "https://digitales360.com.br"
+    "site": "https://digitales360.com.br",
+    "email_enviado_tipo": "automacao"
   },
   {
     "id": 27,
@@ -567,11 +577,12 @@
     "servico_sugerido": "automacao",
     "canal_abordagem": "email",
     "prioridade": "A",
-    "status": "pending",
-    "data_contato": null,
+    "status": "enviado",
+    "data_contato": "2026-06-02T10:53:26.809Z",
     "observacoes": "Empresas de segurança têm processos altamente manuais",
     "site": "https://blog.primebid.com.br/empresas-de-seguranca-17",
-    "email_fonte": "tavily_search_2"
+    "email_fonte": "tavily_search_2",
+    "email_enviado_tipo": "automacao"
   },
   {
     "id": 28,
@@ -610,11 +621,12 @@
     "servico_sugerido": "lean",
     "canal_abordagem": "email",
     "prioridade": "A",
-    "status": "pending",
-    "data_contato": null,
+    "status": "enviado",
+    "data_contato": "2026-06-02T10:53:34.936Z",
     "observacoes": "BH tem polo calçadista relevante",
     "email_fonte": "tavily_search",
-    "site": "https://www.deckercalcados.com.br/contato"
+    "site": "https://www.deckercalcados.com.br/contato",
+    "email_enviado_tipo": "lean"
   },
   {
     "id": 30,
@@ -631,11 +643,12 @@
     "servico_sugerido": "automacao",
     "canal_abordagem": "email",
     "prioridade": "A",
-    "status": "pending",
-    "data_contato": null,
+    "status": "enviado",
+    "data_contato": "2026-06-02T10:53:46.853Z",
     "observacoes": "Empresas de TI entendem automação — boa receptividade",
     "site": "https://4infra.com.br/melhores-empresas-de-suporte-de-ti-em-belo-horizonte",
-    "email_fonte": "tavily_search_2"
+    "email_fonte": "tavily_search_2",
+    "email_enviado_tipo": "automacao"
   },
   {
     "id": 31,
@@ -652,11 +665,12 @@
     "servico_sugerido": "lean",
     "canal_abordagem": "email",
     "prioridade": "A",
-    "status": "pending",
-    "data_contato": null,
+    "status": "enviado",
+    "data_contato": "2026-06-02T10:53:57.672Z",
     "observacoes": "Manutenção industrial tem alto ROI com gestão visual e lean",
     "email_fonte": "tavily_search",
-    "site": "https://instaladores.trane.com.br/instaladores-industrial"
+    "site": "https://instaladores.trane.com.br/instaladores-industrial",
+    "email_enviado_tipo": "lean"
   },
   {
     "id": 32,
@@ -716,11 +730,12 @@
     "servico_sugerido": "automacao",
     "canal_abordagem": "email",
     "prioridade": "A",
-    "status": "pending",
-    "data_contato": null,
+    "status": "enviado",
+    "data_contato": "2026-06-02T10:54:09.336Z",
     "observacoes": "Escolas de idiomas: alta churn, automação de retenção é muito útil",
     "email_fonte": "tavily_search",
-    "site": "https://languageoffice.com.br/contato"
+    "site": "https://languageoffice.com.br/contato",
+    "email_enviado_tipo": "automacao"
   },
   {
     "id": 35,
