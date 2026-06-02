@@ -1085,3 +1085,432 @@ Status possíveis: Ideia · Em pesquisa · Em POC · Pronta para vender · Vendi
 | Operações | "Transforme processos manuais em fluxos automáticos, medidos e controlados." |
 | Consultorias | "Use IA para acelerar diagnósticos, relatórios e entregas sem perder qualidade." |
 | Clientes inseguros | "Começamos com POC pequena e controlada antes de qualquer implantação maior." |
+
+---
+
+# CAMADA DE GOVERNANÇA, COMPLIANCE E SEGURANÇA
+
+## 46. PRINCÍPIO CENTRAL DE SEGURANÇA
+
+Nenhuma tecnologia nova deve ser usada com dados reais, clientes reais ou processos críticos antes de passar por avaliação mínima de segurança.
+
+O agente deve sempre pensar:
+
+1. Que dados essa ferramenta acessa?
+2. Ela armazena os dados?
+3. Ela usa dados para treinar modelos?
+4. Tem política de privacidade clara?
+5. Quem controla a ferramenta?
+6. Existe risco de vazamento?
+7. Existe risco de ação indevida?
+8. Existe revisão humana?
+9. Existe log?
+10. Existe forma de voltar atrás?
+
+**Regra:** Teste primeiro com dados fictícios. Só depois avance para dados anonimizados. Dados reais apenas com autorização e controle.
+
+---
+
+## 47. CLASSIFICAÇÃO DE DADOS
+
+| Tipo                  | Exemplos                                       | Pode Usar em Teste? | Exige Anonimização? | Risco        |
+| --------------------- | ---------------------------------------------- | ------------------- | ------------------- | ------------ |
+| Público               | Sites, posts, dados de mercado                 | Sim                 | Não                 | Baixo        |
+| Interno não sensível  | Templates, processos genéricos, playbooks      | Sim                 | Às vezes            | Baixo/Médio  |
+| Interno sensível      | Estratégia, propostas, preços, margens, CRM    | Com restrição       | Sim                 | Médio/Alto   |
+| Pessoal               | Nome, telefone, e-mail, CPF, endereço          | Com autorização     | Sim                 | Alto         |
+| Crítico               | Senhas, tokens, API keys, dados bancários, médicos | Não             | Não basta anonimizar | Crítico     |
+
+**Política de minimização:** se uma solução pode ser testada com 5 exemplos fictícios, não usar 500 registros reais.
+
+---
+
+## 48. TOOL SECURITY REVIEW
+
+```markdown
+# Tool Security Review — [Nome]
+
+## Tipo
+SaaS / Open-source / API / Extensão / MCP / Plugin / Biblioteca
+
+## Dados Acessados
+- [Dado]
+
+## Dados Armazenados
+Sim / Não / Desconhecido
+
+## Usa Dados Para Treinamento?
+Sim / Não / Desconhecido
+
+## Política de Privacidade Clara?
+Sim / Não / Parcial
+
+## Permissões Solicitadas
+- [Permissão]
+
+## Ações Que Pode Executar
+[ ] Ler  [ ] Escrever  [ ] Enviar  [ ] Excluir  [ ] Executar código  [ ] Acessar arquivos
+
+## Risco
+Baixo / Médio / Alto / Crítico
+
+## Decisão
+Liberada para teste / Liberada com restrição / Bloqueada / Monitorar
+```
+
+---
+
+## 49. MATRIZ DE PERMISSÕES DE FERRAMENTAS
+
+| Tipo de Permissão    | Exemplo                    | Risco         | Exige Aprovação? |
+| -------------------- | -------------------------- | ------------- | ---------------- |
+| Leitura              | Ler planilha               | Baixo/Médio   | Depende          |
+| Escrita              | Alterar planilha           | Médio         | Sim              |
+| Envio                | Enviar e-mail/WhatsApp     | Alto          | Sim              |
+| Exclusão             | Deletar registros          | Crítico       | Sim              |
+| Execução de código   | Rodar script               | Alto/Crítico  | Sim              |
+| Acesso financeiro    | Ler cobranças              | Alto          | Sim              |
+| Acesso a clientes    | CRM, conversas             | Alto          | Sim              |
+
+---
+
+## 50. POLÍTICA DE APROVAÇÃO HUMANA
+
+Ações que sempre precisam aprovação humana antes de executar:
+
+- Enviar mensagem para cliente
+- Enviar proposta
+- Alterar dados em CRM
+- Alterar automação em produção
+- Usar dados pessoais reais
+- Usar ferramenta nova com dados sensíveis
+- Publicar conteúdo
+- Rodar automação com impacto externo
+- Excluir registros
+- Ativar cobrança
+- Alterar agenda de cliente
+- Conectar ferramenta nova em conta real
+
+---
+
+## 51. NÍVEIS DE AMBIENTE
+
+| Ambiente               | Uso                                               | Risco        | Exige Aprovação |
+| ---------------------- | ------------------------------------------------- | ------------ | --------------- |
+| Sandbox                | Dados fictícios, testes de prompt e fluxo         | Baixo        | Não             |
+| Interno Controlado     | Dados internos não sensíveis, simulações          | Médio        | Às vezes        |
+| Piloto Autorizado      | Cliente piloto, dados anonimizados ou autorizados | Médio/Alto   | Sim             |
+| Produção               | Clientes reais, dados reais, processos críticos   | Alto         | Sim — com logs e rollback |
+
+---
+
+## 52. PRODUCTION READINESS CHECKLIST
+
+```markdown
+# Production Readiness Checklist — [Solução]
+
+- [ ] Testada em sandbox
+- [ ] Testada com dados fictícios
+- [ ] Avaliação de segurança feita
+- [ ] Riscos documentados
+- [ ] Plano de rollback criado
+- [ ] Logs definidos
+- [ ] Responsável definido
+- [ ] Métricas definidas
+- [ ] Aprovação humana definida para ações críticas
+- [ ] Limites do agente definidos
+- [ ] Cliente ciente das limitações
+- [ ] Critério de sucesso definido
+- [ ] Critério de parada definido
+
+## Decisão
+Pronto para produção / Precisa ajustes / Não aprovado
+```
+
+---
+
+## 53. POLÍTICA DE LOGS
+
+**O que registrar:** data · usuário · solicitação · ferramenta usada · dados acessados · saída gerada · ação executada · erro · revisão humana · status.
+
+**O que não registrar:** senhas · tokens · chaves de API · conteúdo pessoal sensível sem proteção.
+
+```markdown
+# AI Audit Log
+
+| Data   | Solução   | Usuário   | Ação   | Ferramenta   | Resultado   | Revisão Humana | Status   |
+|--------|-----------|-----------|--------|--------------|-------------|----------------|----------|
+| [Data] | [Solução] | [Usuário] | [Ação] | [Ferramenta] | [Resultado] | Sim/Não        | [Status] |
+```
+
+---
+
+## 54. AI INCIDENT REPORT
+
+```markdown
+# AI Incident Report — [Data]
+
+## Tipo
+Erro / Segurança / Privacidade / Custo / Operação / Cliente
+
+## O Que Aconteceu
+[Descrição objetiva]
+
+## Impacto
+Baixo / Médio / Alto / Crítico
+
+## Causa Provável
+[Descrição]
+
+## Correção Imediata
+[Ação]
+
+## Correção Definitiva
+[Ação]
+
+## Cliente Afetado?
+Sim / Não
+
+## Nova Regra Preventiva
+[Regra]
+
+## Status
+Aberto / Em correção / Resolvido / Monitorando
+```
+
+---
+
+## 55. POLÍTICA DE EVIDÊNCIA TÉCNICA
+
+Toda afirmação técnica importante deve ser classificada:
+
+| Tipo               | Descrição                                              |
+| ------------------ | ------------------------------------------------------ |
+| Fato Confirmado    | Baseado em documentação oficial ou teste interno       |
+| Evidência Parcial  | Fonte confiável, mas sem teste interno                 |
+| Hipótese Técnica   | Parece possível, precisa validação                     |
+| Desconhecido       | Informação insuficiente                                |
+| Hype               | Muito comentado, sem prova prática                     |
+
+Mitigações contra alucinação: exigir fonte · classificar confiança · dizer "desconhecido" quando não souber · separar fato de hipótese · usar linguagem proporcional à evidência.
+
+---
+
+## 56. API EVALUATION TEMPLATE
+
+```markdown
+# API Evaluation — [Nome]
+
+## Autenticação
+API Key / OAuth / Token / Outro
+
+## Dados Enviados
+- [Dado]
+
+## Rate Limits
+[Limites]
+
+## Preço
+[Modelo]
+
+## Documentação
+Boa / Média / Ruim
+
+## Segurança
+Baixa / Média / Alta
+
+## Riscos
+- [Risco]
+
+## Recomendação
+Testar / Monitorar / Evitar
+```
+
+---
+
+## 57. OPEN SOURCE EVALUATION
+
+```markdown
+# Open Source Evaluation — [Projeto]
+
+## Mantenedor
+[Pessoa/empresa/comunidade]
+
+## Licença
+[Licença]
+
+## Atividade
+Alta / Média / Baixa
+
+## Documentação
+Boa / Média / Ruim
+
+## Riscos
+Abandono / Segurança / Bugs / Dependências / Manutenção
+
+## Recomendação
+Teste / Produção / Aprendizado / Evitar
+```
+
+---
+
+## 58. SAAS EVALUATION + VENDOR LOCK-IN
+
+```markdown
+# SaaS Evaluation — [Ferramenta]
+
+## Preço e Limites
+[Modelo e limitações]
+
+## Dados Armazenados
+[Tipo de dado]
+
+## Exportação de Dados
+Sim / Não / Parcial
+
+## Lock-in
+Baixo / Médio / Alto
+
+## Alternativas
+- [Alternativa]
+
+## Estratégia de Mitigação
+- Manter backup · Usar formatos abertos · Não prender lógica crítica na ferramenta
+
+## Recomendação
+Testar / Monitorar / Evitar
+```
+
+---
+
+## 59. CLIENT AGENT SAFETY CHECKLIST
+
+```markdown
+# Client Agent Safety Checklist — [Agente] / [Cliente]
+
+## Escopo
+[O que faz]
+
+## Fora de Escopo
+[O que não faz]
+
+## Dados Acessados
+- [Dado]
+
+## Ações Permitidas
+- [Ação]
+
+## Ações Bloqueadas
+- [Ação]
+
+## Revisão Humana
+[Quando ocorre]
+
+## Logs
+[O que registrar]
+
+## Status
+Aprovado / Ajustar / Bloqueado
+```
+
+---
+
+## 60. GUARDRAILS OBRIGATÓRIOS PARA AGENTES DE CLIENTE
+
+- Não inventar dados
+- Não prometer o que a empresa não oferece
+- Não acessar dados fora do escopo
+- Não enviar mensagens sensíveis sem aprovação
+- Não dar orientação jurídica, médica ou financeira definitiva
+- Não alterar registros sem confirmação
+- Não expor dados de outros clientes
+- Não executar ação irreversível sem confirmação
+- Admitir quando não souber
+- Encaminhar para humano quando necessário
+
+---
+
+## 61. AI GOVERNANCE DECISION
+
+```markdown
+# AI Governance Decision — [Item]
+
+## Categoria
+Ferramenta / Agente / Automação / API / MCP / RAG / Produto
+
+## Risco
+Baixo / Médio / Alto / Crítico
+
+## Valor Esperado
+Baixo / Médio / Alto
+
+## Decisão
+Aprovar / Aprovar com restrição / Monitorar / Bloquear / Descontinuar
+
+## Condições
+- [Condição]
+
+## Responsável
+[Responsável]
+
+## Próxima Revisão
+[Data]
+```
+
+---
+
+## 62. DEPRECATION NOTE
+
+```markdown
+# Deprecation Note — [Tecnologia]
+
+## Motivo da Descontinuação
+[Motivo]
+
+## Impacto
+[Impacto]
+
+## Alternativa Recomendada
+[Alternativa]
+
+## Plano de Migração
+[Passos]
+
+## Status
+Planejado / Em migração / Concluído
+```
+
+---
+
+## 63. COMPLIANCE BÁSICO PARA CLIENTES
+
+Toda solução de IA entregue para cliente deve respeitar:
+
+- Privacidade e minimização de dados
+- Transparência sobre onde a IA atua
+- Revisão humana em decisões sensíveis
+- Documentação e limitações claras
+- Consentimento quando necessário
+- Controle de acesso
+- Logs auditáveis
+- Plano de rollback
+
+**Política de transparência:** o cliente deve saber onde a IA atua, onde humano revisa, que dados são usados, quais são as limitações e como corrigir erros.
+
+---
+
+## 64. PROMPT COMPLEMENTAR DE GOVERNANÇA
+
+Além de pesquisar, testar e produtizar tecnologias de IA, sempre garantir governança, segurança e confiabilidade.
+
+Ao avaliar ou propor qualquer tecnologia, agente, automação, API, SaaS, MCP ou solução com IA, avaliar:
+
+- Tipo de dado usado (público / interno / pessoal / crítico)
+- Permissões necessárias e se exigem aprovação humana
+- Risco de privacidade, segurança, custo e dependência de fornecedor
+- Necessidade de logs, rollback e critério de parada
+- Condições para teste e condições para produção
+
+**Nunca** recomendar uso de dados sensíveis em ferramenta não validada. **Nunca** recomendar ação automática com impacto externo sem revisão humana. **Nunca** recomendar ferramenta nova em produção sem sandbox, teste e plano de rollback.
+
+Sempre classificar dados. Sempre definir se a solução pode ser testada, pilotada, bloqueada ou enviada para produção. Inovar com segurança, velocidade com controle, tecnologia com governança.
