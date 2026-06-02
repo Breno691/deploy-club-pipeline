@@ -39,32 +39,47 @@ const TEMPLATE_CATALOG = [
   { id: 'MinimalistLight35s',name: 'Minimalist',     style: 'editorial_clean',  bestFor: ['authority','trust','consulting'],     frames: 35*30 },
 ];
 
-// ── Mapeamento de temas de campanha → intento de template ─────────────────────
+// ── Mapeamento de temas → template ideal (v2 — foco em conversão + autoridade) ──
 const THEME_MAP = {
-  retrabalho:    { intent: ['data_storytelling', 'stamp_impact', 'kinetic_type'],    weight: 'problem' },
-  desperdicio:   { intent: ['data_storytelling', 'hud_tech', 'neobrutalism'],        weight: 'problem' },
-  automacao:     { intent: ['hud_tech', 'glassmorphism', 'dynamic_colorful'],        weight: 'solution' },
-  lean:          { intent: ['data_storytelling', 'bento_grid', 'editorial_clean'],   weight: 'authority' },
-  diagnostico:   { intent: ['stamp_impact', 'kinetic_type', 'dynamic_colorful'],     weight: 'cta' },
-  roi:           { intent: ['data_storytelling', 'data_viz', 'bento_grid'],          weight: 'results' },
-  processo:      { intent: ['editorial_clean', 'elegant_smooth', 'data_storytelling'],weight: 'consulting' },
-  crescimento:   { intent: ['dynamic_colorful', 'gradient_bold', 'space_age'],       weight: 'growth' },
-  ia:            { intent: ['hud_tech', 'cyberpunk', '3d_tech'],                     weight: 'tech' },
-  custo:         { intent: ['data_storytelling', 'neobrutalism', 'kinetic_type'],    weight: 'problem' },
+  // Dor / Problema (Terças)
+  clinica:       { intent: ['stamp_impact', 'neobrutalism', 'kinetic_type'],         weight: 'pain',      setor: 'saude' },
+  industria:     { intent: ['data_storytelling', 'hud_tech', 'stamp_impact'],        weight: 'pain',      setor: 'producao' },
+  distribuidora: { intent: ['data_storytelling', 'bento_grid', 'kinetic_type'],      weight: 'pain',      setor: 'logistica' },
+  autoescola:    { intent: ['dynamic_colorful', 'stamp_impact', 'podcast_word'],     weight: 'pain',      setor: 'educacao' },
+  varejo:        { intent: ['neobrutalism', 'kinetic_type', 'stamp_impact'],         weight: 'pain',      setor: 'varejo' },
+  servicos:      { intent: ['editorial_clean', 'elegant_smooth', 'podcast_word'],    weight: 'pain',      setor: 'servicos' },
+  retrabalho:    { intent: ['data_storytelling', 'stamp_impact', 'kinetic_type'],    weight: 'pain',      setor: 'geral' },
+  desperdicio:   { intent: ['hud_tech', 'data_storytelling', 'neobrutalism'],        weight: 'pain',      setor: 'geral' },
+  // Educação / Método (Quintas)
+  lean:          { intent: ['editorial_clean', 'bento_grid', 'data_storytelling'],   weight: 'authority', setor: 'geral' },
+  dmaic:         { intent: ['data_storytelling', 'hud_tech', 'bento_grid'],          weight: 'authority', setor: 'geral' },
+  automacao:     { intent: ['glassmorphism', 'hud_tech', 'dynamic_colorful'],        weight: 'solution',  setor: 'geral' },
+  n8n:           { intent: ['hud_tech', 'glassmorphism', 'cyberpunk'],               weight: 'solution',  setor: 'tech' },
+  processo:      { intent: ['editorial_clean', 'elegant_smooth', 'bento_grid'],      weight: 'consulting',setor: 'geral' },
+  ia:            { intent: ['hud_tech', 'cyberpunk', 'glassmorphism'],               weight: 'tech',      setor: 'tech' },
+  // Resultado / CTA (Sábados)
+  antes_depois:  { intent: ['data_viz', 'data_storytelling', 'stamp_impact'],        weight: 'proof',     setor: 'geral' },
+  roi:           { intent: ['data_storytelling', 'data_viz', 'kinetic_type'],        weight: 'results',   setor: 'geral' },
+  diagnostico:   { intent: ['dynamic_colorful', 'stamp_impact', 'neobrutalism'],     weight: 'cta',       setor: 'geral' },
+  case:          { intent: ['data_storytelling', 'editorial_clean', 'bento_grid'],   weight: 'proof',     setor: 'geral' },
+  opiniao:       { intent: ['kinetic_type', 'podcast_word', 'stamp_impact'],         weight: 'authority', setor: 'geral' },
 };
 
-// ── Rotação semanal (Ter/Qui/Sáb × 3 semanas = 9 slots únicos) ────────────────
+// ── Rotação semanal v2 — Ter/Qui/Sáb por 6 semanas (ciclo completo = 18 posts únicos)
+// Terça = visual impactante para dor | Quinta = visual técnico para educação | Sábado = prova ou CTA
 const WEEKLY_ROTATION = [
-  // Semana A
-  ['VividFlow30s', 'KineticData32s', 'PodcastDark19s'],
-  // Semana B
-  ['DriftTeal29s', 'NeoBrutYellow30s', 'Aurora30s'],
-  // Semana C
-  ['BoldTypoBlack', 'D3DataStory38s', 'GlassCool30s'],
-  // Semana D
-  ['PosterBlue35s', 'HUDData30s', 'MinimalistLight35s'],
-  // Semana E
-  ['Synthwave23s', 'BentoDark25s', 'DriftIndigo29s'],
+  // Semana 1 — Clínicas
+  ['PosterRed35s',     'BentoDark25s',      'KineticData32s'],
+  // Semana 2 — Indústria
+  ['NeoBrutYellow30s', 'HUDData30s',        'D3DataStory38s'],
+  // Semana 3 — Distribuidoras (CTA no sábado)
+  ['BoldTypoBlack',    'DriftTeal29s',      'VividFlow30s'],
+  // Semana 4 — Serviços / Opinião
+  ['PodcastPurple19s', 'MinimalistLight35s','PosterBlue35s'],
+  // Semana 5 — Autoescolas
+  ['Synthwave23s',     'GlassCool30s',      'DriftIndigo29s'],
+  // Semana 6 — Posicionamento geral + CTA diagnóstico
+  ['Aurora30s',        'NeonCyber30s',      'NeoBrutYellow30s'],
 ];
 
 function getWeekOfYear(date = new Date()) {

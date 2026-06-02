@@ -1,225 +1,186 @@
-# SmartOps IA — Content Strategy & Editorial Intelligence
+# SmartOps IA — Content Strategy v2
 
-*Breno Luiz · Consultor de Melhoria Contínua, Lean Six Sigma e Automação com IA*
+*Breno Luiz · Consultor Lean Six Sigma + Automação com IA para PMEs em BH/MG*
 
 ---
 
 ## Posicionamento
 
-**Quem:** Empresário e consultor especializado em transformar operações caóticas em sistemas inteligentes usando IA, automação e Lean Six Sigma.
+**Quem:** Consultor que combina Lean Six Sigma com IA e automação para PMEs.
 
-**Para quem:** Pequenas e médias empresas que perdem dinheiro, tempo e oportunidades por processos desorganizados, trabalho manual e falta de estrutura.
+**Para quem:** Donos de empresas em BH/MG que perdem dinheiro com processo manual, retrabalho e dependência do dono.
 
-**O que entrega:** Clareza operacional + ferramentas que trabalham enquanto o dono dorme.
-
-**Diferencial:** Combina método (Lean Six Sigma) com tecnologia (IA + automação n8n) e visão de empresário — não guru de ferramenta, mas consultor de resultado.
+**Diferencial:** Não é coach, não é vendedor de curso. É consultor de resultado — método + ferramenta + número real.
 
 **Proposta de valor:**
-> "Eu ajudo empresas a parar de operar no caos e começar a operar com sistema — usando IA, automação e metodologia Lean para reduzir desperdícios, aumentar produtividade e escalar sem contratar mais."
+> "Eu transformo operações caóticas em sistemas inteligentes. Lean para eliminar o desperdício. IA para automatizar o que sobrou. Resultado em 30 a 90 dias."
 
 ---
 
 ## Tom de Voz
 
-| Característica | Como aplicar |
-|---|---|
-| Direto | Frase curta. Sem enrolação. Vai logo ao ponto. |
-| Técnico mas acessível | Explica o conceito em 1 linha, depois mostra o exemplo prático |
-| Empresário falando com empresário | "Você conhece essa situação?" — não professor dando aula |
-| Sem hype vazio | Nada de "IA vai mudar o mundo". Caso real, processo real, número real. |
-| CTA sempre presente | Todo post termina com uma ação clara |
+- **Direto:** frase curta, vai logo ao ponto
+- **Empresário falando com empresário:** "Você conhece essa situação?"
+- **Com número:** sempre uma métrica real — tempo, custo, percentual
+- **Sem hype:** nenhuma promessa vaga, nenhum emoji em excesso
+- **CTA sempre presente:** todo post termina com ação clara
 
-**Palavras-chave do posicionamento:** Prático. Objetivo. Concreto. Sistêmico. Provocador.
-
-**Evitar:** Frases motivacionais genéricas, emojis em excesso, jargão sem explicação, promessas sem entrega.
+**Nunca usar:** frases motivacionais genéricas, jargão sem explicação, "IA vai mudar o mundo"
 
 ---
 
-## Os 5 Pilares de Conteúdo
+## Os 6 Pilares
 
-Todo post se encaixa em UM desses pilares:
-
-### 1. Educação Técnica
-Ensina conceito, ferramenta ou metodologia.
-- DMAIC, Lean, 8 desperdícios, n8n, BPM
-- Linguagem simples, sem jargão acadêmico
-
-### 2. Problema / Dor Real
-Nomeia uma dor que o empresário sente todo dia.
-- "Por que sua equipe ainda faz isso no Excel?"
-- "Seu processo de vendas está vazando leads e você nem sabe"
-
-### 3. Resultado / Prova
-Mostra o antes e depois — processo, número, case real.
-- Screenshots de dashboards, fluxogramas, automações funcionando
-- Sempre com número: "reduziu 3h/dia", "30% menos cancelamento"
-
-### 4. Opinião / Posicionamento
-Você fala o que pensa. Gera debate e autoridade.
-- "Automatizar processo ruim só acelera o caos"
-- "Lean Six Sigma não é só para indústria"
-
-### 5. Conversão
-CTA direto para diagnóstico, WhatsApp ou DM.
-- "3 vagas para diagnóstico gratuito essa semana"
-- "Manda DM com a palavra PROCESSO"
-
----
-
-## Frequência e Formato
-
-| Formato | Frequência | Objetivo |
-|---|---|---|
-| Reels | 2x/semana | Alcance — chegar em novos públicos |
-| Carrossel | 2x/semana | Autoridade — salvar/compartilhar |
-| Story | 3x/semana mínimo | Relacionamento + conversão |
-| Post card | 1x/semana | Autoridade — citação com contexto |
-
-**Regra de produção em lote:** Reserve 2h/semana para gravar 3–4 reels de uma vez. Manda pro editor. Fica livre o resto da semana.
-
----
-
-## Estrutura Semanal
-
-| Dia | Formato | Objetivo | Tema |
+| # | Pilar | Objetivo | Frequência |
 |---|---|---|---|
-| Segunda | Carrossel | Autoridade | Conceito técnico (Lean, DMAIC, automação) |
-| Terça | Story | Engajamento | Bastidor / pergunta / enquete |
-| Quarta | Reel | Alcance | Dica prática, problema real |
-| Quinta | Post card | Autoridade | Citação/reflexão empresarial |
-| Sexta | Carrossel | Conversão | Case/resultado/oferta diagnóstico |
-| Sábado | Reel | Alcance | Conteúdo provocativo |
-| Domingo | Story | Relacionamento | Pessoal + mentalidade |
+| 1 | **Dor / Problema** | Fazer o empresário se reconhecer | 2×/semana |
+| 2 | **Educação Prática** | Ensinar algo aplicável hoje | 1×/semana |
+| 3 | **Antes / Depois** | Mostrar transformação real | 1×/semana |
+| 4 | **Processo / Método** | Demonstrar competência técnica | 1×/semana |
+| 5 | **Opinião / Posição** | Criar debate e autoridade | 1×/semana |
+| 6 | **Conversão / CTA** | Gerar pedido de diagnóstico | 1×/semana |
 
 ---
 
-## Estrutura de Reel
+## Calendário Semanal
 
-**Duração ideal:** 30–60 segundos
+| Dia | Formato | Pilar | Tema da Semana |
+|---|---|---|---|
+| Terça | Reel 30–45s | Dor / Problema | Nomear dor específica do setor da semana |
+| Quinta | Carrossel 6–8 slides | Educação Prática | Ferramenta, método ou framework aplicado |
+| Sábado | Reel 30–45s | Antes / Depois ou Conversão | Case ou CTA direto para diagnóstico |
 
-```
-[0–3s]   Hook visual/verbal — frase que para o scroll
-[3–15s]  Desenvolvimento — dica, problema ou provocação
-[15–50s] Conteúdo de valor — mostra/explica/provoca
-[50–60s] CTA — "Salva esse vídeo" / "Me segue pra mais"
-```
-
-**Hooks que performam:**
-- "Se você ainda faz isso manualmente, está perdendo dinheiro"
-- "O processo que salvou 15h de trabalho por semana"
-- "A diferença entre empresa organizada e empresa que cresce"
+**Frequência:** 3 posts/semana — consistência acima de volume.
 
 ---
 
-## Estrutura de Carrossel
+## Setores em Foco (rotação mensal)
 
-**Ideal:** 7–10 slides
+Cada semana tem um **setor prioritário** — o conteúdo reflete a dor daquele tipo de empresa:
 
-```
-Slide 1:   Título forte (promessa ou pergunta provocativa)
-Slides 2–8: Conteúdo sequencial (1 ideia por slide)
-Slide 9:   Resumo ou conclusão com número
-Slide 10:  CTA — "Salva", "Compartilha", "Me chama no DM"
-```
-
-**Regra:** Se a pessoa ler só o slide 1 e o último, precisa entender o valor.
-
----
-
-## Estrutura de Story
-
-Grave no celular, sem edição pesada:
-- **Enquete:** "Seu negócio usa IA hoje? Sim / Não"
-- **Pergunta:** "Qual processo na sua empresa mais toma tempo?"
-- **Bastidor:** "Hoje finalizei o mapeamento de processo de um cliente. O que encontrei:"
-- **Provocação:** "Uma coisa que vejo em toda PME que visito..."
-- **CTA direto:** "2 vagas para diagnóstico grátis — manda DM 'DIAGNÓSTICO'"
+| Semana | Setor | Dor Principal | Exemplo de Hook |
+|---|---|---|---|
+| 1 | Clínicas / Saúde | Agendamentos, faltas, prontuário manual | "Sua clínica ainda confirma consulta pelo WhatsApp manualmente?" |
+| 2 | Indústria / Produção | Retrabalho, setup, controle de qualidade | "Cada peça com defeito custa mais do que parece. Calcula." |
+| 3 | Distribuidoras / Logística | Estoque, pedidos, rastreamento | "Se seu estoque depende de planilha, você já perdeu venda hoje." |
+| 4 | Serviços / Escritórios | Processos manuais, retrabalho, reunião sem resultado | "3h de reunião para decidir o que podia ter sido 1 mensagem." |
+| 5 | Autoescolas / Ensino | Agendamento, evasão, acompanhamento de alunos | "Por que sua autoescola perde aluno antes da prova?" |
+| 6 | Varejo / Comércio | Estoque, precificação, atendimento repetitivo | "Quantas vezes sua equipe respondeu a mesma pergunta hoje?" |
 
 ---
 
-## Hashtags Estratégicas
+## Temas das Próximas 6 Semanas
+
+### Semana 1 — Clínicas (Dor + Processo)
+- **Terça (Reel):** "Sua clínica ainda perde paciente por confirmação manual de consulta?"
+- **Quinta (Carrossel):** "5 automações que toda clínica deveria ter em 2026"
+- **Sábado (Reel):** "Como uma clínica reduziu 40% das faltas com 1 automação simples"
+
+### Semana 2 — Indústria / Produção (Dor + Educação)
+- **Terça (Reel):** "Os 8 desperdícios que estão comendo a margem da sua produção"
+- **Quinta (Carrossel):** "DMAIC em 5 passos: como resolver problema de processo de uma vez"
+- **Sábado (Reel):** "Por que Lean Six Sigma não é só para grande indústria"
+
+### Semana 3 — Distribuidoras / Logística (Processo + CTA)
+- **Terça (Reel):** "Sua distribuidora ainda controla estoque no Excel?"
+- **Quinta (Carrossel):** "Como automatizar o ciclo de pedido sem trocar de sistema"
+- **Sábado (Reel/CTA):** "Diagnóstico gratuito — mostre o seu processo, eu mostro onde está o desperdício"
+
+### Semana 4 — Serviços / Escritórios (Opinião + Antes/Depois)
+- **Terça (Reel):** "Automatizar processo ruim só acelera o caos. Lean primeiro, IA depois."
+- **Quinta (Carrossel):** "Como mapear um processo em 30 minutos (sem consultoria cara)"
+- **Sábado (Reel):** "Antes: 4h para gerar relatório. Depois: automático toda segunda às 8h."
+
+### Semana 5 — Autoescolas (Dor + Método)
+- **Terça (Reel):** "Por que autoescola perde aluno — e não sabe que perdeu"
+- **Quinta (Carrossel):** "3 automações que autoescolas precisam implementar agora"
+- **Sábado (Reel):** "Como reduzir evasão de alunos com lembretes automáticos no WhatsApp"
+
+### Semana 6 — Posicionamento Geral (Autoridade + CTA)
+- **Terça (Reel):** "Lean + IA: a combinação que ninguém está usando ainda nas PMEs"
+- **Quinta (Carrossel):** "Como saber se sua empresa está pronta para automação com IA"
+- **Sábado (Reel/CTA):** "Em 30 minutos, eu identifico os 3 maiores gargalos da sua operação. Grátis."
+
+---
+
+## Banco de Hooks — Usar Quando Precisar
+
+### Dor (para abrir reel ou carrossel)
+- "Você tem empresa? Então provavelmente está perdendo dinheiro por causa disso."
+- "Se você ainda faz isso manualmente, está pagando mais do que deveria."
+- "O processo que quebra toda semana não é azar. É falta de padrão."
+- "Quantas horas sua equipe gastou hoje em tarefas que poderiam ser automáticas?"
+- "Sua empresa cresce, mas o caos cresce junto. Isso tem nome: falta de processo."
+
+### Educação (para desenvolver conteúdo)
+- "O DMAIC em 60 segundos: D — define, M — mede, A — analisa, I — melhora, C — controla."
+- "5 Porquês: a ferramenta mais simples e mais ignorada do Lean."
+- "n8n: o que é, para que serve e por que PMEs deveriam usar."
+- "Diagrama de Ishikawa: encontrar a causa raiz em 15 minutos."
+
+### Resultado (para antes/depois e cases)
+- "Em 3 semanas, reduzimos 40% do retrabalho na produção."
+- "15 horas por semana economizadas com 1 automação no WhatsApp."
+- "O relatório que demorava 4 horas agora gera sozinho toda segunda."
+
+### Conversão (para CTA)
+- "Diagnóstico operacional gratuito — 30 minutos. Você me mostra o processo, eu mostro onde está o desperdício."
+- "2 vagas essa semana para diagnóstico. Manda DM com 'DIAGNÓSTICO'."
+- "Me manda uma mensagem com o seu maior gargalo hoje. Respondo com uma solução."
+
+---
+
+## Estrutura de Reel (30–45s)
+
+```
+[0–3s]   Hook — frase que para o scroll, começa com dor ou provocação
+[3–15s]  Desenvolvimento — aprofunda o problema ou promessa
+[15–40s] Conteúdo de valor — mostra, ensina ou demonstra
+[40–45s] CTA — "Salva", "Segue", "DM com [palavra]"
+```
+
+---
+
+## Estrutura de Carrossel (6–8 slides)
+
+```
+Slide 1:   Título forte — promessa ou pergunta provocativa
+Slides 2–6: Conteúdo — 1 ideia por slide, máx 2 frases
+Slide 7:   Conclusão com número ou insight
+Slide 8:   CTA — "Salva esse carrossel" / "Me manda DM"
+```
+
+---
+
+## Hashtags
 
 **Alto volume (alcance):**
-`#automacao #inteligenciaartificial #ia #processos #produtividade #transformacaodigital #negocios #empreendedorismo #gestao`
+`#automacao #ia #processos #produtividade #gestao #empreendedorismo #negocios`
 
 **Médio volume (qualificado):**
-`#leansixsigma #melhoriacontinua #automacaoempresarial #iaparanegocios #n8n #eficienciaempresarial #bpm #gestaoprocessos`
+`#leansixsigma #melhoriacontinua #automacaoempresarial #n8n #eficienciaoperacional`
 
 **Nicho (conversão):**
-`#consultoriadeprocessos #automacaocomercial #sdria #crmia #whatsappautomacao #operacoes #SmartOpsIA`
-
----
-
-## SEO do Instagram
-
-1. **Nome de perfil:** inclua palavras-chave — "Breno | Consultor IA & Automação"
-2. **Bio:** repita os termos — automação, IA, processos, Lean Six Sigma
-3. **Legenda:** primeira linha tem peso de SEO — comece com a palavra-chave
-4. **Alt text:** configure texto alternativo com descrição do conteúdo
-5. **Vídeo:** fale os termos-chave — Instagram transcreve reels
+`#consultoriadeprocessos #automacaocomia #SmartOpsIA #iaparanegocios #bh #minasgerais`
 
 ---
 
 ## Funil Instagram → Venda
 
 ```
-TOPO (alcance)
-└── Reels de valor: "5 processos que toda empresa deveria automatizar"
-    └── Salva / Compartilha / Segue
-
-MEIO (autoridade)
-└── Carrossel técnico: "Como montar um SDR com IA em 7 passos"
-    └── Comenta / Manda DM / Clica no link
-
-FUNDO (conversão)
-└── Story com CTA direto: "Diagnóstico gratuito essa semana — 3 vagas"
-    └── DM → WhatsApp → Reunião → Venda
+TOPO   → Reel de dor/problema → Alcance + Seguidores
+MEIO   → Carrossel técnico → Salva + Autoridade
+FUNDO  → Story CTA / Reel resultado → DM → WhatsApp → Diagnóstico → Proposta → Cliente
 ```
 
-**Regra de distribuição:** 60% conteúdo de valor (topo/meio) + 40% conteúdo de conversão.
+**Regra:** 60% valor (topo + meio) + 40% conversão (fundo)
 
 ---
 
-## Ofertas Estruturadas
+## Meta por Período
 
-| Oferta | O que é | Preço orientativo |
-|---|---|---|
-| Diagnóstico Operacional | 30 min no WhatsApp — mapeamento de gargalos | Gratuito |
-| Consultoria Lean Six Sigma | Mapeamento + plano DMAIC | Acima de R$3.000 |
-| Automação Comercial | n8n + WhatsApp API + CRM automatizado | Acima de R$5.000 |
-| SDR IA / CRM IA | Agente de IA que qualifica leads 24h | Setup + mensalidade |
-| Pacote IA para Empresas | Diagnóstico + 2–3 automações prioritárias | Acima de R$8.000 |
-
----
-
-## Banco de Conteúdo por Pilar
-
-### Lean Six Sigma (100 ideias disponíveis em `[C] 100 Ideias - Lean Six Sigma.md`)
-Top performers: 8 desperdícios, DMAIC prático, 5 Porquês, Ishikawa, casos reais, comparação custo de não qualidade
-
-### Automação Empresarial (100 ideias em `[C] 100 Ideias - Automação Empresarial.md`)
-Top performers: n8n para PMEs, SDR IA, WhatsApp bot, qualificação automática, comparativo ferramentas
-
-### Processos Operacionais (100 ideias em `[C] 100 Ideias - Processos e Organização Operacional.md`)
-Top performers: como mapear processo, SOP em 1 página, sinais que processo está quebrado, gargalos invisíveis
-
-### IA para Empresas (100 ideias em `[C] 100 Ideias - IA para Empresas.md`)
-Top performers: IA sem código, casos de uso práticos, ROI de automação, mitos sobre IA
-
----
-
-## Prioridade Primeiros 30 Dias
-
-**Semana 1–2 (lançamento da autoridade):**
-1. Reel: apresentação — quem é, o que faz, para quem
-2. Carrossel: "7 processos que toda empresa deveria automatizar"
-3. Reel: "Automatizar processo ruim só acelera o caos"
-4. Story: enquete + CTA diagnóstico
-
-**Semana 3–4 (aprofundar + converter):**
-1. Carrossel: "5 sinais que sua empresa precisa de automação"
-2. Reel: "O processo que está te custando 3h por dia"
-3. Carrossel: "Como montar um SDR com IA"
-4. Story: bastidor + CTA diagnóstico
-
-**Meta 30 dias:** 8–10 posts, 1 lead via DM/WhatsApp.
+| Período | Seguidores | DMs/semana | Diagnósticos/mês | Clientes |
+|---|---|---|---|---|
+| Mês 1 | 200+ | 2–3 | 2–4 | 1 |
+| Mês 2 | 500+ | 5–8 | 4–8 | 2–3 |
+| Mês 3 | 1.000+ | 10+ | 8–12 | 4–6 |
