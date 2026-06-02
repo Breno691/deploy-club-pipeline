@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "description": "Regras de scoring para qualificação de parceiros SmartOps IA",
+  "weights": {
+    "acesso_a_pmes":          { "max": 20, "description": "Acesso direto a donos/gestores de PMEs" },
+    "confianca_empresarios":  { "max": 20, "description": "Nível de confiança e relacionamento com empresários" },
+    "complementaridade":      { "max": 15, "description": "Complementaridade de serviços com SmartOps" },
+    "potencial_indicacao":    { "max": 15, "description": "Volume potencial de indicações mensais" },
+    "fit_local":              { "max": 10, "description": "Presença e atuação em BH e região metropolitana" },
+    "facilidade_ativacao":    { "max": 10, "description": "Facilidade de ativar o parceiro para indicações" },
+    "potencial_co_marketing": { "max":  5, "description": "Potencial de ações conjuntas de marketing" },
+    "baixo_risco":            { "max":  5, "description": "Ausência de conflito de interesse ou risco reputacional" }
+  },
+  "classification": {
+    "prioridade_maxima": { "min": 85, "label": "Prioridade Máxima", "action": "Abordar esta semana" },
+    "bom_parceiro":      { "min": 70, "label": "Bom Parceiro",      "action": "Abordar este mês" },
+    "monitorar":         { "min": 50, "label": "Monitorar",         "action": "Avaliar em 60 dias" },
+    "baixa_prioridade":  { "min":  0, "label": "Baixa Prioridade",  "action": "Não priorizar" }
+  },
+  "type_base_scores": {
+    "accountants":             { "acesso_a_pmes": 18, "confianca_empresarios": 18, "complementaridade": 13, "potencial_indicacao": 12, "fit_local": 8, "facilidade_ativacao": 8, "potencial_co_marketing": 3, "baixo_risco": 5 },
+    "software-houses":         { "acesso_a_pmes": 16, "confianca_empresarios": 14, "complementaridade": 15, "potencial_indicacao": 12, "fit_local": 8, "facilidade_ativacao": 9, "potencial_co_marketing": 4, "baixo_risco": 5 },
+    "erp-consultants":         { "acesso_a_pmes": 17, "confianca_empresarios": 16, "complementaridade": 15, "potencial_indicacao": 12, "fit_local": 7, "facilidade_ativacao": 8, "potencial_co_marketing": 3, "baixo_risco": 5 },
+    "financial-consultants":   { "acesso_a_pmes": 18, "confianca_empresarios": 18, "complementaridade": 14, "potencial_indicacao": 13, "fit_local": 8, "facilidade_ativacao": 8, "potencial_co_marketing": 3, "baixo_risco": 5 },
+    "business-lawyers":        { "acesso_a_pmes": 16, "confianca_empresarios": 17, "complementaridade": 12, "potencial_indicacao": 10, "fit_local": 8, "facilidade_ativacao": 7, "potencial_co_marketing": 3, "baixo_risco": 5 },
+    "marketing-agencies":      { "acesso_a_pmes": 15, "confianca_empresarios": 13, "complementaridade": 14, "potencial_indicacao": 11, "fit_local": 8, "facilidade_ativacao": 9, "potencial_co_marketing": 5, "baixo_risco": 4 },
+    "hr-consultants":          { "acesso_a_pmes": 14, "confianca_empresarios": 15, "complementaridade": 12, "potencial_indicacao": 10, "fit_local": 8, "facilidade_ativacao": 8, "potencial_co_marketing": 3, "baixo_risco": 5 },
+    "commercial-associations": { "acesso_a_pmes": 19, "confianca_empresarios": 17, "complementaridade": 12, "potencial_indicacao": 14, "fit_local": 10, "facilidade_ativacao": 6, "potencial_co_marketing": 5, "baixo_risco": 5 },
+    "sebrae-entities":         { "acesso_a_pmes": 19, "confianca_empresarios": 18, "complementaridade": 13, "potencial_indicacao": 14, "fit_local": 10, "facilidade_ativacao": 5, "potencial_co_marketing": 5, "baixo_risco": 5 },
+    "coworkings":              { "acesso_a_pmes": 14, "confianca_empresarios": 12, "complementaridade": 10, "potencial_indicacao":  9, "fit_local": 9, "facilidade_ativacao": 9, "potencial_co_marketing": 4, "baixo_risco": 5 }
+  }
+}

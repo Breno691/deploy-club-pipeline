@@ -35,6 +35,23 @@ Distribuir o conteúdo da SmartOps IA no canal certo, no formato certo e no mome
 - Gerar o Publish MD com tudo pronto para publicação
 - Executar posting via API apenas com aprovação explícita
 
+## MODOS
+
+Execute: `node agents/distribution-agent/distribution_agent.js --mode <modo>`
+
+| Modo | Descrição | Argumento |
+|---|---|---|
+| `calendar` | Gerar calendário editorial multicanal | `--semanas 2` |
+| `schedule` | Agendar publicação em canal específico | `--canal instagram --data "2026-06-05"` |
+| `repurpose` | Reaproveitar conteúdo para outros formatos/canais | `--formato reel --para linkedin` |
+| `instagram` | Publicar no Instagram (requer Publish MD aprovado) | `--task <nome> --date <data>` |
+| `youtube` | Publicar no YouTube | `--task <nome> --date <data>` |
+| `multicanal` | Distribuição simultânea em todos os canais | `--task <nome> --date <data>` |
+| `analytics` | Análise de performance de publicações recentes | — |
+| `whatsapp` | Distribuição via WhatsApp Business | `--mensagem "texto"` |
+| `linkedin` | Publicar no LinkedIn | `--task <nome> --date <data>` |
+| `report` | Relatório de alcance, engajamento e conversão | — |
+
 ## CANAIS
 
 - Instagram (Graph API)

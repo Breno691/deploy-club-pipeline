@@ -1,0 +1,21 @@
+{
+  "name": "consulting-company-builder-agent",
+  "version": "1.0.0",
+  "description": "Consulting Company Builder Agent — estruturar, organizar e escalar empresa de consultoria profissional",
+  "main": "consulting_company_builder_agent.js",
+  "scripts": {
+    "start": "node consulting_company_builder_agent.js",
+    "estrutura": "node consulting_company_builder_agent.js --mode estrutura",
+    "servicos": "node consulting_company_builder_agent.js --mode servicos",
+    "proposta": "node consulting_company_builder_agent.js --mode proposta",
+    "diagnostico": "node consulting_company_builder_agent.js --mode diagnostico",
+    "processo": "node consulting_company_builder_agent.js --mode processo",
+    "comercial": "node consulting_company_builder_agent.js --mode comercial",
+    "indicadores": "node consulting_company_builder_agent.js --mode indicadores",
+    "metodologia": "node consulting_company_builder_agent.js --mode metodologia",
+    "rotina": "node consulting_company_builder_agent.js --mode rotina",
+    "escalar": "node consulting_company_builder_agent.js --mode escalar",
+    "report": "node consulting_company_builder_agent.js --mode report"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

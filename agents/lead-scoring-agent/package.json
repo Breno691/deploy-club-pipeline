@@ -1,0 +1,20 @@
+{
+  "name": "lead-scoring-agent",
+  "version": "1.0.0",
+  "description": "Lead Scoring Agent — qualificação, priorização e scoring de leads por BANT e ICP",
+  "main": "lead_scoring_agent.js",
+  "scripts": {
+    "start": "node lead_scoring_agent.js",
+    "score": "node lead_scoring_agent.js --mode score",
+    "qualify": "node lead_scoring_agent.js --mode qualify",
+    "icp": "node lead_scoring_agent.js --mode icp",
+    "pipeline": "node lead_scoring_agent.js --mode pipeline",
+    "prioritize": "node lead_scoring_agent.js --mode prioritize",
+    "followup": "node lead_scoring_agent.js --mode followup",
+    "segment": "node lead_scoring_agent.js --mode segment",
+    "nurture": "node lead_scoring_agent.js --mode nurture",
+    "convert": "node lead_scoring_agent.js --mode convert",
+    "report": "node lead_scoring_agent.js --mode report"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

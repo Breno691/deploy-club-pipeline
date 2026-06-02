@@ -1,0 +1,21 @@
+{
+  "name": "lean-consulting-agent",
+  "version": "1.0.0",
+  "description": "Lean Consulting Agent — diagnóstico operacional, mapeamento de processos, eliminação de desperdícios e automação",
+  "main": "lean_consulting_agent.js",
+  "scripts": {
+    "start": "node lean_consulting_agent.js",
+    "diagnostico": "node lean_consulting_agent.js --mode diagnostico",
+    "mapeamento": "node lean_consulting_agent.js --mode mapeamento",
+    "desperdicios": "node lean_consulting_agent.js --mode desperdicios",
+    "vsm": "node lean_consulting_agent.js --mode vsm",
+    "kaizen": "node lean_consulting_agent.js --mode kaizen",
+    "pdca": "node lean_consulting_agent.js --mode pdca",
+    "5s": "node lean_consulting_agent.js --mode 5s",
+    "automacao": "node lean_consulting_agent.js --mode automacao",
+    "indicadores": "node lean_consulting_agent.js --mode indicadores",
+    "plano": "node lean_consulting_agent.js --mode plano",
+    "report": "node lean_consulting_agent.js --mode report"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

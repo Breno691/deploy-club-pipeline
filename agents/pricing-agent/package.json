@@ -1,0 +1,18 @@
+{
+  "name": "pricing-agent",
+  "version": "1.0.0",
+  "description": "Pricing Agent — precificação estratégica, ancoragem, pacotes e margem",
+  "main": "pricing_agent.js",
+  "scripts": {
+    "start": "node pricing_agent.js",
+    "calculate": "node pricing_agent.js --mode calculate",
+    "package": "node pricing_agent.js --mode package",
+    "anchor": "node pricing_agent.js --mode anchor",
+    "margin": "node pricing_agent.js --mode margin",
+    "competitive": "node pricing_agent.js --mode competitive",
+    "value": "node pricing_agent.js --mode value",
+    "optimize": "node pricing_agent.js --mode optimize",
+    "report": "node pricing_agent.js --mode report"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

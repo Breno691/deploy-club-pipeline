@@ -1,0 +1,21 @@
+{
+  "name": "personal-brand-intelligence-agent",
+  "version": "1.0.0",
+  "description": "SmartOps IA — Personal Brand Intelligence Agent (Diretor de Marca Pessoal de Breno Luiz)",
+  "main": "personal_brand_agent.js",
+  "scripts": {
+    "audit":          "node personal_brand_agent.js --mode audit",
+    "bio":            "node personal_brand_agent.js --mode bio",
+    "bio:all":        "node personal_brand_agent.js --mode bio --platform all",
+    "bio:linkedin":   "node personal_brand_agent.js --mode bio --platform linkedin --version linkedin_about",
+    "narrative":      "node personal_brand_agent.js --mode narrative",
+    "linkedin":       "node personal_brand_agent.js --mode linkedin",
+    "post":           "node personal_brand_agent.js --mode post",
+    "authority":      "node personal_brand_agent.js --mode authority-audit",
+    "content-plan":   "node personal_brand_agent.js --mode content-plan"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.56.0",
+    "dotenv": "^16.0.0"
+  }
+}

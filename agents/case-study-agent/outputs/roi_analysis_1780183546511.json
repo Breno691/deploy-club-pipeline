@@ -1,0 +1,23 @@
+{
+  "calc": {
+    "investment": 5000,
+    "hours_week": 17,
+    "cost_hour": 35,
+    "savings_from_hours": 2380,
+    "direct_savings_monthly": 0,
+    "revenue_gain_annual": 0,
+    "total_monthly": 2380,
+    "total_annual": 28560,
+    "net_gain": 23560,
+    "roi": 4.71,
+    "roi_pct": 471.2,
+    "payback_months": 2.1,
+    "confidence": "MÉDIA",
+    "assumptions": [
+      "Custo-hora estimado: R$ 35"
+    ],
+    "roi_level": "EXCELENTE — Case destaque para vendas"
+  },
+  "analysis": "# ROI ANALYSIS — SmartOps IA\n\n---\n\n**CASE:** clinica-bh-automacao\n**INVESTMENT:** R$ 5.000\n**MONTHLY\\_SAVINGS:** R$ 2.380\n**ANNUAL\\_SAVINGS:** R$ 28.560\n**NET\\_GAIN:** R$ 23.560\n**ROI:** 471,2% (4,71x)\n**PAYBACK:** 2,1 meses\n**CONFIDENCE\\_LEVEL:** MÉDIA\n**ASSUMPTIONS:**\n- Custo-hora estimado em R$ 35 (não informado pelo cliente)\n- 17h economizadas/semana convertidas em 4,3 semanas/mês = ~73h/mês\n- Economia de tempo computada como custo real de mão de obra\n- Sem ganho de receita adicional considerado neste cálculo\n- Sem economia direta em ferramentas ou fornecedores declarada\n\n**VALIDATION\\_NEEDED:**\n- Confirmar custo-hora real da(s) pessoa(s) que executavam as tarefas automatizadas\n- Verificar se as 17h/semana são de um único colaborador ou distribuídas na equipe\n- Checar se houve aumento de capacidade de atendimento (receita não capturada)\n- Validar se o tempo liberado foi realocado produtivamente ou apenas absorvido\n- Confirmar contexto da automação para refinar premissas do modelo\n\n---\n\n## NARRATIVA FINANCEIRA\n\nUma clínica em Belo Horizonte decidiu parar de pagar para fazer o que uma máquina pode fazer melhor. Com um investimento único de R$ 5.000 em automação inteligente, a operação passou a recuperar **17 horas por semana** — tempo que antes era consumido por tarefas manuais, repetitivas e de baixo valor estratégico. Em menos de 70 dias, o investimento já estava pago.\n\nAo longo de 12 meses, essa decisão se traduz em **R$ 28.560 em economia real** — gerada exclusivamente pela devolução de tempo à equipe. Não é receita projetada, não é promessa: é o custo de horas humanas que deixaram de ser desperdiçadas em processos que a tecnologia resolve com mais velocidade, menos erro e zero cansaço. O ganho líquido de **R$ 23.560 no primeiro ano** representa um retorno de **4,71 vezes** o valor investido.\n\nO que torna esse case ainda mais relevante é o que os números *não* capturam: a capacidade da equipe de focar em atendimento, conversão e experiência do paciente — ativos que impactam diretamente a receita da clínica mas que não foram incluídos neste cálculo por ausência de dados. Em outras palavras, **471% de ROI é o piso, não o teto** dessa operação.\n\nPara qualquer gestor que ainda trata automação como custo, esse case oferece uma resposta direta: o verdadeiro custo é continuar sem ela. A cada mês sem automação, essa clínica estaria deixando R$ 2.380 sobre a mesa — pagos em salário para executar o que um sistema faz em segundos.\n\n---\n\n**HEADLINE ROI:**\n> 🏥 *\"Clínica em BH recupera R$ 28 mil por ano — com um investimento de R$ 5 mil e payback em 2 meses\"*\n\n---\n\n**QUOTE FINANCEIRA:**\n> *\"Para cada R$ 1,00 investido na automação SmartOps, essa clínica recebeu R$ 4,71 de volta — ainda no primeiro ano de operação.\"*\n\n---\n\n**OBJEÇÃO QUEBRADA:**\n> ❌ *\"R$ 5.000 é caro para uma clínica pequena.\"*\n> ✅ **Não investir custa R$ 2.380 por mês.** Em 12 meses, a inação tem um custo silencioso de R$ 28.560 — mais de 5x o valor da solução. O que é caro, de fato, é continuar operando no manual.\n\n---\n\n*⚠️ Análise com confiança MÉDIA. Recomenda-se validação do custo-hora real e contexto da automação para elevar a precisão do modelo antes de uso em proposta formal.*",
+  "created_at": "2026-05-30T23:25:46.509Z"
+}

@@ -1,3 +1,17 @@
+---
+name: proposal-agent
+description: >
+  Criação de propostas comerciais para consultoria Lean, Six Sigma e Automação.
+  SEMPRE use quando: "proposta", "proposta comercial", "criar proposta", "montar proposta",
+  "orçamento", "apresentação comercial", "proposta para cliente", "escopo do projeto",
+  "precificar projeto", "estruturar proposta", "proposta de consultoria".
+metadata:
+  author: Deploy Club / SmartOps IA
+  version: 1.0.0
+  category: sales
+  tags: [proposta, comercial, orçamento, escopo, apresentação, cliente, fechamento]
+---
+
 # PROPOSAL-AGENT
 
 ## ROLE
@@ -15,6 +29,17 @@ Gerar propostas comerciais personalizadas que comunicam valor, ROI e metodologia
 - Calcular e comunicar ROI esperado do projeto
 - Adaptar linguagem e foco por segmento e maturidade operacional
 - Criar variações de proposta por tamanho de empresa e dor principal
+
+## MODOS
+
+Execute: `node agents/proposal-agent/proposal_agent.js --mode <modo>`
+
+| Modo | Descrição | Argumento |
+|---|---|---|
+| `generate` | Gerar proposta comercial completa personalizada | `--cliente "nome" --servico "lean" --ticket 6000` |
+| `template` | Criar ou adaptar template de proposta por serviço | `--servico "automação"` |
+| `roi` | Calcular e documentar ROI esperado para o cliente | `--problema "retrabalho" --economia 15000` |
+| `followup` | Gerar email de follow-up pós-proposta enviada | `--dias 3 --cliente "nome"` |
 
 ## METODOLOGIA DE FECHAMENTO (GPCTBA)
 

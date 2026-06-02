@@ -1,0 +1,17 @@
+{
+  "name": "offer-optimization-agent",
+  "version": "1.0.0",
+  "description": "Offer Optimization Agent — otimização de ofertas, pacotes e conversão",
+  "main": "offer_optimization_agent.js",
+  "scripts": {
+    "start": "node offer_optimization_agent.js",
+    "analyze": "node offer_optimization_agent.js --mode analyze",
+    "design": "node offer_optimization_agent.js --mode design",
+    "test": "node offer_optimization_agent.js --mode test",
+    "bundle": "node offer_optimization_agent.js --mode bundle",
+    "guarantee": "node offer_optimization_agent.js --mode guarantee",
+    "urgency": "node offer_optimization_agent.js --mode urgency",
+    "report": "node offer_optimization_agent.js --mode report"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

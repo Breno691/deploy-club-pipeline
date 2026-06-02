@@ -1,0 +1,18 @@
+{
+  "name": "customer-journey-agent",
+  "version": "1.0.0",
+  "description": "Customer Journey Agent — mapeamento da jornada, touchpoints e fricção",
+  "main": "customer_journey_agent.js",
+  "scripts": {
+    "start": "node customer_journey_agent.js",
+    "map": "node customer_journey_agent.js --mode map",
+    "touchpoints": "node customer_journey_agent.js --mode touchpoints",
+    "friction": "node customer_journey_agent.js --mode friction",
+    "persona": "node customer_journey_agent.js --mode persona",
+    "awareness": "node customer_journey_agent.js --mode awareness",
+    "decision": "node customer_journey_agent.js --mode decision",
+    "retention": "node customer_journey_agent.js --mode retention",
+    "report": "node customer_journey_agent.js --mode report"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

@@ -1,0 +1,14 @@
+{
+  "agent": "lean-agent",
+  "cargo": "Diretor Lean",
+  "kpi_mestre": "Economia gerada (R$)",
+  "meta_diaria": "Desperdício identificado + plano Kaizen",
+  "last_run": null,
+  "status": "never_run",
+  "last_kpis": {},
+  "last_alerts": [],
+  "last_summary": "",
+  "last_next_action": "",
+  "sessions_today": 0,
+  "created_at": "2026-05-30"
+}

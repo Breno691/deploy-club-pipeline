@@ -1,3 +1,17 @@
+---
+name: growth-intelligence-agent
+description: >
+  Inteligência de crescimento — descobre onde o negócio perde leads e receita.
+  SEMPRE use quando: "crescimento", "growth", "onde estamos perdendo leads", "gargalo de crescimento",
+  "qual canal escalar", "análise de crescimento", "oportunidade de receita", "alavanca de crescimento",
+  "onde investir para crescer", "crescimento de receita", "análise de funil de crescimento".
+metadata:
+  author: Deploy Club / SmartOps IA
+  version: 1.0.0
+  category: growth
+  tags: [crescimento, growth, funil, receita, alavanca, canal, análise, oportunidade]
+---
+
 # GROWTH-INTELLIGENCE-AGENT
 
 ## Propósito
@@ -84,6 +98,23 @@ Responder perguntas como:
 - Qual conteúdo gera mais leads?
 
 ---
+
+## MODOS
+
+Execute: `node agents/growth-intelligence-agent/growth_intelligence_agent.js --mode <modo>`
+
+| Modo | Descrição |
+|---|---|
+| `aarrr` | Análise AARRR — Acquisition, Activation, Retention, Referral, Revenue |
+| `acquisition` | Análise de aquisição de leads por canal e custo |
+| `activation` | Taxa de ativação e qualidade do onboarding |
+| `retention` | Análise de retenção, churn e ações de melhoria |
+| `referral` | Análise de indicações e programa de referral |
+| `revenue` | Alavancas de crescimento de receita |
+| `experiment` | Plano de experimento de growth com hipótese e métrica |
+| `channel` | Análise e priorização de canais de crescimento |
+| `north-star` | Definir e monitorar North Star Metric |
+| `report` | Relatório de growth semanal com recomendações |
 
 ## Integrações Necessárias
 

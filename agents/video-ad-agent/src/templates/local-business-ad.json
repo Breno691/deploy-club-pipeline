@@ -1,0 +1,18 @@
+{
+  "template_id": "local-business-ad",
+  "name": "Local Business Ad — BH/MG",
+  "platform": "instagram_reel",
+  "objective": "lead_generation",
+  "framework": "PAS",
+  "duration": 45,
+  "structure": [
+    { "scene": 1, "type": "hook",     "duration": 3,  "purpose": "local_relevance", "instruction": "Mencionar BH/MG ou PMEs locais no primeiro segundo." },
+    { "scene": 2, "type": "problem",  "duration": 8,  "purpose": "local_pain",      "instruction": "Problema específico que PMEs da região enfrentam." },
+    { "scene": 3, "type": "context",  "duration": 8,  "purpose": "build_authority", "instruction": "Breno como especialista local. Black Belt. Presencial." },
+    { "scene": 4, "type": "solution", "duration": 12, "purpose": "local_solution",  "instruction": "Consultoria presencial em BH. Resultado em 4 semanas." },
+    { "scene": 5, "type": "cta",      "duration": 14, "purpose": "convert_local",   "instruction": "Atendimento presencial. CTA claro. Diagnóstico gratuito." }
+  ],
+  "visual_style": "professional-local",
+  "keywords": ["Belo Horizonte", "BH", "Minas Gerais", "PME local", "presencial"],
+  "geographic_targeting": "Belo Horizonte e Região Metropolitana"
+}

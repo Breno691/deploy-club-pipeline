@@ -34,7 +34,7 @@
 | Margem Bruta | 0% | > 60% |
 | Margem Líquida | 0% | > 35% |
 | CAC | R$ 0 | — |
-| LTV | R$ 36.000 | — |
+| LTV | R$ 30.000 | — |
 | LTV:CAC | 0x | > 3x |
 | Cobertura de Caixa | 0 meses | ≥ 3 meses |
 
@@ -58,87 +58,85 @@
 
 ## Análise e Recomendações
 
-# 📊 Análise Financeira — SmartOps IA
-**Data-base: 29/05/2026 | Status: 🔴 Crítico — Pré-Receita**
+# 📊 Financial Intelligence Report — SmartOps IA
+**Data de referência: 29/05/2026**
 
 ---
 
-## 🔍 Diagnóstico Financeiro
+## 🔴 Diagnóstico Financeiro
 
-**A realidade nua e crua:** a empresa está em estágio zero operacional. Nenhuma receita, nenhum cliente, nenhum lead no pipeline. Do ponto de vista financeiro, cada dia que passa é consumo de caixa sem contrapartida.
+**O quadro atual é de pré-receita total — a empresa ainda não gerou nenhum faturamento.**
 
-**O que merece atenção imediata:**
+Isso não é necessariamente uma crise irreversível, mas exige leitura honesta:
 
-| Indicador | Situação | Risco |
+| Indicador | Situação | Sinal |
 |---|---|---|
-| Receita | R$ 0 | 🔴 Crítico |
-| Clientes ativos | 0 | 🔴 Crítico |
-| Pipeline | R$ 0 / 0 leads | 🔴 Crítico |
-| Previsão 30/60d | R$ 0 | 🔴 Crítico |
+| Receita | R$ 0 | 🔴 Pré-operacional |
+| Pipeline | R$ 0 / 0 leads | 🔴 Ausência de tração |
+| Clientes ativos | 0 | 🔴 Sem base instalada |
+| LTV potencial | R$ 30.000 | 🟡 Produto bem precificado |
+| Ticket médio | R$ 12.000 | 🟢 Saudável para PMEs |
 
-**O único sinal positivo está na estrutura de valor:** LTV projetado de R$ 36.000 com ticket médio de R$ 12.000 indica um modelo de retenção de **3 meses de contrato por cliente**. Isso é saudável — quando o primeiro cliente entrar, o retorno por aquisição será expressivo.
+**O que está bem:**
+O LTV de R$ 30.000 com ticket de R$ 12.000 indica um modelo de retenção de **~2,5 ciclos por cliente**, o que é realista para consultoria recorrente. O posicionamento de valor existe — falta o cliente na ponta.
 
-> ⚠️ **Diagnóstico central:** o problema não é operacional nem de produto — é de **ausência total de tração comercial**. O motor financeiro não foi ligado ainda.
+**O que exige atenção imediata:**
+Com R$ 0 em pipeline e 0 leads, o problema **não é financeiro — é de aquisição**. Nenhuma alavanca financeira resolve um funil vazio. O risco real aqui é o **burn silencioso**: custos fixos (mesmo que baixos) consumindo caixa pessoal ou reserva sem contrapartida de receita.
+
+> ⚠️ **Conclusão do diagnóstico:** A empresa está no estágio mais crítico — *zero tração comercial*. Cada semana sem lead qualificado é uma semana de custo sem retorno.
 
 ---
 
-## 🎯 Onde Investir Mais Agora
+## 💡 Onde Investir Mais Agora
 
-Com receita zero, qualquer investimento deve ter **retorno em até 30 dias**. Prioridade absoluta: canais de aquisição de baixo custo e ciclo curto.
+**Canal prioritário: Prospecção direta B2B via LinkedIn + indicação estruturada**
 
-**1. 🥇 Prospecção direta (outbound manual) — ROI mais rápido**
-- Custo: tempo do fundador
-- Alvo: gestores de PMEs em BH com 10–50 funcionários (indústria, serviços, varejo)
-- Método: LinkedIn + WhatsApp com abordagem consultiva, não comercial
-- Meta realista: **5 reuniões diagnóstico em 7 dias** → 1–2 propostas → 1 fechamento em 21–30 dias
-- Receita potencial: R$ 12.000 no mês 1
+Com R$ 0 de receita, o investimento deve ser **mínimo em dinheiro e máximo em tempo**. O raciocínio:
 
-**2. 🥈 Parceria com contadores e consultorias de RH em BH**
-- Custo: zero financeiro
-- Lógica: contadores já têm relacionamento com PMEs que precisam de eficiência operacional
-- Oferecer 10–15% de comissão por indicação fechada
-- 1 parceiro ativo pode gerar 2–3 leads qualificados/mês
+**Por que LinkedIn ativo (não ads)?**
+- Custo: R$ 0 a R$ 79/mês (Sales Navigator básico)
+- PMEs de BH com 10–100 funcionários são o ICP perfeito
+- Decisor (dono/diretor) é acessível diretamente
+- Ciclo de venda consultiva começa com **conversa**, não com anúncio
 
-**3. 🥉 Conteúdo no LinkedIn (inbound de médio prazo)**
-- Custo: zero
-- Publicar 3x/semana sobre casos de Lean Six Sigma + IA aplicados a PMEs
-- Não gera receita imediata, mas constrói autoridade para fechar deals maiores em 60–90 dias
+**Projeção realista — Cenário 30 dias com esforço consistente:**
 
-> 💡 **Não invista em tráfego pago agora.** Sem dados de conversão e sem caixa comprovado, Google Ads/Meta Ads são risco sem base de otimização.
+```
+Meta: 50 contatos ativos/semana no LinkedIn
+→ Taxa de resposta esperada: 15–20% = 8 a 10 conversas
+→ Taxa de reunião: 30% das respostas = 3 reuniões/semana
+→ Taxa de fechamento consultoria: 10–15% = 1 cliente em 30–45 dias
+→ Receita projetada: R$ 12.000 (1º contrato)
+→ LTV potencial ativado: R$ 30.000
+```
+
+**Canal secundário: Parceria com contadores e consultorias de RH em BH**
+- Eles já têm a carteira de PMEs
+- Modelo de comissão de indicação (10–15% do contrato)
+- Custo zero até a venda acontecer
 
 ---
 
 ## ✂️ Onde Cortar Custo
 
-Em fase pré-receita, o princípio é: **estrutura mínima viável**.
+Com receita zero, **todo custo é crítico**. A lógica aqui é: *cortar tudo que não gera lead ou não entrega o serviço*.
 
-**Cortes e revisões recomendados:**
+**Auditoria recomendada de custos típicos nesta fase:**
+
+| Categoria | Recomendação |
+|---|---|
+| Ferramentas SaaS não utilizadas | ✂️ Cancelar imediatamente |
+| Escritório físico (se houver) | ✂️ Home office até R$ 50k/mês recorrente |
+| Tráfego pago (sem funil testado) | ⏸️ Pausar — dinheiro no ralo sem copy validada |
+| Branding/design premium | ⏸️ Adiar — cliente compra o consultor, não o logo |
+| Softwares de gestão complexos | 🔄 Substituir por Google Sheets + Notion gratuitos |
+
+**Estrutura de custo ideal para esta fase:**
 
 ```
-❌ Ferramentas SaaS subutilizadas
-   → Audite todo app com cobrança recorrente.
-     Se não gera lead ou entrega serviço, cancele agora.
-
-❌ Infraestrutura antecipada
-   → Servidor, domínios extras, licenças corporativas
-     antes do primeiro cliente = custo sem função.
-
-❌ Identidade visual / branding adicional
-   → O que existe já serve. Não é hora de refinar,
-     é hora de vender.
-
-❌ Escritório físico (se houver)
-   → PMEs em BH aceitam reuniões híbridas.
-     Home office + coworking por hora = economia
-     de R$ 1.500–3.000/mês.
-
-✅ O que NÃO cortar:
-   → Acesso ao LinkedIn (Sales Navigator vale se usar)
-   → Ferramentas de entrega do serviço (o produto precisa funcionar)
-   → 1 ferramenta de CRM simples (HubSpot free ou Notion)
-```
-
-> 🎯 **Meta de custo fixo mensal n
+Custo mensal máximo recomendado: R$ 800 – R$ 1.500/mês
+├── LinkedIn Sales Navigator: R$ 79–150
+├──
 
 ---
 

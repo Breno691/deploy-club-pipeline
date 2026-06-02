@@ -1,0 +1,20 @@
+{
+  "name": "video-ad-specialist-agent",
+  "version": "1.0.0",
+  "description": "Video Ad Specialist Agent — criativos de vídeo, VSL, UGC, roteiros e direção de conteúdo em vídeo",
+  "main": "video_ad_specialist_agent.js",
+  "scripts": {
+    "start": "node video_ad_specialist_agent.js",
+    "roteiro": "node video_ad_specialist_agent.js --mode roteiro",
+    "vsl": "node video_ad_specialist_agent.js --mode vsl",
+    "ugc": "node video_ad_specialist_agent.js --mode ugc",
+    "reel": "node video_ad_specialist_agent.js --mode reel",
+    "hook": "node video_ad_specialist_agent.js --mode hook",
+    "testimonial": "node video_ad_specialist_agent.js --mode testimonial",
+    "storyboard": "node video_ad_specialist_agent.js --mode storyboard",
+    "shorts": "node video_ad_specialist_agent.js --mode shorts",
+    "audit": "node video_ad_specialist_agent.js --mode audit",
+    "report": "node video_ad_specialist_agent.js --mode report"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

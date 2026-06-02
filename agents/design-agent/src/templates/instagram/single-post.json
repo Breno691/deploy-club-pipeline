@@ -1,0 +1,27 @@
+{
+  "template_id": "instagram-single-post",
+  "name": "Instagram Single Post — Dor + CTA",
+  "format": "instagram_post",
+  "dimensions": { "width": 1080, "height": 1080 },
+  "objective": "awareness + lead_generation",
+  "structure": {
+    "accent_stripe": { "position": "left", "width": 14, "color": "primary" },
+    "brand_row":     { "position": "top_left", "top": 52, "left": 60, "elements": ["dot", "brand_name", "separator"] },
+    "headline":      { "position": "top_left", "top": 118, "font": "Bebas Neue", "size": 118, "max_words": 7 },
+    "divider":       { "position": "horizontal", "top": 470, "style": "1px solid border" },
+    "subtext":       { "position": "below_divider", "font": "Inter 400", "size": 20, "color": "textSecondary" },
+    "method_cards":  { "position": "center_bottom", "count": 3, "style": "card" },
+    "footer":        { "position": "bottom", "bottom": 52, "elements": ["cta_label", "cta_button"] }
+  },
+  "visual_patterns": {
+    "background_grid": true,
+    "top_left_glow":   true,
+    "grain_overlay":   false
+  },
+  "guidelines": {
+    "headline_max_words": 7,
+    "use_single_accent_color": true,
+    "cta_always_visible": true,
+    "no_busy_backgrounds": true
+  }
+}

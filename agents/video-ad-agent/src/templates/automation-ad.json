@@ -1,0 +1,19 @@
+{
+  "template_id": "automation-ad",
+  "name": "Automation Ad — Elimine Trabalho Manual",
+  "platform": "instagram_reel",
+  "objective": "lead_generation",
+  "framework": "BAB",
+  "duration": 60,
+  "structure": [
+    { "scene": 1, "type": "before",   "duration": 6,  "purpose": "show_manual_work", "instruction": "Mostrar tarefa manual repetitiva que a empresa faz hoje." },
+    { "scene": 2, "type": "pain",     "duration": 8,  "purpose": "quantify_waste",   "instruction": "Horas por semana. Custo por mês. Erro humano." },
+    { "scene": 3, "type": "after",    "duration": 8,  "purpose": "show_automation",  "instruction": "O mesmo processo automatizado. Resultado em segundos." },
+    { "scene": 4, "type": "bridge",   "duration": 18, "purpose": "present_method",   "instruction": "Como SmartOps automatiza. n8n + IA + integração. Em 2-4 semanas." },
+    { "scene": 5, "type": "roi",      "duration": 10, "purpose": "quantify_gain",    "instruction": "Horas economizadas/mês. ROI estimado. Sem contratar mais gente." },
+    { "scene": 6, "type": "cta",      "duration": 10, "purpose": "convert",          "instruction": "Agende diagnóstico de automação. Gratuito. Presencial BH." }
+  ],
+  "visual_style": "tech-automation",
+  "keywords": ["automação", "n8n", "IA", "processo manual", "economizar tempo"],
+  "tone": "técnico mas acessível"
+}

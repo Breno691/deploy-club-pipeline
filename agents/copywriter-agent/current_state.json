@@ -1,0 +1,14 @@
+{
+  "agent": "copywriter-agent",
+  "cargo": "Diretor de Comunicação",
+  "kpi_mestre": "CTR ads ≥ 2.5%",
+  "meta_diaria": "1 peça de conteúdo nova ou variação entregue",
+  "last_run": null,
+  "status": "never_run",
+  "last_kpis": {},
+  "last_alerts": [],
+  "last_summary": "",
+  "last_next_action": "",
+  "sessions_today": 0,
+  "created_at": "2026-05-30"
+}

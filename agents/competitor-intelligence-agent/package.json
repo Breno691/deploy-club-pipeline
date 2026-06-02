@@ -1,0 +1,23 @@
+{
+  "name": "competitor-intelligence-agent",
+  "version": "1.0.0",
+  "description": "Diretor de Inteligência Competitiva — SmartOps IA",
+  "main": "competitor_agent.js",
+  "scripts": {
+    "discover":      "node competitor_agent.js --mode discover",
+    "instagram":     "node competitor_agent.js --mode instagram --competitor 'Concorrente X' --profile '@perfil' --context 'consultoria lean BH'",
+    "google":        "node competitor_agent.js --mode google --query 'consultoria lean BH'",
+    "seo":           "node competitor_agent.js --mode seo --keyword 'consultoria lean belo horizonte'",
+    "ads":           "node competitor_agent.js --mode ads --competitor 'Concorrente X' --platform meta --offer 'diagnóstico gratuito'",
+    "website":       "node competitor_agent.js --mode website --competitor 'Concorrente X' --url 'site.com.br'",
+    "differentiate": "node competitor_agent.js --mode differentiate",
+    "opportunity":   "node competitor_agent.js --mode opportunity --gap 'nenhum concorrente local usa IA + Lean'",
+    "report":        "node competitor_agent.js --mode report",
+    "brief":         "node competitor_agent.js --mode brief",
+    "landscape":     "node competitor_agent.js --mode landscape"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.0.0"
+  }
+}

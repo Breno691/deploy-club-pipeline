@@ -1,0 +1,31 @@
+[
+  {
+    "id": "case-1780183475654",
+    "case_name": "clinica-1780183475654",
+    "client": "Clínica BH",
+    "anonymized": true,
+    "sector": "clinica",
+    "problem": "agendamento manual consome 20h/semana da recepção",
+    "solution": "automacao n8n com WhatsApp",
+    "status": "capturing",
+    "case_type": "automacao",
+    "investment": 5000,
+    "hours_before_week": 20,
+    "hours_after_week": 3,
+    "hours_saved_week": 17,
+    "cost_hour": 35,
+    "monthly_savings": 2380,
+    "annual_savings": 28560,
+    "roi": 4.71,
+    "payback_months": 2.1,
+    "reduction_pct": 85,
+    "potential": {
+      "score": 100,
+      "level": "CASE_DESTAQUE",
+      "action": "Criar case completo + todos os ativos + proposta de publicação"
+    },
+    "permission_level": 0,
+    "assets_to_create": [],
+    "created_at": "2026-05-30T23:24:35.654Z"
+  }
+]

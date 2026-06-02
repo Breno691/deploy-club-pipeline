@@ -1,0 +1,62 @@
+{
+  "snapshot": {
+    "date": "2026-05-30",
+    "health_status": "PRE_REVENUE",
+    "health_label": "Pré-Receita",
+    "receita": {
+      "bruta": 0,
+      "liquida": 0,
+      "meta": 15000,
+      "gap_meta": 15000
+    },
+    "custos": {
+      "entrega": 0,
+      "operacional": 600,
+      "total": 600,
+      "ferramentas": 600
+    },
+    "lucro": {
+      "bruto": 0,
+      "liquido": -600
+    },
+    "margens": {
+      "bruta": 0,
+      "liquida": 0,
+      "bruta_ok": false,
+      "liquida_ok": false
+    },
+    "unit_economics": {
+      "cac": 0,
+      "ltv": 28750,
+      "ltv_cac": 0,
+      "ltv_cac_status": "crítico",
+      "ticket_medio": 11500
+    },
+    "caixa": {
+      "disponivel": 5000,
+      "runway_meses": 8.3,
+      "runway_status": "atenção"
+    },
+    "pipeline": {
+      "valor_total": 0,
+      "esperado": 0,
+      "taxa_fechamento": 0.25
+    },
+    "forecast": {
+      "d30_realista": 0,
+      "d60_realista": 0,
+      "d90_realista": 0
+    },
+    "break_even_clients": 1,
+    "clientes_ativos": 0,
+    "alerts_count": 1
+  },
+  "risks": [
+    {
+      "type": "MARGIN_RISK",
+      "severity": "CRÍTICO",
+      "message": "Margem líquida crítica: 0.0%",
+      "action": "Revisar precificação urgente"
+    }
+  ]
+}

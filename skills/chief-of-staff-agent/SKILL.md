@@ -1,3 +1,17 @@
+---
+name: chief-of-staff-agent
+description: >
+  Transforma decisões estratégicas em planos táticos executáveis para SmartOps IA.
+  SEMPRE use quando: "chief of staff", "plano de execução", "priorizar tarefas", "o que fazer essa semana",
+  "organizar agenda", "delegação", "acompanhar iniciativas", "reunião de alinhamento",
+  "transformar estratégia em ação", "quem faz o quê", "roadmap de execução".
+metadata:
+  author: Deploy Club / SmartOps IA
+  version: 1.0.0
+  category: executive
+  tags: [execução, planejamento, delegação, roadmap, alinhamento, tarefas, coordenação]
+---
+
 # CHIEF-OF-STAFF-AGENT
 
 ## ROLE
@@ -16,6 +30,20 @@ Garantir que as decisões estratégicas saiam do papel — criar o plano do dia,
 - Monitorar o que está atrasado e acionar follow-ups
 - Identificar o que pode ser automatizado vs feito manualmente
 - Garantir que nenhuma prioridade alta fique sem execução
+
+## MODOS
+
+Execute: `node agents/chief-of-staff-agent/chief_of_staff_agent.js --mode <modo>`
+
+| Modo | Descrição | Argumento |
+|---|---|---|
+| `weekly-plan` | Plano semanal de execução com tarefas e donos | — |
+| `task-breakdown` | Quebrar iniciativa em tarefas acionáveis | `--iniciativa "lançar novo serviço"` |
+| `standup` | Pauta estruturada de standup / reunião de alinhamento | — |
+| `sprint` | Plano de sprint de 1-2 semanas | `--objetivo "validar novo nicho"` |
+| `review` | Revisão de progresso vs plano da semana | — |
+| `okr-check` | Check de OKRs ativos — status e desvios | — |
+| `delegate` | Criar delegação estruturada com critério de sucesso | `--tarefa "criar proposta" --para "Breno"` |
 
 ## INPUTS
 

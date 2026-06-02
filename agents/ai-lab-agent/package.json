@@ -1,0 +1,20 @@
+{
+  "name": "ai-lab-intelligence-agent",
+  "version": "1.0.0",
+  "description": "SmartOps IA — AI Lab Intelligence Agent (Diretor de Inovação e Pesquisa Aplicada em IA)",
+  "main": "ai_lab_agent.js",
+  "scripts": {
+    "scan":           "node ai_lab_agent.js --mode scan",
+    "evaluate":       "node ai_lab_agent.js --mode evaluate",
+    "tech":           "node ai_lab_agent.js --mode tech",
+    "poc":            "node ai_lab_agent.js --mode poc",
+    "llm:benchmark":  "node ai_lab_agent.js --mode llm-benchmark",
+    "llm:recommend":  "node ai_lab_agent.js --mode llm-recommend",
+    "roi":            "node ai_lab_agent.js --mode roi",
+    "report":         "node ai_lab_agent.js --mode report"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.56.0",
+    "dotenv": "^16.0.0"
+  }
+}

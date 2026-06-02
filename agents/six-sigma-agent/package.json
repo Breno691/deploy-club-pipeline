@@ -1,0 +1,18 @@
+{
+  "name": "six-sigma-agent",
+  "version": "1.0.0",
+  "description": "Six Sigma Agent — DMAIC, DPMO, Cp/Cpk, controle estatístico de processos",
+  "main": "six_sigma_agent.js",
+  "scripts": {
+    "start": "node six_sigma_agent.js",
+    "dmaic": "node six_sigma_agent.js --mode dmaic",
+    "dpmo": "node six_sigma_agent.js --mode dpmo",
+    "capability": "node six_sigma_agent.js --mode capability",
+    "control": "node six_sigma_agent.js --mode control",
+    "analyze": "node six_sigma_agent.js --mode analyze",
+    "report": "node six_sigma_agent.js --mode report",
+    "brief": "node six_sigma_agent.js --mode brief",
+    "spc": "node six_sigma_agent.js --mode spc"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

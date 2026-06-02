@@ -1,0 +1,62 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-05-30",
+  "models": [
+    {
+      "id": "claude-sonnet-4-6",
+      "provider": "Anthropic",
+      "status": "primary",
+      "context_window": 200000,
+      "cost_input_per_1k":  0.003,
+      "cost_output_per_1k": 0.015,
+      "strengths": ["copy", "raciocínio", "JSON", "formato", "português", "análise"],
+      "weaknesses": ["custo vs Haiku", "latência"],
+      "recommended_agents": [
+        "copywriter-agent", "sales-intelligence-agent", "proposal-agent",
+        "video-ad-agent", "design-agent", "ceo-advisor-agent",
+        "strategic-planning-agent", "website-design-agent"
+      ],
+      "benchmark_scores": {
+        "copy_instagram": 92,
+        "proposal_commercial": 94,
+        "lean_diagnosis": 90,
+        "json_remotion": 88,
+        "portuguese_quality": 95
+      }
+    },
+    {
+      "id": "claude-haiku-4-5-20251001",
+      "provider": "Anthropic",
+      "status": "secondary",
+      "context_window": 200000,
+      "cost_input_per_1k":  0.0008,
+      "cost_output_per_1k": 0.004,
+      "strengths": ["velocidade", "custo baixo", "classificação", "extração", "JSON simples"],
+      "weaknesses": ["raciocínio complexo", "criatividade", "copy avançado"],
+      "recommended_agents": [
+        "ads-agent", "financial-agent", "lead-scoring-agent",
+        "website-analytics-agent", "process-mining-agent"
+      ],
+      "benchmark_scores": {
+        "json_extraction": 88,
+        "classification": 85,
+        "simple_copy": 78,
+        "data_analysis": 82
+      }
+    },
+    {
+      "id": "claude-opus-4-8",
+      "provider": "Anthropic",
+      "status": "premium",
+      "context_window": 200000,
+      "cost_input_per_1k":  0.015,
+      "cost_output_per_1k": 0.075,
+      "strengths": ["raciocínio avançado", "estratégia", "análise profunda", "decisões complexas"],
+      "weaknesses": ["custo alto", "latência"],
+      "recommended_agents": [
+        "ceo-advisor-agent", "strategic-planning-agent", "revenue-agent"
+      ],
+      "use_case": "Decisões estratégicas de alto impacto apenas"
+    }
+  ]
+}

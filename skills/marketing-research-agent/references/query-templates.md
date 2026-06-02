@@ -1,121 +1,166 @@
-# Query Templates — Marketing Research Agent
+# Query Templates — Marketing Research Agent Enterprise v2.0.0
 
-## Buscas Principais (sempre executar)
+## Queries do Pipeline Principal (run_auto.js)
 
 ```javascript
-const queries = {
-  trends: `Lean Six Sigma automação IA Brasil ${year} tendências crescimento mercado`,
-  competitors: `consultoria Lean Six Sigma automação processos pequenas empresas concorrentes posicionamento preços`,
-  audience: `problemas operacionais pequenas empresas Brasil retrabalho desperdício gargalos eficiência 2026`,
-  hooks: `melhores hooks marketing consultoria processos automação pequena empresa conversão anúncio`,
-  viral: `conteúdo viral melhoria contínua automação IA operações Instagram TikTok ${year}`,
+const pipelineQueries = {
+  trends:      `Lean Six Sigma automação IA Brasil ${year} tendências crescimento PME`,
+  competitors: `consultoria Lean automação processos pequenas empresas posicionamento preços`,
+  audience:    `problemas operacionais pequenas empresas Brasil retrabalho desperdício gargalos`,
+  hooks:       `hooks marketing consultoria processos automação conversão anúncio 2026`,
+  viral:       `conteúdo viral melhoria contínua automação IA Instagram TikTok ${year}`,
 };
 ```
+
+---
+
+## Queries Por Modo
+
+### `trends` — Tendências
+```javascript
+[
+  `${topic} tendências ${year} Brasil PME dados crescimento`,
+  `${topic} market growth small business ${year}`,
+  `${topic} oportunidade mercado futuro`,
+  `${topic} comportamento consumidor mudança recente`,
+]
+```
+
+### `competitors` — Análise Competitiva
+```javascript
+[
+  `consultoria lean automação pequenas empresas Brasil posicionamento`,
+  `automação processos PME preços concorrentes reviews`,
+  `lean six sigma consultoria BH posicionamento diferencial`,
+  `${concorrente} reclamações reviews pontos fracos`,
+]
+```
+
+### `audience` — Público
+```javascript
+[
+  `problemas dores gestores donos PME Brasil operações`,
+  `pequenas empresas reclamações processos retrabalho`,
+  `gestor PME 2026 desafios tecnologia automação`,
+  `dono pequena empresa BH dificuldades crescimento`,
+]
+```
+
+### `validate` — Validação de Ideia
+```javascript
+[
+  `${ideia} mercado demanda Brasil validação`,
+  `${ideia} concorrentes reviews quem já faz`,
+  `${ideia} público-alvo dores problemas`,
+]
+```
+
+### `deep` — Deep Research
+```javascript
+[
+  `${topic} Brasil ${year} mercado análise`,
+  `${topic} público comportamento dores`,
+  `${topic} concorrentes análise posicionamento`,
+  `${topic} tendências futuro crescimento`,
+]
+```
+
+### `voice` — Voz do Cliente
+```javascript
+[
+  `${topic} reclamações reviews problemas clientes`,
+  `${topic} fórum comentários dúvidas opiniões`,
+  `${topic} Reclame Aqui problemas frequentes`,
+]
+```
+
+### `sector` — Pesquisa Setorial
+```javascript
+[
+  `${setor} problemas gestão processos Brasil PME`,
+  `${setor} automação oportunidade gestores`,
+  `${setor} dores proprietários empresários reclamações`,
+]
+```
+
+### `radar` — Radar de Mercado
+```javascript
+[
+  `${topic} novidades semana tendências recentes`,
+  `${topic} mudanças mercado concorrentes novos`,
+  `lean automação IA PME Brasil novidades`,
+]
+```
+
+### `weekly` — Relatório Semanal
+```javascript
+[
+  `lean automação IA PME Brasil tendências semana`,
+  `consultoria processos pequenas empresas novidades`,
+  `automação n8n IA negócios novidades recentes`,
+]
+```
+
+### `niche-study` — Estudo de Nicho
+```javascript
+[
+  `${nicho} problemas gestão processos automação`,
+  `${nicho} dores gestores empresários reclamações`,
+  `${nicho} oportunidades consultoria lean`,
+]
+```
+
+### `pricing` — Precificação
+```javascript
+[
+  `${servico} preço consultoria custo Brasil`,
+  `${servico} quanto custa mercado referência`,
+]
+```
+
+### `client-report` — Relatório Para Cliente
+```javascript
+[
+  `${topic} mercado tendências ${year}`,
+  `${topic} concorrentes análise posicionamento`,
+]
+```
+
+---
 
 ## Buscas Complementares (quando relevante)
 
 ```javascript
 const supplementary = {
-  creators: `creators influencers Lean Six Sigma automação operações YouTube LinkedIn TikTok Brasil`,
-  keywords: `palavras-chave Lean Six Sigma automação processos Brasil busca crescimento SEO`,
-  social_listening: `comentários reclamações problemas operacionais gestão processos empresas Brasil`,
-  market_gaps: `gaps nicho melhoria contínua automação IA Brasil oportunidades não exploradas`,
-  positioning: `posicionamento premium consultoria operações IA Brasil diferenciação mercado`,
+  creators:        `creators influencers Lean automação processos YouTube LinkedIn TikTok Brasil`,
+  keywords:        `palavras-chave Lean automação processos Brasil SEO crescimento`,
+  social_listening:`comentários reclamações problemas operacionais gestão PME Brasil`,
+  market_gaps:     `gaps nicho automação IA Brasil oportunidades não exploradas`,
+  positioning:     `posicionamento premium consultoria operações IA Brasil diferenciação`,
+  reclame_aqui:    `${concorrente} Reclame Aqui reclamações`,
+  ads_library:     `anúncios consultoria lean automação meta ads`,
 };
 ```
 
 ---
 
-## 10 Capacidades de Análise
+## Modificadores de Query (melhoram relevância)
 
-### 1. Competitor Analysis
-Para cada concorrente/creator identificado, mapear:
-- Posicionamento (generalista vs especialista, preço, autoridade)
-- Linguagem e tom (técnico vs acessível)
-- Formatos usados (reel, carrossel, post longo, YouTube)
-- Conteúdos que performam (engajamento acima da média)
-- **Gaps:** o que NÃO fazem que a marca pode fazer
-
-### 2. Trend Detection
-Classificar cada trend identificada:
-- `emergente` — crescendo, pouco saturado (alta oportunidade)
-- `estabelecida` — mainstream, competição alta
-- `declinando` — momentum caindo (evitar)
-
-### 3. Viral Content Research
-Padrões de hook que viralizam no nicho:
-- Afirmação contra-intuitiva + dado específico
-- "X% das empresas cometem esse erro sem saber"
-- POV de caos operacional (identificação imediata)
-- Comparação antes/depois com número de resultado
-
-### 4. Audience Research
-| Dimensão | Insights para o nicho |
-|----------|----------------------|
-| Dores primárias | Retrabalho, equipe apagando incêndio, processo sem dono |
-| Dores secundárias | Cliente insatisfeito, perda de receita invisível |
-| Objeções | "Lean é para fábricas", "automação é cara" |
-| Linguagem real | "gargalo", "apagar incêndio", "padronizar", "mapear" |
-| Medos | Investir em consultoria sem resultado |
-
-### 5. Market Gap Analysis
-Perguntas-chave:
-- Que problema o público tem que nenhum concorrente resolve bem?
-- Que formato de conteúdo o nicho ainda não explorou?
-- Que linguagem diferencia quem lidera no nicho?
-
-Gaps típicos identificados:
-- Conteúdo que combina Lean + IA (a maioria faz um OU outro)
-- Casos reais de pequenas empresas (a maioria foca em grandes)
-- Conteúdo em português com profundidade técnica real
-
-### 6. Content Opportunity Engine
-Para cada oportunidade, especificar:
-```
-Tema: [tópico específico]
-Formato ideal: [reel / carrossel / post / vídeo]
-Canal prioritário: [Instagram / LinkedIn / YouTube]
-Potencial: [viral / autoridade / educativo / conversão]
-Hook sugerido: [primeira linha do conteúdo]
-```
-
-### 7. Search Intelligence (Keywords)
-| Categoria | Exemplos |
-|-----------|---------|
-| Metodologias | Lean Six Sigma, DMAIC, BPM, Process Mining, Kaizen |
-| Problemas | retrabalho, gargalo, desperdício, processo ineficiente |
-| Soluções | automação de processos, melhoria contínua, padronização |
-| Ferramentas | n8n, WhatsApp Business API, Claude Code |
-| Resultados | redução de custos, eficiência operacional, produtividade |
-
-### 8. Social Listening
-O que escutar:
-- Comentários em posts de concorrentes sobre problemas operacionais
-- Perguntas em grupos de LinkedIn e Facebook de gestão
-- Reclamações em comunidades de empresários brasileiros
-- Termos exatos que o público usa para descrever seus problemas
-
-### 9. Creator Intelligence
-Para cada creator relevante, analisar:
-- Formato dos conteúdos com maior engajamento
-- Estrutura de storytelling
-- Frequência e consistência
-- CTAs que geram mais comentários/salvamentos
-
-### 10. Positioning Intelligence
-Matriz rápida de posicionamento:
-| Dimensão | Mercado atual | Oportunidade |
-|----------|--------------|-------------|
-| Especialização | Generalistas dominam | Especialista Lean + IA para PMEs |
-| Formato de entrega | Cursos online | Projeto com resultado fechado |
-| Linguagem | Técnica e distante | Direta, com número e prova real |
-| Proof | Teórica | Cases reais com prazo e número |
+| Modificador | Quando usar |
+|---|---|
+| `Brasil ${year}` | Sempre para dados locais recentes |
+| `PME pequenas empresas` | Quando o foco é SMB |
+| `BH Belo Horizonte` | Quando é pesquisa local |
+| `reclamações reviews` | Quando busca voz do cliente |
+| `preço custo` | Quando busca dados de precificação |
+| `tendência crescimento` | Quando busca oportunidade |
+| `concorrentes análise` | Quando busca posicionamento |
+| `automação processos` | Foco SmartOps em automação |
+| `lean seis sigma` | Foco SmartOps em metodologia |
 
 ---
 
-## Defaults de Fallback (brand_defaults)
-
-Usar quando Tavily falha:
+## Fallback — brand_defaults (quando Tavily falha)
 
 ```json
 {
@@ -131,9 +176,10 @@ Usar quando Tavily falha:
   ],
   "trending_windows": {
     "instagram": "Terça–Quinta, 7h–9h BRT ou 12h–13h BRT",
-    "youtube": "Quarta–Sábado, 14h–17h BRT",
-    "threads": "Dias úteis, 8h–10h BRT",
-    "linkedin": "Terça–Quinta, 7h–9h BRT"
-  }
+    "youtube":   "Quarta–Sábado, 14h–17h BRT",
+    "threads":   "Dias úteis, 8h–10h BRT",
+    "linkedin":  "Terça–Quinta, 7h–9h BRT"
+  },
+  "confidence_score": { "nota": 45, "classificacao": "Baixa — sem dados externos" }
 }
 ```

@@ -1,0 +1,62 @@
+{
+  "score": 19,
+  "level": "Empresa Não Aprende",
+  "target": 80,
+  "gap": 61,
+  "metrics_breakdown": [
+    {
+      "metric": "learnings_captured",
+      "value": 5,
+      "max": 20,
+      "contribution": "5.0"
+    },
+    {
+      "metric": "changes_implemented",
+      "value": 2,
+      "max": 10,
+      "contribution": "4.0"
+    },
+    {
+      "metric": "playbooks_updated",
+      "value": 1,
+      "max": 5,
+      "contribution": "3.0"
+    },
+    {
+      "metric": "recurring_errors_reduced",
+      "value": 0,
+      "max": 5,
+      "contribution": "0.0"
+    },
+    {
+      "metric": "improvements_with_impact",
+      "value": 2,
+      "max": 8,
+      "contribution": "2.5"
+    },
+    {
+      "metric": "agents_improved",
+      "value": 0,
+      "max": 5,
+      "contribution": "0.0"
+    },
+    {
+      "metric": "decisions_reviewed",
+      "value": 3,
+      "max": 5,
+      "contribution": "3.0"
+    },
+    {
+      "metric": "sops_created",
+      "value": 1,
+      "max": 5,
+      "contribution": "1.0"
+    },
+    {
+      "metric": "knowledge_reused",
+      "value": 0,
+      "max": 10,
+      "contribution": "0.0"
+    }
+  ]
+}

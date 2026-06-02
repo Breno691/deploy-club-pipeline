@@ -1,0 +1,14 @@
+{
+  "agent": "ads-agent",
+  "cargo": "Diretor de Mídia Paga",
+  "kpi_mestre": "CPA ≤ R$60",
+  "meta_diaria": "Relatório de performance 24h + otimizações executadas + alertas",
+  "last_run": null,
+  "status": "never_run",
+  "last_kpis": {},
+  "last_alerts": [],
+  "last_summary": "",
+  "last_next_action": "",
+  "sessions_today": 0,
+  "created_at": "2026-05-30"
+}

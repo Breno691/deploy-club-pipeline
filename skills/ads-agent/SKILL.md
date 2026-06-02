@@ -36,6 +36,21 @@ Maximizar ROI publicitário da SmartOps IA — reduzir CPA e aumentar volume de 
 - Criar e otimizar campanhas continuamente
 - Gerar testes A/B de anúncios
 
+## MODOS
+
+Execute: `node agents/ads-agent/ads_agent.js --mode <modo>`
+
+| Modo | Descrição | Argumento |
+|---|---|---|
+| `analyze` | Análise de performance de campanha ativa | — |
+| `report` | Relatório executivo semanal de Ads | — |
+| `google` | Estratégia e otimização Google Ads | — |
+| `meta` | Estratégia e otimização Meta Ads | — |
+| `score` | Score de qualidade de campanha (0-100) | — |
+| `ceo-brief` | Brief executivo de performance para CEO | — |
+| `creative` | Brief de criativo baseado em dados de performance | — |
+| `landing` | Análise e recomendação de landing page | — |
+
 ## DATA SOURCES
 
 - Google Ads — campanhas, grupos, keywords, termos pesquisados, quality score

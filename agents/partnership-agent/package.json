@@ -1,0 +1,19 @@
+{
+  "name": "partnership-intelligence-agent",
+  "version": "1.0.0",
+  "description": "Diretor de Parcerias Estratégicas e Canais B2B — SmartOps IA",
+  "main": "partnership_agent.js",
+  "scripts": {
+    "research":  "node partnership_agent.js --mode research",
+    "qualify":   "node partnership_agent.js --mode qualify --type accountants",
+    "outreach":  "node partnership_agent.js --mode outreach --partner-id 1",
+    "commission":"node partnership_agent.js --mode commission --partner-type referral",
+    "referral":  "node partnership_agent.js --mode referral",
+    "success":   "node partnership_agent.js --mode success",
+    "report":    "node partnership_agent.js --mode report"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.0.0"
+  }
+}

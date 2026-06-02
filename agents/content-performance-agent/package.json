@@ -1,0 +1,20 @@
+{
+  "name": "content-performance-agent",
+  "version": "1.0.0",
+  "description": "Content Performance Agent — análise de performance de conteúdo, métricas e otimização",
+  "main": "content_performance_agent.js",
+  "scripts": {
+    "start": "node content_performance_agent.js",
+    "analyze": "node content_performance_agent.js --mode analyze",
+    "instagram": "node content_performance_agent.js --mode instagram",
+    "youtube": "node content_performance_agent.js --mode youtube",
+    "top-posts": "node content_performance_agent.js --mode top-posts",
+    "worst-posts": "node content_performance_agent.js --mode worst-posts",
+    "benchmark": "node content_performance_agent.js --mode benchmark",
+    "audit": "node content_performance_agent.js --mode audit",
+    "optimize": "node content_performance_agent.js --mode optimize",
+    "forecast": "node content_performance_agent.js --mode forecast",
+    "report": "node content_performance_agent.js --mode report"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

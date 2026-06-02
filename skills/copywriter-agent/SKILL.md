@@ -34,6 +34,23 @@ Transformar temas técnicos de melhoria contínua em conteúdo persuasivo, viral
 - Produzir scripts de reels e roteiros para vídeo curto
 - Criar copies para anúncios e landing pages
 
+## MODOS
+
+Execute: `node agents/copywriter-agent/copywriter_agent.js --mode <modo> --tema "<tema>"`
+
+| Modo | Descrição | Argumento |
+|---|---|---|
+| `hook` | Hook viral por tema — primeiras 3 linhas que param o scroll | `--tema "retrabalho"` |
+| `caption` | Caption Instagram com ângulo, body e CTA | `--tema "lean" --plataforma instagram` |
+| `cta` | CTA persuasivo por serviço | `--servico "diagnostico-express"` |
+| `vsl` | Script de Video Sales Letter | `--servico "lean-melhoria"` |
+| `email` | Email de nutrição ou cold outreach | `--tipo nurture\|cold` |
+| `reel` | Roteiro de Reels (hook → body → CTA) | `--tema "automacao"` |
+| `headline` | Headlines por produto/serviço | `--produto "diagnostico"` |
+| `ad-copy` | Copy para anúncio por canal e objetivo | `--canal meta --objetivo conversao` |
+| `thread` | Thread para Instagram/LinkedIn/Threads | `--tema "melhoria continua"` |
+| `report` | Relatório de copy gerada com análise | — |
+
 ## FRAMEWORK DE ALTO ENGAJAMENTO (5 ETAPAS)
 
 Todo conteúdo de autoridade e reels deve seguir esta estrutura:

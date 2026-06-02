@@ -1,0 +1,21 @@
+{
+  "template_id": "diagnostic-offer-ad",
+  "name": "Diagnostic Offer Ad — Diagnóstico Gratuito",
+  "platform": "instagram_reel",
+  "objective": "lead_generation",
+  "framework": "AIDA",
+  "duration": 30,
+  "offer": "diagnostico-gratuito",
+  "structure": [
+    { "scene": 1, "type": "attention", "duration": 3,  "purpose": "hook_diagnostic", "instruction": "Perguntar sobre diagnóstico ou revelar que a empresa provavelmente tem X problema." },
+    { "scene": 2, "type": "interest",  "duration": 8,  "purpose": "show_value",      "instruction": "O que é diagnóstico. O que inclui. O que vai descobrir." },
+    { "scene": 3, "type": "desire",    "duration": 8,  "purpose": "paint_outcome",   "instruction": "O que muda depois. Resultado esperado em termos práticos." },
+    { "scene": 4, "type": "action",    "duration": 11, "purpose": "low_risk_cta",    "instruction": "Diagnóstico gratuito de 30 min. Presencial BH. Sem compromisso." }
+  ],
+  "cta": {
+    "primary":   "Agende seu diagnóstico gratuito",
+    "secondary": "É gratuito · 30 min · Presencial BH/MG",
+    "risk":      "Sem custo. Sem compromisso."
+  },
+  "visual_style": "clean-professional"
+}

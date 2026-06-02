@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-05-30",
+  "approved": [
+    { "name": "Anthropic Claude API", "category": "llm", "status": "adopt", "cost": "paid", "use": "Todos os agentes", "score": 95 },
+    { "name": "n8n", "category": "automation", "status": "adopt", "cost": "self-hosted", "use": "Orquestração de workflows", "score": 92 },
+    { "name": "Remotion", "category": "video", "status": "adopt", "cost": "open-source", "use": "Renderização de vídeos", "score": 88 },
+    { "name": "Playwright", "category": "automation", "status": "adopt", "cost": "free", "use": "Screenshot de HTML→PNG", "score": 90 },
+    { "name": "Supabase", "category": "infrastructure", "status": "adopt", "cost": "freemium", "use": "Banco de dados e storage", "score": 87 },
+    { "name": "Tavily AI", "category": "search", "status": "adopt", "cost": "paid", "use": "Pesquisa de mercado em tempo real", "score": 85 },
+    { "name": "BullMQ + Upstash Redis", "category": "infrastructure", "status": "adopt", "cost": "paid", "use": "Job queuing", "score": 84 }
+  ],
+  "trial": [
+    { "name": "ElevenLabs", "category": "voice", "status": "trial", "cost": "paid", "use": "Narração de vídeos", "score": 76 },
+    { "name": "Qdrant", "category": "rag-knowledge", "status": "trial", "cost": "freemium", "use": "Vector database para RAG", "score": 74 }
+  ],
+  "assess": [
+    { "name": "LangGraph", "category": "agent-framework", "status": "assess", "cost": "open-source", "use": "Orquestração multiagente", "score": 68 },
+    { "name": "OpenAI Assistants", "category": "agent-framework", "status": "assess", "cost": "paid", "use": "Agentes com memória", "score": 65 },
+    { "name": "Perplexity API", "category": "search", "status": "assess", "cost": "paid", "use": "Alternativa ao Tavily", "score": 62 }
+  ],
+  "rejected": [
+    { "name": "AutoGen", "category": "agent-framework", "status": "hold", "reason": "Complexidade alta, overhead para o stack atual", "score": 42 }
+  ]
+}

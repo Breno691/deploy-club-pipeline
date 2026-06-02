@@ -1,0 +1,142 @@
+{
+  "version": "1.0.0",
+  "sectors": {
+    "industrias_pequenas": {
+      "label": "Indústrias Pequenas",
+      "main_pains": [
+        "retrabalho na produção",
+        "falta de indicadores",
+        "estoque desorganizado",
+        "atrasos de entrega",
+        "baixa padronização",
+        "desperdício de material"
+      ],
+      "offers": ["diagnostico-lean", "kaizen", "padronizacao-processo", "dashboard-lean"],
+      "decision_maker": "Dono ou Diretor Industrial",
+      "avg_ticket_brl": 12000,
+      "pain_score": 9,
+      "payment_capacity": 8,
+      "lean_fit": 10,
+      "automation_fit": 7
+    },
+    "transportadoras": {
+      "label": "Transportadoras e Logística",
+      "main_pains": [
+        "atrasos de entrega",
+        "falta de rastreabilidade",
+        "retrabalho documental",
+        "comunicação manual",
+        "baixa visibilidade de frota"
+      ],
+      "offers": ["mapeamento-processos", "automacao-status", "dashboard-entregas", "padronizacao"],
+      "decision_maker": "Dono ou Gerente Operacional",
+      "avg_ticket_brl": 10000,
+      "pain_score": 8,
+      "payment_capacity": 7,
+      "lean_fit": 8,
+      "automation_fit": 9
+    },
+    "clinicas": {
+      "label": "Clínicas e Saúde",
+      "main_pains": [
+        "agendamento manual",
+        "confirmação manual",
+        "retrabalho em cadastro",
+        "perda de pacientes",
+        "atendimento lento"
+      ],
+      "offers": ["automacao-atendimento", "diagnostico-fluxo", "padronizacao-recepcao"],
+      "decision_maker": "Médico dono ou Gerente Administrativo",
+      "avg_ticket_brl": 9000,
+      "pain_score": 8,
+      "payment_capacity": 8,
+      "lean_fit": 7,
+      "automation_fit": 10
+    },
+    "distribuidoras": {
+      "label": "Distribuidoras",
+      "main_pains": [
+        "pedidos manuais",
+        "estoque inconsistente",
+        "retrabalho de separação",
+        "erros de entrega",
+        "falta de visibilidade"
+      ],
+      "offers": ["mapeamento-processos", "automacao-pedidos", "dashboard-estoque"],
+      "decision_maker": "Dono ou Gerente de Operações",
+      "avg_ticket_brl": 11000,
+      "pain_score": 8,
+      "payment_capacity": 7,
+      "lean_fit": 9,
+      "automation_fit": 8
+    },
+    "escritorios_contabeis": {
+      "label": "Escritórios Contábeis",
+      "main_pains": [
+        "processos manuais repetitivos",
+        "retrabalho de lançamentos",
+        "falta de padronização de obrigações",
+        "entrega de declarações atrasadas",
+        "alto volume com equipe pequena"
+      ],
+      "offers": ["automacao-n8n", "padronizacao-processo", "diagnostico-lean"],
+      "decision_maker": "Contador sócio",
+      "avg_ticket_brl": 8000,
+      "pain_score": 7,
+      "payment_capacity": 6,
+      "lean_fit": 7,
+      "automation_fit": 10
+    },
+    "supermercados": {
+      "label": "Supermercados e Varejo",
+      "main_pains": [
+        "reposição manual lenta",
+        "falta de indicadores de giro",
+        "perda de mercadoria",
+        "atendimento lento",
+        "gestão de fornecedores manual"
+      ],
+      "offers": ["diagnostico-lean", "mapeamento-perdas", "dashboard-vendas"],
+      "decision_maker": "Dono ou Gerente Geral",
+      "avg_ticket_brl": 10000,
+      "pain_score": 7,
+      "payment_capacity": 7,
+      "lean_fit": 8,
+      "automation_fit": 7
+    },
+    "construcao": {
+      "label": "Construção Civil",
+      "main_pains": [
+        "retrabalho em obra",
+        "falta de controle de materiais",
+        "atrasos",
+        "falta de checklist padronizado",
+        "comunicação entre obra e escritório"
+      ],
+      "offers": ["padronizacao-processo", "checklist-lean", "mapeamento-gargalos"],
+      "decision_maker": "Engenheiro sócio ou Dono",
+      "avg_ticket_brl": 9000,
+      "pain_score": 7,
+      "payment_capacity": 7,
+      "lean_fit": 8,
+      "automation_fit": 6
+    },
+    "auto_repair": {
+      "label": "Oficinas e Autopeças",
+      "main_pains": [
+        "agendamento manual",
+        "tempo de espera do cliente",
+        "falta de controle de OS",
+        "retrabalho de diagnóstico",
+        "perda de cliente por follow-up manual"
+      ],
+      "offers": ["automacao-agendamento", "padronizacao-os", "dashboard-oficina"],
+      "decision_maker": "Dono",
+      "avg_ticket_brl": 8000,
+      "pain_score": 7,
+      "payment_capacity": 6,
+      "lean_fit": 7,
+      "automation_fit": 9
+    }
+  }
+}

@@ -30,3 +30,6 @@ remotion/dist/
 
 # Logs
 npm-debug.log*
+*.mp3
+outputs/prospecting/
+outputs/worker*.log

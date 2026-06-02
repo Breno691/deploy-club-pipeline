@@ -1,0 +1,14 @@
+{
+  "agent": "lead-scoring-agent",
+  "cargo": "Diretor de Qualificação",
+  "kpi_mestre": "A+ identificado < 15min",
+  "meta_diaria": "Fila comercial priorizada + alertas de leads quentes",
+  "last_run": null,
+  "status": "never_run",
+  "last_kpis": {},
+  "last_alerts": [],
+  "last_summary": "",
+  "last_next_action": "",
+  "sessions_today": 0,
+  "created_at": "2026-05-30"
+}

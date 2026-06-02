@@ -1,0 +1,20 @@
+{
+  "name": "growth-intelligence-agent",
+  "version": "1.0.0",
+  "description": "Growth Intelligence Agent — aquisição, ativação, retenção, receita e referência (AARRR)",
+  "main": "growth_intelligence_agent.js",
+  "scripts": {
+    "start": "node growth_intelligence_agent.js",
+    "aarrr": "node growth_intelligence_agent.js --mode aarrr",
+    "acquisition": "node growth_intelligence_agent.js --mode acquisition",
+    "activation": "node growth_intelligence_agent.js --mode activation",
+    "retention": "node growth_intelligence_agent.js --mode retention",
+    "referral": "node growth_intelligence_agent.js --mode referral",
+    "revenue": "node growth_intelligence_agent.js --mode revenue",
+    "experiment": "node growth_intelligence_agent.js --mode experiment",
+    "channel": "node growth_intelligence_agent.js --mode channel",
+    "north-star": "node growth_intelligence_agent.js --mode north-star",
+    "report": "node growth_intelligence_agent.js --mode report"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

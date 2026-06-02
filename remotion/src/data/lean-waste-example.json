@@ -1,0 +1,82 @@
+{
+  "videoId": "lean-waste-001",
+  "title": "O retrabalho está destruindo sua empresa",
+  "format": "instagram_reel",
+  "aspectRatio": "9:16",
+  "duration": 35,
+  "fps": 30,
+  "objective": "lead_generation",
+  "audience": "Donos de PMEs em BH/MG",
+  "theme": "retrabalho",
+  "template": "LeanWaste",
+  "cta": {
+    "type": "diagnostic",
+    "text": "Agende um diagnóstico gratuito",
+    "url": "https://smartops-ia.com.br/diagnostico",
+    "subtext": "30 min · presencial BH/MG · Black Belt"
+  },
+  "brand": {
+    "style": "premium-tech-consulting",
+    "primaryColor": "#7C3AED",
+    "accentColor": "#10B981",
+    "backgroundColor": "#0A0A0F"
+  },
+  "scenes": [
+    {
+      "id": "scene_1",
+      "type": "hook",
+      "duration": 4,
+      "headline": "Sua empresa está perdendo dinheiro com retrabalho.",
+      "subheadline": "E talvez ninguém esteja medindo isso.",
+      "animation": "kinetic-impact",
+      "visual": "dark-gradient"
+    },
+    {
+      "id": "scene_2",
+      "type": "problem",
+      "duration": 6,
+      "headline": "O problema não é falta de esforço.",
+      "body": "É processo mal desenhado.",
+      "bullets": [
+        "Tarefas refeitas 2, 3, 4 vezes",
+        "Erros que voltam sempre",
+        "Aprovações que travam tudo"
+      ],
+      "animation": "slide-up"
+    },
+    {
+      "id": "scene_3",
+      "type": "data",
+      "duration": 8,
+      "headline": "Retrabalho consome tempo, margem e energia.",
+      "metrics": [
+        { "label": "Tempo perdido", "value": "30%", "unit": "da semana" },
+        { "label": "Custo invisível", "value": "R$47k", "unit": "/mês" },
+        { "label": "Equipe esgotada", "value": "100%", "unit": "garantido" }
+      ],
+      "animation": "counter"
+    },
+    {
+      "id": "scene_4",
+      "type": "solution",
+      "duration": 10,
+      "headline": "Com Lean + IA, você encontra os gargalos.",
+      "body": "E automatiza o que trava sua operação.",
+      "bullets": [
+        "Diagnóstico em 4 semanas",
+        "Redução de 30% no retrabalho",
+        "Processos padronizados e automatizados"
+      ],
+      "animation": "process-flow"
+    },
+    {
+      "id": "scene_5",
+      "type": "cta",
+      "duration": 7,
+      "headline": "Quer descobrir onde sua empresa perde dinheiro?",
+      "subheadline": "Diagnóstico gratuito de 30 min.",
+      "animation": "cta-pulse",
+      "visual": "glow-accent"
+    }
+  ]
+}

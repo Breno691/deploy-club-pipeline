@@ -30,6 +30,21 @@ Detectar e eliminar os 8 desperdícios Lean nos processos dos clientes SmartOps 
 
 ---
 
+## MODOS
+
+Execute: `node agents/lean-agent/lean_agent.js --mode <modo>`
+
+| Modo | Descrição | Argumento |
+|---|---|---|
+| `waste` | Identificar os 8 desperdícios TIMWOODS no processo | `--processo "atendimento"` |
+| `vsm` | Value Stream Mapping completo com lead time | `--processo "venda até entrega"` |
+| `diagnose` | Diagnóstico Lean completo de área ou processo | `--area "operações"` |
+| `oee` | Calcular OEE (Disponibilidade × Performance × Qualidade) | `--disponibilidade 0.9 --performance 0.85 --qualidade 0.95` |
+| `kaizen` | Plano Kaizen rápido com quick wins priorizados | `--area "atendimento"` |
+| `5s` | Auditoria e plano de implementação 5S | `--local "escritório"` |
+| `lead-time` | Análise de lead time e cycle time por etapa | — |
+| `report` | Relatório executivo Lean com ROI calculado | — |
+
 ## AS 8 PERGUNTAS QUE ESTE AGENTE RESPONDE
 
 1. Quais desperdícios existem no processo (TIMWOODS)?

@@ -1,0 +1,77 @@
+{
+  "products": [
+    {
+      "id": "smartops-monthly",
+      "name": "SmartOps Monthly — Melhoria Contínua Mensal",
+      "tier": "recurring",
+      "price": 3500,
+      "score": 93,
+      "funnel_role": "mrr",
+      "margin": 80,
+      "upsell": "lean-ai-sprint",
+      "status": "idea",
+      "classification": "Criar e vender imediatamente"
+    },
+    {
+      "id": "checklist-desperdicios",
+      "name": "Checklist de Desperdícios Lean para PMEs",
+      "tier": "free",
+      "price": 0,
+      "score": 92,
+      "funnel_role": "lead_magnet",
+      "margin": 100,
+      "upsell": "diagnostico-express",
+      "status": "idea",
+      "classification": "Criar e vender imediatamente"
+    },
+    {
+      "id": "diagnostico-express",
+      "name": "Diagnóstico Express SmartOps",
+      "tier": "b2b_low",
+      "price": 997,
+      "score": 91,
+      "funnel_role": "qualifier",
+      "margin": 80,
+      "upsell": "lean-ai-sprint",
+      "status": "idea",
+      "classification": "Criar e vender imediatamente"
+    },
+    {
+      "id": "lean-ai-sprint",
+      "name": "Lean AI Sprint",
+      "tier": "core",
+      "price": 10000,
+      "score": 90,
+      "funnel_role": "main_revenue",
+      "margin": 80,
+      "upsell": "smartops-monthly",
+      "status": "idea",
+      "classification": "Criar e vender imediatamente"
+    },
+    {
+      "id": "mapa-gargalos",
+      "name": "Mapa de Gargalos Operacionais",
+      "tier": "b2b_low",
+      "price": 2500,
+      "score": 88,
+      "funnel_role": "qualifier",
+      "margin": 80,
+      "upsell": "lean-ai-sprint",
+      "status": "idea",
+      "classification": "Criar e vender imediatamente"
+    },
+    {
+      "id": "sprint-automacao",
+      "name": "Sprint de Automação n8n",
+      "tier": "core",
+      "price": 6500,
+      "score": 87,
+      "funnel_role": "main_revenue",
+      "margin": 82,
+      "upsell": "smartops-monthly",
+      "status": "idea",
+      "classification": "Criar e vender imediatamente"
+    }
+  ],
+  "generated_at": "2026-05-30T23:10:47.363Z"
+}

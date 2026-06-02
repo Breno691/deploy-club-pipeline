@@ -1,0 +1,18 @@
+{
+  "name": "cro-agent",
+  "version": "1.0.0",
+  "description": "CRO Agent — otimização de conversão, landing pages, funis e A/B tests",
+  "main": "cro_agent.js",
+  "scripts": {
+    "start": "node cro_agent.js",
+    "audit": "node cro_agent.js --mode audit",
+    "funnel": "node cro_agent.js --mode funnel",
+    "landing": "node cro_agent.js --mode landing",
+    "ab-test": "node cro_agent.js --mode ab-test",
+    "cta": "node cro_agent.js --mode cta",
+    "form": "node cro_agent.js --mode form",
+    "report": "node cro_agent.js --mode report",
+    "heatmap": "node cro_agent.js --mode heatmap"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

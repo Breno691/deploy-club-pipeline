@@ -1,0 +1,50 @@
+[
+  {
+    "id": "parceria-continua",
+    "nome": "Parceria Contínua (mensal)",
+    "tipo": "recorrente",
+    "ticket_bruto": 5500,
+    "custo_entrega": 1100,
+    "receita_liquida": 5060,
+    "lucro_bruto": 3960,
+    "margem_bruta_pct": 78.3,
+    "preco_minimo": 2989,
+    "margem_status": "ok"
+  },
+  {
+    "id": "quick-win",
+    "nome": "Quick Win (2–4 semanas)",
+    "tipo": "projeto",
+    "ticket_bruto": 5500,
+    "custo_entrega": 1200,
+    "receita_liquida": 5060,
+    "lucro_bruto": 3860,
+    "margem_bruta_pct": 76.3,
+    "preco_minimo": 3261,
+    "margem_status": "ok"
+  },
+  {
+    "id": "diagnostico-plano",
+    "nome": "Diagnóstico + Plano",
+    "tipo": "projeto",
+    "ticket_bruto": 11500,
+    "custo_entrega": 2800,
+    "receita_liquida": 10580,
+    "lucro_bruto": 7780,
+    "margem_bruta_pct": 73.5,
+    "preco_minimo": 7609,
+    "margem_status": "ok"
+  },
+  {
+    "id": "projeto-completo",
+    "nome": "Projeto Completo",
+    "tipo": "projeto",
+    "ticket_bruto": 32000,
+    "custo_entrega": 9000,
+    "receita_liquida": 29440,
+    "lucro_bruto": 20440,
+    "margem_bruta_pct": 69.4,
+    "preco_minimo": 24457,
+    "margem_status": "ok"
+  }
+]

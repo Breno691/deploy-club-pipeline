@@ -1,0 +1,19 @@
+{
+  "name": "seo-agent",
+  "version": "1.0.0",
+  "description": "SEO Agent — Especialista em SEO estratégico, clusters semânticos e crescimento orgânico",
+  "main": "seo_agent.js",
+  "scripts": {
+    "start": "node seo_agent.js",
+    "analyze": "node seo_agent.js --mode analyze",
+    "keywords": "node seo_agent.js --mode keywords",
+    "cluster": "node seo_agent.js --mode cluster",
+    "technical": "node seo_agent.js --mode technical",
+    "content": "node seo_agent.js --mode content",
+    "report": "node seo_agent.js --mode report"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.0.0"
+  }
+}

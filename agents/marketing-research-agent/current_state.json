@@ -1,0 +1,17 @@
+{
+  "agent": "marketing-research-agent",
+  "version": "2.0.0-enterprise",
+  "cargo": "Área de Market Intelligence",
+  "camadas": ["Enterprise", "Avançada Contínua", "Operacional", "Qualidade/Evidência", "Produtização"],
+  "kpi_mestre": "Insights com evidência que geram decisão",
+  "cadencia": "Sob demanda + Radar semanal",
+  "modos_disponiveis": 41,
+  "last_run": null,
+  "status": "ready",
+  "last_kpis": {},
+  "last_alerts": [],
+  "last_summary": "",
+  "last_next_action": "",
+  "sessions_today": 0,
+  "updated_at": "2026-06-01"
+}

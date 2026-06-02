@@ -1,0 +1,20 @@
+{
+  "name": "revenue-intelligence-agent",
+  "version": "1.0.0",
+  "description": "Revenue Intelligence Agent — atribuição de receita, funil digital, canais e growth finance",
+  "main": "revenue_intelligence_agent.js",
+  "scripts": {
+    "start": "node revenue_intelligence_agent.js",
+    "funnel": "node revenue_intelligence_agent.js --mode funnel",
+    "attribution": "node revenue_intelligence_agent.js --mode attribution",
+    "channel": "node revenue_intelligence_agent.js --mode channel",
+    "forecast": "node revenue_intelligence_agent.js --mode forecast",
+    "alert": "node revenue_intelligence_agent.js --mode alert",
+    "roi": "node revenue_intelligence_agent.js --mode roi",
+    "budget": "node revenue_intelligence_agent.js --mode budget",
+    "dashboard": "node revenue_intelligence_agent.js --mode dashboard",
+    "ceo-brief": "node revenue_intelligence_agent.js --mode ceo-brief",
+    "report": "node revenue_intelligence_agent.js --mode report"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

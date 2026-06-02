@@ -1,0 +1,14 @@
+{
+  "name": "risk-agent",
+  "version": "1.0.0",
+  "description": "Risk Agent — Alertas preventivos, riscos operacionais e financeiros",
+  "main": "risk_agent.js",
+  "scripts": {
+    "start": "node risk_agent.js",
+    "scan": "node risk_agent.js --mode scan",
+    "client": "node risk_agent.js --mode client",
+    "financial": "node risk_agent.js --mode financial",
+    "report": "node risk_agent.js --mode report"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

@@ -1,0 +1,31 @@
+{
+  "template_id": "carousel-7-slides",
+  "name": "Carrossel Educativo 7 Slides",
+  "format": "instagram_carousel",
+  "dimensions": { "width": 1080, "height": 1080 },
+  "objective": "education + saves + authority",
+  "slides": [
+    { "position": 1, "type": "hook",        "purpose": "Para o scroll imediatamente",   "max_words": 7 },
+    { "position": 2, "type": "problem",     "purpose": "Aprofunda a dor",               "max_words": 8 },
+    { "position": 3, "type": "cause",       "purpose": "Revela causa raiz",             "max_words": 8 },
+    { "position": 4, "type": "data",        "purpose": "Evidência com número concreto", "max_words": 6 },
+    { "position": 5, "type": "example",     "purpose": "Caso prático / antes-depois",   "max_words": 8 },
+    { "position": 6, "type": "solution",    "purpose": "Método SmartOps em 3 passos",   "max_words": 8 },
+    { "position": 7, "type": "cta",         "purpose": "Convite ao diagnóstico",        "max_words": 8 }
+  ],
+  "slide_structure": {
+    "accent_stripe": "left",
+    "brand_row":     "top_left",
+    "slide_number":  "top_right",
+    "headline":      "center_left",
+    "divider":       "below_headline",
+    "body":          "below_divider",
+    "footer":        "bottom"
+  },
+  "visual_rules": {
+    "consistent_accent_color": true,
+    "same_background_all_slides": true,
+    "slide_number_visible": true,
+    "cta_slide_different_bg": true
+  }
+}

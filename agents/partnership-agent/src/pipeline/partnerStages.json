@@ -1,0 +1,27 @@
+{
+  "stages": [
+    { "id": "identified",             "label": "Identificado",            "next": "researched",         "action": "Pesquisar perfil do parceiro" },
+    { "id": "researched",             "label": "Pesquisado",              "next": "qualified",          "action": "Qualificar e pontuar" },
+    { "id": "qualified",              "label": "Qualificado",             "next": "contacted",          "action": "Enviar primeira mensagem" },
+    { "id": "contacted",              "label": "Contactado",              "next": "meeting_scheduled",  "action": "Aguardar resposta / fazer follow-up" },
+    { "id": "meeting_scheduled",      "label": "Reunião Marcada",         "next": "meeting_done",       "action": "Preparar roteiro da reunião" },
+    { "id": "meeting_done",           "label": "Reunião Realizada",       "next": "proposal_sent",      "action": "Enviar proposta de parceria" },
+    { "id": "proposal_sent",          "label": "Proposta Enviada",        "next": "agreement_signed",   "action": "Aguardar aprovação / negociar" },
+    { "id": "agreement_signed",       "label": "Acordo Assinado",         "next": "onboarded",          "action": "Fazer onboarding do parceiro" },
+    { "id": "onboarded",              "label": "Onboarded",               "next": "activated",          "action": "Treinar e entregar kit de ativação" },
+    { "id": "activated",              "label": "Ativado",                 "next": "first_referral_received", "action": "Monitorar e estimular indicações" },
+    { "id": "first_referral_received","label": "Primeira Indicação",      "next": "revenue_generated",  "action": "Qualificar lead e iniciar vendas" },
+    { "id": "revenue_generated",      "label": "Receita Gerada",          "next": "active_partner",     "action": "Pagar comissão e fortalecer parceria" },
+    { "id": "active_partner",         "label": "Parceiro Ativo",          "next": "active_partner",     "action": "Manter engajamento e co-marketing" },
+    { "id": "inactive",               "label": "Inativo",                 "next": "activated",          "action": "Reativar com nova oferta ou conteúdo" },
+    { "id": "rejected",               "label": "Rejeitado",               "next": null,                 "action": "Arquivar e monitorar no futuro" }
+  ],
+  "triggers": {
+    "score_above_85":       { "action": "create_brief_and_outreach_task", "notify": "ceo_advisor" },
+    "partner_responded":    { "action": "schedule_meeting_and_prep",      "notify": "calendar" },
+    "inactive_30_days":     { "action": "send_followup_and_content",      "notify": "telegram" },
+    "referral_received":    { "action": "track_lead_and_commission",      "notify": "sales_intelligence" },
+    "client_closed":        { "action": "calculate_commission_and_thank", "notify": "finance" },
+    "3_clients_generated":  { "action": "upgrade_to_strategic",          "notify": "ceo_advisor" }
+  }
+}

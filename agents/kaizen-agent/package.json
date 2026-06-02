@@ -1,0 +1,17 @@
+{
+  "name": "kaizen-agent",
+  "version": "1.0.0",
+  "description": "Kaizen Agent — eventos de melhoria contínua, PDCA, resultados",
+  "main": "kaizen_agent.js",
+  "scripts": {
+    "start": "node kaizen_agent.js",
+    "event": "node kaizen_agent.js --mode event",
+    "plan": "node kaizen_agent.js --mode plan",
+    "pdca": "node kaizen_agent.js --mode pdca",
+    "track": "node kaizen_agent.js --mode track",
+    "results": "node kaizen_agent.js --mode results",
+    "celebrate": "node kaizen_agent.js --mode celebrate",
+    "report": "node kaizen_agent.js --mode report"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

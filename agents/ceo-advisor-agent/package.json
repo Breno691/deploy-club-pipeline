@@ -1,0 +1,19 @@
+{
+  "name": "ceo-advisor-agent",
+  "version": "1.0.0",
+  "description": "CEO Advisor Agent — Decisor Central da SmartOps IA. Consolida todos os agentes e gera o plano do dia.",
+  "main": "ceo_advisor_agent.js",
+  "scripts": {
+    "start": "node ceo_advisor_agent.js",
+    "brief": "node ceo_advisor_agent.js --mode brief",
+    "plan": "node ceo_advisor_agent.js --mode daily-plan",
+    "priority": "node ceo_advisor_agent.js --mode priority",
+    "decision": "node ceo_advisor_agent.js --mode decision",
+    "week": "node ceo_advisor_agent.js --mode weekly-review",
+    "alert": "node ceo_advisor_agent.js --mode alert"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.0.0"
+  }
+}

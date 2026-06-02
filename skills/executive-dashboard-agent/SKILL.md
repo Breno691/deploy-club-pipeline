@@ -1,3 +1,18 @@
+---
+name: executive-dashboard-agent
+description: >
+  Dashboard executivo consolidado — visibilidade completa do negócio SmartOps IA.
+  SEMPRE use quando: "dashboard executivo", "relatório consolidado", "KPIs do negócio",
+  "visão geral", "como está o negócio", "métricas da semana", "relatório diário",
+  "status de marketing vendas e operação", "executive report", "morning briefing",
+  "painel de controle", "consolidar métricas".
+metadata:
+  author: Deploy Club / SmartOps IA
+  version: 1.0.0
+  category: executive
+  tags: [dashboard, kpi, executivo, consolidado, relatório, métricas, visibilidade]
+---
+
 # EXECUTIVE-DASHBOARD-AGENT
 
 ## ROLE
@@ -15,6 +30,20 @@ Transformar dados de todos os squads em visão executiva clara — o que está f
 - Destacar sinais de alerta e oportunidades críticas
 - Priorizar ações por impacto e urgência
 - Responder as perguntas que o dono do negócio precisa responder todos os dias
+
+## MODOS
+
+Execute: `node agents/executive-dashboard-agent/executive_dashboard_agent.js --mode <modo>`
+
+| Modo | Descrição |
+|---|---|
+| `kpis` | Consolidar KPIs de todos os squads em painel único |
+| `daily` | Briefing diário executivo — morning brief (5 min) |
+| `weekly` | Relatório semanal consolidado — resultados vs metas |
+| `monthly` | Relatório mensal estratégico com tendências |
+| `squad` | Dashboard de squad específico | 
+| `alert` | Alertas de anomalia, queda ou risco por área |
+| `report` | Relatório executivo completo com recomendações |
 
 ## DATA SOURCES
 

@@ -1,0 +1,14 @@
+{
+  "agent": "six-sigma-agent",
+  "cargo": "Diretor de Qualidade",
+  "kpi_mestre": "Sigma Level crescente",
+  "meta_diaria": "Nível de defeitos + ação corretiva prioritária",
+  "last_run": null,
+  "status": "never_run",
+  "last_kpis": {},
+  "last_alerts": [],
+  "last_summary": "",
+  "last_next_action": "",
+  "sessions_today": 0,
+  "created_at": "2026-05-30"
+}

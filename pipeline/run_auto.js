@@ -101,12 +101,59 @@ async function main() {
   run('scripts/generate_ad.js');
   assertJSON(path.join(taskDir, 'ads', 'layout.json'), 'layout.json', ['background']);
 
+  // Background (ComfyUI if configured, CSS fallback otherwise)
+  try {
+    execSync(`node scripts/generate_background.js --task ${taskName} --date ${taskDate}`,
+      { stdio: 'inherit', cwd: path.resolve('.') });
+  } catch (e) { log(`⚠ Background gen skipped: ${e.message}`); }
+
+  // Square 1080×1080 (for carousels and Ads)
   run('scripts/build_ad_html.js');
   assertFile(path.join(taskDir, 'ads', 'ad.html'), 'ad.html', 2);
+
+  // Portrait 1080×1350 (primary Instagram feed format 2025)
+  try {
+    execSync(`node scripts/build_portrait_html.js --task ${taskName} --date ${taskDate}`,
+      { stdio: 'inherit', cwd: path.resolve('.') });
+    log('✓ portrait.html gerado (1080×1350)');
+  } catch (e) { log(`⚠ Portrait HTML skipped: ${e.message}`); }
+
+  // Story 1080×1920
+  try {
+    execSync(`node scripts/build_story_html.js --task ${taskName} --date ${taskDate}`,
+      { stdio: 'inherit', cwd: path.resolve('.') });
+    log('✓ story.html gerado (1080×1920)');
+  } catch (e) { log(`⚠ Story HTML skipped: ${e.message}`); }
+
+  // Carousel — 5 slides
+  try {
+    execSync(`node scripts/build_carousel_html.js --task ${taskName} --date ${taskDate}`,
+      { stdio: 'inherit', cwd: path.resolve('.') });
+    log('✓ Carousel gerado (5 slides)');
+  } catch (e) { log(`⚠ Carousel skipped: ${e.message}`); }
 
   run('scripts/render_ad.js');
   assertFile(path.join(taskDir, 'ads', 'instagram_ad.png'), 'instagram_ad.png', 50);
   log('✓ Ad Creative validated');
+
+  // ── STEP 3.5: Video Remotion ─────────────────────────────────────────────
+  log('── STEP 3.5: Vídeo Remotion ──');
+  const skipVideo = args.includes('--skip-video') || process.env.SKIP_VIDEO === 'true';
+  if (skipVideo) {
+    log('⏭ --skip-video ativo — pulando geração de vídeo');
+  } else {
+    try {
+      const noNarr = process.env.ELEVENLABS_API_KEY ? '' : '--no-narration';
+      execSync(
+        `node scripts/generate_video.js --task ${taskName} --date ${taskDate} ${noNarr}`,
+        { stdio: 'inherit', cwd: path.resolve('.') }
+      );
+      log('✓ Vídeo Remotion gerado');
+    } catch (e) {
+      log(`⚠ Vídeo Remotion falhou (não crítico): ${e.message}`);
+      log('  Pipeline continua sem o vídeo...');
+    }
+  }
 
   // ── STEP 4: Upload ────────────────────────────────────────────────────────
   log('── STEP 4: Upload Mídia ──');
@@ -143,10 +190,18 @@ async function main() {
   }
 
   // ── Result JSON ───────────────────────────────────────────────────────────
+  // Lê video_url se gerado
+  let videoUrl = null;
+  try {
+    const mu = JSON.parse(fs.readFileSync(path.join(taskDir, 'media_urls.json'), 'utf8'));
+    videoUrl = mu.video_mp4 || null;
+  } catch {}
+
   const result = {
     task: taskName,
     date: taskDate,
     image_url: imageUrl,
+    video_url: videoUrl,
     caption_preview: caption.slice(0, 120),
     status: 'complete',
     timestamp: new Date().toISOString(),

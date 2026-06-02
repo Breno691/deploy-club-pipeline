@@ -1,0 +1,23 @@
+{
+  "name": "financial-intelligence-agent",
+  "version": "1.0.0",
+  "description": "CFO Virtual da SmartOps IA — inteligência financeira completa",
+  "main": "financial_agent.js",
+  "scripts": {
+    "dashboard": "node financial_agent.js --mode dashboard",
+    "margin":    "node financial_agent.js --mode margin",
+    "forecast":  "node financial_agent.js --mode forecast",
+    "roi":       "node financial_agent.js --mode roi",
+    "risk":      "node financial_agent.js --mode risk",
+    "report":    "node financial_agent.js --mode report",
+    "pnl":       "node financial_agent.js --mode pnl",
+    "pricing":   "node financial_agent.js --mode pricing --service consultoria-lean",
+    "scenario":  "node financial_agent.js --mode scenario --action 'fechar 2 clientes'",
+    "cac":       "node financial_agent.js --mode cac",
+    "ltv":       "node financial_agent.js --mode ltv"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.0.0"
+  }
+}

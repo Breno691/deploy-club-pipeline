@@ -1,0 +1,75 @@
+{
+  "carousel_id": "carousel-lean-waste-001",
+  "topic": "Os 8 desperdícios que matam empresas",
+  "objective": "education",
+  "service_mode": "lean",
+  "total_slides": 8,
+  "slides": [
+    {
+      "slide_number": 1,
+      "type": "hook",
+      "headline": "8 desperdícios que matam empresas",
+      "body": "E a maioria não mede nenhum deles.",
+      "visual_type": "impact_headline",
+      "cta": null
+    },
+    {
+      "slide_number": 2,
+      "type": "problem",
+      "headline": "O problema não é o time.",
+      "body": "É o processo. Sempre.",
+      "visual_type": "problem_card",
+      "cta": null
+    },
+    {
+      "slide_number": 3,
+      "type": "data",
+      "headline": "Retrabalho custa 30% do tempo.",
+      "body": "E ninguém contabiliza isso no financeiro.",
+      "visual_type": "data_card",
+      "cta": null
+    },
+    {
+      "slide_number": 4,
+      "type": "explanation",
+      "headline": "Espera trava tudo.",
+      "bullets": ["Aprovações sem prazo", "Fila sem prioridade", "Gargalo que ninguém vê"],
+      "visual_type": "list",
+      "cta": null
+    },
+    {
+      "slide_number": 5,
+      "type": "example",
+      "headline": "Antes: 45 dias. Depois: 19.",
+      "body": "Com Lean e automação. Em 4 semanas.",
+      "visual_type": "before_after",
+      "cta": null
+    },
+    {
+      "slide_number": 6,
+      "type": "solution",
+      "headline": "Lean + IA elimina na raiz.",
+      "bullets": ["Diagnóstico em 1 semana", "Mapeamento real", "Automação onde cabe"],
+      "visual_type": "solution_card",
+      "cta": null
+    },
+    {
+      "slide_number": 7,
+      "type": "checklist",
+      "headline": "Você tem algum desses?",
+      "bullets": ["Retrabalho recorrente", "Aprovações travadas", "Processos manuais", "Dados em planilha"],
+      "visual_type": "checklist",
+      "cta": null
+    },
+    {
+      "slide_number": 8,
+      "type": "cta",
+      "headline": "Descubra onde sua empresa perde dinheiro.",
+      "body": "Diagnóstico gratuito de 30 min · Presencial BH/MG.",
+      "visual_type": "cta_block",
+      "cta": "Agende agora"
+    }
+  ],
+  "caption": "8 desperdícios que estão matando a margem da sua empresa.\n\nE o pior: a maioria dos donos não vê nenhum deles.\n\nSalve esse carrossel para revisar depois.\n\n👉 Quer descobrir quais existem na sua operação?\nDiagnóstico gratuito de 30 min — link na bio.",
+  "hashtags": ["#lean", "#sixsigma", "#melhoriaContinua", "#PME", "#BH", "#gestao", "#processos", "#automacao", "#retrabalho", "#eficiencia"]
+}

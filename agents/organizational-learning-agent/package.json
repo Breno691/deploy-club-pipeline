@@ -1,0 +1,23 @@
+{
+  "name": "organizational-learning-intelligence-agent",
+  "version": "1.0.0",
+  "description": "Diretor de Aprendizado Organizacional e Melhoria Contínua Interna — SmartOps IA",
+  "main": "organizational_learning.js",
+  "scripts": {
+    "retro":      "node organizational_learning.js --mode retro --type monthly",
+    "lesson":     "node organizational_learning.js --mode lesson --area marketing --event 'reel sobre retrabalho gerou 3 leads'",
+    "pattern":    "node organizational_learning.js --mode pattern",
+    "failure":    "node organizational_learning.js --mode failure --area ads --event 'campanha gastou R$300 sem gerar lead'",
+    "success":    "node organizational_learning.js --mode success --area marketing --event 'post sobre retrabalho viralizou'",
+    "sop":        "node organizational_learning.js --mode sop --name 'publicar-conteudo'",
+    "playbook":   "node organizational_learning.js --mode playbook --playbook marketing --section conteudo",
+    "agent-review":"node organizational_learning.js --mode agent-review --agent partnership-agent",
+    "decision":   "node organizational_learning.js --mode decision --decision 'Priorizar indicação como canal principal'",
+    "score":      "node organizational_learning.js --mode score",
+    "report":     "node organizational_learning.js --mode report"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.0.0"
+  }
+}

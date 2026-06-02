@@ -171,6 +171,44 @@ Use these keywords in tags: ${keywords}`
   appendLog('youtube_metadata.json saved');
   console.log('  youtube_metadata.json ✓');
 
+  // ── Copy quality metadata (enterprise) ─────────────────────────────────────
+  const copyQuality = {
+    task_name: taskName,
+    date: taskDate,
+    campaign_angle: selectedAngle,
+    hook_used: topHook,
+    services_in_scope: services,
+    data_source: research.data_source || 'brand_defaults',
+    confidence_score: research.confidence_score || { nota: 35, classificacao: 'Baixa' },
+    brand_compliance: {
+      manutencao_ti_excluded: true,
+      dark_theme_applied: true,
+      cta_includes_whatsapp: igCaption.includes('wa.me') || igCaption.includes('WhatsApp'),
+      lean_automacao_only: true,
+    },
+    platform_quality: {
+      instagram: {
+        has_hook: igCaption.split('\n')[0].length > 0,
+        has_cta: igCaption.includes('Diagnóstico') || igCaption.includes('WhatsApp'),
+        char_count: igCaption.length,
+        within_limit: igCaption.length <= 2200,
+      },
+      threads: {
+        char_count: threadsPost.length,
+        within_limit: threadsPost.length <= 500,
+      },
+      youtube: {
+        title_length: ytMetadata?.title?.length || 0,
+        title_ok: (ytMetadata?.title?.length || 0) <= 70,
+        has_tags: (ytMetadata?.tags?.length || 0) >= 8,
+      },
+    },
+    generated_at: new Date().toISOString(),
+  };
+  fs.writeFileSync(path.join(copyDir, 'copy_quality.json'), JSON.stringify(copyQuality, null, 2));
+  appendLog('copy_quality.json saved');
+  console.log('  copy_quality.json ✓');
+
   // ── Summary log ─────────────────────────────────────────────────────────────
   appendLog(`Campaign angle used: ${selectedAngle}`);
   appendLog('generate_copy complete ✓');

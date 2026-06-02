@@ -1,8 +1,0 @@
-[2026-05-29T00:09:46.556Z] Distribution Agent started
-[2026-05-29T00:09:46.605Z] Uploading instagram_ad to deploy_club_test/2026-05-28/instagram_ad.png
-[2026-05-29T00:09:47.636Z] instagram_ad uploaded ✓: https://fehnahtgmcppatcwgpiz.supabase.co/storage/v1/object/public/campaign-uploads/deploy_club_test/2026-05-28/instagram_ad.png
-[2026-05-29T00:09:47.636Z] Skipped ad_video: file not found
-[2026-05-29T00:09:47.638Z] media_urls.json saved
-[2026-05-29T00:09:47.640Z] Publish MD saved: outputs\deploy_club_test_2026-05-28\Publish deploy_club_test 2026-05-28.md
-[2026-05-29T00:09:47.641Z] Distribution Agent complete ✓
-[2026-05-29T00:12:36.749Z] FAILED (attempt 1): Dependency timeout: ad_creative_designer did not complete within 480s

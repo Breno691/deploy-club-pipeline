@@ -1,0 +1,24 @@
+{
+  "name": "experimentation-agent",
+  "version": "1.0.0",
+  "description": "Experimentation Agent — Motor de Otimização Contínua da SmartOps IA",
+  "main": "experimentation_agent.js",
+  "scripts": {
+    "start": "node experimentation_agent.js",
+    "hypothesis": "node experimentation_agent.js --mode hypothesis",
+    "design": "node experimentation_agent.js --mode design",
+    "analyze": "node experimentation_agent.js --mode analyze",
+    "cro": "node experimentation_agent.js --mode cro",
+    "ads": "node experimentation_agent.js --mode ads",
+    "creative": "node experimentation_agent.js --mode creative",
+    "landing": "node experimentation_agent.js --mode landing",
+    "funnel": "node experimentation_agent.js --mode funnel",
+    "report": "node experimentation_agent.js --mode report",
+    "dashboard": "node experimentation_agent.js --mode dashboard",
+    "prioritize": "node experimentation_agent.js --mode prioritize"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.0.0"
+  }
+}

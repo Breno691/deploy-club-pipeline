@@ -1,0 +1,21 @@
+{
+  "name": "ai-automation-agent",
+  "version": "1.0.0",
+  "description": "AI Automation Discovery Agent — Diretor de Automação Inteligente da SmartOps IA",
+  "main": "ai_automation_agent.js",
+  "scripts": {
+    "start": "node ai_automation_agent.js",
+    "discover": "node ai_automation_agent.js --mode discover",
+    "map": "node ai_automation_agent.js --mode map-process",
+    "score": "node ai_automation_agent.js --mode score",
+    "roi": "node ai_automation_agent.js --mode roi",
+    "n8n-build": "node ai_automation_agent.js --mode n8n-build",
+    "whatsapp": "node ai_automation_agent.js --mode whatsapp-bot",
+    "report": "node ai_automation_agent.js --mode report",
+    "ceo-brief": "node ai_automation_agent.js --mode ceo-brief"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.0.0"
+  }
+}

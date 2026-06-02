@@ -1,0 +1,20 @@
+{
+  "name": "automation-agent",
+  "version": "1.0.0",
+  "description": "Automation Agent — n8n, APIs, RPA, webhooks e automação de processos",
+  "main": "automation_agent.js",
+  "scripts": {
+    "start": "node automation_agent.js",
+    "discover": "node automation_agent.js --mode discover",
+    "design": "node automation_agent.js --mode design",
+    "n8n-flow": "node automation_agent.js --mode n8n-flow",
+    "webhook": "node automation_agent.js --mode webhook",
+    "whatsapp": "node automation_agent.js --mode whatsapp",
+    "crm": "node automation_agent.js --mode crm",
+    "email-flow": "node automation_agent.js --mode email-flow",
+    "roi": "node automation_agent.js --mode roi",
+    "monitor": "node automation_agent.js --mode monitor",
+    "report": "node automation_agent.js --mode report"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

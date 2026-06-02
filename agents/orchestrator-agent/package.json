@@ -1,0 +1,20 @@
+{
+  "name": "orchestrator-agent",
+  "version": "1.0.0",
+  "description": "Orchestrator Agent — coordena pipeline de conteúdo 3x/semana e agenda de agentes",
+  "main": "orchestrator_agent.js",
+  "scripts": {
+    "start": "node orchestrator_agent.js",
+    "pipeline": "node orchestrator_agent.js --mode pipeline",
+    "brief": "node orchestrator_agent.js --mode brief",
+    "agenda": "node orchestrator_agent.js --mode agenda",
+    "assign": "node orchestrator_agent.js --mode assign",
+    "review": "node orchestrator_agent.js --mode review",
+    "weekly": "node orchestrator_agent.js --mode weekly",
+    "status": "node orchestrator_agent.js --mode status",
+    "priority": "node orchestrator_agent.js --mode priority",
+    "debrief": "node orchestrator_agent.js --mode debrief",
+    "report": "node orchestrator_agent.js --mode report"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

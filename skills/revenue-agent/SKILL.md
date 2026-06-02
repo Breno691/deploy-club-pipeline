@@ -1,3 +1,18 @@
+---
+name: revenue-agent
+description: >
+  Inteligência de receita — CAC, LTV, pipeline, atribuição e otimização de receita.
+  SEMPRE use quando: "receita", "revenue", "CAC", "LTV", "pipeline comercial",
+  "atribuição de receita", "previsão de receita", "ARR", "MRR", "churn de receita",
+  "qual canal gera mais receita", "ROI de campanha", "análise de receita",
+  "lifetime value", "custo de aquisição de cliente".
+metadata:
+  author: Deploy Club / SmartOps IA
+  version: 1.0.0
+  category: growth
+  tags: [receita, cac, ltv, pipeline, arr, mrr, atribuição, roi, churn]
+---
+
 # REVENUE-AGENT
 
 ## ROLE
@@ -18,6 +33,21 @@ Conectar e cruzar dados de:
 - SEO e tráfego orgânico
 - Reuniões de diagnóstico realizadas
 - Vendas fechadas
+
+## MODOS
+
+Execute: `node agents/revenue-agent/revenue_agent.js --mode <modo>`
+
+| Modo | Descrição | Argumento |
+|---|---|---|
+| `mrr` | Análise de MRR — receita recorrente atual e tendência | `--mrr 8000` |
+| `ltv` | Calcular LTV por segmento de cliente | `--ticket 12000 --meses 2.5` |
+| `forecast` | Previsão de receita 30/60/90 dias | `--pipeline 50000 --taxa 0.25` |
+| `attribution` | Atribuição de receita por canal de aquisição | — |
+| `churn` | Análise de churn e ações de retenção | `--churn 0.08` |
+| `dashboard` | Dashboard de receita consolidado | — |
+| `cac` | Calcular CAC por canal | `--spend 500 --clientes 2` |
+| `report` | Relatório executivo de receita semanal/mensal | — |
 
 ## DATA SOURCES
 

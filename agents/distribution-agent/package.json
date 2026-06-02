@@ -1,0 +1,20 @@
+{
+  "name": "distribution-agent",
+  "version": "1.0.0",
+  "description": "Distribution Agent — publicação multicanal, calendário editorial e estratégia de distribuição",
+  "main": "distribution_agent.js",
+  "scripts": {
+    "start": "node distribution_agent.js",
+    "calendar": "node distribution_agent.js --mode calendar",
+    "schedule": "node distribution_agent.js --mode schedule",
+    "repurpose": "node distribution_agent.js --mode repurpose",
+    "instagram": "node distribution_agent.js --mode instagram",
+    "youtube": "node distribution_agent.js --mode youtube",
+    "linkedin": "node distribution_agent.js --mode linkedin",
+    "whatsapp": "node distribution_agent.js --mode whatsapp",
+    "multicanal": "node distribution_agent.js --mode multicanal",
+    "analytics": "node distribution_agent.js --mode analytics",
+    "report": "node distribution_agent.js --mode report"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "remotion-video-agent",
+  "version": "1.0.0",
+  "description": "Remotion Video Agent — geração de vídeos motion design com React + Remotion para SmartOps IA",
+  "main": "remotion_video_agent.js",
+  "scripts": {
+    "start": "node remotion_video_agent.js",
+    "generate": "node remotion_video_agent.js --mode generate",
+    "lean-waste": "node remotion_video_agent.js --mode lean-waste",
+    "automation": "node remotion_video_agent.js --mode automation",
+    "case-study": "node remotion_video_agent.js --mode case-study",
+    "authority": "node remotion_video_agent.js --mode authority",
+    "ad": "node remotion_video_agent.js --mode ad",
+    "six-sigma": "node remotion_video_agent.js --mode six-sigma",
+    "local-business": "node remotion_video_agent.js --mode local-business",
+    "render": "node remotion_video_agent.js --mode render",
+    "pipeline": "node remotion_video_agent.js --mode pipeline",
+    "audit": "node remotion_video_agent.js --mode audit",
+    "template": "node remotion_video_agent.js --mode template",
+    "report": "node remotion_video_agent.js --mode report"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.0.0"
+  }
+}

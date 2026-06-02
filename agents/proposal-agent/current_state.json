@@ -1,0 +1,14 @@
+{
+  "agent": "proposal-agent",
+  "cargo": "Diretor de Propostas",
+  "kpi_mestre": "Proposta→Contrato ≥ 60%",
+  "meta_diaria": "Proposta enviada em < 2h após reunião",
+  "last_run": null,
+  "status": "never_run",
+  "last_kpis": {},
+  "last_alerts": [],
+  "last_summary": "",
+  "last_next_action": "",
+  "sessions_today": 0,
+  "created_at": "2026-05-30"
+}

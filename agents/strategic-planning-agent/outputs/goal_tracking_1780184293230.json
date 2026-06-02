@@ -1,0 +1,45 @@
+{
+  "tracking": {
+    "goals": {
+      "leads": {
+        "actual": 0,
+        "target": 40,
+        "pct": 0,
+        "s": "OFF_TRACK",
+        "e": "🔴"
+      },
+      "meetings": {
+        "actual": 0,
+        "target": 15,
+        "pct": 0,
+        "s": "OFF_TRACK",
+        "e": "🔴"
+      },
+      "revenue": {
+        "actual": 0,
+        "target": 15000,
+        "pct": 0,
+        "s": "OFF_TRACK",
+        "e": "🔴"
+      },
+      "clients": {
+        "actual": 0,
+        "target": 3,
+        "pct": 0,
+        "s": "OFF_TRACK",
+        "e": "🔴"
+      }
+    },
+    "timePct": 1,
+    "daysElapsed": 1,
+    "totalDays": 90,
+    "conversionRate": 0,
+    "closingRate": 0,
+    "revenuePerClient": 0,
+    "overallHealth": "CRÍTICO",
+    "atRisk": 0,
+    "offTrack": 4
+  },
+  "analysis": "# 🎯 GOAL TRACKING AGENT — SmartOps IA\n\n---\n\n## GOAL_TRACKING_PERIOD:\n**Dia 1 de 90 | 1% do período concluído**\n\n---\n\n## OVERALL_HEALTH: 🔴 CRÍTICO\n\n> Nenhuma meta possui qualquer progresso registrado. O período está em fase de arranque, o que é contextualmente normal para o Dia 1 — **mas a ausência de qualquer atividade inicial é um sinal de alerta real**, pois os primeiros dias definem o ritmo e a cadência do trimestre inteiro.\n\n---\n\n## POR META:\n\n**LEADS: 🔴 0/40 (0%) — OFF TRACK**\nNenhum lead gerado até o momento. Para um ciclo de 90 dias, a meta diária implícita é **~0,44 leads/dia**. Aparentemente simples, mas exige consistência absoluta desde o primeiro dia. O risco aqui não é o número em si — é o **hábito de prospecção não ter sido iniciado**.\n\n---\n\n**MEETINGS: 🔴 0/15 (0%) — OFF TRACK**\nZero reuniões agendadas. Com 0 leads no topo do funil, este resultado é consequência direta. A meta implícita é **~1 reunião a cada 6 dias**. O problema ainda não é a reunião — é a ausência de inputs que a gerariam.\n\n---\n\n**CLIENTS: 🔴 0/3 (0%) — OFF TRACK**\nNenhum cliente fechado. Meta de 3 clientes em 90 dias exige ciclo médio de **~30 dias por fechamento**, o que significa que o **primeiro processo de venda deveria ter sido iniciado hoje ou antes**. Cada dia de atraso no início comprime o ciclo disponível.\n\n---\n\n**REVENUE: 🔴 R$0 / R$15.000 (0%) — OFF TRACK**\nReceita zerada, consistente com pipeline vazio. Ticket médio implícito: **R$5.000/cliente**. Com 0 clientes e 0 pipeline ativo, a projeção atual aponta para **R$0 ao final do período** sem intervenção imediata.\n\n---\n\n## CONVERSION_ANALYSIS:\n\n```\nLEADS → REUNIÕES → CLIENTES → RECEITA\n\n  0       →      0      →     0      →   R$0\n  —            (0%)          (0%)         —\n```\n\n> **Maior perda:** No topo do funil. Não existe conversão a analisar porque não existe **entrada de leads**. O funil está seco antes de começar. Não é um problema de pitch, proposta ou fechamento — é um problema de **volume de prospecção = zero**.\n\n---\n\n## ROOT_CAUSE_OF_GAPS:\n\n| Gap | Causa Raiz Identificada |\n|-----|------------------------|\n| 0 Leads | Atividade de prospecção não iniciada ou não registrada no sistema |\n| 0 Reuniões | Consequência direta do gap de leads — funil vazio no topo |\n| 0 Clientes | Sem pipeline ativo, fechamento é matematicamente impossível |\n| R$0 Receita | Cascata dos gaps anteriores — sem entrada, sem saída |\n| Contexto vazio | Ausência de informações externas impede diagnóstico mais preciso |\n\n> ⚠️ **Hipótese principal:** O Dia 1 pode representar atraso no setup operacional (configuração de ferramentas, definição de ICP, alinhamento de equipe). Se for esse o caso, **a janela de correção ainda está aberta — mas fecha rápido.**\n\n---\n\n## CORRECTIVE_ACTIONS:\n\n**1. Gap de Leads →**\nDefinir e executar hoje uma lista de **20 prospects qualificados** para abordagem imediata. Não prospectar em massa — prospectar com precisão cirúrgica. Canal prioritário: LinkedIn + indicações diretas.\n\n**2. Gap de Reuniões →**\nPara cada lead contactado, **ter um CTA claro e uma agenda de valor** (não \"posso te apresentar a empresa?\" — mas \"tenho 3 insights sobre [dor específica] que valem 20 minutos\"). Meta: 1 reunião agendada nos próximos 3 dias.\n\n**3. Gap de Clientes →**\nMapear se existem **conversas anteriores paradas** (leads frios, propostas não respondidas, contatos antigos). Reativar esses contatos antes de abrir novos ciclos — são os de menor custo e menor tempo de fechamento.\n\n**4. Gap de Receita →**\nNão existe ação direta de receita sem pipeline. A ação é **acelerar os passos 1, 2 e 3** — receita é um lagging indicator aqui.\n\n**5. Contexto vazio →**\nRegistrar no sistema: ICP definido, canais de aquisição ativos, responsável por prospecção, histórico de taxas de conversão anteriores (se houver). Sem dados, o agente opera às cegas.\n\n---\n\n## WHAT_TO_DOUBLE_DOWN:\n\n```\n🔥 PROSPECÇÃO ATIVA — agora e todos os dias\n```\n\n- **Volume qualificado de contatos novos por dia** é a única alavanca que move todas as outras métricas\n- Definir **bloco diário fixo de prospecção** (ex: 9h–11h, intocável)\n- Priorizar canais onde o ICP já está ativo — não testar canais novos agora\n- Registrar cada contato, cada resposta, cada reunião — o que não é medido, não é gerenciado\n\n---\n\n## WHAT_TO_CUT:\n\n```\n🚫 PARAR AGORA — não é o momento para isso\n```\n\n| O que cortar | Por quê |\n|---|---|\n| Reuniões internas sem decisão | Consomem tempo de prospecção sem gerar pipeline |\n| Criação de conteúdo como estratégia principal | Resultado de longo prazo — não resolve o trimestre |\n| Pesquisa e benchmarking excessivo | Paralisia por análise. O mercado se descobre prospectando |\n| Múltiplos canais simultâneos | Dispersão = baixa conversão. Escolher 1 ou 2 e dominar |\n\n---\n\n## FORECAST:\n\n> Com **dados atuais (pipeline = zero, atividade = zero):**\n\n```\nPROJEÇÃO ATUAL:\n  Leads:    0  / 40   →  0%\n  Reuniões: 0  / 15   →  0%\n  Clientes: 0  / 3    →  0%\n  Receita:  R$0/R$15k →  0%\n```\n\n> **Se ação corretiva for iniciada hoje:**\n> Assumindo taxa de conversão conservadora (Lead→Reunião: 25% | Reunião→Cliente: 20%):\n> Para fechar 3 clientes → necessário **60 leads e 15 reuniões** — exatamente a meta.\n> Isso exige **~0,67 leads qualificados por dia** a partir de hoje.\n> **Ainda é recuperável — mas a janela de conforto fecha em ~15 dias.**\n\n---\n\n## ALERT_FOR_CEO:\n\n---\n\n> **⚠️ Breno, o trimestre começa agora — não amanhã.**\n> O pipeline está zerado e cada dia sem prospecção ativa comprime o ciclo de fechamento disponível para os 3 clientes que você precisa. **Uma ação hoje vale por três na semana que vem** — defina sua lista de 20 prospects e faça o primeiro contato antes do fim do dia.\n\n---\n\n*— SmartOps IA | Goal Tracking Agent | Atualizado: Dia 1/90*",
+  "created_at": "2026-05-30T23:38:13.228Z"
+}

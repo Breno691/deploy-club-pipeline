@@ -1,0 +1,14 @@
+{
+  "agent": "design-agent",
+  "cargo": "Diretor de Design",
+  "kpi_mestre": "Criativos aprovados < 24h",
+  "cadencia": "Por demanda",
+  "last_run": null,
+  "status": "never_run",
+  "last_kpis": {},
+  "last_alerts": [],
+  "last_summary": "",
+  "last_next_action": "",
+  "sessions_today": 0,
+  "created_at": "2026-05-30"
+}

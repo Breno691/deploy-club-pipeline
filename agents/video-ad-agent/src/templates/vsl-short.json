@@ -1,0 +1,26 @@
+{
+  "template_id": "vsl-short",
+  "name": "VSL Curta — 2 a 3 minutos",
+  "placement": "landing_page",
+  "objective": "conversion",
+  "framework": "VSL",
+  "duration": 150,
+  "structure": [
+    { "section": "Hook",            "duration": 10, "objective": "stop_scroll",       "instruction": "Frase que identifica o espectador e cria tensão imediata." },
+    { "section": "Dor",             "duration": 20, "objective": "qualify_viewer",    "instruction": "Problema que a empresa vive. Reconhecível. Específico." },
+    { "section": "Custo Invisível", "duration": 20, "objective": "quantify_problem",  "instruction": "Quanto custa esse problema por mês. Número lógico e calculável." },
+    { "section": "Causa Raiz",      "duration": 20, "objective": "deliver_insight",   "instruction": "Por que acontece. A causa que ninguém vê." },
+    { "section": "Método SmartOps", "duration": 25, "objective": "present_solution",  "instruction": "Lean + IA aplicados. 4 fases. Em 4 semanas." },
+    { "section": "ROI Esperado",    "duration": 20, "objective": "justify_decision",  "instruction": "O que muda. Redução de custo esperada. Sem garantia mágica." },
+    { "section": "Oferta",          "duration": 15, "objective": "present_offer",     "instruction": "Diagnóstico gratuito. O que inclui. Como funciona." },
+    { "section": "CTA",             "duration": 20, "objective": "convert",           "instruction": "Agende agora. Por que agora. Baixo risco. Facilidade." }
+  ],
+  "objections_to_handle": [
+    "Está caro",
+    "Deixa eu pensar",
+    "Já tentamos isso antes",
+    "Não tenho tempo agora",
+    "Quero ver resultado primeiro"
+  ],
+  "visual_style": "talking-head-or-motion"
+}

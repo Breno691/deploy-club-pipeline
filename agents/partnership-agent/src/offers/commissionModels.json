@@ -1,0 +1,29 @@
+{
+  "models": {
+    "A": { "id": "A", "label": "Parceiro Padrão",    "percentage": 10, "type": "one_time",   "description": "10% do primeiro contrato fechado" },
+    "B": { "id": "B", "label": "Parceiro Ativo",     "percentage": 15, "type": "one_time",   "description": "15% do primeiro contrato — para parceiros com histórico de indicações" },
+    "C": { "id": "C", "label": "Parceiro Estratégico","percentage": 20, "type": "one_time",  "description": "20% do primeiro contrato — parceiros de alto volume" },
+    "D": { "id": "D", "label": "Recorrente 3 meses", "percentage": 10, "type": "recurring",  "description": "10% por 3 meses em contratos mensais" },
+    "E": { "id": "E", "label": "Fee + Comissão",     "percentage": 10, "type": "hybrid",     "description": "Fee fixo por indicação qualificada + 10% por fechamento" },
+    "F": { "id": "F", "label": "Co-marketing",       "percentage": 0,  "type": "exchange",   "description": "Troca de audiência sem comissão financeira" }
+  },
+  "assignment": {
+    "accountants":             "B",
+    "software-houses":         "B",
+    "erp-consultants":         "B",
+    "financial-consultants":   "B",
+    "business-lawyers":        "A",
+    "marketing-agencies":      "F",
+    "hr-consultants":          "A",
+    "commercial-associations": "F",
+    "sebrae-entities":         "F",
+    "coworkings":              "A"
+  },
+  "rules": [
+    "Comissão paga somente após cliente efetuar pagamento",
+    "Comissão registrada por lead e contrato",
+    "Comissão não se aplica a renovação, salvo acordo específico",
+    "Upgrade de modelo mediante 3 indicações fechadas",
+    "Parceiro estratégico pode negociar modelo D em contratos recorrentes"
+  ]
+}

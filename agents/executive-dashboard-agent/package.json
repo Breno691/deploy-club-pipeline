@@ -1,0 +1,17 @@
+{
+  "name": "executive-dashboard-agent",
+  "version": "1.0.0",
+  "description": "Executive Dashboard Agent — consolida 9 dashboards, KPIs, alertas executivos",
+  "main": "executive_dashboard_agent.js",
+  "scripts": {
+    "start": "node executive_dashboard_agent.js",
+    "daily": "node executive_dashboard_agent.js --mode daily",
+    "weekly": "node executive_dashboard_agent.js --mode weekly",
+    "monthly": "node executive_dashboard_agent.js --mode monthly",
+    "squad": "node executive_dashboard_agent.js --mode squad",
+    "kpis": "node executive_dashboard_agent.js --mode kpis",
+    "alert": "node executive_dashboard_agent.js --mode alert",
+    "report": "node executive_dashboard_agent.js --mode report"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

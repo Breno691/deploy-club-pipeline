@@ -1,0 +1,14 @@
+{
+  "agent": "cro-agent",
+  "cargo": "Diretor de Conversão",
+  "kpi_mestre": "CTR ≥ 3.5%",
+  "meta_diaria": "Status dos testes A/B ativos + variante vencedora identificada",
+  "last_run": null,
+  "status": "never_run",
+  "last_kpis": {},
+  "last_alerts": [],
+  "last_summary": "",
+  "last_next_action": "",
+  "sessions_today": 0,
+  "created_at": "2026-05-30"
+}

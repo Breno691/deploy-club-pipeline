@@ -1,92 +1,139 @@
+// render_ad.js — SmartOps IA | Renderiza todos os formatos via Playwright
+// square(1080×1080) + portrait(1080×1350) + story(1080×1920) + carousel slides
 require('dotenv').config();
 const { chromium } = require('playwright');
-const fs = require('fs');
+const fs   = require('fs');
 const path = require('path');
 
-const args = process.argv.slice(2);
-const taskArg = args.indexOf('--task');
-const dateArg = args.indexOf('--date');
-
-const taskName = taskArg !== -1 ? args[taskArg + 1] : process.env.TASK_NAME || 'smartops_demo';
-const taskDate = dateArg !== -1 ? args[dateArg + 1] : new Date().toISOString().split('T')[0];
+const args     = process.argv.slice(2);
+const taskName = args[args.indexOf('--task') + 1] || process.env.TASK_NAME || 'smartops_demo';
+const taskDate = args[args.indexOf('--date') + 1] || new Date().toISOString().split('T')[0];
 const outputDir = path.join('outputs', `${taskName}_${taskDate}`);
-const adsDir = path.join(outputDir, 'ads');
+const adsDir    = path.join(outputDir, 'ads');
+const logPath   = path.join(outputDir, 'logs', 'ad_creative_designer.log');
 
-function appendLog(message) {
-  const logFile = path.join(outputDir, 'logs', 'ad_creative_designer.log');
-  fs.appendFileSync(logFile, `[${new Date().toISOString()}] ${message}\n`);
+function log(msg) {
+  const line = `[${new Date().toISOString()}] ${msg}`;
+  console.log(line);
+  try { fs.appendFileSync(logPath, line + '\n'); } catch {}
 }
 
-async function renderAd() {
-  console.log(`\nAd Creative Designer — Playwright Renderer`);
+// ─── Render one HTML file to PNG ──────────────────────────────────────────────
+async function renderHTML(browser, htmlPath, outPng, width, height) {
+  if (!fs.existsSync(htmlPath)) { log(`  ⚠ skip (not found): ${htmlPath}`); return false; }
+
+  const page = await browser.newPage();
+  await page.setViewportSize({ width, height });
+
+  // Use file:// — Playwright allows external requests from file pages
+  await page.goto(`file://${path.resolve(htmlPath)}`);
+
+  // Wait for Google Fonts: networkidle + extra wait for font rendering
+  try { await page.waitForLoadState('networkidle', { timeout: 8000 }); } catch {}
+  await page.waitForTimeout(2500); // ensure Bebas Neue renders correctly
+
+  // Force exact dimensions
+  await page.addStyleTag({
+    content: `html,body{margin:0!important;padding:0!important;width:${width}px!important;height:${height}px!important;display:block!important;overflow:hidden!important;}`
+  });
+  await page.waitForTimeout(200);
+
+  await page.screenshot({
+    path: outPng,
+    clip: { x: 0, y: 0, width, height },
+    type: 'png',
+  });
+
+  await page.close();
+
+  const sizeKB = (fs.statSync(outPng).size / 1024).toFixed(0);
+  log(`  ✓ ${path.basename(outPng)} — ${width}×${height} — ${sizeKB} KB`);
+  return true;
+}
+
+// ─── Main ─────────────────────────────────────────────────────────────────────
+async function main() {
+  log('render_ad started');
+  console.log(`\nAd Renderer — SmartOps IA`);
   console.log(`Task: ${taskName} | Date: ${taskDate}\n`);
-
-  appendLog('Ad render started');
-
-  const htmlPath = path.resolve(path.join(adsDir, 'ad.html'));
-
-  if (!fs.existsSync(htmlPath)) {
-    const errMsg = `ad.html not found at: ${htmlPath}\nEnsure the Ad Creative Designer skill generated the HTML file first.`;
-    console.error(errMsg);
-    appendLog(`FAILED: ${errMsg}`);
-    process.exit(1);
-  }
-
-  const outputPath = path.join(adsDir, 'instagram_ad.png');
 
   const launchOptions = { headless: true };
   if (process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH) {
     launchOptions.executablePath = process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH;
   }
+
   const browser = await chromium.launch(launchOptions);
-  const page = await browser.newPage();
 
-  await page.setViewportSize({ width: 1080, height: 1080 });
+  // ── 1. Square 1080×1080 (primary — pipeline validation uses this) ──────────
+  const squareOk = await renderHTML(
+    browser,
+    path.join(adsDir, 'ad.html'),
+    path.join(adsDir, 'instagram_ad.png'),
+    1080, 1080
+  );
+  if (!squareOk) {
+    await browser.close();
+    log('FAILED: ad.html not found');
+    console.error('ad.html not found — run build_ad_html.js first');
+    process.exit(1);
+  }
 
-  appendLog(`Loading: ${htmlPath}`);
-  await page.goto(`file://${htmlPath}`);
+  // ── 2. Portrait 1080×1350 (Instagram recommended 2025) ───────────────────
+  await renderHTML(
+    browser,
+    path.join(adsDir, 'portrait.html'),
+    path.join(adsDir, 'instagram_portrait.png'),
+    1080, 1350
+  );
 
-  // Force body to fill viewport exactly — prevents flex-centering offset issues
-  await page.addStyleTag({
-    content: `
-      html, body {
-        margin: 0 !important; padding: 0 !important;
-        width: 1080px !important; height: 1080px !important;
-        display: block !important; overflow: hidden !important;
-      }
-      .ad-container {
-        position: absolute !important;
-        top: 0 !important; left: 0 !important;
-      }
-    `
-  });
+  // ── 3. Story 1080×1920 ────────────────────────────────────────────────────
+  await renderHTML(
+    browser,
+    path.join(adsDir, 'story.html'),
+    path.join(adsDir, 'instagram_story.png'),
+    1080, 1920
+  );
 
-  await page.waitForLoadState('networkidle');
-  await page.waitForTimeout(2000);
-
-  // Screenshot the .ad-container element directly
-  const adEl = await page.$('.ad-container');
-  if (adEl) {
-    await adEl.screenshot({ path: outputPath, type: 'png' });
-  } else {
-    await page.screenshot({
-      path: outputPath,
-      clip: { x: 0, y: 0, width: 1080, height: 1080 },
-      type: 'png',
-    });
+  // ── 4. Carousel slides ────────────────────────────────────────────────────
+  const carouselDir = path.join(adsDir, 'carousel');
+  if (fs.existsSync(carouselDir)) {
+    for (let i = 1; i <= 5; i++) {
+      const slideHtml = path.join(carouselDir, `slide_${i}.html`);
+      const slidePng  = path.join(carouselDir, `slide_${i}.png`);
+      await renderHTML(browser, slideHtml, slidePng, 1080, 1080);
+    }
   }
 
   await browser.close();
 
-  const stats = fs.statSync(outputPath);
-  console.log(`Screenshot saved: ${outputPath}`);
-  console.log(`File size: ${(stats.size / 1024).toFixed(1)} KB`);
-  appendLog(`instagram_ad.png saved (${(stats.size / 1024).toFixed(1)} KB) ✓`);
-  appendLog('Ad render complete ✓');
+  // ── Summary ───────────────────────────────────────────────────────────────
+  const outputs = [
+    { file: 'instagram_ad.png',       label: 'Square (1080×1080)' },
+    { file: 'instagram_portrait.png', label: 'Portrait (1080×1350)' },
+    { file: 'instagram_story.png',    label: 'Story (1080×1920)' },
+  ];
+
+  console.log('\n── Generated ────────────────────────');
+  outputs.forEach(({ file, label }) => {
+    const p = path.join(adsDir, file);
+    if (fs.existsSync(p)) {
+      const kb = (fs.statSync(p).size / 1024).toFixed(0);
+      console.log(`  ✓ ${label} — ${kb} KB`);
+    }
+  });
+
+  const carouselPngs = fs.existsSync(carouselDir)
+    ? fs.readdirSync(carouselDir).filter(f => f.endsWith('.png'))
+    : [];
+  if (carouselPngs.length) {
+    console.log(`  ✓ Carousel — ${carouselPngs.length} slides`);
+  }
+
+  log('render_ad complete ✓');
 }
 
-renderAd().catch(async (err) => {
+main().catch(err => {
+  log(`FAILED: ${err.message}`);
   console.error('Render error:', err.message);
-  appendLog(`FAILED: ${err.message}`);
   process.exit(1);
 });

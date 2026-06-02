@@ -1,0 +1,101 @@
+{
+  "version": "1.0.0",
+  "pillars": [
+    {
+      "id": "autoridade_tecnica",
+      "name": "Autoridade Técnica",
+      "objective": "Mostrar domínio em Lean, Six Sigma, IA e automação",
+      "frequency": "2x/semana",
+      "formats": ["carrossel", "post educativo", "thread"],
+      "topics": [
+        "Os 8 desperdícios Lean e como identificar",
+        "O que é DMAIC e como aplicar",
+        "Como automatizar com n8n",
+        "Como IA ajuda a reduzir retrabalho",
+        "O que é um gargalo de processo",
+        "Como calcular ROI de uma melhoria"
+      ],
+      "hook_style": "técnico mas acessível",
+      "cta": "Salve para referência"
+    },
+    {
+      "id": "autoridade_pratica",
+      "name": "Autoridade Prática",
+      "objective": "Mostrar que Breno resolve problemas reais, não teoria",
+      "frequency": "2x/semana",
+      "formats": ["bastidor", "antes/depois", "diagnóstico", "reel"],
+      "topics": [
+        "Bastidor de um diagnóstico",
+        "O que encontrei nessa empresa",
+        "Processo que reduzimos de X para Y",
+        "Erro comum que vejo todo mês",
+        "O que mudou após 4 semanas"
+      ],
+      "hook_style": "surpresa / revelação",
+      "cta": "Agende um diagnóstico gratuito"
+    },
+    {
+      "id": "autoridade_local",
+      "name": "Autoridade Local — BH/MG",
+      "objective": "Ser referência para PMEs de BH e região",
+      "frequency": "1x/semana",
+      "formats": ["post local", "case local", "visita empresa"],
+      "topics": [
+        "Empresas de BH que melhoraram processos",
+        "Setores mais comuns na RMBH com retrabalho",
+        "Por que atender presencialmente faz diferença",
+        "Consultoria para indústria local de BH"
+      ],
+      "hook_style": "local e específico",
+      "cta": "Atendo presencialmente em BH e região"
+    },
+    {
+      "id": "educacao_mercado",
+      "name": "Educação de Mercado",
+      "objective": "Criar demanda ao ensinar sobre problemas que o público não sabia que tinha",
+      "frequency": "2x/semana",
+      "formats": ["carrossel", "vídeo curto", "post"],
+      "topics": [
+        "Você sabe quanto custa o retrabalho na sua empresa?",
+        "O que é custo invisível de processo",
+        "Por que crescer com processo ruim vira caos",
+        "Quando o WhatsApp virou sistema de gestão",
+        "O que automação com IA pode fazer pela sua PME"
+      ],
+      "hook_style": "pergunta + revelação",
+      "cta": "Salve e reflita"
+    },
+    {
+      "id": "prova_social",
+      "name": "Prova Social",
+      "objective": "Reduzir desconfiança e aumentar percepção de resultado",
+      "frequency": "1x/semana",
+      "formats": ["case", "depoimento", "resultado", "palestra"],
+      "topics": [
+        "Resultado de cliente com números reais",
+        "Feedback de projeto finalizado",
+        "Palestra ou evento realizado",
+        "Parceria ou reconhecimento",
+        "Black Belt — o que representa"
+      ],
+      "hook_style": "número + resultado",
+      "cta": "Quer esse resultado na sua empresa?"
+    },
+    {
+      "id": "humanizacao",
+      "name": "Humanização",
+      "objective": "Criar conexão emocional e mostrar quem é Breno",
+      "frequency": "1x/semana",
+      "formats": ["post pessoal", "bastidor", "crença", "visão"],
+      "topics": [
+        "Por que escolhi Lean",
+        "O que aprendi construindo a SmartOps",
+        "Minha rotina de consultor",
+        "O que me motiva a trabalhar com PMEs",
+        "Uma visão que tenho sobre automação no Brasil"
+      ],
+      "hook_style": "pessoal e reflexivo",
+      "cta": "Comente o que você pensa"
+    }
+  ]
+}

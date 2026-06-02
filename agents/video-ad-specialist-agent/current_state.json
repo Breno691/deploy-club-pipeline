@@ -1,0 +1,14 @@
+{
+  "agent": "video-ad-specialist-agent",
+  "cargo": "Diretor de Vídeo",
+  "kpi_mestre": "VTR + CPV + conversão de vídeo",
+  "cadencia": "Por demanda",
+  "last_run": null,
+  "status": "never_run",
+  "last_kpis": {},
+  "last_alerts": [],
+  "last_summary": "",
+  "last_next_action": "",
+  "sessions_today": 0,
+  "created_at": "2026-05-30"
+}

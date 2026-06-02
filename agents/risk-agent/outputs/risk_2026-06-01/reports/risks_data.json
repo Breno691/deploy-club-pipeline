@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Pipeline vazio",
+    "category": "FINANCEIRO",
+    "probability": 10,
+    "impact": 10,
+    "risk": {
+      "prob_min": 7,
+      "impact_min": 7,
+      "label": "Crítico",
+      "action": "Agir agora — < 24h",
+      "color": "vermelho",
+      "score": 100
+    }
+  },
+  {
+    "name": "Sem clientes ativos",
+    "category": "FINANCEIRO",
+    "probability": 10,
+    "impact": 9,
+    "risk": {
+      "prob_min": 7,
+      "impact_min": 7,
+      "label": "Crítico",
+      "action": "Agir agora — < 24h",
+      "color": "vermelho",
+      "score": 90
+    }
+  },
+  {
+    "name": "Receita abaixo de 50% da meta",
+    "category": "FINANCEIRO",
+    "probability": 8,
+    "impact": 9,
+    "risk": {
+      "prob_min": 7,
+      "impact_min": 7,
+      "label": "Crítico",
+      "action": "Agir agora — < 24h",
+      "color": "vermelho",
+      "score": 72
+    }
+  }
+]

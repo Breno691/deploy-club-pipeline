@@ -1,0 +1,14 @@
+{
+  "agent": "sales-intelligence-agent",
+  "cargo": "Diretor Comercial",
+  "kpi_mestre": "Reunião→Proposta ≥ 40%",
+  "meta_diaria": "Dossiê de cada reunião do dia pronto até 1h antes",
+  "last_run": null,
+  "status": "never_run",
+  "last_kpis": {},
+  "last_alerts": [],
+  "last_summary": "",
+  "last_next_action": "",
+  "sessions_today": 0,
+  "created_at": "2026-05-30"
+}

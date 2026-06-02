@@ -1,0 +1,18 @@
+{
+  "name": "website-analytics-agent",
+  "version": "1.0.0",
+  "description": "Website Analytics Agent — sessões, eventos, páginas, funil, GA4",
+  "main": "website_analytics_agent.js",
+  "scripts": {
+    "start": "node website_analytics_agent.js",
+    "sessions": "node website_analytics_agent.js --mode sessions",
+    "events": "node website_analytics_agent.js --mode events",
+    "pages": "node website_analytics_agent.js --mode pages",
+    "funnel": "node website_analytics_agent.js --mode funnel",
+    "conversion": "node website_analytics_agent.js --mode conversion",
+    "seo-traffic": "node website_analytics_agent.js --mode seo-traffic",
+    "report": "node website_analytics_agent.js --mode report",
+    "heatmap": "node website_analytics_agent.js --mode heatmap"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

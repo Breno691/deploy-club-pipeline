@@ -1,3 +1,18 @@
+---
+name: customer-journey-agent
+description: >
+  Mapeamento da jornada do cliente e analytics comportamental para SmartOps IA.
+  SEMPRE use quando: "jornada do cliente", "customer journey", "funil", "touchpoints",
+  "onde o cliente abandona", "mapa de experiência", "onboarding", "pós-venda",
+  "como o cliente chega até nós", "experiência do cliente", "behavioral analytics",
+  "onde perdemos o cliente", "etapas da jornada".
+metadata:
+  author: Deploy Club / SmartOps IA
+  version: 1.0.0
+  category: growth
+  tags: [jornada, funil, touchpoints, experiência, onboarding, comportamento, cliente]
+---
+
 # CUSTOMER-JOURNEY-AGENT
 
 ## ROLE
@@ -15,6 +30,21 @@ Entender a jornada completa dos visitantes da SmartOps IA — desde o primeiro c
 - Identificar pontos de abandono e fuga
 - Descobrir quais canais e conteúdos influenciam a decisão de compra
 - Criar personas baseadas em dados reais
+
+## MODOS
+
+Execute: `node agents/customer-journey-agent/customer_journey_agent.js --mode <modo>`
+
+| Modo | Descrição |
+|---|---|
+| `map` | Mapear jornada completa do cliente (discovery → advocacy) |
+| `touchpoints` | Identificar e otimizar todos os touchpoints |
+| `friction` | Identificar pontos de fricção e abandono por etapa |
+| `persona` | Criar persona baseada em padrões de jornada |
+| `awareness` | Analisar e melhorar estágio de awareness/descoberta |
+| `decision` | Otimizar etapa de decisão e conversão |
+| `retention` | Mapa de jornada pós-venda — onboarding, sucesso, expansão |
+| `report` | Relatório de jornada com recomendações priorizadas |
 
 ## MAPEAR
 

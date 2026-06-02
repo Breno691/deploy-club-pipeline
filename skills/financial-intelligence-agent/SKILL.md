@@ -1,3 +1,18 @@
+---
+name: financial-intelligence-agent
+description: >
+  Inteligência financeira para consultoria de serviços SmartOps IA.
+  SEMPRE use quando: "financeiro", "receita", "margem", "lucro", "fluxo de caixa",
+  "faturamento", "inadimplência", "custo", "despesa", "ROI financeiro", "DRE",
+  "quanto ganhamos esse mês", "relatório financeiro", "saúde financeira",
+  "projeção de receita", "custo por projeto", "resultado financeiro".
+metadata:
+  author: Deploy Club / SmartOps IA
+  version: 1.0.0
+  category: finance
+  tags: [financeiro, receita, margem, lucro, fluxo-caixa, roi, dre, custo]
+---
+
 # FINANCIAL-INTELLIGENCE-AGENT
 
 ## ROLE
@@ -15,6 +30,26 @@ Garantir que a SmartOps IA opere com visibilidade financeira total — saber exa
 - Prever fluxo de caixa com base no pipeline
 - Identificar onde cortar custo sem afetar qualidade
 - Identificar onde investir para maior retorno
+
+## MODOS
+
+Execute: `node agents/financial-intelligence-agent/financial_agent.js --mode <modo>`
+
+| Modo | Descrição | Argumento |
+|---|---|---|
+| `dashboard` | Dashboard financeiro consolidado | — |
+| `margin` | Calcular margem por projeto ou serviço | `--receita 15000 --custo-entrega 3000 --despesas 600` |
+| `forecast` | Previsão de caixa 30/60/90 dias | `--pipeline 50000 --taxa 0.25 --recorrencia 5500` |
+| `roi` | ROI de projeto ou investimento | — |
+| `risk` | Análise de risco financeiro e alertas | `--receita 0 --caixa 5000` |
+| `report` | Relatório financeiro semanal/mensal | — |
+| `pnl` | Demonstrativo de P&L — receita vs custo vs margem | `--receita 15000 --custo-entrega 3000` |
+| `cac` | Calcular CAC por canal de aquisição | `--spend 500 --clientes 1` |
+| `ltv` | Calcular LTV por segmento | `--ticket 12000 --meses 2.5` |
+| `pricing` | Análise de precificação por serviço | `--service quick-win` |
+| `scenario` | Análise de cenário "e se" | `--action "fechar 2 clientes no mês"` |
+| `ceo-brief` | Brief financeiro executivo para CEO | — |
+| `services` | Análise de rentabilidade por tipo de serviço | — |
 
 ## DATA SOURCES
 

@@ -1,0 +1,30 @@
+{
+  "whatsapp": {
+    "default": "Olá, {nome}. Tudo bem?\n\nEstou estruturando uma rede de parceiros da SmartOps IA, minha consultoria de melhoria contínua, Lean, automação e IA para PMEs.\n\nA ideia é simples: quando algum cliente seu tiver problema com retrabalho, processos manuais, custo alto ou falta de produtividade, você pode me indicar.\n\nEu faço o diagnóstico e, se virar contrato, você recebe uma comissão pela indicação.\n\nAcredito que pode ser uma forma de gerar mais valor para seus clientes e ainda criar uma nova fonte de receita para você.\n\nFaz sentido conversarmos 15 minutos esta semana?",
+    "accountant": "Olá, {nome}. Tudo bem?\n\nMuitos clientes de contabilidade têm margem apertada não apenas por imposto ou preço, mas por desperdício operacional.\n\nQuando você perceber clientes com custo alto, retrabalho ou operação bagunçada, eu posso fazer um diagnóstico para encontrar onde eles estão perdendo dinheiro.\n\nSe fechar contrato, você recebe comissão pela indicação.\n\nFaz sentido conversarmos rapidamente esta semana?",
+    "agency": "Olá, {nome}. Tudo bem?\n\nVocê gera leads para seus clientes. Mas às vezes o problema deles não é só vender mais — é atender melhor, organizar processos e parar de perder oportunidades por operação desorganizada.\n\nA SmartOps pode ajudar seus clientes a melhorar processos e automatizar tarefas. Isso aumenta o resultado do seu próprio marketing.\n\nFaz sentido conversarmos?",
+    "software_house": "Olá, {nome}. Tudo bem?\n\nVocê cria sistemas, mas muitos clientes precisam mapear e otimizar processos antes de desenvolver software. Esse gap atrasa projetos e gera retrabalho.\n\nA SmartOps faz esse mapeamento e otimização — podemos ser complementares.\n\nFaz sentido conversarmos 15 minutos esta semana?"
+  },
+  "linkedin": {
+    "default": "Olá, {nome}. Vi que você atua com {area} e atende empresas locais.\n\nEu trabalho com melhoria contínua, Lean e automação com IA para ajudar PMEs a reduzir desperdícios e organizar processos.\n\nTenho buscado parceiros que já se relacionam com empresários e possam indicar clientes que estejam sofrendo com retrabalho, processos manuais ou baixa produtividade.\n\nEm troca, ofereço comissão por contrato fechado e possibilidade de ações conjuntas.\n\nFaz sentido conversarmos?"
+  },
+  "referral_signals": [
+    "cliente reclamando de custo alto",
+    "empresa crescendo de forma desorganizada",
+    "muitos atrasos na operação",
+    "equipe sobrecarregada",
+    "excesso de retrabalho",
+    "processos em planilhas",
+    "empresário apagando incêndio",
+    "falta de indicadores de desempenho",
+    "cliente querendo automatizar tarefas",
+    "problemas de produtividade",
+    "dificuldade para escalar",
+    "margem caindo sem explicação"
+  ],
+  "follow_up": {
+    "day3":  "Olá, {nome}! Só passando para confirmar se recebeu minha mensagem anterior sobre a parceria. Faz sentido marcarmos 15 minutos esta semana?",
+    "day7":  "Olá, {nome}. Entendo que a agenda está corrida. Deixo aqui meu contato para quando fizer sentido conversar sobre parceria. Qualquer cliente com problema operacional, pode me indicar!",
+    "day30": "Olá, {nome}! Como vai? Estou ampliando a rede de parceiros da SmartOps. Se tiver algum cliente com desafios de processo ou custo, adoraria conversar. Comissão garantida por indicação fechada."
+  }
+}

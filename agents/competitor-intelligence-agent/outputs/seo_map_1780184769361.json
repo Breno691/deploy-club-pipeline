@@ -1,0 +1,126 @@
+{
+  "keywords": [
+    {
+      "kw": "consultoria lean belo horizonte",
+      "intent": "commercial",
+      "difficulty": "baixa",
+      "priority": "alta",
+      "opp": {
+        "score": 100,
+        "difficulty": "baixa",
+        "intent": "commercial",
+        "priority": "alta"
+      }
+    },
+    {
+      "kw": "consultoria six sigma BH",
+      "intent": "commercial",
+      "difficulty": "baixa",
+      "priority": "alta",
+      "opp": {
+        "score": 100,
+        "difficulty": "baixa",
+        "intent": "commercial",
+        "priority": "alta"
+      }
+    },
+    {
+      "kw": "consultoria processos belo horizonte",
+      "intent": "commercial",
+      "difficulty": "baixa",
+      "priority": "alta",
+      "opp": {
+        "score": 80,
+        "difficulty": "baixa",
+        "intent": "commercial",
+        "priority": "alta"
+      }
+    },
+    {
+      "kw": "automação de processos belo horizonte",
+      "intent": "commercial",
+      "difficulty": "baixa",
+      "priority": "alta",
+      "opp": {
+        "score": 75,
+        "difficulty": "baixa",
+        "intent": "commercial",
+        "priority": "alta"
+      }
+    },
+    {
+      "kw": "automação n8n para empresas",
+      "intent": "informational",
+      "difficulty": "baixa",
+      "priority": "alta",
+      "opp": {
+        "score": 70,
+        "difficulty": "baixa",
+        "intent": "informational",
+        "priority": "alta"
+      }
+    },
+    {
+      "kw": "lean manufacturing PME",
+      "intent": "informational",
+      "difficulty": "média",
+      "priority": "média",
+      "opp": {
+        "score": 60,
+        "difficulty": "média",
+        "intent": "informational",
+        "priority": "média"
+      }
+    },
+    {
+      "kw": "melhoria contínua para pequenas empresas",
+      "intent": "informational",
+      "difficulty": "média",
+      "priority": "alta",
+      "opp": {
+        "score": 50,
+        "difficulty": "média",
+        "intent": "informational",
+        "priority": "alta"
+      }
+    },
+    {
+      "kw": "como reduzir retrabalho na empresa",
+      "intent": "informational",
+      "difficulty": "baixa",
+      "priority": "alta",
+      "opp": {
+        "score": 50,
+        "difficulty": "baixa",
+        "intent": "informational",
+        "priority": "alta"
+      }
+    },
+    {
+      "kw": "IA para pequenas empresas Brasil",
+      "intent": "informational",
+      "difficulty": "baixa",
+      "priority": "alta",
+      "opp": {
+        "score": 50,
+        "difficulty": "média",
+        "intent": "informational",
+        "priority": "média"
+      }
+    },
+    {
+      "kw": "diagnóstico operacional gratuito",
+      "intent": "commercial",
+      "difficulty": "baixa",
+      "priority": "alta",
+      "opp": {
+        "score": 40,
+        "difficulty": "baixa",
+        "intent": "commercial",
+        "priority": "alta"
+      }
+    }
+  ],
+  "analysis": "# 🗺️ SEO_OPPORTUNITY_MAP — SmartOps IA\n### Consultoria de Melhoria Contínua & Automação com IA | BH e Região\n\n---\n\n## ⚡ TOP_5_QUICK_WINS\n> *Keywords com maior oportunidade e menor esforço — foco imediato*\n\n| # | Keyword | Score | Dificuldade | Ação |\n|---|---------|-------|-------------|------|\n| 🥇 | `consultoria lean belo horizonte` | 100 | 🟢 Baixa | Página de serviço dedicada |\n| 🥈 | `consultoria six sigma BH` | 100 | 🟢 Baixa | Página de serviço dedicada |\n| 🥉 | `consultoria processos belo horizonte` | 80 | 🟢 Baixa | Página pilar (hub) |\n| 4️⃣ | `automação de processos belo horizonte` | 75 | 🟢 Baixa | Página de serviço dedicada |\n| 5️⃣ | `como reduzir retrabalho na empresa` | 50 | 🟢 Baixa | Blog post + CTA para diagnóstico |\n\n> **💡 Insight:** As 4 primeiras keywords têm score máximo ou quase máximo com dificuldade baixa — são oportunidades raras. Ranquear nelas nos próximos 60–90 dias é altamente viável para uma empresa em fase inicial.\n\n---\n\n## 📄 PAGES_TO_CREATE_NOW\n> *Criar e publicar esta semana (prioridade máxima)*\n\n### 1. 🏠 Página Pilar — Hub Central\n**URL sugerida:** `/consultoria-de-processos-belo-horizonte`\n**H1:** \"Consultoria de Processos em Belo Horizonte | SmartOps IA\"\n**Objetivo:** Ranquear para `consultoria processos belo horizonte` e funcionar como hub que liga todas as páginas de serviço\n**Elementos obrigatórios:**\n- Menção a BH/MG no título, meta description e 3x no body\n- Links internos para páginas Lean, Six Sigma e Automação\n- CTA para diagnóstico gratuito\n- Schema Markup: `LocalBusiness` + `Service`\n\n---\n\n### 2. 🔧 Página de Serviço — Lean\n**URL sugerida:** `/consultoria-lean-belo-horizonte`\n**H1:** \"Consultoria Lean em Belo Horizonte para PMEs | SmartOps IA\"\n**Objetivo:** Ranquear para `consultoria lean belo horizonte`\n**Elementos obrigatórios:**\n- O que é Lean (explicação simples para PME)\n- Como a SmartOps aplica Lean\n- Cases ou resultados esperados\n- FAQ com perguntas reais\n- CTA: \"Solicite seu Diagnóstico Gratuito\"\n\n---\n\n### 3. 🔧 Página de Serviço — Six Sigma\n**URL sugerida:** `/consultoria-six-sigma-bh`\n**H1:** \"Consultoria Six Sigma em BH | Reduza Erros e Retrabalho | SmartOps IA\"\n**Objetivo:** Ranquear para `consultoria six sigma BH`\n**Elementos obrigatórios:**\n- Diferença entre Lean e Six Sigma (interno link)\n- Metodologia DMAIC simplificada\n- Benefícios tangíveis para PMEs\n- CTA para diagnóstico\n\n---\n\n### 4. 🤖 Página de Serviço — Automação\n**URL sugerida:** `/automacao-de-processos-belo-horizonte`\n**H1:** \"Automação de Processos em Belo Horizonte com IA | SmartOps IA\"\n**Objetivo:** Ranquear para `automação de processos belo horizonte` + `automação n8n para empresas`\n**Elementos obrigatórios:**\n- Mencionar n8n como ferramenta (long tail capture)\n- Exemplos práticos de automação para PMEs\n- Antes x Depois visual\n- CTA forte\n\n---\n\n### 5. 🎁 Página de Conversão — Diagnóstico Gratuito\n**URL sugerida:** `/diagnostico-operacional-gratuito`\n**H1:** \"Diagnóstico Operacional Gratuito para sua Empresa em BH\"\n**Objetivo:** Ranquear para `diagnóstico operacional gratuito` + capturar leads diretos\n**Elementos obrigatórios:**\n- Formulário simples (nome, empresa, WhatsApp, maior dor operacional)\n- O que o diagnóstico inclui (lista clara)\n- Urgência/escassez: \"X vagas por mês\"\n- Prova social assim que disponível\n\n---\n\n## ✍️ BLOG_POSTS_TO_CREATE\n> *Publicar ao longo deste mês — 1 post por semana*\n\n### 📅 Semana 1\n**Post:** \"Como reduzir o retrabalho na sua empresa em 5 passos\"\n- **Keyword-alvo:** `como reduzir retrabalho na empresa`\n- **Score/Dificuldade:** 50 / 🟢 Baixa\n- **Formato:** Lista prática + infográfico simples\n- **CTA final:** Link para `/diagnostico-operacional-gratuito`\n- **Tamanho:** 1.200–1.500 palavras\n\n---\n\n### 📅 Semana 2\n**Post:** \"Lean Manufacturing para PMEs: como aplicar sem precisar de grande estrutura\"\n- **Keyword-alvo:** `lean manufacturing PME`\n- **Score/Dificuldade:** 60 / 🟡 Média\n- **Formato:** Guia educativo com exemplos reais\n- **CTA final:** Link para `/consultoria-lean-belo-horizonte`\n- **Tamanho:** 1.500–2.000 palavras\n\n---\n\n### 📅 Semana 3\n**Post:** \"Melhoria contínua para pequenas empresas: por onde começar?\"\n- **Keyword-alvo:** `melhoria contínua para pequenas empresas`\n- **Score/Dificuldade:** 50 / 🟡 Média\n- **Formato:** Guia iniciante + checklist para download (geração de lead)\n- **CTA final:** Link para diagnóstico + checklist gratuito\n- **Tamanho:** 1.200–1.800 palavras\n\n---\n\n### 📅 Semana 4\n**Post:** \"IA para pequenas empresas no Brasil: o que já é possível fazer hoje\"\n- **Keyword-alvo:** `IA para pequenas empresas Brasil`\n- **Score/Dificuldade:** 50 / 🟡 Média\n- **Formato:** Artigo de tendência + casos de uso práticos com n8n e outras ferramentas\n- **CTA final:** Link para `/automacao-de-processos-belo-horizonte`\n- **Tamanho:** 1.500–2.000 palavras\n\n---\n\n## 🕸️ TOPIC_CLUSTERS\n> *Estrutura de autoridade temática — conteúdo organizado para dominar nichos*\n\n```\n📦 CLUSTER 1: MELHORIA CONTÍNUA\n─────────────────────────────────────────────────────\n🏛️  PILLAR PAGE: /consultoria-de-processos-belo-horizonte\n    │\n    ├── 📄 /consultoria-lean-belo-horizonte\n    ├── 📄 /consultoria-six-sigma-bh\n    ├── ✍️  Blog: \"Como reduzir retrabalho na empresa\"\n    ├── ✍️  Blog: \"Lean Manufacturing para PMEs\"\n    └── ✍️  Blog: \"Melhoria contínua para pequenas empresas\"\n\n\n📦 CLUSTER 2: AUTOMAÇÃO & IA\n─────────────────────────────────────────────────────\n🏛️  PILLAR PAGE: /automacao-de-processos-belo-horizonte\n    │\n    ├── 📄 (futura) /automacao-n8n-para-empresas\n    ├── ✍️  Blog: \"IA para pequenas empresas no Brasil\"\n    ├── ✍️  Blog: (futuro) \"O que é n8n e como usar na sua empresa\"\n    └── ✍️  Blog: (futuro) \"Automação de WhatsApp para PMEs\"\n\n\n📦 CLUSTER 3: CONVERSÃO LOCAL\n─────────────────────────────────────────────────────\n🏛️  PILLAR PAGE: /diagnostico-operacional-gratuito\n    │\n    ├── 📄 Todas as páginas de serviço (CTA → diagnóstico)\n    └── ✍️  Todos os blog posts (CTA final → diagnóstico)\n```\n\n> **💡 Estratégia:** Cada cluster reforça a autoridade do Pillar Page. O Google entende que a SmartOps IA é especialista nos temas, aumentando o ranqueamento de todas as páginas do cluster.\n\n---\n\n## 📍 LOCAL_SEO_PRIORITY\n> *Ações específicas para dominar BH — fazer nos próximos 7 dias*\n\n### 🔴 URGENTE — Esta Semana\n\n**1. Google Business Profile (GBP)**\n- [ ] Criar/reclamar e verificar o perfil\n- [ ] Nome exato: `SmartOps IA - Consultoria de Processos e Automação`\n- [ ] Categoria primária: `Consultoria de gestão empresarial`\n- [ ] Categorias secundárias: `Consultoria de TI`, `Serviço de automação`\n- [ ] Adicionar: endereço BH (mesmo que home office, use endereço real ou \"atende em BH e região\")\n- [ ] Publicar primeiras 5 fotos (logo, equipe, escritório ou mockups profissionais)\n- [ ] Adicionar todos os serviços com descrição e keywords\n\n**2. NAP Consistency (Nome, Endereço, Telefone)**\n- [ ] Definir NAP padrão e usar IGUAL em todo lugar:\n  ```\n  SmartOps IA\n  Belo Horizonte, MG\n  (31) XXXX-XXXX\n  ```\n- [ ] Aplicar no site (footer e página de contato)\n- [ ] Aplicar no GBP\n- [ ] Aplicar em todas as redes sociais\n\n**3. Schema Markup LocalBusiness**\n```json\n{\n  \"@type\": \"LocalBusiness\",\n  \"name\": \"SmartOps IA\",\n  \"description\": \"Consultoria de melhoria contínua e automação com IA para PMEs\",\n  \"address\": {\n    \"@type\": \"PostalAddress\",\n    \"addressLocality\": \"Belo Horizonte\",\n    \"addressRegion\": \"MG\",\n    \"addressCountry\": \"BR\"\n  },\n  \"areaServed\": [\"Belo Horizonte\", \"Grande BH\", \"Minas Gerais\"],\n  \"url\": \"https://smartopsIA.com.br\"\n}\n```\n\n### 🟡 Próximas 2 Semanas\n\n**4. Citations Locais (Diretórios)**\nCadastrar em:\n- [ ] Apontador\n- [ ] Yelp Brasil\n- [ ] Foursquare\n- [ ] LinkedIn Company Page (com endereço BH)\n- [ ] ACMINAS / FIEMG (associações empresariais de BH)\n\n**5. Sinais Locais no Conteúdo**\n- [ ] Mencionar bairros de BH nas páginas de serviço (ex: \"atendemos empresas no Savassi, Centro, Santa Efigênia...\")\n- [ ] Criar seção \"Clientes em BH\" assim que tiver casos\n- [ ] Solicitar primeiras avaliações no GBP (amigos, conhecidos, primeiros clientes)\n\n---\n\n## 📊 ESTIMATED_IMPACT\n> *Projeção de impacto em leads se as páginas ranquearem nas posições 1–5*\n\n### Premissas do Cálculo\n> CTR estimado posição 1–3: 25–35% | Conversão site→lead: 3–5% | Volume de buscas estimado por keyword/mês\n\n| Página / Post | Keyword Principal | Buscas/mês (est.) | Visitas Esperadas (P1-3) | Leads Estimados/mês |\n|---------------|-------------------|-------------------|--------------------------|---------------------|\n| `/consultoria-lean-belo-horizonte` | consultoria lean BH | 80–150 | 25–50 | **1–3 leads** |\n| `/consultoria-six-sigma-bh` | consultoria six sigma BH | 80–150 | 25–50 | **1–3 leads** |\n| `/consultoria-processos-belo-horizonte` | consultoria processos BH | 150–300 | 45–90 | **2–5 leads** |\n| `/automacao-de-processos-belo-horizonte` | automação processos BH | 100–200 | 30–65 | **1–3 leads** |\n| `/diagnostico-operacional-gratuito` | diagnóstico operacional gratuito | 50–100 | 15–35 | **2–4 leads** |\n| Blog: retrabalho | como reduzir retrabalho | 200–400 | 60–130 | **2–5 leads** |\n| Blog: lean PME | lean manufacturing PME | 150–300 | 45–90 | **1–3 leads** |\n\n---\n\n### 🎯 IMPACTO CONSOLIDADO\n\n```\n┌─────────────────────────────────────────────────┐\n│           PROJEÇÃO — 90 DIAS PÓS-PUBLICAÇÃO      │\n├─────────────────────────────────────────────────┤\n│  Visitas Orgânicas/mês:       300 – 600          │\n│  Leads Gerados/mês:            10 – 26           │\n│  Taxa de Fechamento (est. 20%): 2 – 5 clientes   │\n│  Ticket médio consultoria PME: R$ 3.000–8.000    │\n│                                                  │\n│  💰 RECEITA POTENCIAL/MÊS:   R$ 6.000 – 40.000  │\n└─────────────────────────────────────────────────┘\n```\n\n> **⚠️ Nota:** Esses números são conservadores para fase inicial. Com Google Business Profile ativo e primeiras avaliações, o impacto local pode ser 2x maior nos primeiros 90 dias.\n\n---\n\n## 🚀 PLANO DE EXECUÇÃO — RESUMO\n\n```\nSEMANA 1:  Criar GBP + 5 páginas prioritárias + Schema markup\nSEMANA 2:  Publicar Post 1 (retrabalho) + Citations locais\nSEMANA 3:  Publicar Post 2 (Lean PME) + Solicitar 5 avaliações no GBP\nSEMANA 4:  Publicar Post 3 (melhoria contínua) + Revisar performance\nMÊS 2:     Post 4 (IA para PMEs) + Iniciar link building local\nMÊS 3:     Expandir clusters + criar páginas de casos e resultados\n```\n\n---\n\n*🤖 Gerado por SEO Competitor Agent — SmartOps IA | Atualizar análise em 60 dias*",
+  "created_at": "2026-05-30T23:46:09.359Z"
+}

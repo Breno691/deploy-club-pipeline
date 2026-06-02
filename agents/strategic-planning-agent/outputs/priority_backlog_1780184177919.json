@@ -1,0 +1,136 @@
+{
+  "scored": [
+    {
+      "name": "Proposal Agent ativo",
+      "pillar": "vendas",
+      "impact": 8,
+      "confidence": 9,
+      "ease": 9,
+      "ice_score": 648,
+      "classification": {
+        "level": "EXECUTAR AGORA",
+        "priority": 1,
+        "color": "🔴"
+      }
+    },
+    {
+      "name": "Tracking do site (GA4 + Meta Pixel)",
+      "pillar": "site",
+      "impact": 9,
+      "confidence": 9,
+      "ease": 7,
+      "ice_score": 567,
+      "classification": {
+        "level": "EXECUTAR AGORA",
+        "priority": 1,
+        "color": "🔴"
+      }
+    },
+    {
+      "name": "Case Study Agent ativo",
+      "pillar": "autoridade",
+      "impact": 7,
+      "confidence": 9,
+      "ease": 9,
+      "ice_score": 567,
+      "classification": {
+        "level": "EXECUTAR AGORA",
+        "priority": 1,
+        "color": "🔴"
+      }
+    },
+    {
+      "name": "CRM de leads (básico)",
+      "pillar": "vendas",
+      "impact": 8,
+      "confidence": 8,
+      "ease": 7,
+      "ice_score": 448,
+      "classification": {
+        "level": "EXECUTAR AGORA",
+        "priority": 1,
+        "color": "🔴"
+      }
+    },
+    {
+      "name": "Dashboard executivo diário",
+      "pillar": "financeiro",
+      "impact": 7,
+      "confidence": 8,
+      "ease": 8,
+      "ice_score": 448,
+      "classification": {
+        "level": "EXECUTAR AGORA",
+        "priority": 1,
+        "color": "🔴"
+      }
+    },
+    {
+      "name": "Lead Scoring Agent ativo",
+      "pillar": "aquisicao",
+      "impact": 7,
+      "confidence": 8,
+      "ease": 8,
+      "ice_score": 448,
+      "classification": {
+        "level": "EXECUTAR AGORA",
+        "priority": 1,
+        "color": "🔴"
+      }
+    },
+    {
+      "name": "Página /diagnostico-gratuito",
+      "pillar": "site",
+      "impact": 9,
+      "confidence": 8,
+      "ease": 6,
+      "ice_score": 432,
+      "classification": {
+        "level": "EXECUTAR AGORA",
+        "priority": 1,
+        "color": "🔴"
+      }
+    },
+    {
+      "name": "Conteúdo Instagram 3x/semana",
+      "pillar": "autoridade",
+      "impact": 7,
+      "confidence": 8,
+      "ease": 7,
+      "ice_score": 392,
+      "classification": {
+        "level": "PRÓXIMO SPRINT",
+        "priority": 2,
+        "color": "🟠"
+      }
+    },
+    {
+      "name": "Google Ads local para diagnóstico gratuito",
+      "pillar": "ads",
+      "impact": 9,
+      "confidence": 7,
+      "ease": 6,
+      "ice_score": 378,
+      "classification": {
+        "level": "PRÓXIMO SPRINT",
+        "priority": 2,
+        "color": "🟠"
+      }
+    },
+    {
+      "name": "Prospecção local (LinkedIn + indicação)",
+      "pillar": "aquisicao",
+      "impact": 8,
+      "confidence": 7,
+      "ease": 6,
+      "ice_score": 336,
+      "classification": {
+        "level": "PRÓXIMO SPRINT",
+        "priority": 2,
+        "color": "🟠"
+      }
+    }
+  ],
+  "analysis": "# 🧠 Priority Agent — SmartOps IA\n## Análise Estratégica do Backlog | Stage: Early\n\n---\n\n## BACKLOG_STATUS\n\nO backlog está **bem calibrado para o momento**, com concentração saudável em vendas, autoridade e aquisição — os três pilares que geram receita em fase inicial. Dos 10 itens rankeados, **7 estão em zona crítica (🔴)**, o que indica urgência real, não inflação de prioridades.\n\n> ⚠️ **Sinal de alerta:** 7 itens críticos simultâneos é operacionalmente inviável para um time early-stage. Sem cortes e sequenciamento, o risco de execução parcial em tudo — e resultado em nada — é alto.\n\n**Saúde do backlog: 7/10** — bom direcionamento estratégico, mas exige disciplina de foco para não dispersar execução.\n\n---\n\n## TOP_3_NOW\n\n```\n┌─────────────────────────────────────────────────────────┐\n│  #1 — Proposal Agent Ativo          ICE: 648  🔴        │\n│  #2 — Tracking do Site (GA4+Pixel)  ICE: 567  🔴        │\n│  #3 — Case Study Agent Ativo        ICE: 567  🔴        │\n└─────────────────────────────────────────────────────────┘\n```\n\n### #1 · Proposal Agent Ativo — ICE 648\n**Por quê agora:**\nSem proposta estruturada e ágil, leads quentes esfriam. Em early-stage, velocidade de fechamento é vantagem competitiva direta. Um Proposal Agent reduz o ciclo de vendas, padroniza o discurso de valor e permite escalar sem depender de esforço manual a cada oportunidade. É o item com maior impacto direto em **receita imediata**.\n\n> 💡 Desbloqueador: ativa o CRM de leads (item #4) com mais eficiência — sem proposta automatizada, o CRM vira apenas uma planilha cara.\n\n---\n\n### #2 · Tracking do Site — GA4 + Meta Pixel — ICE 567\n**Por quê agora:**\nTudo o que vier depois — Google Ads, Instagram, página /diagnostico-gratuito — só terá ROI mensurável **se o tracking estiver ativo antes**. Rodar qualquer campanha sem pixel e GA4 configurados é queimar budget às cegas. Este item é **infraestrutura de decisão**, não feature opcional.\n\n> 💡 Desbloqueador: habilita os itens #9 (Google Ads) e #8 (Instagram) com dados reais de conversão.\n\n---\n\n### #3 · Case Study Agent Ativo — ICE 567\n**Por quê agora:**\nEm B2B early-stage, prova social supera qualquer copy. O Case Study Agent transforma resultados de clientes em ativos de vendas reutilizáveis — alimenta proposta, site, Instagram e qualificação de leads com evidências reais. Sem ele, o Proposal Agent entrega argumento; com ele, entrega **prova**.\n\n> 💡 Sinergia direta com #1: Case Study + Proposal Agent = ciclo de fechamento com autoridade e velocidade.\n\n---\n\n## WHAT_TO_CUT\n\n```\n❌ CORTAR / MOVER PARA BACKLOG FUTURO\n```\n\n| Iniciativa | Motivo | Decisão |\n|---|---|---|\n| **Conteúdo Instagram 3x/semana** | Consome tempo de execução alto, retorno lento para receita. Sem tracking (#2) ativo, não há dados. Sem case studies (#3), o conteúdo é genérico | ⏸️ Mover para sprint 3+ |\n| **Google Ads local** | Zero valor sem GA4 + Pixel ativos. Rodar ads antes do tracking é desperdício de budget | 🔒 Bloqueado até #2 estar live |\n| **Prospecção local LinkedIn + indicação** | Ação manual e não escalável. Válida, mas só após Proposal Agent ativo — senão prospectar sem fechar rápido é esforço perdido | ⏸️ Mover para sprint 2 |\n\n> 🎯 **Regra aplicada:** se o item depende de outro que ainda não está live, ele vai para backlog até o desbloqueador estar pronto.\n\n---\n\n## STRATEGIC_FOCUS\n\n```\n┌──────────────────────────────────────────────────────────┐\n│  80% DO TEMPO AQUI:                                      │\n│                                                          │\n│  🔧 Ativar infraestrutura de fechamento                  │\n│     Proposal Agent + Case Study Agent                    │\n│                                                          │\n│  📊 Ativar infraestrutura de dados                       │\n│     GA4 + Meta Pixel                                     │\n│                                                          │\n│  🧲 Um canal de entrada qualificado                      │\n│     Página /diagnostico-gratuito                         │\n└──────────────────────────────────────────────────────────┘\n```\n\n**A lógica do foco:**\n\n```\nLead entra → /diagnostico-gratuito\n       ↓\nLead Scoring Agent qualifica\n       ↓\nCase Study Agent gera prova social\n       ↓\nProposal Agent fecha com velocidade\n       ↓\nCRM registra e acompanha\n       ↓\nDashboard mostra o que está funcionando\n```\n\nEste é o **funil mínimo viável** da SmartOps. Tudo fora deste fluxo é distração neste momento.\n\n---\n\n## ANTI_PATTERNS\n\n```\n⛔ ARMADILHAS IDENTIFICADAS PARA ESTE BACKLOG\n```\n\n**1. · Ativar tudo ao mesmo tempo**\nTer 7 itens críticos não significa executar 7 itens em paralelo. Time early-stage que tenta fazer tudo faz tudo pela metade. Escolha 3, termine, avance.\n\n**2. · Rodar ads antes do tracking**\nGoogle Ads sem GA4 + Pixel é o equivalente a investir em tráfego e não saber o que converte. O tracking vem **antes** de qualquer investimento em mídia paga — sem exceção.\n\n**3. · Construir CRM antes do Proposal Agent**\nCRM sem processo de vendas maduro vira burocracia. Primeiro automatize o fechamento, depois organize o pipeline. Sequência importa.\n\n**4. · Usar Instagram como prioridade de aquisição em early-stage**\nConteúdo orgânico tem horizonte de 3-6 meses para tração. Em early-stage com necessidade de receita, é recurso mal alocado como prioridade. Use como suporte, não como motor principal.\n\n**5. · Confundir atividade com progresso**\nPostar 3x/semana, prospectar no LinkedIn e configurar CRM podem parecer produtividade. Mas se o Proposal Agent não estiver ativo, nenhum lead fecha com velocidade. Foque no que move o número de receita.\n\n---\n\n## WEEKLY_SPRINT\n\n```\n📅 SPRINT DA SEMANA — Execução em 5 dias\n```\n\n| Dia | Foco | Entregável |\n|---|---|---|\n| **Seg** | Tracking | GA4 configurado + eventos básicos ativos no site |\n| **Ter** | Tracking | Meta Pixel instalado + evento de conversão testado |\n| **Qua** | Proposal Agent | Estrutura do agente mapeada + template de proposta definido |\n| **Qui** | Proposal Agent | Agente ativo com primeiro fluxo testado internamente |\n| **Sex** | Case Study Agent | 1 case coletado, estruturado e formatado como ativo de vendas |\n\n> ✅ **Critério de sucesso da semana:**\n> - Tracking 100% funcional antes de qualquer gasto em mídia\n> - Proposal Agent enviando proposta real para ao menos 1 lead\n> - 1 case study publicável pronto para uso em vendas\n\n---\n\n## DEPENDENCIES\n\n```\n🔗 MAPA DE DEPENDÊNCIAS — O QUE DESBLOQUEARIA MAIS\n```\n\n```\n[GA4 + Meta Pixel] ──────────────► desbloqueia Google Ads (#9)\n      │                             desbloqueia mensuração do Instagram (#8)\n      └──────────────────────────► valida ROI de /diagnostico-gratuito (#7)\n\n[Proposal Agent] ────────────────► desbloqueia CRM com processo real (#4)\n      │                             desbloqueia Lead Scoring com critério (#6)\n      └──────────────────────────► potencializa prospecção LinkedIn (#10)\n\n[Case Study Agent] ──────────────► alimenta Proposal Agent com prova social\n      │                             alimenta Instagram com conteúdo de valor (#8)\n      └──────────────────────────► aumenta conversão do /diagnostico-gratuito (#7)\n\n[/diagnostico-gratuito] ─────────► ativa funil completo de entrada qualificada\n      └──────────────────────────► dá insumo real para Lead Scoring (#6)\n```\n\n**O maior desbloqueador único:**\n> 🏆 **Tracking do site (GA4 + Meta Pixel)** — é a fundação de dados que valida e habilita tudo que envolve tráfego, conversão e investimento. É rápido de implementar e libera 3 outros itens críticos.\n\n**O maior gerador de receita imediata:**\n> 🏆 **Proposal Agent + Case Study Agent rodando juntos** — são o combo de fechamento. Sozinhos, cada um entrega valor. Juntos, formam o motor de conversão da operação.\n\n---\n\n```\n┌─────────────────────────────────────────────────────────┐\n│  RESUMO EXECUTIVO                                        │\n│                                                          │\n│  Faça 3 coisas bem feitas essa semana.                  │\n│  Não 10 coisas pela metade.                              │\n│                                                          │\n│  1. Tracking live → dados reais                         │\n│  2. Proposal Agent ativo → fechamento rápido            │\n│  3. Case Study pronto → prova social em vendas          │\n│                                                          │\n│  O resto é backlog. Por enquanto.                        │\n└─────────────────────────────────────────────────────────┘\n```\n\n*— Priority Agent · SmartOps IA*",
+  "created_at": "2026-05-30T23:36:17.918Z"
+}

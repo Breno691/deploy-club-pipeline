@@ -1,0 +1,18 @@
+{
+  "name": "revenue-agent",
+  "version": "1.0.0",
+  "description": "Revenue Agent — MRR, CAC, LTV, forecast, atribuição e churn",
+  "main": "revenue_agent.js",
+  "scripts": {
+    "start": "node revenue_agent.js",
+    "mrr": "node revenue_agent.js --mode mrr",
+    "cac": "node revenue_agent.js --mode cac",
+    "ltv": "node revenue_agent.js --mode ltv",
+    "forecast": "node revenue_agent.js --mode forecast",
+    "attribution": "node revenue_agent.js --mode attribution",
+    "churn": "node revenue_agent.js --mode churn",
+    "report": "node revenue_agent.js --mode report",
+    "dashboard": "node revenue_agent.js --mode dashboard"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

@@ -1,0 +1,66 @@
+{
+  "name": "marketing-research-agent",
+  "version": "2.0.0-enterprise",
+  "description": "Marketing Research Agent Enterprise — Área de Market Intelligence da SmartOps IA",
+  "main": "marketing_research_agent.js",
+  "scripts": {
+    "start": "node marketing_research_agent.js",
+
+    "trends":           "node marketing_research_agent.js --mode trends",
+    "competitors":      "node marketing_research_agent.js --mode competitors",
+    "audience":         "node marketing_research_agent.js --mode audience",
+    "audience-deep":    "node marketing_research_agent.js --mode audience-deep",
+    "validate":         "node marketing_research_agent.js --mode validate",
+    "brief":            "node marketing_research_agent.js --mode brief",
+    "deep":             "node marketing_research_agent.js --mode deep",
+    "content-ideas":    "node marketing_research_agent.js --mode content-ideas",
+    "competitive-intel":"node marketing_research_agent.js --mode competitive-intel",
+
+    "voice":            "node marketing_research_agent.js --mode voice",
+    "gaps":             "node marketing_research_agent.js --mode gaps",
+    "trend-eval":       "node marketing_research_agent.js --mode trend-eval",
+
+    "content-brief":    "node marketing_research_agent.js --mode content-brief",
+    "ads-brief":        "node marketing_research_agent.js --mode ads-brief",
+    "seo-brief":        "node marketing_research_agent.js --mode seo-brief",
+    "sales-brief":      "node marketing_research_agent.js --mode sales-brief",
+    "lean-brief":       "node marketing_research_agent.js --mode lean-brief",
+
+    "sector":           "node marketing_research_agent.js --mode sector",
+    "local":            "node marketing_research_agent.js --mode local",
+    "pricing":          "node marketing_research_agent.js --mode pricing",
+    "channels":         "node marketing_research_agent.js --mode channels",
+    "message":          "node marketing_research_agent.js --mode message",
+    "offer":            "node marketing_research_agent.js --mode offer",
+
+    "radar":            "node marketing_research_agent.js --mode radar",
+    "weekly":           "node marketing_research_agent.js --mode weekly",
+    "alert":            "node marketing_research_agent.js --mode alert",
+    "hypothesis":       "node marketing_research_agent.js --mode hypothesis",
+
+    "niche-compare":    "node marketing_research_agent.js --mode niche-compare",
+    "intel-map":        "node marketing_research_agent.js --mode intel-map",
+    "proposal-intel":   "node marketing_research_agent.js --mode proposal-intel",
+    "diagnostic":       "node marketing_research_agent.js --mode diagnostic",
+    "sprint":           "node marketing_research_agent.js --mode sprint",
+    "executive":        "node marketing_research_agent.js --mode executive",
+
+    "decision-memo":    "node marketing_research_agent.js --mode decision-memo",
+    "market-map":       "node marketing_research_agent.js --mode market-map",
+    "test-plan":        "node marketing_research_agent.js --mode test-plan",
+    "handoff-brief":    "node marketing_research_agent.js --mode handoff-brief",
+
+    "client-report":          "node marketing_research_agent.js --mode client-report",
+    "niche-study":            "node marketing_research_agent.js --mode niche-study",
+    "research-to-offer":      "node marketing_research_agent.js --mode research-to-offer",
+    "research-to-content":    "node marketing_research_agent.js --mode research-to-content",
+    "research-to-campaign":   "node marketing_research_agent.js --mode research-to-campaign",
+    "dashboard":              "node marketing_research_agent.js --mode dashboard",
+    "html-report":            "node marketing_research_agent.js --mode html-report"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@tavily/core": "^0.5.2",
+    "dotenv": "^16.0.0"
+  }
+}

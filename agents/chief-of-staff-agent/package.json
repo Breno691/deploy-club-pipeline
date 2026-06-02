@@ -1,0 +1,14 @@
+{
+  "name": "chief-of-staff-agent",
+  "version": "1.0.0",
+  "description": "Chief of Staff Agent — Transforma estratégia em execução semanal",
+  "main": "chief_of_staff_agent.js",
+  "scripts": {
+    "start": "node chief_of_staff_agent.js",
+    "plan": "node chief_of_staff_agent.js --mode weekly-plan",
+    "tasks": "node chief_of_staff_agent.js --mode task-breakdown",
+    "standup": "node chief_of_staff_agent.js --mode standup",
+    "review": "node chief_of_staff_agent.js --mode review"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

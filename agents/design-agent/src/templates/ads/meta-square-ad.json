@@ -1,0 +1,47 @@
+{
+  "template_id": "meta-square-ad",
+  "name": "Meta Ads Square — 1080x1080",
+  "format": "meta_ad_square",
+  "dimensions": { "width": 1080, "height": 1080 },
+  "objective": "lead_generation",
+  "variants": [
+    {
+      "variant": "pain",
+      "name": "Dor Direta",
+      "structure": {
+        "headline": "Dor financeira direta — máximo 7 palavras",
+        "visual": "número grande + contraste alto",
+        "cta": "baixo risco — diagnóstico gratuito"
+      }
+    },
+    {
+      "variant": "roi",
+      "name": "ROI / Número",
+      "structure": {
+        "headline": "Percentual ou valor monetário grande",
+        "visual": "número dominante + cor destaque",
+        "cta": "quero esse resultado"
+      }
+    },
+    {
+      "variant": "local",
+      "name": "Local BH",
+      "structure": {
+        "headline": "Menção a BH/MG + dor local",
+        "visual": "presença de localização geográfica",
+        "cta": "consultoria presencial BH"
+      }
+    }
+  ],
+  "performance_criteria": {
+    "min_ctr":      1.5,
+    "target_ctr":   2.5,
+    "max_cpa":      60,
+    "target_cpa":   40
+  },
+  "testing": {
+    "default_test": "headline",
+    "test_duration": "72h",
+    "min_impressions": 500
+  }
+}

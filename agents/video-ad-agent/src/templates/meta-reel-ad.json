@@ -1,0 +1,20 @@
+{
+  "template_id": "meta-reel-ad",
+  "name": "Meta Reel Ad — Dor + Solução",
+  "platform": "instagram_reel",
+  "objective": "lead_generation",
+  "framework": "PAS",
+  "duration": 60,
+  "structure": [
+    { "scene": 1, "type": "hook",     "duration": 3,  "purpose": "stop_scroll",    "instruction": "Frase de impacto com dor principal. Sem introdução." },
+    { "scene": 2, "type": "problem",  "duration": 8,  "purpose": "build_tension",  "instruction": "Expandir a dor. Descrever o problema com detalhes reconhecíveis." },
+    { "scene": 3, "type": "agitate",  "duration": 8,  "purpose": "quantify_pain",  "instruction": "Custo invisível. Número concreto. Consequência de não resolver." },
+    { "scene": 4, "type": "insight",  "duration": 8,  "purpose": "deliver_insight","instruction": "A causa raiz que ninguém vê. Reveal que surpreende." },
+    { "scene": 5, "type": "solution", "duration": 15, "purpose": "present_method", "instruction": "Método SmartOps Lean + IA em 3 passos simples." },
+    { "scene": 6, "type": "proof",    "duration": 8,  "purpose": "build_trust",    "instruction": "Resultado lógico/esperado. Sem inventar case." },
+    { "scene": 7, "type": "cta",      "duration": 10, "purpose": "convert",        "instruction": "CTA direto. Oferta clara. Urgência ou facilidade." }
+  ],
+  "visual_style": "premium-dark-consulting",
+  "caption_style": "educational-with-cta",
+  "thumbnail_approach": "dor-financeira"
+}

@@ -1,0 +1,76 @@
+{
+  "name": "SALES_LEAD_QUALIFICATION_WHATSAPP",
+  "description": "Bot n8n para qualificar leads via WhatsApp com IA, registrar no CRM e notificar sobre leads quentes",
+  "trigger": "webhook_whatsapp",
+  "version": "1.0.0",
+  "created": "2026-05-30",
+  "credentials_needed": ["whatsapp_api", "anthropic_api", "supabase_smartops", "telegram_bot"],
+  "flow_stages": [
+    {
+      "stage": 1,
+      "name": "Receber Mensagem WhatsApp",
+      "type": "n8n-nodes-base.webhook",
+      "purpose": "Entrada de qualquer mensagem WhatsApp"
+    },
+    {
+      "stage": 2,
+      "name": "Identificar Sessão",
+      "type": "n8n-nodes-base.code",
+      "purpose": "Verificar se lead já está em fluxo ativo ou é novo contato",
+      "code": "const phone = $input.first().json.from;\nconst msg = $input.first().json.body;\n// Verificar sessão ativa no Supabase\nreturn [{ json: { phone, msg, is_new: true, current_stage: 0 } }];"
+    },
+    {
+      "stage": 3,
+      "name": "Classificar Intenção com IA",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "purpose": "Entender intenção da mensagem (interesse/dúvida/urgente/humano)",
+      "prompt": "Classifique a intenção dessa mensagem de lead para uma consultoria Lean + IA: '{{ $json.msg }}'. Responda JSON: { intent: 'interesse|duvida|urgente|quer_humano|irrelevante', summary: '1 linha', urgency: 1-10 }"
+    },
+    {
+      "stage": 4,
+      "name": "Verificar se Quer Humano",
+      "type": "n8n-nodes-base.if",
+      "condition": "{{ $json.intent === 'quer_humano' }}",
+      "true_branch": "Transferir para Humano",
+      "false_branch": "Continuar Qualificação"
+    },
+    {
+      "stage": 5,
+      "name": "Fazer Próxima Pergunta de Qualificação",
+      "type": "@n8n/n8n-nodes-langchain.lmChatAnthropic",
+      "purpose": "Gerar a próxima mensagem do fluxo baseado no estágio atual",
+      "prompt": "Você é o assistente da SmartOps IA (consultoria Lean + IA, BH). Stage atual: {{ $json.current_stage }}. Mensagem do lead: '{{ $json.msg }}'. Gere a próxima mensagem do fluxo de qualificação. Seja direto, amigável e curto (máx 2 linhas). Se stage 0: perguntar o setor e problema principal. Se stage 1: perguntar tamanho da empresa e urgência. Se stage 2: oferecer diagnóstico gratuito."
+    },
+    {
+      "stage": 6,
+      "name": "Enviar Mensagem WhatsApp",
+      "type": "n8n-nodes-base.whatsApp",
+      "purpose": "Responder ao lead"
+    },
+    {
+      "stage": 7,
+      "name": "Atualizar Sessão no CRM",
+      "type": "n8n-nodes-base.supabase",
+      "purpose": "Salvar estado da conversa",
+      "table": "bot_conversations",
+      "fields": ["phone", "current_stage", "intent", "messages_json", "updated_at"]
+    },
+    {
+      "stage": 8,
+      "name": "Score Final e Alerta se Quente",
+      "type": "n8n-nodes-base.code",
+      "purpose": "Calcular score e notificar Breno se lead quente",
+      "code": "const lead = $input.first().json;\nconst score = (lead.urgency || 0) * 10;\nif (score >= 70) { /* trigger Telegram alert */ }\nreturn [{ json: { ...lead, final_score: score, category: score >= 70 ? 'HOT' : score >= 40 ? 'WARM' : 'COLD' } }];"
+    }
+  ],
+  "human_handoff": {
+    "triggers": ["quero falar com humano", "me liga", "ligar agora", "falar com alguém"],
+    "message": "Entendido! Vou chamar o Breno agora. Um segundo... 🙏",
+    "telegram_alert": "🔥 HANDOFF NECESSÁRIO\n📱 {{ $json.phone }}\n💬 '{{ $json.msg }}'\n⚡ Quer falar com humano agora!"
+  },
+  "success_metrics": {
+    "taxa_conclusao_fluxo": "> 40%",
+    "leads_qualificados_semana": "monitorar",
+    "handoffs_semana": "monitorar"
+  }
+}

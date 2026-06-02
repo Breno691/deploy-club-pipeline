@@ -1,0 +1,14 @@
+{
+  "agent": "client-success-agent",
+  "cargo": "Diretor de Sucesso do Cliente",
+  "kpi_mestre": "NPS ≥ 9 + renovação ≥ 90%",
+  "meta_diaria": "Status de cada cliente ativo + alertas de risco",
+  "last_run": null,
+  "status": "never_run",
+  "last_kpis": {},
+  "last_alerts": [],
+  "last_summary": "",
+  "last_next_action": "",
+  "sessions_today": 0,
+  "created_at": "2026-05-30"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "copywriter-agent",
+  "version": "1.0.0",
+  "description": "Copywriter Agent — copy, hooks, scripts, CTAs, reels e conteúdo de conversão",
+  "main": "copywriter_agent.js",
+  "scripts": {
+    "start": "node copywriter_agent.js",
+    "hook": "node copywriter_agent.js --mode hook",
+    "caption": "node copywriter_agent.js --mode caption",
+    "cta": "node copywriter_agent.js --mode cta",
+    "vsl": "node copywriter_agent.js --mode vsl",
+    "email": "node copywriter_agent.js --mode email",
+    "reel": "node copywriter_agent.js --mode reel",
+    "headline": "node copywriter_agent.js --mode headline",
+    "ad-copy": "node copywriter_agent.js --mode ad-copy",
+    "thread": "node copywriter_agent.js --mode thread",
+    "report": "node copywriter_agent.js --mode report"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

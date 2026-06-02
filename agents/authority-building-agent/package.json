@@ -1,0 +1,20 @@
+{
+  "name": "authority-building-intelligence-agent",
+  "version": "1.0.0",
+  "description": "Diretor de Autoridade, Relações Públicas e Thought Leadership — SmartOps IA",
+  "main": "authority_agent.js",
+  "scripts": {
+    "events":   "node authority_agent.js --mode events",
+    "speaking": "node authority_agent.js --mode speaking --event 'SEBRAE BH'",
+    "linkedin": "node authority_agent.js --mode linkedin --topic lean-pmes",
+    "podcast":  "node authority_agent.js --mode podcast",
+    "live":     "node authority_agent.js --mode live --partner 'Contador Parceiro'",
+    "repurpose":"node authority_agent.js --mode repurpose --source palestra",
+    "score":    "node authority_agent.js --mode score",
+    "report":   "node authority_agent.js --mode report"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.0.0"
+  }
+}

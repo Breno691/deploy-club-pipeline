@@ -1,0 +1,9 @@
+{
+  "driftScore": 65,
+  "level": "CRITICAL — Mudar estratégia agora",
+  "signals": [
+    "47 iniciativas ativas — limite recomendado: 5",
+    "47 agentes construídos, 0 clientes fechados — desbalanceado"
+  ],
+  "hasDrift": true
+}

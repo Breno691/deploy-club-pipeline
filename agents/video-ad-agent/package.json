@@ -1,0 +1,19 @@
+{
+  "name": "video-ad-agent",
+  "version": "1.0.0",
+  "description": "SmartOps IA — Video Ad Intelligence Agent (Diretor de Performance Criativa)",
+  "type": "module",
+  "main": "video_ad_agent.js",
+  "scripts": {
+    "start":       "node video_ad_agent.js",
+    "hooks":       "node video_ad_agent.js --hooks",
+    "script:30":   "node video_ad_agent.js --duration 30",
+    "script:60":   "node video_ad_agent.js --duration 60",
+    "script:90":   "node video_ad_agent.js --duration 90",
+    "vsl:short":   "node video_ad_agent.js --vsl --type short",
+    "vsl:long":    "node video_ad_agent.js --vsl --type long"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.56.0"
+  }
+}

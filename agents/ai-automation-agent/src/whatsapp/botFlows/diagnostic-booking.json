@@ -1,0 +1,55 @@
+{
+  "bot_id": "wa_diagnostic_booking_v1",
+  "name": "Bot Agendamento de Diagnóstico Gratuito",
+  "version": "1.0.0",
+  "objective": "Coletar dados e agendar diagnóstico gratuito de 30 minutos",
+  "created": "2026-05-30",
+  "steps": [
+    {
+      "id": "s1",
+      "message": "Olá! Fico feliz em agendar seu diagnóstico gratuito! 🎯\n\nVamos precisar de alguns dados básicos. Leva menos de 2 minutos. Pode ir?",
+      "type": "intro",
+      "options": ["Vamos lá! ✅", "Tenho uma dúvida primeiro"]
+    },
+    {
+      "id": "s2",
+      "message": "Qual é o seu nome completo?",
+      "type": "open",
+      "field": "nome"
+    },
+    {
+      "id": "s3",
+      "message": "Qual o nome da sua empresa e o seu setor?",
+      "type": "open",
+      "field": "empresa_setor",
+      "example": "Ex: Metalúrgica Silva — indústria metalúrgica"
+    },
+    {
+      "id": "s4",
+      "message": "Em poucas palavras: qual é o principal gargalo operacional que você quer resolver?",
+      "type": "open",
+      "field": "gargalo_principal"
+    },
+    {
+      "id": "s5",
+      "message": "Você já tentou alguma solução antes? (pode dizer 'não' se for a primeira vez)",
+      "type": "open",
+      "field": "tentativas_anteriores"
+    },
+    {
+      "id": "s6",
+      "message": "Perfeito, {nome}! 🙌\n\nO Breno vai analisar seus dados antes da conversa para já chegar com insights.\n\nEle tem horários disponíveis:\n• Terça e Quinta: 10h, 14h, 16h\n• Sábado: 09h, 10h\n\nQual prefere?",
+      "type": "options",
+      "field": "horario_preferido",
+      "options": ["Terça 10h", "Terça 14h", "Quinta 14h", "Quinta 16h", "Sábado 10h", "Outro horário"]
+    },
+    {
+      "id": "s7",
+      "message": "✅ Diagnóstico confirmado!\n\n📅 {horario_preferido}\n👤 {nome} — {empresa_setor}\n\nBreno vai entrar em contato para confirmar. Você receberá um lembrete 24h antes.\n\nAté lá! 🚀",
+      "type": "closing",
+      "action": "create_calendar_event"
+    }
+  ],
+  "telegram_notification": "📅 DIAGNÓSTICO AGENDADO!\n👤 {nome}\n🏢 {empresa_setor}\n🔧 Gargalo: {gargalo_principal}\n📆 Horário: {horario_preferido}\n📱 {phone}",
+  "crm_fields": ["nome", "phone", "empresa_setor", "gargalo_principal", "tentativas_anteriores", "horario_preferido", "status", "created_at"]
+}

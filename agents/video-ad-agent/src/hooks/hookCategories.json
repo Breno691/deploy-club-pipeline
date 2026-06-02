@@ -1,0 +1,23 @@
+{
+  "categories": [
+    { "id": "dor",            "label": "Dor Direta",        "description": "Ataca a dor principal do empresário sem rodeios" },
+    { "id": "custo_invisivel","label": "Custo Invisível",   "description": "Revela o custo financeiro oculto do problema" },
+    { "id": "local",          "label": "BH Local",          "description": "Conecta com o empresário da região BH/MG" },
+    { "id": "autoridade",     "label": "Autoridade",        "description": "Posiciona Breno como especialista referência" },
+    { "id": "automacao",      "label": "Automação",         "description": "Apresenta automação como solução ao trabalho manual" },
+    { "id": "curiosidade",    "label": "Curiosidade",       "description": "Cria curiosidade sem revelar a resposta" },
+    { "id": "pergunta",       "label": "Pergunta",          "description": "Pergunta que faz o empresário refletir sobre o problema" },
+    { "id": "choque",         "label": "Choque / Caso Real","description": "Número ou resultado que gera impacto imediato" },
+    { "id": "mito",           "label": "Mito vs Verdade",   "description": "Quebra uma crença comum sobre gestão" },
+    { "id": "alerta",         "label": "Alerta",            "description": "Cria senso de urgência e risco de não agir" }
+  ],
+  "scoring_criteria": {
+    "clareza":           "A mensagem é clara e direta?",
+    "dor":               "Ataca uma dor real do público?",
+    "curiosidade":       "Cria vontade de continuar assistindo?",
+    "especificidade":    "Usa número, local ou detalhe concreto?",
+    "relevancia_local":  "Conecta com o contexto BH/MG?",
+    "potencial_retencao":"Segura a atenção nos próximos segundos?",
+    "potencial_conversao":"Leva naturalmente ao CTA?"
+  }
+}

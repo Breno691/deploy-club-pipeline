@@ -1,0 +1,20 @@
+{
+  "name": "process-mining-agent",
+  "version": "1.0.0",
+  "description": "Process Mining Agent — descoberta e análise de processos por dados, logs e comportamento",
+  "main": "process_mining_agent.js",
+  "scripts": {
+    "start": "node process_mining_agent.js",
+    "discover": "node process_mining_agent.js --mode discover",
+    "map": "node process_mining_agent.js --mode map",
+    "bottleneck": "node process_mining_agent.js --mode bottleneck",
+    "conformance": "node process_mining_agent.js --mode conformance",
+    "variant": "node process_mining_agent.js --mode variant",
+    "sla": "node process_mining_agent.js --mode sla",
+    "handover": "node process_mining_agent.js --mode handover",
+    "root-cause": "node process_mining_agent.js --mode root-cause",
+    "simulate": "node process_mining_agent.js --mode simulate",
+    "report": "node process_mining_agent.js --mode report"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

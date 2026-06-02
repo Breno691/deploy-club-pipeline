@@ -1,0 +1,21 @@
+{
+  "name": "productization-intelligence-agent",
+  "version": "1.0.0",
+  "description": "Diretor de Produtos, Ofertas e Escalabilidade — SmartOps IA",
+  "main": "productization_agent.js",
+  "scripts": {
+    "discover":   "node productization_agent.js --mode discover",
+    "offer":      "node productization_agent.js --mode offer --product diagnostico-express",
+    "validate":   "node productization_agent.js --mode validate --product checklist-desperdicios",
+    "diagnostic": "node productization_agent.js --mode diagnostic",
+    "launch":     "node productization_agent.js --mode launch --product diagnostico-express",
+    "roadmap":    "node productization_agent.js --mode roadmap",
+    "score":      "node productization_agent.js --mode score --service 'mapeamento de processos'",
+    "funnel":     "node productization_agent.js --mode funnel",
+    "report":     "node productization_agent.js --mode report"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.0.0"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "strategic-planning-intelligence-agent",
+  "version": "1.0.0",
+  "description": "Diretor de Estratégia, Planejamento e OKRs — SmartOps IA",
+  "main": "strategic_planning.js",
+  "scripts": {
+    "plan30":    "node strategic_planning.js --mode plan --horizon 30",
+    "plan90":    "node strategic_planning.js --mode plan --horizon 90",
+    "plan180":   "node strategic_planning.js --mode plan --horizon 180",
+    "okr":       "node strategic_planning.js --mode okr --objective 'Gerar tração comercial local' --horizon 90",
+    "priority":  "node strategic_planning.js --mode priority --initiative 'Google Ads local' --impact 9 --confidence 7 --ease 6",
+    "review":    "node strategic_planning.js --mode review --period 'semana 1' --leads 5 --meetings 2 --revenue 0",
+    "goals":     "node strategic_planning.js --mode goals --leads-actual 8 --leads-target 40 --meetings-actual 3 --meetings-target 15 --revenue-actual 0 --revenue-target 15000",
+    "risk":      "node strategic_planning.js --mode risk --context 'inicio da empresa, sem clientes ainda'",
+    "drift":     "node strategic_planning.js --mode drift",
+    "brief":     "node strategic_planning.js --mode brief",
+    "roadmap":   "node strategic_planning.js --mode roadmap",
+    "report":    "node strategic_planning.js --mode report"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.0.0"
+  }
+}

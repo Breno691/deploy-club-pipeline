@@ -1,0 +1,29 @@
+{
+  "design_id": "ad-diagnostico-001",
+  "type": "meta_ad_square",
+  "format": "meta_ad_square",
+  "dimensions": { "width": 1080, "height": 1080 },
+  "objective": "lead_generation",
+  "audience": "Donos de PMEs em BH, 35-55 anos, setor industrial/serviços",
+  "theme": "diagnóstico gratuito",
+  "headline": "Sua empresa perde dinheiro com retrabalho.",
+  "subheadline": "Descubra onde estão os gargalos em 30 minutos.",
+  "cta": "Quero meu diagnóstico",
+  "template": "diagnostic_offer_ad",
+  "visual_style": "dark-premium-tech",
+  "service_mode": "lean",
+  "brand": {
+    "background": "#0A0A0F",
+    "primary": "#7C3AED",
+    "accent": "#10B981"
+  },
+  "testing_plan": {
+    "test_variable": "headline",
+    "variant_a": "Sua empresa perde dinheiro com retrabalho.",
+    "variant_b": "30% do custo operacional pode ser eliminado.",
+    "duration": "72h",
+    "success_metric": "CTR ≥ 2.5% | CPA ≤ R$60"
+  },
+  "output_formats": ["html", "png", "jpg"],
+  "variations": 3
+}

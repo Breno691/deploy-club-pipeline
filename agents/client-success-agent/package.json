@@ -1,0 +1,14 @@
+{
+  "name": "client-success-agent",
+  "version": "1.0.0",
+  "description": "Client Success Agent — Retenção, satisfação, health score e alertas de churn",
+  "main": "client_success_agent.js",
+  "scripts": {
+    "start": "node client_success_agent.js",
+    "health": "node client_success_agent.js --mode health",
+    "risk": "node client_success_agent.js --mode risk",
+    "action": "node client_success_agent.js --mode action",
+    "report": "node client_success_agent.js --mode report"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

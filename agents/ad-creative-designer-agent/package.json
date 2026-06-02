@@ -1,0 +1,20 @@
+{
+  "name": "ad-creative-designer-agent",
+  "version": "1.0.0",
+  "description": "Ad Creative Designer Agent — briefings de criativos, layouts, direção visual e conceitos de anúncios",
+  "main": "ad_creative_designer_agent.js",
+  "scripts": {
+    "start": "node ad_creative_designer_agent.js",
+    "brief": "node ad_creative_designer_agent.js --mode brief",
+    "layout": "node ad_creative_designer_agent.js --mode layout",
+    "conceito": "node ad_creative_designer_agent.js --mode conceito",
+    "carousel": "node ad_creative_designer_agent.js --mode carousel",
+    "stories": "node ad_creative_designer_agent.js --mode stories",
+    "banner": "node ad_creative_designer_agent.js --mode banner",
+    "video-brief": "node ad_creative_designer_agent.js --mode video-brief",
+    "audit": "node ad_creative_designer_agent.js --mode audit",
+    "ugc": "node ad_creative_designer_agent.js --mode ugc",
+    "report": "node ad_creative_designer_agent.js --mode report"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

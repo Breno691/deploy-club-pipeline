@@ -1,0 +1,14 @@
+{
+  "date": "2026-05-30",
+  "receita_bruta": 15000,
+  "impostos": 1200,
+  "receita_liquida": 13800,
+  "custo_entrega": 3000,
+  "lucro_bruto": 10800,
+  "margem_bruta": 78.3,
+  "despesas_operacionais": 600,
+  "lucro_liquido": 10200,
+  "margem_liquida": 73.9,
+  "meta_bruta_ok": true,
+  "meta_liq_ok": true
+}

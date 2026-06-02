@@ -44,6 +44,19 @@ O dono da SmartOps IA deve conseguir, **em 10 minutos por dia**, saber exatament
 
 ---
 
+## MODOS
+
+Execute: `node agents/ceo-advisor-agent/ceo_advisor_agent.js --mode <modo>`
+
+| Modo | Descrição |
+|---|---|
+| `brief` | Brief executivo consolidado — status de todos os squads |
+| `daily-plan` | Plano do dia com 3 prioridades e tempo estimado |
+| `priority` | Priorização por ROI e impacto — o que focar agora |
+| `decision` | Framework de decisão para escolha estratégica |
+| `weekly-review` | Revisão semanal de OKRs, resultados e ajustes |
+| `alert` | Alerta crítico de negócio — ação imediata necessária |
+
 ## AS 8 PERGUNTAS QUE ESTE AGENTE RESPONDE SEMPRE
 
 1. O que aconteceu no negócio?

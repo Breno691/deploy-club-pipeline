@@ -1,0 +1,19 @@
+{
+  "name": "market-opportunity-intelligence-agent",
+  "version": "1.0.0",
+  "description": "SmartOps IA — Market Opportunity Intelligence Agent (Diretor de Expansão Estratégica)",
+  "main": "market_opportunity.js",
+  "scripts": {
+    "sectors":   "node market_opportunity.js --mode sectors",
+    "sector":    "node market_opportunity.js --mode sector",
+    "local":     "node market_opportunity.js --mode local",
+    "prospects": "node market_opportunity.js --mode prospects",
+    "campaign":  "node market_opportunity.js --mode campaign",
+    "outreach":  "node market_opportunity.js --mode outreach",
+    "report":    "node market_opportunity.js --mode report"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.56.0",
+    "dotenv": "^16.0.0"
+  }
+}

@@ -53,7 +53,7 @@ PRÓXIMO PASSO:
 1. Data Collection Layer     — GA4, Ads, CRM, site, n8n, formulários, contratos
 2. Memory & Knowledge Layer  — PostgreSQL, pgvector, Supabase, Redis, Qdrant
 3. Agent Orchestration Layer — BullMQ + n8n + LangGraph/CrewAI
-4. Specialist Agents Layer   — 35 agentes em 10 squads
+4. Specialist Agents Layer   — 51 agentes em 10 squads + pipeline/orquestração
 5. Automation Layer          — n8n executa workflows aprovados
 6. Analytics & Dashboard Layer — 9 dashboards por área
 7. Executive Decision Layer  — CEO Advisor + Chief of Staff + plano de ação
@@ -62,81 +62,95 @@ PRÓXIMO PASSO:
 
 ---
 
-## Os 10 Squads — 35 Agentes
+## Os 10 Squads — 51 Agentes Especialistas
 
-### SQUAD 1 — MARKETING
+### SQUAD 1 — MARKETING (12 agentes)
 
 | Agente | Skill File | Foco |
 |---|---|---|
 | Copywriter Agent | `skills/copywriter-agent/` | copy, hooks, scripts, CTAs, reels |
-| Design Agent | `skills/design-agent/` | layouts, carrosséis, identidade visual |
+| Design Agent | `skills/design-agent/` | layouts, carrosséis, identidade visual enterprise |
+| Ad Creative Designer | `skills/ad-creative-designer/` | criativos estáticos Instagram (pipeline) |
+| Content Agent | `skills/content-agent/` | reels, carrosséis, stories, cards Instagram |
+| Content Opportunity Agent | `skills/content-opportunity-agent/` | gaps de conteúdo, pautas, tendências |
+| Content Performance Agent | `skills/content-performance-agent/` | análise de performance por canal e formato |
 | Distribution Agent | `skills/distribution-agent/` | publicação multicanal, calendário |
 | Marketing Research Agent | `skills/marketing-research-agent/` | pesquisa, tendências, concorrentes |
 | SEO Agent | `skills/seo-agent/` | orgânico, clusters, autoridade |
 | Video Ad Agent | `skills/video-ad-specialist/` | criativos de vídeo, VSL, UGC |
-| Remotion Video Agent | `skills/remotion-best-practices/` | animações React, motion design |
+| Remotion Video Agent | `skills/remotion-video-agent/` | motion design React, 31 templates, pipeline vídeo |
+| Market Opportunity Agent | `skills/market-opportunity-agent/` | setores, cidades, prospects, oportunidade local |
 
-### SQUAD 2 — GROWTH
+### SQUAD 2 — GROWTH (9 agentes)
 
 | Agente | Skill File | Foco |
 |---|---|---|
 | CRO Agent | `skills/cro-agent/` | conversão, landing pages, funis |
 | Customer Journey Agent | `skills/customer-journey-agent/` | jornada completa do visitante |
 | Revenue Agent | `skills/revenue-agent/` | receita, ROI, CAC, LTV, atribuição |
+| Revenue Intelligence Agent | `skills/revenue-intelligence-agent/` | atribuição de canal, funil digital, MRR, forecast |
 | Ads Agent | `skills/ads-agent/` | Google Ads + Meta Ads |
 | Website Analytics Agent | `skills/website-analytics-agent/` | eventos, sessões, páginas |
+| Social Media Intelligence | `skills/social-media-intelligence/` | performance Instagram, padrões, crescimento |
+| Growth Intelligence Agent | `skills/growth-intelligence-agent/` | funil, conversão, trends, SEO, previsão |
+| Experimentation Agent | `skills/experimentation-agent/` | testes A/B, hipóteses, CRO, otimização |
 
-### SQUAD 3 — OPERATIONS
+### SQUAD 3 — OPERATIONS (6 agentes)
 
 | Agente | Skill File | Foco |
 |---|---|---|
 | Lean Agent | `skills/lean-agent/` | 8 desperdícios, VSM |
+| Lean Consulting Agent | `skills/lean-consulting-agent/` | diagnóstico operacional para clientes |
 | Six Sigma Agent | `skills/six-sigma-agent/` | DMAIC, defeitos, variabilidade |
 | Kaizen Agent | `skills/kaizen-agent/` | melhoria contínua diária |
 | Process Mining Agent | `skills/process-mining-agent/` | processos descobertos por dados |
 | Automation Agent | `skills/automation-agent/` | n8n, APIs, RPA, webhooks |
 
-### SQUAD 4 — SALES
+### SQUAD 4 — SALES (5 agentes)
 
 | Agente | Skill File | Foco |
 |---|---|---|
 | Sales Intelligence Agent | `skills/sales-intelligence-agent/` | leads, objeções, fechamento, CRM |
+| Lead Scoring Agent | `skills/lead-scoring-agent/` | qualificação BANT + ICP, priorização de pipeline |
 | Proposal Agent | `skills/proposal-agent/` | propostas comerciais personalizadas |
 | Offer Optimization Agent | `skills/offer-optimization-agent/` | otimização de ofertas e pacotes |
 | Pricing Agent | `skills/pricing-agent/` | precificação, margem, valor percebido |
 
-### SQUAD 5 — EXECUTIVE
+### SQUAD 5 — EXECUTIVE (6 agentes)
 
 | Agente | Skill File | Foco |
 |---|---|---|
+| AI Operations Manager | `skills/ai-operations-manager/` | maestro central, roteamento, plano integrado |
 | Executive Dashboard Agent | `skills/executive-dashboard-agent/` | dashboards diário/semanal/mensal |
 | Competitor Intelligence Agent | `skills/competitor-intelligence-agent/` | monitoramento de concorrentes |
 | Strategic Planning Agent | `skills/strategic-planning-agent/` | planos 30/90/180 dias, OKRs |
-| CEO Advisor Agent | `skills/ceo-advisor-agent/` | decisão central, priorização |
+| CEO Advisor Agent | `skills/ceo-advisor-agent/` | decisão central, priorização por ROI |
 | Chief of Staff Agent | `skills/chief-of-staff-agent/` | estratégia → execução, tarefas |
 
-### SQUAD 6 — KNOWLEDGE
+### SQUAD 6 — KNOWLEDGE (5 agentes)
 
 | Agente | Skill File | Foco |
 |---|---|---|
 | Knowledge Management Agent | `skills/knowledge-management-agent/` | SOPs, playbooks, aprendizados |
 | Case Study Agent | `skills/case-study-agent/` | estudos de caso, antes/depois, ROI |
 | Productization Agent | `skills/productization-agent/` | transformar consultoria em produtos |
+| Organizational Learning Agent | `skills/organizational-learning-agent/` | retrospectivas, lições, decisões documentadas |
+| Consulting Company Builder | `skills/consulting-company-builder-agent/` | estrutura, portfólio, escala da consultoria |
 
-### SQUAD 7 — CLIENT SUCCESS
+### SQUAD 7 — CLIENT SUCCESS (2 agentes)
 
 | Agente | Skill File | Foco |
 |---|---|---|
 | Client Success Agent | `skills/client-success-agent/` | retenção, satisfação, expansão |
 | Risk Agent | `skills/risk-agent/` | alertas, riscos, ação preventiva |
 
-### SQUAD 8 — FINANCE
+### SQUAD 8 — FINANCE (1 agente)
 
 | Agente | Skill File | Foco |
 |---|---|---|
 | Financial Intelligence Agent | `skills/financial-intelligence-agent/` | receita, margem, ROI, fluxo de caixa |
 
-### SQUAD 9 — PERSONAL BRAND
+### SQUAD 9 — PERSONAL BRAND (3 agentes)
 
 | Agente | Skill File | Foco |
 |---|---|---|
@@ -144,11 +158,19 @@ PRÓXIMO PASSO:
 | Authority Building Agent | `skills/authority-building-agent/` | palestras, artigos, lives, podcasts |
 | Partnership Agent | `skills/partnership-agent/` | parcerias estratégicas B2B |
 
-### SQUAD 10 — AI LAB
+### SQUAD 10 — AI LAB (1 agente)
 
 | Agente | Skill File | Foco |
 |---|---|---|
 | AI Lab Agent | `skills/ai-lab-agent/` | novas tecnologias, LLMs, ferramentas |
+
+---
+
+## Agentes de Pipeline e Orquestração
+
+| Agente | Skill File | Foco |
+|---|---|---|
+| Orchestrator | `skills/orchestrator/` | coordena pipeline de conteúdo 3×/semana |
 
 ---
 

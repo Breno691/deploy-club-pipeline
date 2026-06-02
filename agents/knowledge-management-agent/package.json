@@ -1,0 +1,18 @@
+{
+  "name": "knowledge-management-agent",
+  "version": "1.0.0",
+  "description": "Knowledge Management Agent — SOPs, playbooks, base de conhecimento e onboarding",
+  "main": "knowledge_management_agent.js",
+  "scripts": {
+    "start": "node knowledge_management_agent.js",
+    "sop": "node knowledge_management_agent.js --mode sop",
+    "playbook": "node knowledge_management_agent.js --mode playbook",
+    "capture": "node knowledge_management_agent.js --mode capture",
+    "search": "node knowledge_management_agent.js --mode search",
+    "gap": "node knowledge_management_agent.js --mode gap",
+    "update": "node knowledge_management_agent.js --mode update",
+    "report": "node knowledge_management_agent.js --mode report",
+    "onboard": "node knowledge_management_agent.js --mode onboard"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

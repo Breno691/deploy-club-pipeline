@@ -1,0 +1,96 @@
+{
+  "name": "SALES_LEAD_CAPTURE_CRM",
+  "description": "Captura lead do formulário/site, valida, enriquece, pontua e insere no CRM com alerta Telegram",
+  "trigger": "webhook",
+  "version": "1.0.0",
+  "created": "2026-05-30",
+  "owner": "SmartOps IA",
+  "credentials_needed": ["telegram_bot", "supabase_smartops"],
+  "expected_inputs": {
+    "nome":     { "type": "string", "required": true },
+    "telefone": { "type": "string", "required": true },
+    "email":    { "type": "string", "required": false },
+    "empresa":  { "type": "string", "required": false },
+    "origem":   { "type": "string", "required": false, "default": "site" },
+    "interesse":{ "type": "string", "required": false }
+  },
+  "nodes_spec": [
+    {
+      "id": "1",
+      "name": "Webhook — Lead Entrada",
+      "type": "n8n-nodes-base.webhook",
+      "purpose": "Receber dados do formulário do site"
+    },
+    {
+      "id": "2",
+      "name": "Validar Dados Obrigatórios",
+      "type": "n8n-nodes-base.if",
+      "purpose": "Verificar se nome e telefone estão presentes",
+      "condition": "{{ $json.nome && $json.telefone }}"
+    },
+    {
+      "id": "3",
+      "name": "Normalizar Dados",
+      "type": "n8n-nodes-base.set",
+      "purpose": "Limpar e normalizar telefone, capitalizar nome",
+      "fields": {
+        "nome_clean":     "{{ $json.nome.trim().split(' ').map(w => w[0].toUpperCase() + w.slice(1)).join(' ') }}",
+        "telefone_clean": "{{ $json.telefone.replace(/\\D/g, '') }}",
+        "origem":         "{{ $json.origem || 'site' }}",
+        "created_at":     "{{ $now.toISO() }}"
+      }
+    },
+    {
+      "id": "4",
+      "name": "Lead Scoring",
+      "type": "n8n-nodes-base.code",
+      "purpose": "Calcular score do lead baseado nos dados disponíveis",
+      "code": "const data = $input.first().json;\nlet score = 0;\nif (data.telefone_clean?.length >= 10) score += 30;\nif (data.email) score += 20;\nif (data.empresa) score += 25;\nif (data.interesse) score += 25;\nconst category = score >= 70 ? 'HOT' : score >= 40 ? 'WARM' : 'COLD';\nreturn [{ json: { ...data, lead_score: score, lead_category: category } }];"
+    },
+    {
+      "id": "5",
+      "name": "Inserir no CRM (Supabase)",
+      "type": "n8n-nodes-base.supabase",
+      "purpose": "Salvar lead no banco de dados",
+      "operation": "insert",
+      "table": "leads",
+      "fields_mapping": {
+        "nome": "{{ $json.nome_clean }}",
+        "telefone": "{{ $json.telefone_clean }}",
+        "email": "{{ $json.email }}",
+        "empresa": "{{ $json.empresa }}",
+        "origem": "{{ $json.origem }}",
+        "score": "{{ $json.lead_score }}",
+        "status": "{{ $json.lead_category }}",
+        "created_at": "{{ $json.created_at }}"
+      }
+    },
+    {
+      "id": "6",
+      "name": "Alerta Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "purpose": "Notificar Breno sobre novo lead",
+      "chat_id": "1349738505",
+      "message": "🎯 NOVO LEAD CAPTURADO\n\n👤 {{ $json.nome_clean }}\n📱 {{ $json.telefone_clean }}\n🏢 {{ $json.empresa || 'N/A' }}\n📊 Score: {{ $json.lead_score }}/100 ({{ $json.lead_category }})\n📍 Origem: {{ $json.origem }}\n\n⏱ {{ $now.toFormat('HH:mm') }}"
+    },
+    {
+      "id": "error_1",
+      "name": "Error Handler",
+      "type": "n8n-nodes-base.errorTrigger",
+      "purpose": "Capturar qualquer erro do workflow"
+    },
+    {
+      "id": "error_2",
+      "name": "Alerta Erro Telegram",
+      "type": "n8n-nodes-base.telegram",
+      "purpose": "Notificar erro no workflow",
+      "chat_id": "1349738505",
+      "message": "⚠️ ERRO — SALES_LEAD_CAPTURE_CRM\n❌ {{ $json.error.message }}\n🕐 {{ $now.toFormat('HH:mm DD/MM') }}"
+    }
+  ],
+  "success_metrics": {
+    "taxa_sucesso_min": "95%",
+    "latencia_max_s": 10,
+    "leads_capturados_dia": "monitorar via Supabase"
+  }
+}

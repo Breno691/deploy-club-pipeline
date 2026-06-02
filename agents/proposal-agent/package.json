@@ -1,0 +1,14 @@
+{
+  "name": "proposal-agent",
+  "version": "1.0.0",
+  "description": "Proposal Agent — Propostas comerciais personalizadas com ROI calculado",
+  "main": "proposal_agent.js",
+  "scripts": {
+    "start": "node proposal_agent.js",
+    "generate": "node proposal_agent.js --mode generate",
+    "roi": "node proposal_agent.js --mode roi",
+    "followup": "node proposal_agent.js --mode followup",
+    "template": "node proposal_agent.js --mode template"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

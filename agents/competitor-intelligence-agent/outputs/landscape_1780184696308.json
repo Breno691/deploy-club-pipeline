@@ -1,0 +1,100 @@
+{
+  "landscape": [
+    {
+      "name": "Consultores Lean locais BH",
+      "type": "direct",
+      "channel": "google,instagram",
+      "threat": "alta",
+      "threat_score": {
+        "score": 3,
+        "label": "alta"
+      },
+      "channels": [
+        "google",
+        "instagram"
+      ]
+    },
+    {
+      "name": "Freelancers n8n/automação",
+      "type": "indirect",
+      "channel": "instagram,linkedin",
+      "threat": "alta",
+      "threat_score": {
+        "score": 3,
+        "label": "alta"
+      },
+      "channels": [
+        "instagram",
+        "linkedin"
+      ]
+    },
+    {
+      "name": "Agências de automação BH",
+      "type": "indirect",
+      "channel": "instagram,ads",
+      "threat": "média",
+      "threat_score": {
+        "score": 2,
+        "label": "média"
+      },
+      "channels": [
+        "instagram",
+        "ads"
+      ]
+    },
+    {
+      "name": "Consultorias Six Sigma nacionais",
+      "type": "direct",
+      "channel": "seo,google",
+      "threat": "média",
+      "threat_score": {
+        "score": 2,
+        "label": "média"
+      },
+      "channels": [
+        "seo",
+        "google"
+      ]
+    },
+    {
+      "name": "Criadores sobre IA (Instagram)",
+      "type": "attention",
+      "channel": "instagram",
+      "threat": "média",
+      "threat_score": {
+        "score": 2,
+        "label": "média"
+      },
+      "channels": [
+        "instagram"
+      ]
+    },
+    {
+      "name": "Consultores de gestão BH",
+      "type": "indirect",
+      "channel": "google",
+      "threat": "baixa",
+      "threat_score": {
+        "score": 1,
+        "label": "baixa"
+      },
+      "channels": [
+        "google"
+      ]
+    },
+    {
+      "name": "Software BPM (Sankhya, Totvs)",
+      "type": "indirect",
+      "channel": "ads,seo",
+      "threat": "baixa",
+      "threat_score": {
+        "score": 1,
+        "label": "baixa"
+      },
+      "channels": [
+        "ads",
+        "seo"
+      ]
+    }
+  ]
+}

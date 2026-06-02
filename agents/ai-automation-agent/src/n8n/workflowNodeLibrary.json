@@ -1,0 +1,68 @@
+{
+  "version": "1.0.0",
+  "updated": "2026-05-30",
+  "categories": {
+    "triggers": [
+      { "id": "n8n-nodes-base.scheduleTrigger", "name": "Schedule Trigger", "use": "Rodar workflow em horário fixo" },
+      { "id": "n8n-nodes-base.webhook", "name": "Webhook", "use": "Receber dados de formulários, APIs externas" },
+      { "id": "n8n-nodes-base.manualTrigger", "name": "Manual Trigger", "use": "Testar workflow manualmente" },
+      { "id": "n8n-nodes-base.errorTrigger", "name": "Error Trigger", "use": "Capturar erros do workflow" }
+    ],
+    "logic": [
+      { "id": "n8n-nodes-base.if", "name": "IF", "use": "Condições binárias (sim/não)" },
+      { "id": "n8n-nodes-base.switch", "name": "Switch", "use": "Múltiplas condições/casos" },
+      { "id": "n8n-nodes-base.merge", "name": "Merge", "use": "Combinar resultados de branches" },
+      { "id": "n8n-nodes-base.set", "name": "Set", "use": "Definir/transformar variáveis" },
+      { "id": "n8n-nodes-base.code", "name": "Code (JS)", "use": "Lógica customizada em JavaScript" },
+      { "id": "n8n-nodes-base.wait", "name": "Wait", "use": "Aguardar aprovação ou tempo" },
+      { "id": "n8n-nodes-base.splitInBatches", "name": "Split in Batches", "use": "Processar em lotes" }
+    ],
+    "http_api": [
+      { "id": "n8n-nodes-base.httpRequest", "name": "HTTP Request", "use": "Qualquer API REST" }
+    ],
+    "google": [
+      { "id": "n8n-nodes-base.googleSheets", "name": "Google Sheets", "use": "Ler/gravar planilhas" },
+      { "id": "n8n-nodes-base.gmail", "name": "Gmail", "use": "Enviar/ler e-mails" },
+      { "id": "n8n-nodes-base.googleCalendar", "name": "Google Calendar", "use": "Criar/listar eventos" },
+      { "id": "n8n-nodes-base.googleDrive", "name": "Google Drive", "use": "Upload/download arquivos" }
+    ],
+    "messaging": [
+      { "id": "n8n-nodes-base.telegram", "name": "Telegram", "use": "Alertas e notificações internas" },
+      { "id": "n8n-nodes-base.whatsApp", "name": "WhatsApp", "use": "Mensagens para clientes/leads" }
+    ],
+    "ai": [
+      { "id": "@n8n/n8n-nodes-langchain.lmChatAnthropic", "name": "Claude (Anthropic)", "use": "Geração de texto, análise, classificação" },
+      { "id": "@n8n/n8n-nodes-langchain.agent", "name": "AI Agent", "use": "Agente autônomo com ferramentas" },
+      { "id": "@n8n/n8n-nodes-langchain.chainLlm", "name": "LLM Chain", "use": "Chain simples de prompt" }
+    ],
+    "database": [
+      { "id": "n8n-nodes-base.postgres", "name": "PostgreSQL", "use": "Banco principal SmartOps" },
+      { "id": "n8n-nodes-base.supabase", "name": "Supabase", "use": "Storage, auth, realtime" }
+    ],
+    "instagram": [
+      { "id": "n8n-nodes-base.instagram", "name": "Instagram", "use": "Publicação de posts/reels" }
+    ],
+    "ads": [
+      { "id": "n8n-nodes-base.googleAds", "name": "Google Ads", "use": "Métricas e campanhas" }
+    ]
+  },
+  "patterns": {
+    "error_handling": {
+      "description": "Todo workflow DEVE ter Error Trigger + Telegram alert",
+      "nodes": ["n8n-nodes-base.errorTrigger", "n8n-nodes-base.telegram"],
+      "telegram_message": "⚠️ ERRO — {workflow.name}\n{$json.error.message}\n{$now}"
+    },
+    "logging": {
+      "description": "Logar todas execuções no Supabase",
+      "table": "workflow_executions",
+      "fields": ["workflow_id", "status", "started_at", "finished_at", "input_summary", "error_message"]
+    },
+    "validation": {
+      "description": "Sempre validar entrada com IF node antes de processar",
+      "check": "{{ $json.required_field }} não está vazio"
+    },
+    "retry": {
+      "description": "HTTP Request nodes: maxTries=3, waitBetweenTries=2000ms"
+    }
+  }
+}

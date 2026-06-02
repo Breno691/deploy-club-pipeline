@@ -1,0 +1,20 @@
+{
+  "name": "lean-agent",
+  "version": "1.0.0",
+  "description": "Lean Agent — 8 Desperdícios, VSM, Mapeamento e Eliminação de Waste para PMEs",
+  "main": "lean_agent.js",
+  "scripts": {
+    "start": "node lean_agent.js",
+    "waste": "node lean_agent.js --mode waste",
+    "vsm": "node lean_agent.js --mode vsm",
+    "diagnose": "node lean_agent.js --mode diagnose",
+    "5s": "node lean_agent.js --mode 5s",
+    "kaizen": "node lean_agent.js --mode kaizen",
+    "roi": "node lean_agent.js --mode roi",
+    "report": "node lean_agent.js --mode report"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.0.0"
+  }
+}

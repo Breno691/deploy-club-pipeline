@@ -1,0 +1,25 @@
+{
+  "name": "case-study-intelligence-agent",
+  "version": "1.0.0",
+  "description": "Diretor de Prova Social, Resultados e Case Studies — SmartOps IA",
+  "main": "case_study_agent.js",
+  "scripts": {
+    "capture":     "node case_study_agent.js --mode capture --client 'Cliente X' --sector clinica --problem 'agendamento manual lento' --solution 'automacao n8n' --investment 5000 --hours-before 20 --hours-after 3 --cost-hour 40",
+    "before-after":"node case_study_agent.js --mode before-after --client 'Cliente Y' --sector industria --problem 'retrabalho alto' --intervention 'kaizen + SOP' --metric-before 30 --metric-after 8 --unit 'defeitos/semana'",
+    "roi":         "node case_study_agent.js --mode roi --case 'clinica-bh-2026' --investment 5000 --monthly-savings 2400",
+    "validate":    "node case_study_agent.js --mode validate --case 'clinica-bh-2026'",
+    "permission":  "node case_study_agent.js --mode permission --client 'Clínica BH' --case 'clinica-bh-2026' --level 3",
+    "testimonial": "node case_study_agent.js --mode testimonial --client 'Dr. João' --sector clinica --result 'reduziu 40% retrabalho'",
+    "narrative":   "node case_study_agent.js --mode narrative --case 'clinica-bh-2026' --framework problem-solution-result",
+    "repurpose":   "node case_study_agent.js --mode repurpose --case 'clinica-bh-2026'",
+    "proposal":    "node case_study_agent.js --mode proposal --case 'clinica-bh-2026' --sector clinica --pain 'retrabalho'",
+    "sales":       "node case_study_agent.js --mode sales --objection 'caro demais'",
+    "analytics":   "node case_study_agent.js --mode analytics",
+    "library":     "node case_study_agent.js --mode library",
+    "report":      "node case_study_agent.js --mode report"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.0.0"
+  }
+}

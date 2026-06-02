@@ -1,0 +1,49 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-05-30",
+  "experiments": [],
+  "learnings": [
+    {
+      "area": "site",
+      "learning": "CTAs com verbo de ação específico (Agendar / Ver / Solicitar) convertem mais que CTAs genéricos (Saiba mais / Enviar)",
+      "date": "2026-05-30",
+      "strength": "forte",
+      "source": "Best practices CRO"
+    },
+    {
+      "area": "google_ads",
+      "learning": "Números concretos em títulos (% redução, R$ economizados) aumentam CTR em média 20-30%",
+      "date": "2026-05-30",
+      "strength": "forte",
+      "source": "Best practices Google Ads"
+    },
+    {
+      "area": "whatsapp",
+      "learning": "Primeira mensagem com pergunta sobre dor do cliente tem 25-40% mais resposta que mensagem de apresentação",
+      "date": "2026-05-30",
+      "strength": "moderado",
+      "source": "Referência WhatsApp marketing"
+    }
+  ],
+  "winners": [],
+  "hypotheses_backlog": [
+    {
+      "hypothesis": "Adicionar cálculo de ROI personalizado na proposta aumentará taxa de fechamento",
+      "area": "propostas",
+      "priority": "alta",
+      "ice_score": 504
+    },
+    {
+      "hypothesis": "Headline com dor específica ('Lean + IA para PMEs que perdem tempo em processo manual') vs headline genérico",
+      "area": "site",
+      "priority": "alta",
+      "ice_score": 448
+    },
+    {
+      "hypothesis": "Video de 60s com caso de sucesso acima da dobra aumentará tempo na página e conversão",
+      "area": "site",
+      "priority": "media",
+      "ice_score": 320
+    }
+  ]
+}

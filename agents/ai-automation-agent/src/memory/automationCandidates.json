@@ -1,0 +1,54 @@
+{
+  "version": "1.0.0",
+  "last_updated": "2026-05-30",
+  "approved_automations": [],
+  "candidates": [
+    {
+      "id": "SALES_LEAD_FOLLOWUP_WA",
+      "name": "Follow-up de leads no WhatsApp",
+      "area": "vendas",
+      "status": "discovered",
+      "score": 88,
+      "roi_monthly": 4500,
+      "added": "2026-05-30"
+    },
+    {
+      "id": "SALES_WHATSAPP_LEAD_QUALIFY",
+      "name": "Bot WhatsApp qualificação de leads",
+      "area": "vendas",
+      "status": "discovered",
+      "score": 91,
+      "roi_monthly": 4500,
+      "added": "2026-05-30"
+    },
+    {
+      "id": "MARKETING_INSTAGRAM_POST",
+      "name": "Instagram Auto Post",
+      "area": "marketing",
+      "status": "poc_planned",
+      "score": 85,
+      "roi_monthly": 1800,
+      "added": "2026-05-30"
+    },
+    {
+      "id": "SALES_PROPOSAL_GEN",
+      "name": "Geração automática de proposta",
+      "area": "vendas",
+      "status": "discovered",
+      "score": 79,
+      "roi_monthly": 1600,
+      "added": "2026-05-30"
+    },
+    {
+      "id": "OPS_WEEKLY_REPORT",
+      "name": "Relatório semanal de cliente",
+      "area": "operacoes",
+      "status": "discovered",
+      "score": 85,
+      "roi_monthly": 1200,
+      "added": "2026-05-30"
+    }
+  ],
+  "rejected": [],
+  "learnings": []
+}

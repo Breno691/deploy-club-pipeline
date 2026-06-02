@@ -1,0 +1,22 @@
+{
+  "name": "relationship-coach-agent",
+  "version": "1.0.0",
+  "description": "Relationship Coach Agent — mensagens românticas, resolução de conflitos, conselhos diários e fortalecimento de vínculos",
+  "main": "relationship_coach_agent.js",
+  "scripts": {
+    "start": "node relationship_coach_agent.js",
+    "bom-dia": "node relationship_coach_agent.js --mode bom-dia",
+    "boa-noite": "node relationship_coach_agent.js --mode boa-noite",
+    "romantica": "node relationship_coach_agent.js --mode romantica",
+    "conflito": "node relationship_coach_agent.js --mode conflito",
+    "ciumes": "node relationship_coach_agent.js --mode ciumes",
+    "desculpa": "node relationship_coach_agent.js --mode desculpa",
+    "conselho": "node relationship_coach_agent.js --mode conselho",
+    "diario": "node relationship_coach_agent.js --mode diario",
+    "elogio": "node relationship_coach_agent.js --mode elogio",
+    "reconciliacao": "node relationship_coach_agent.js --mode reconciliacao",
+    "saudade": "node relationship_coach_agent.js --mode saudade",
+    "encontro": "node relationship_coach_agent.js --mode encontro"
+  },
+  "dependencies": { "@anthropic-ai/sdk": "^0.39.0", "dotenv": "^16.0.0" }
+}

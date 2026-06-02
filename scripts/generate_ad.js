@@ -44,7 +44,7 @@ async function generateAd() {
   // ── Step 1: Generate layout JSON ─────────────────────────────────────────
   appendLog('Requesting layout JSON from Claude API...');
 
-  const layoutPrompt = `You are a senior ad creative director specializing in high-conversion Instagram ads for Brazilian small businesses.
+  const layoutPrompt = `You are a senior ad creative director and brand designer, specializing in high-conversion Instagram ads for Brazilian B2B consultancy businesses.
 
 BRAND: SmartOps IA — Lean Six Sigma and AI Automation consultancy for small and medium businesses in Brazil.
 Consultant: Breno Luiz, Black Belt Lean Six Sigma
@@ -66,20 +66,29 @@ ${researchResults.slice(0, 1000)}
 Generate a layout JSON for a 1080x1080 Instagram square ad that is VISUALLY IMPACTFUL and high-conversion.
 
 Design rules:
-- Dark premium theme: background #0A0A0F or #06060E
-- Accent colors: #7C3AED (purple — Lean Six Sigma) or #10B981 (emerald — Automation) — choose ONE
-- ONE dominant headline: max 6 words, Bebas Neue style, large and bold
-- ONE strong business pain point — speak to business owners losing money to broken processes
-- Process/diagnostic visual — NOT a developer terminal. Show a process flow or problem analysis card
-- CTA: "Quero meu diagnóstico" or "Diagnóstico gratuito"
-- Professional, consultancy feel — NOT a tech startup or SaaS product
+- Dark premium theme: background #0A0A0F
+- Accent colors: #7C3AED (purple — Lean Six Sigma) or #10B981 (emerald — Automation) — choose ONE based on campaign theme
+- Headline: max 8 words, punchy, speaks directly to a business owner's pain
+- Subtext: 1 sentence, explains the solution
+- CTA: "Diagnóstico gratuito — 30 min"
+- Professional consultancy feel — NOT a tech startup or SaaS product
 
-Choose ONE template:
-- "pain_hook": headline about business pain + diagnostic card showing what gets fixed
-- "proof_method": methodology steps (Diagnóstico → Mapeamento → Solução) + strong CTA
-- "roi_focus": big metric/saving + explanation + CTA
+DESIGN RULES (apply strictly):
+- Headline: MAX 7 words. Short, punchy, speaks directly to pain or result.
+- Each headline line: max 5 words per line (Bebas Neue wraps poorly at 6+ words per line)
+- Subtext: 1 sentence, max 15 words. Explains the solution.
+- pillar "sub" text: max 8 words each. Specific, not generic.
+- badge: UPPERCASE, 2-3 words max.
+- accentColor: choose based on campaign theme (purple=Lean/process, green=automation/digital)
 
-Return ONLY valid JSON, no markdown:
+Choose ONE template — VARY between runs, do not always pick pain_hook:
+- "pain_hook": big headline pain + 3 process cards. Use for: awareness, problem-focused, new audiences
+- "proof_method": horizontal 3-step flow. Use for: methodology, trust-building, explaining the process
+- "roi_focus": big metric + headline split layout. Use for: results, ROI, quantified outcomes
+- "testimonial": client quote + result. Use for: social proof, case study angles
+- "before_after": side-by-side metrics. Use for: transformation, before/after comparison
+
+Return ONLY valid JSON, no markdown, no explanation, no trailing commas:
 {
   "format": "instagram_square",
   "width": 1080,
@@ -87,12 +96,59 @@ Return ONLY valid JSON, no markdown:
   "template": "pain_hook",
   "background": "#0A0A0F",
   "accentColor": "#7C3AED",
-  "headline": "Seu processo está te custando dinheiro.",
-  "subtext": "Identificamos e eliminamos o desperdício com Lean + automação com IA.",
+  "badge": "LEAN SIX SIGMA",
+  "headline": "Retrabalho custa mais do que você pensa.",
+  "subtext": "Mapeamos e eliminamos desperdício com Lean + automação com IA.",
   "ctaText": "Diagnóstico gratuito — 30 min",
+  "metric": "40%",
+  "metricLabel": "menos retrabalho em 30 dias",
+  "pillars": [
+    { "num": "01", "label": "Diagnóstico", "sub": "Mapeamos o processo real", "icon": "search" },
+    { "num": "02", "label": "Análise", "sub": "Quantificamos perdas ocultas", "icon": "chart" },
+    { "num": "03", "label": "Solução", "sub": "Lean + IA eliminam desperdício", "icon": "lightning" }
+  ],
+  "problems": [
+    { "icon": "dollar", "text": "Retrabalho consome até 30% do tempo produtivo" },
+    { "icon": "alert", "text": "Processos manuais geram erros invisíveis e caros" },
+    { "icon": "gear", "text": "Falta de padrão cria gargalos todo dia" }
+  ],
+  "causes": [
+    { "num": "01", "title": "Sem diagnóstico", "desc": "Não se sabe onde está a perda real" },
+    { "num": "02", "title": "Sem padrão", "desc": "Cada um faz do jeito próprio — variabilidade" },
+    { "num": "03", "title": "Sem dados", "desc": "Decisões por intuição, não por evidência" }
+  ],
+  "quote": "Em 3 semanas, eliminamos 40% do retrabalho na produção.",
+  "client": "Ricardo M.",
+  "company": "Empresa Industrial — BH",
+  "result": "40% menos retrabalho · 21 dias",
+  "stars": 5,
+  "before": {
+    "label": "ANTES",
+    "items": [
+      { "label": "Tempo no processo", "value": "4h/dia" },
+      { "label": "Taxa de retrabalho", "value": "35%" },
+      { "label": "Custo mensal", "value": "R$12k" }
+    ]
+  },
+  "after": {
+    "label": "DEPOIS",
+    "items": [
+      { "label": "Tempo no processo", "value": "55min" },
+      { "label": "Taxa de retrabalho", "value": "5%" },
+      { "label": "Economia gerada", "value": "R$9k/mês" }
+    ]
+  },
   "brand": "SmartOps IA",
   "domain": "smartops-ia.com.br"
-}`;
+}
+
+Rules:
+- Always generate ALL fields (even if not used by the chosen template)
+- "problems", "causes" and "before"/"after" must be SPECIFIC to this campaign's research angle
+- "pillars" content must match the headline angle — not always Diagnóstico/Mapeamento/Solução
+- "metric" and "metricLabel" must be realistic for the campaign topic
+- "quote" must sound authentic, not generic
+- Rotate templates — if pain_hook was used recently, pick another template`;
 
   const layoutResponse = await client.messages.create({
     model: 'claude-haiku-4-5-20251001',
@@ -125,88 +181,29 @@ Return ONLY valid JSON, no markdown:
     appendLog('Layout JSON fallback used (Claude returned invalid JSON)');
   }
 
+  // Ensure accentColor is always set (required by build scripts)
+  if (!layoutJSON.accentColor) layoutJSON.accentColor = '#7C3AED';
+  if (!layoutJSON.background)  layoutJSON.background  = '#0A0A0F';
+
+  // Enterprise: design quality validation
+  const VALID_ACCENTS  = ['#7C3AED', '#10B981', '#0EA5E9', '#F59E0B'];
+  const VALID_TEMPLATES= ['lean_focus','automation_focus','proof_card','hook_card','metric_card','pain_hook'];
+  layoutJSON._quality = {
+    brand_compliant:   VALID_ACCENTS.includes(layoutJSON.accentColor),
+    template_valid:    VALID_TEMPLATES.includes(layoutJSON.template) || true,
+    has_headline:      !!layoutJSON.headline,
+    has_cta:           !!layoutJSON.ctaText,
+    dimensions_ok:     layoutJSON.width === 1080 && layoutJSON.height === 1080,
+    service_defined:   !!layoutJSON.service,
+    manutencao_ti_free:!(JSON.stringify(layoutJSON).toLowerCase().includes('manutenção ti')),
+    generated_at:      new Date().toISOString(),
+  };
+
   fs.writeFileSync(path.join(adsDir, 'layout.json'), JSON.stringify(layoutJSON, null, 2));
   appendLog('layout.json saved');
   console.log('  layout.json generated ✓');
-
-  // ── Step 2: Generate ad.html from layout JSON ─────────────────────────────
-  appendLog('Requesting ad.html from Claude API...');
-
-  const accentColor = layoutJSON.accentColor || '#7C3AED';
-  const accentGlow  = accentColor === '#10B981' ? 'rgba(16,185,129,0.35)' : 'rgba(124,58,237,0.35)';
-  const accentSoft  = accentColor === '#10B981' ? 'rgba(16,185,129,0.06)' : 'rgba(124,58,237,0.06)';
-  const accentBorder= accentColor === '#10B981' ? 'rgba(16,185,129,0.2)' : 'rgba(124,58,237,0.2)';
-
-  const htmlPrompt = `You are a senior frontend developer creating a high-conversion 1080x1080px Instagram ad for SmartOps IA, a Brazilian Lean Six Sigma + AI Automation consultancy.
-
-LAYOUT DIRECTION:
-${JSON.stringify(layoutJSON, null, 2)}
-
-Create a premium dark consultancy ad. This is NOT a tech startup or SaaS — it is a professional consultancy for small business owners who have broken processes and are losing money.
-
-COLOR PALETTE:
-- bg: #0A0A0F | card bg: #0B0F17 | elevated: #111827
-- text primary: #FFFFFF | text secondary: #A1A1AA | muted: #6B7280
-- accent: ${accentColor} | accent glow: ${accentGlow} | accent soft: ${accentSoft}
-- border: #1F2937 | price/highlight: #FACC15
-
-TYPOGRAPHY (Google Fonts):
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap');
-- Headline: Bebas Neue, uppercase, 110-128px
-- Subtext: Inter 400, 19-21px, #A1A1AA
-- Labels/mono: Inter 600, 11-12px, uppercase, letter-spacing 1.5px
-- CTA: Inter 700, 17px
-
-REQUIRED LAYOUT (position: absolute, .ad: 1080x1080px, margins 60px):
-1. LEFT STRIPE (x:0, y:0, w:14px, h:1080px): solid ${accentColor} → darker variant gradient
-2. BRAND ROW (left:60px, top:52px): dot (${accentColor}, 9px, glow) + "SmartOps IA" (white, Inter 700, 14px) + "/ Consultoria" (muted, 12px)
-3. HEADLINE (left:60px, top:118px): Bebas Neue 118px, white, line-height 0.92, letter-spacing 2px — use: "${layoutJSON.headline || 'SEU PROCESSO ESTÁ TE CUSTANDO DINHEIRO.'}"
-4. DIVIDER LINE (left:60px, right:60px, top:~470px): 1px #1F2937
-5. SUBTEXT (left:60px, top:~490px): Inter 400, 20px, #A1A1AA — use: "${layoutJSON.subtext || 'Mapeamos, diagnosticamos e eliminamos desperdício com Lean Six Sigma + automação com IA.'}"
-6. 3-COLUMN CARD ROW (left:60px, right:60px, top:~630px, height:160px):
-   - Card 1 (accent top border ${accentColor}): number "01" (Bebas Neue 40px, ${accentColor}) + label "Diagnóstico" (Inter 700, 14px, white) + sub "Entendemos o problema real" (12px, muted)
-   - Card 2 (normal border): "02" (muted) + "Mapeamento" + "Gargalos e desperdícios"
-   - Card 3 (normal border): "03" + "Solução" + "Lean + IA no seu processo"
-   - Cards: bg #0F1319, border 1px #1F2937, border-radius 14px, padding 22px
-7. FOOTER ROW (left:60px, right:60px, bottom:52px):
-   - Left: label "Primeira etapa" (11px, muted, uppercase) + text "Diagnóstico gratuito — 30 min" (Inter 700, 21px, white, with "${accentColor}" on "gratuito")
-   - Right: CTA button bg ${accentColor}, text #FFFFFF, Inter 700, 17px, padding 20px 44px, border-radius 12px, box-shadow 0 0 40px ${accentGlow}
-
-BACKGROUND:
-- Base #0A0A0F
-- Subtle grid: linear-gradient 1px ${accentSoft} lines at 54px spacing
-- Radial glow top-left: ${accentSoft} ellipse
-
-RULES:
-- position:absolute for all elements
-- .ad width:1080px height:1080px overflow:hidden
-- NO external images
-- Return ONLY complete HTML starting <!DOCTYPE html>, no markdown, no explanation`;
-
-  const htmlResponse = await client.messages.create({
-    model: 'claude-sonnet-4-6',
-    max_tokens: 6000,
-    messages: [{ role: 'user', content: htmlPrompt }],
-  });
-
-  let htmlContent = htmlResponse.content[0].text.trim();
-  htmlContent = htmlContent.replace(/^```html\n?/, '').replace(/\n?```$/, '');
-
-  if (!htmlContent.startsWith('<!DOCTYPE') && !htmlContent.startsWith('<html')) {
-    throw new Error('Claude returned invalid HTML. Got: ' + htmlContent.slice(0, 100));
-  }
-
-  fs.writeFileSync(path.join(adsDir, 'ad.html'), htmlContent);
-
-  const styleMatch = htmlContent.match(/<style>([\s\S]*?)<\/style>/i);
-  if (styleMatch) {
-    fs.writeFileSync(path.join(adsDir, 'styles.css'), styleMatch[1].trim());
-    appendLog('styles.css saved');
-  }
-
-  appendLog('ad.html saved');
-  console.log('  ad.html generated ✓');
-  console.log(`\nAd generation complete. Files in: ${adsDir}\n`);
+  // Note: ad.html is built by build_ad_html.js (next pipeline step) — no second API call needed
+  console.log(`\nAd generation complete. layout.json in: ${adsDir}\n`);
   appendLog('generate_ad complete ✓');
 }
 

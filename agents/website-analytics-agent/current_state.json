@@ -1,0 +1,14 @@
+{
+  "agent": "website-analytics-agent",
+  "cargo": "Diretor de Analytics",
+  "kpi_mestre": "Conversão ≥ 5%",
+  "meta_diaria": "Snapshot de conversão por página + tickets disparados",
+  "last_run": null,
+  "status": "never_run",
+  "last_kpis": {},
+  "last_alerts": [],
+  "last_summary": "",
+  "last_next_action": "",
+  "sessions_today": 0,
+  "created_at": "2026-05-30"
+}

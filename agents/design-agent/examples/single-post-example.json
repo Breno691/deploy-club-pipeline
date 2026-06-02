@@ -1,0 +1,28 @@
+{
+  "design_id": "post-retrabalho-001",
+  "type": "instagram_post",
+  "format": "instagram_post",
+  "dimensions": { "width": 1080, "height": 1080 },
+  "objective": "lead_generation",
+  "audience": "Donos de PMEs em BH/MG",
+  "theme": "retrabalho",
+  "headline": "Retrabalho custa mais do que você pensa.",
+  "subheadline": "Descubra onde sua operação perde dinheiro com Lean + IA.",
+  "cta": "Diagnóstico gratuito — 30 min",
+  "template": "pain_hook",
+  "visual_style": "dark-premium-tech",
+  "service_mode": "lean",
+  "brand": {
+    "background": "#0A0A0F",
+    "primary": "#7C3AED",
+    "accent": "#10B981"
+  },
+  "elements": [
+    { "type": "headline",    "text": "Retrabalho custa mais do que você pensa.", "position": "top_left" },
+    { "type": "accent_bar",  "color": "#7C3AED", "position": "left" },
+    { "type": "method_cards","steps": ["Diagnóstico", "Mapeamento", "Solução"], "position": "center" },
+    { "type": "cta",         "text": "Diagnóstico gratuito — 30 min", "position": "bottom_right" },
+    { "type": "logo",        "position": "top_left" }
+  ],
+  "output_formats": ["html", "png"]
+}

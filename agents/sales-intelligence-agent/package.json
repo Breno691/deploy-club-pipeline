@@ -1,0 +1,21 @@
+{
+  "name": "sales-intelligence-agent",
+  "version": "1.0.0",
+  "description": "Sales Intelligence Agent — Leads, qualificação, CRM, objeções e fechamento",
+  "main": "sales_agent.js",
+  "scripts": {
+    "start": "node sales_agent.js",
+    "qualify": "node sales_agent.js --mode qualify",
+    "objections": "node sales_agent.js --mode objections",
+    "script": "node sales_agent.js --mode script",
+    "crm": "node sales_agent.js --mode crm",
+    "pipeline": "node sales_agent.js --mode pipeline",
+    "followup": "node sales_agent.js --mode followup",
+    "proposal-brief": "node sales_agent.js --mode proposal-brief",
+    "report": "node sales_agent.js --mode report"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.0.0"
+  }
+}

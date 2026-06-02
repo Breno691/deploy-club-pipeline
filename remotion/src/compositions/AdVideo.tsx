@@ -305,7 +305,7 @@ const ProductScene: React.FC<{ scene: Scene; frame: number; totalFrames: number;
         {[0, 1, 2].map(i => (
           <rect key={i} x="20" y={148 + i * 38} width="360" height="24" rx="6" fill={C.bg3} opacity={1 - i * 0.2} />
         ))}
-        <text x="200" y="250" textAnchor="middle" fill={C.accentC} fontFamily="monospace" fontSize="14" fontWeight="bold">88 TEMPLATES · DEPLOY CLUB</text>
+        <text x="200" y="250" textAnchor="middle" fill={C.accentC} fontFamily="monospace" fontSize="14" fontWeight="bold">LEAN SIX SIGMA + AUTOMAÇÃO COM IA · BH/MG</text>
       </svg>
 
       {/* Text */}
@@ -587,7 +587,7 @@ const CTAScene: React.FC<{ scene: Scene; frame: number; totalFrames: number; fps
         textTransform: 'uppercase',
         opacity: fadeIn(frame, 30, 50),
       }}>
-        Deploy Club
+        SmartOps IA
       </div>
     </AbsoluteFill>
   );

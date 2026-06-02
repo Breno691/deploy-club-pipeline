@@ -1,0 +1,74 @@
+{
+  "bot_id": "wa_lead_qual_v1",
+  "name": "Bot Qualificação de Leads SmartOps",
+  "version": "1.0.0",
+  "objective": "Qualificar leads de consultoria Lean + IA antes da reunião com Breno",
+  "target_audience": "PMEs em BH que buscam Lean, automação ou IA",
+  "created": "2026-05-30",
+  "consent_message": "Olá! Sou o assistente virtual da SmartOps IA. Para te ajudar melhor, posso fazer algumas perguntas rápidas? Suas informações são tratadas com confidencialidade.",
+  "steps": [
+    {
+      "id": "s1",
+      "message": "Olá! 👋 Vi que você tem interesse em melhorar processos ou implementar automação na sua empresa. Ótima decisão!\n\nPosso te fazer 3 perguntas rápidas para entender melhor como podemos ajudar?",
+      "type": "intro",
+      "options": ["Sim, pode perguntar! 👍", "Prefiro falar diretamente com alguém"],
+      "next_if_sim": "s2",
+      "next_if_nao": "handoff"
+    },
+    {
+      "id": "s2",
+      "message": "Qual é o seu principal desafio hoje? (pode ser breve)",
+      "type": "open",
+      "field": "desafio_principal",
+      "score_weight": 30,
+      "score_rules": {
+        "words_lean_waste_process": "+10",
+        "words_manual_repetitive":  "+10",
+        "words_urgent_problema":    "+10"
+      },
+      "next": "s3"
+    },
+    {
+      "id": "s3",
+      "message": "Qual o tamanho da sua equipe?",
+      "type": "options",
+      "field": "tamanho_empresa",
+      "options": ["1 a 5 pessoas", "6 a 20 pessoas", "21 a 100 pessoas", "Mais de 100"],
+      "score_rules": {
+        "6 a 20 pessoas":    20,
+        "21 a 100 pessoas":  30,
+        "Mais de 100":       25,
+        "1 a 5 pessoas":     10
+      },
+      "next": "s4"
+    },
+    {
+      "id": "s4",
+      "message": "Com que urgência você precisa resolver isso?",
+      "type": "options",
+      "field": "urgencia",
+      "options": ["🔥 Urgente (esta semana)", "📅 Em breve (30 dias)", "🔍 Estou pesquisando"],
+      "score_rules": {
+        "🔥 Urgente (esta semana)": 40,
+        "📅 Em breve (30 dias)":    20,
+        "🔍 Estou pesquisando":     5
+      },
+      "next": "scoring"
+    }
+  ],
+  "scoring": {
+    "hot":  { "min": 70, "message": "Perfeito! 🎯 Com base no que você me disse, acredito que podemos te ajudar. Posso te enviar os horários disponíveis para uma conversa gratuita de 30 min com o Breno?", "action": "agendar_diagnostico", "telegram": "🔥 LEAD QUENTE!\n📱 {phone}\n💼 {empresa}\n⚡ {desafio}\n📊 Score: {score}/100\n👉 Agendar diagnóstico NOW" },
+    "warm": { "min": 40, "message": "Obrigado pelas informações! 😊 Vou te enviar um material com casos reais de empresas como a sua que já usamos Lean + IA. Posso te mandar agora?", "action": "enviar_material", "telegram": "⭐ Lead morno — {phone} — Score: {score}/100 — fazer follow-up em 48h" },
+    "cold": { "min": 0,  "message": "Obrigado! 🙏 Vou te incluir na nossa lista de conteúdo sobre automação e Lean para PMEs. Qualquer dúvida estou aqui!", "action": "nutricao", "telegram": "❄️ Lead frio — {phone} — Score: {score}/100 — incluir em nutrição" }
+  },
+  "handoff": {
+    "message": "Entendido! 🙏 Vou avisar o Breno agora mesmo para falar com você. Um momento...",
+    "telegram": "⚡ HANDOFF SOLICITADO\n📱 {phone}\nQuer falar com humano imediatamente!"
+  },
+  "fallback": {
+    "message": "Desculpe, não entendi bem. Pode reformular? Ou se preferir, posso te conectar diretamente com o Breno. 😊",
+    "max_retries": 2,
+    "after_retries": "handoff"
+  },
+  "crm_fields": ["phone", "nome", "empresa", "desafio_principal", "tamanho_empresa", "urgencia", "score", "category", "conversation_id", "created_at"]
+}

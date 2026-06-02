@@ -33,6 +33,20 @@ Transformar dados de leads, reuniões e propostas em inteligência acionável �
 - Monitorar qualidade das reuniões de diagnóstico
 - Calcular taxa de conversão em cada etapa do funil de vendas
 
+## MODOS
+
+Execute: `node agents/sales-intelligence-agent/sales_agent.js --mode <modo>`
+
+| Modo | Descrição | Argumento |
+|---|---|---|
+| `qualify` | Qualificar lead com framework GPCTBA | `--lead "nome ou contexto"` |
+| `objections` | Mapa de objeções e respostas por tipo de cliente | `--segmento "PME industria"` |
+| `script` | Script de venda personalizado para reunião | `--cliente "clínica" --servico "lean"` |
+| `pipeline` | Análise de pipeline e probabilidade de fechamento | — |
+| `followup` | Sequência de follow-up pós-reunião | `--dias 3` |
+| `proposal-brief` | Brief para criação de proposta comercial | `--cliente "nome" --servico "automação"` |
+| `report` | Relatório semanal de vendas — leads, reuniões, propostas | — |
+
 ## METODOLOGIA DE VENDAS
 
 Usar o framework **GPCTBA** (Goals, Plans, Challenges, Timeline, Budget, Authority) em todas as reuniões de diagnóstico. Referência completa: `knowledge/sales_playbook.md`.
