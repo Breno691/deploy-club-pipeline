@@ -197,6 +197,33 @@ app.post('/send-prospecting', (req, res) => {
   console.log(`[${new Date().toISOString()}] Prospecção iniciada (PID ${proc.pid})`);
 });
 
+// ── Weekly Briefing — todos os squads apresentam novidades da semana ─────────
+app.post('/run-weekly-briefing', (req, res) => {
+  const date = new Date().toISOString().split('T')[0];
+  const noTelegram = req.body?.noTelegram === true;
+
+  res.json({ ok: true, date, message: 'Briefing semanal iniciado em background' });
+
+  const { spawn } = require('child_process');
+  const logPath = path.join(ROOT, `outputs/weekly_briefing_${date}/logs/server.log`);
+  require('fs').mkdirSync(path.dirname(logPath), { recursive: true });
+
+  const nodeArgs = ['scripts/weekly_briefing.js'];
+  if (noTelegram) nodeArgs.push('--no-telegram');
+
+  const proc = spawn('node', nodeArgs, {
+    cwd:      ROOT,
+    detached: true,
+    stdio:    ['ignore',
+               require('fs').openSync(logPath, 'a'),
+               require('fs').openSync(logPath, 'a')],
+    env:      process.env,
+  });
+  proc.unref();
+
+  console.log(`[${new Date().toISOString()}] Weekly briefing iniciado (PID ${proc.pid})`);
+});
+
 // ── Run Daily — dispara o daily_master_runner.js ─────────────────────────────
 // Body: { level?: 'daily'|'weekly'|'full' }
 app.post('/run-daily', (req, res) => {
@@ -218,13 +245,65 @@ app.post('/run-daily', (req, res) => {
   console.log(`[${new Date().toISOString()}] Rotina ${level} iniciada (PID ${proc.pid})`);
 });
 
+// ── WhatsApp Webhook Relay ────────────────────────────────────────────────────
+// Recebe webhooks do Meta e retransmite para n8n + Chatwoot em paralelo
+// Configura no Meta: URL = https://smartops-pipeline.61gu86.easypanel.host/webhook/whatsapp
+//                   Verify Token = smartops_cw_2025
+const N8N_WH_URL  = 'https://smartops-n8n.61gu86.easypanel.host/webhook/whatsapp';
+const CW_WH_URL   = 'https://smartops-chatwoot-web.61gu86.easypanel.host/webhooks/whatsapp/%2B5531972039180';
+const WH_VERIFY   = process.env.WH_VERIFY_TOKEN || 'smartops_cw_2025';
+
+// GET — Meta verifica o token
+app.get('/webhook/whatsapp', (req, res) => {
+  const mode      = req.query['hub.mode'];
+  const token     = req.query['hub.verify_token'];
+  const challenge = req.query['hub.challenge'];
+  if (mode === 'subscribe' && token === WH_VERIFY) {
+    console.log(`[${new Date().toISOString()}] Webhook Meta verificado OK`);
+    return res.status(200).send(challenge);
+  }
+  console.warn(`[${new Date().toISOString()}] Webhook verify FALHOU token="${token}"`);
+  res.sendStatus(403);
+});
+
+// POST — Meta envia mensagens; relay para n8n e Chatwoot
+app.post('/webhook/whatsapp', async (req, res) => {
+  const body = req.body;
+  res.sendStatus(200); // responde imediatamente para o Meta
+
+  const payloadStr = JSON.stringify(body);
+  const ts = new Date().toISOString();
+  console.log(`[${ts}] Webhook WA recebido: ${payloadStr.slice(0, 120)}`);
+
+  const forward = async (targetUrl, label) => {
+    try {
+      const r = await fetch(targetUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: payloadStr,
+      });
+      console.log(`[${ts}] Relay → ${label}: ${r.status}`);
+    } catch (e) {
+      console.error(`[${ts}] Relay → ${label} ERRO: ${e.message}`);
+    }
+  };
+
+  // Encaminha em paralelo para n8n e Chatwoot
+  await Promise.all([
+    forward(N8N_WH_URL, 'n8n'),
+    forward(CW_WH_URL, 'chatwoot'),
+  ]);
+});
+
 app.listen(PORT, () => {
   console.log(`Pipeline server rodando em http://localhost:${PORT}`);
   console.log(`  POST /run-pipeline        { taskName, taskDate, skipPost? }`);
   console.log(`  POST /send-agent-report   { agent, message, date? }`);
+  console.log(`  POST /run-weekly-briefing { noTelegram? } → briefing semanal todos os squads`);
   console.log(`  POST /run-daily           { level? }  → dispara daily_master_runner`);
   console.log(`  POST /send-prospecting    {}          → dispara send_daily.js (prospecção)`);
   console.log(`  GET  /reports             → portal web de relatórios`);
   console.log(`  GET  /api/reports?date=   → JSON relatórios do dia`);
+  console.log(`  GET  /webhook/whatsapp    → Meta verify (GET) + relay para n8n + Chatwoot (POST)`);
   console.log(`  GET  /health`);
 });
