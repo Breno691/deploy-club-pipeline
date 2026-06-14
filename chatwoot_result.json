@@ -1,0 +1,17 @@
+{
+  "chatwootUrl": "https://smartops-chatwoot-web.61gu86.easypanel.host",
+  "adminEmail": "brenoluiz691@gmail.com",
+  "accountId": 1,
+  "inboxId": 2,
+  "inboxName": "WhatsApp SmartOps",
+  "inboxPhone": "+5531972039180",
+  "chatwootWebhookUrl": "https://smartops-chatwoot-web.61gu86.easypanel.host/webhooks/whatsapp/+5531972039180",
+  "pipelineRelayUrl": "https://smartops-pipeline.61gu86.easypanel.host/webhook/whatsapp",
+  "verifyToken": "smartops_cw_2025",
+  "status": "ready — aguardando update do Meta webhook",
+  "pendingAction": {
+    "where": "developers.facebook.com → App 'API wtt' → WhatsApp → Configuration → Webhooks → Edit",
+    "callbackUrl": "https://smartops-pipeline.61gu86.easypanel.host/webhook/whatsapp",
+    "verifyToken": "smartops_cw_2025"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "appId": "1704569937637467",
+  "wabaId": "1829838828198874",
+  "phoneNumberId": "1076586585548366",
+  "webhookUrl": "https://smartops-pipeline.61gu86.easypanel.host/webhook/whatsapp",
+  "verifyToken": "smartops_cw_2025",
+  "n8nWebhookOriginal": "https://smartops-n8n.61gu86.easypanel.host/webhook/whatsapp",
+  "n8nWorkflowId": "fKDL57MH9jcXUVOj",
+  "n8nCredentialId": "djM6d0vXFp9WHLoK",
+  "chatwootWebhook": "https://smartops-chatwoot-web.61gu86.easypanel.host/webhooks/whatsapp/+5531972039180",
+  "status": "relay-pending-meta-update",
+  "updatedAt": "2026-06-14T14:57:00.000Z",
+  "notes": "Pipeline relay encaminha para n8n + Chatwoot. Falta atualizar URL no Meta Developer Console."
+}
