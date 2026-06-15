@@ -326,7 +326,8 @@ async function forwardToChatwoot(waPayload) {
         const retry = await cwApi('GET', `/api/v1/accounts/${CW_ACCT}/contacts/search?q=${encodeURIComponent(phone)}&include_contacts=true`);
         contactId = retry?.payload?.find(c => c.phone_number === phone)?.id;
       } else {
-        contactId = created?.id;
+        // A API retorna { payload: { contact: { id } } } em vez de { id } direto
+        contactId = created?.id || created?.payload?.contact?.id;
       }
     }
     if (!contactId) { console.error(`[${ts}] CW: sem contactId para ${phone}`); continue; }
