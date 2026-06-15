@@ -254,20 +254,35 @@ const CW_TOKEN    = process.env.CW_API_TOKEN    || 'gYUzdZ13MAUEbNZ7FBW2cw78';
 const CW_ACCT     = 1;
 const CW_INBOX    = 3; // Channel::Api "WhatsApp Mensagens" — aceita incoming via REST API
 
+const https = require('https');
+
 async function cwApi(method, path, body) {
-  try {
-    const r = await fetch(`${CW_BASE}${path}`, {
-      method,
+  return new Promise((resolve) => {
+    const payload = body ? JSON.stringify(body) : null;
+    const opts = {
+      hostname: 'smartops-chatwoot-web.61gu86.easypanel.host',
+      port: 443, path, method,
       headers: { 'api_access_token': CW_TOKEN, 'Content-Type': 'application/json' },
-      body: body ? JSON.stringify(body) : undefined,
+    };
+    if (payload) opts.headers['Content-Length'] = Buffer.byteLength(payload);
+    const req = https.request(opts, r => {
+      let d = '';
+      r.on('data', c => d += c);
+      r.on('end', () => {
+        try {
+          const json = JSON.parse(d);
+          json._status = r.statusCode;
+          resolve(json);
+        } catch (e) {
+          console.error(`[CW] JSON parse error ${method} ${path}: ${e.message} raw=${d.slice(0,100)}`);
+          resolve(null);
+        }
+      });
     });
-    const json = await r.json();
-    json._status = r.status;
-    return json;
-  } catch (e) {
-    console.error(`[CW] API ${method} ${path}: ${e.message}`);
-    return null;
-  }
+    req.on('error', e => { console.error(`[CW] Request error ${method} ${path}: ${e.message}`); resolve(null); });
+    if (payload) req.write(payload);
+    req.end();
+  });
 }
 
 async function forwardToChatwoot(waPayload) {
