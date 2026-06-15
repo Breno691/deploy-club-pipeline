@@ -380,15 +380,92 @@ app.post('/webhook/whatsapp', async (req, res) => {
   forwardToChatwoot(body).catch(e => console.error(`[${ts}] CW forward ERRO: ${e.message}`));
 });
 
+// ── Chatwoot Outgoing → WhatsApp ─────────────────────────────────────────────
+// Chatwoot dispara este webhook quando agente envia mensagem numa conversa
+// Pegamos o número do contato e enviamos via WhatsApp Cloud API
+
+const WA_TOKEN   = process.env.WA_TOKEN || require('fs').readFileSync('.wa_token','utf8').trim();
+const WA_PHONE_ID = process.env.WA_PHONE_NUMBER_ID || '1076586585548366';
+
+async function sendWhatsAppText(toPhone, text) {
+  return new Promise((resolve) => {
+    const payload = JSON.stringify({
+      messaging_product: 'whatsapp',
+      to: toPhone,
+      type: 'text',
+      text: { body: text, preview_url: false }
+    });
+    const req = https.request({
+      hostname: 'graph.facebook.com',
+      port: 443,
+      path: `/v20.0/${WA_PHONE_ID}/messages`,
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + WA_TOKEN,
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    }, r => {
+      let d = '';
+      r.on('data', c => d += c);
+      r.on('end', () => {
+        try { resolve({ status: r.statusCode, body: JSON.parse(d) }); }
+        catch (e) { resolve({ status: r.statusCode, body: d }); }
+      });
+    });
+    req.on('error', e => { console.error('[WA send] Erro:', e.message); resolve(null); });
+    req.write(payload);
+    req.end();
+  });
+}
+
+app.post('/webhook/chatwoot-outgoing', async (req, res) => {
+  res.sendStatus(200);
+  const body = req.body;
+  const ts = new Date().toISOString();
+
+  // Só processa mensagens de saída do agente (não privadas, não do sistema)
+  if (body.message_type !== 'outgoing') return;
+  if (body.private) return;
+  if (!body.content) return;
+  // Ignora mensagens de status do sistema (reabertura, resolução, etc.)
+  if (body.content_type && body.content_type !== 'text') return;
+
+  const convId = body.conversation?.id;
+  const inboxId = body.conversation?.inbox_id;
+
+  // Só processa inbox 3 (WhatsApp Mensagens - Channel::Api)
+  if (inboxId !== CW_INBOX) return;
+
+  // Busca número de telefone do contato na conversa
+  const conv = await cwApi('GET', `/api/v1/accounts/${CW_ACCT}/conversations/${convId}`);
+  const phone = conv?.meta?.sender?.phone_number?.replace(/\D/g,'');
+  if (!phone) {
+    console.error(`[${ts}] CW→WA: sem telefone na conv#${convId}`);
+    return;
+  }
+
+  const text = body.content;
+  console.log(`[${ts}] CW→WA: conv#${convId} → ${phone}: "${text.slice(0,60)}"`);
+
+  const result = await sendWhatsAppText(phone, text);
+  if (result?.body?.messages?.[0]?.id) {
+    console.log(`[${ts}] CW→WA: enviado OK msgId=${result.body.messages[0].id}`);
+  } else {
+    console.error(`[${ts}] CW→WA: falhou`, JSON.stringify(result?.body).slice(0,150));
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Pipeline server rodando em http://localhost:${PORT}`);
-  console.log(`  POST /run-pipeline        { taskName, taskDate, skipPost? }`);
-  console.log(`  POST /send-agent-report   { agent, message, date? }`);
-  console.log(`  POST /run-weekly-briefing { noTelegram? } → briefing semanal todos os squads`);
-  console.log(`  POST /run-daily           { level? }  → dispara daily_master_runner`);
-  console.log(`  POST /send-prospecting    {}          → dispara send_daily.js (prospecção)`);
-  console.log(`  GET  /reports             → portal web de relatórios`);
-  console.log(`  GET  /api/reports?date=   → JSON relatórios do dia`);
-  console.log(`  GET  /webhook/whatsapp    → Meta verify (GET) + relay para n8n + Chatwoot (POST)`);
+  console.log(`  POST /run-pipeline             { taskName, taskDate, skipPost? }`);
+  console.log(`  POST /send-agent-report        { agent, message, date? }`);
+  console.log(`  POST /run-weekly-briefing      { noTelegram? } → briefing semanal todos os squads`);
+  console.log(`  POST /run-daily                { level? }  → dispara daily_master_runner`);
+  console.log(`  POST /send-prospecting         {}          → dispara send_daily.js (prospecção)`);
+  console.log(`  GET  /reports                  → portal web de relatórios`);
+  console.log(`  GET  /api/reports?date=        → JSON relatórios do dia`);
+  console.log(`  GET  /webhook/whatsapp         → Meta verify (GET) + relay para n8n + Chatwoot (POST)`);
+  console.log(`  POST /webhook/chatwoot-outgoing → Chatwoot → WhatsApp (respostas do agente)`);
   console.log(`  GET  /health`);
 });
