@@ -246,12 +246,93 @@ app.post('/run-daily', (req, res) => {
 });
 
 // ── WhatsApp Webhook Relay ────────────────────────────────────────────────────
-// Recebe webhooks do Meta e retransmite para n8n + Chatwoot em paralelo
-// Configura no Meta: URL = https://smartops-pipeline.61gu86.easypanel.host/webhook/whatsapp
-//                   Verify Token = smartops_cw_2025
+// Recebe webhooks do Meta; encaminha para n8n e cria contato/conversa/msg via API Chatwoot
 const N8N_WH_URL  = 'https://smartops-n8n.61gu86.easypanel.host/webhook/whatsapp';
-const CW_WH_URL   = 'https://smartops-chatwoot-web.61gu86.easypanel.host/webhooks/whatsapp/%2B5531972039180';
 const WH_VERIFY   = process.env.WH_VERIFY_TOKEN || 'smartops_cw_2025';
+const CW_BASE     = 'https://smartops-chatwoot-web.61gu86.easypanel.host';
+const CW_TOKEN    = process.env.CW_API_TOKEN    || 'gYUzdZ13MAUEbNZ7FBW2cw78';
+const CW_ACCT     = 1;
+const CW_INBOX    = 3; // Channel::Api "WhatsApp Mensagens" — aceita incoming via REST API
+
+async function cwApi(method, path, body) {
+  try {
+    const r = await fetch(`${CW_BASE}${path}`, {
+      method,
+      headers: { 'api_access_token': CW_TOKEN, 'Content-Type': 'application/json' },
+      body: body ? JSON.stringify(body) : undefined,
+    });
+    const json = await r.json();
+    json._status = r.status;
+    return json;
+  } catch (e) {
+    console.error(`[CW] API ${method} ${path}: ${e.message}`);
+    return null;
+  }
+}
+
+async function forwardToChatwoot(waPayload) {
+  const entry  = waPayload.entry?.[0];
+  if (!entry) return;
+  const change = entry.changes?.find(c => c.field === 'messages');
+  if (!change) return;
+  const { messages, contacts } = change.value || {};
+  if (!messages?.length) return;
+
+  for (const msg of messages) {
+    const waId  = msg.from;                                    // e.g. "5531987654321"
+    const phone = '+' + waId;
+    const name  = contacts?.find(c => c.wa_id === waId)?.profile?.name || phone;
+
+    let text = '';
+    switch (msg.type) {
+      case 'text':     text = msg.text?.body;                                              break;
+      case 'image':    text = '[Imagem]';                                                  break;
+      case 'audio':    text = '[Áudio]';                                                   break;
+      case 'video':    text = '[Vídeo]';                                                   break;
+      case 'document': text = `[${msg.document?.filename || 'Documento'}]`;               break;
+      case 'sticker':  text = '[Sticker]';                                                 break;
+      case 'location': text = `[Localização: ${msg.location?.latitude},${msg.location?.longitude}]`; break;
+      default:         text = `[${msg.type}]`;
+    }
+    if (!text) continue;
+
+    const ts = new Date().toISOString();
+
+    // Localiza ou cria contato
+    let contactId;
+    const search = await cwApi('GET', `/api/v1/accounts/${CW_ACCT}/contacts/search?q=${encodeURIComponent(phone)}&include_contacts=true`);
+    const found  = search?.payload?.find(c => c.phone_number === phone);
+    if (found) {
+      contactId = found.id;
+    } else {
+      const created = await cwApi('POST', `/api/v1/accounts/${CW_ACCT}/contacts`, { name, phone_number: phone, inbox_id: CW_INBOX });
+      if (created?._status === 422) {
+        // Já existe mas a busca não achou — tenta novamente
+        const retry = await cwApi('GET', `/api/v1/accounts/${CW_ACCT}/contacts/search?q=${encodeURIComponent(phone)}&include_contacts=true`);
+        contactId = retry?.payload?.find(c => c.phone_number === phone)?.id;
+      } else {
+        contactId = created?.id;
+      }
+    }
+    if (!contactId) { console.error(`[${ts}] CW: sem contactId para ${phone}`); continue; }
+
+    // Localiza conversa aberta ou cria nova
+    let convId;
+    const convList = await cwApi('GET', `/api/v1/accounts/${CW_ACCT}/contacts/${contactId}/conversations`);
+    const openConv = convList?.payload?.find(c => c.inbox_id === CW_INBOX && c.status === 'open');
+    if (openConv) {
+      convId = openConv.id;
+    } else {
+      const newConv = await cwApi('POST', `/api/v1/accounts/${CW_ACCT}/conversations`, { inbox_id: CW_INBOX, contact_id: contactId, status: 'open' });
+      convId = newConv?.id;
+    }
+    if (!convId) { console.error(`[${ts}] CW: sem convId para contact ${contactId}`); continue; }
+
+    // Cria mensagem
+    const msgRes = await cwApi('POST', `/api/v1/accounts/${CW_ACCT}/conversations/${convId}/messages`, { content: text, message_type: 'incoming', private: false });
+    console.log(`[${ts}] CW: ${phone} → conv#${convId} msg#${msgRes?.id}: "${text.slice(0, 60)}"`);
+  }
+}
 
 // GET — Meta verifica o token
 app.get('/webhook/whatsapp', (req, res) => {
@@ -266,33 +347,21 @@ app.get('/webhook/whatsapp', (req, res) => {
   res.sendStatus(403);
 });
 
-// POST — Meta envia mensagens; relay para n8n e Chatwoot
+// POST — Meta envia mensagens; relay para n8n + Chatwoot via API
 app.post('/webhook/whatsapp', async (req, res) => {
   const body = req.body;
   res.sendStatus(200); // responde imediatamente para o Meta
 
-  const payloadStr = JSON.stringify(body);
   const ts = new Date().toISOString();
-  console.log(`[${ts}] Webhook WA recebido: ${payloadStr.slice(0, 120)}`);
+  console.log(`[${ts}] Webhook WA recebido: ${JSON.stringify(body).slice(0, 120)}`);
 
-  const forward = async (targetUrl, label) => {
-    try {
-      const r = await fetch(targetUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: payloadStr,
-      });
-      console.log(`[${ts}] Relay → ${label}: ${r.status}`);
-    } catch (e) {
-      console.error(`[${ts}] Relay → ${label} ERRO: ${e.message}`);
-    }
-  };
+  // Encaminha para n8n (fire-and-forget)
+  fetch(N8N_WH_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+    .then(r => console.log(`[${ts}] Relay → n8n: ${r.status}`))
+    .catch(e => console.error(`[${ts}] Relay → n8n ERRO: ${e.message}`));
 
-  // Encaminha em paralelo para n8n e Chatwoot
-  await Promise.all([
-    forward(N8N_WH_URL, 'n8n'),
-    forward(CW_WH_URL, 'chatwoot'),
-  ]);
+  // Cria contato + conversa + mensagem no Chatwoot via API
+  forwardToChatwoot(body).catch(e => console.error(`[${ts}] CW forward ERRO: ${e.message}`));
 });
 
 app.listen(PORT, () => {
