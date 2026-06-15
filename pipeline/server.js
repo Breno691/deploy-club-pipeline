@@ -246,15 +246,106 @@ app.post('/run-daily', (req, res) => {
 });
 
 // ── WhatsApp Webhook Relay ────────────────────────────────────────────────────
-// Recebe webhooks do Meta; encaminha para n8n e cria contato/conversa/msg via API Chatwoot
-const N8N_WH_URL  = 'https://smartops-n8n.61gu86.easypanel.host/webhook/whatsapp';
-const WH_VERIFY   = process.env.WH_VERIFY_TOKEN || 'smartops_cw_2025';
-const CW_BASE     = 'https://smartops-chatwoot-web.61gu86.easypanel.host';
-const CW_TOKEN    = process.env.CW_API_TOKEN    || 'gYUzdZ13MAUEbNZ7FBW2cw78';
-const CW_ACCT     = 1;
-const CW_INBOX    = 3; // Channel::Api "WhatsApp Mensagens" — aceita incoming via REST API
+const N8N_WH_URL     = 'https://smartops-n8n.61gu86.easypanel.host/webhook/whatsapp';
+const WH_VERIFY      = process.env.WH_VERIFY_TOKEN  || 'smartops_cw_2025';
+const CW_TOKEN       = process.env.CW_API_TOKEN     || 'gYUzdZ13MAUEbNZ7FBW2cw78';
+const ANTHROPIC_KEY  = process.env.ANTHROPIC_API_KEY;
+const CW_ACCT        = 1;
+const CW_INBOX       = 3;
+// Label que desativa a IA numa conversa (agente assume manualmente)
+const MANUAL_LABEL   = 'agente-manual';
 
 const https = require('https');
+
+// ── Claude AI Helper ──────────────────────────────────────────────────────────
+const AI_SYSTEM = `Você é o assistente da SmartOps IA, consultoria de Lean, Processos e Automação para pequenas e médias empresas em BH.
+
+Seu objetivo é fazer o cliente se sentir à vontade e entender o que ele precisa. NÃO tente vender imediatamente.
+
+Abordagem:
+- Seja humano, caloroso e direto — como um amigo consultor
+- Primeiro ouça e entenda o negócio deles
+- Faça UMA pergunta por vez
+- Só apresente soluções depois de entender a dor real
+- Quando o momento for certo, sugira uma visita gratuita de 30 min (sem pressão)
+
+Sobre a SmartOps IA:
+- Lean & Processos: elimina desperdícios e gargalos operacionais
+- Automação: substitui tarefas manuais repetitivas por sistemas
+- IA Aplicada: tecnologia real no dia a dia do negócio
+- Resultados típicos: 20-40% redução de custos em 60-90 dias
+
+Estilo: mensagens curtas no estilo WhatsApp. Nunca use listas longas. Sem asteriscos ou formatação. Fale como gente.`;
+
+async function callClaude(messages) {
+  return new Promise((resolve) => {
+    const payload = JSON.stringify({
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 300,
+      system: AI_SYSTEM,
+      messages
+    });
+    const req = https.request({
+      hostname: 'api.anthropic.com',
+      port: 443,
+      path: '/v1/messages',
+      method: 'POST',
+      headers: {
+        'x-api-key': ANTHROPIC_KEY,
+        'anthropic-version': '2023-06-01',
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    }, r => {
+      let d = '';
+      r.on('data', c => d += c);
+      r.on('end', () => {
+        try {
+          const json = JSON.parse(d);
+          resolve(json?.content?.[0]?.text || null);
+        } catch (e) { resolve(null); }
+      });
+    });
+    req.on('error', e => { console.error('[Claude] Erro:', e.message); resolve(null); });
+    req.write(payload);
+    req.end();
+  });
+}
+
+async function aiRespond(convId, incomingText) {
+  if (!ANTHROPIC_KEY) return;
+
+  // Verifica se conversa tem label de agente manual
+  const conv = await cwApi('GET', `/api/v1/accounts/${CW_ACCT}/conversations/${convId}`);
+  const labels = conv?.labels || [];
+  if (labels.includes(MANUAL_LABEL)) {
+    console.log(`[AI] Conv#${convId}: modo manual, IA desativada`);
+    return;
+  }
+
+  // Busca histórico de mensagens
+  const history = await cwApi('GET', `/api/v1/accounts/${CW_ACCT}/conversations/${convId}/messages`);
+  const msgs = (history?.payload || [])
+    .filter(m => m.content && m.content_type !== 'activity')
+    .slice(-12)
+    .map(m => ({
+      role: m.message_type === 0 ? 'user' : 'assistant',
+      content: m.content
+    }));
+
+  if (!msgs.length) msgs.push({ role: 'user', content: incomingText });
+
+  const reply = await callClaude(msgs);
+  if (!reply) { console.error(`[AI] Conv#${convId}: sem resposta do Claude`); return; }
+
+  // Posta como mensagem de saída no Chatwoot (o webhook de outgoing envia para WA)
+  await cwApi('POST', `/api/v1/accounts/${CW_ACCT}/conversations/${convId}/messages`, {
+    content: reply,
+    message_type: 'outgoing',
+    private: false
+  });
+  console.log(`[AI] Conv#${convId}: respondido "${reply.slice(0, 60)}"`);
+}
 
 async function cwApi(method, path, body) {
   return new Promise((resolve) => {
@@ -347,6 +438,11 @@ async function forwardToChatwoot(waPayload) {
     // Cria mensagem
     const msgRes = await cwApi('POST', `/api/v1/accounts/${CW_ACCT}/conversations/${convId}/messages`, { content: text, message_type: 'incoming', private: false });
     console.log(`[${ts}] CW: ${phone} → conv#${convId} msg#${msgRes?.id}: "${text.slice(0, 60)}"`);
+
+    // IA responde automaticamente (fire-and-forget, não bloqueia)
+    if (msg.type === 'text') {
+      aiRespond(convId, text).catch(e => console.error(`[${ts}] AI ERRO conv#${convId}: ${e.message}`));
+    }
   }
 }
 
@@ -384,7 +480,7 @@ app.post('/webhook/whatsapp', async (req, res) => {
 // Chatwoot dispara este webhook quando agente envia mensagem numa conversa
 // Pegamos o número do contato e enviamos via WhatsApp Cloud API
 
-const WA_TOKEN   = process.env.WA_TOKEN || require('fs').readFileSync('.wa_token','utf8').trim();
+const WA_TOKEN   = process.env.WA_TOKEN || (() => { try { return require('fs').readFileSync('.wa_token','utf8').trim(); } catch(e) { return null; } })();
 const WA_PHONE_ID = process.env.WA_PHONE_NUMBER_ID || '1076586585548366';
 
 async function sendWhatsAppText(toPhone, text) {
